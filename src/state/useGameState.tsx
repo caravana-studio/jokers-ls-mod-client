@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { LOGGED_USER, SORT_BY_SUIT } from "../constants/localStorage";
+import { PLAYS_DATA } from "../constants/plays";
 import { useCurrentHand } from "../dojo/queries/useCurrentHand";
 import { useCurrentSpecialCards } from "../dojo/queries/useCurrentSpecialCards";
 import { useGame } from "../dojo/queries/useGame";
@@ -7,14 +8,10 @@ import { useRound } from "../dojo/queries/useRound";
 import { getLSGameId } from "../dojo/utils/getLSGameId";
 import { Plays } from "../enums/plays";
 import { SortBy } from "../enums/sortBy";
-import { useGetPlaysLevelDetail } from "../queries/useGetPlaysLevelDetail";
 import { Card } from "../types/Card";
 import { RoundRewards } from "../types/RoundRewards";
 import { checkHand } from "../utils/checkHand";
 import { sortCards } from "../utils/sortCards";
-import { getPlayerPokerHands } from "../dojo/getPlayerPokerHands";
-import { useDojo } from "../dojo/useDojo";
-import { LevelPokerHand } from "../dojo/typescript/models.gen";
 
 export const useGameState = () => {
   const [gameId, setGameId] = useState<number>(getLSGameId());
@@ -43,7 +40,6 @@ export const useGameState = () => {
   const [lockedSpecialCards, setLockedSpecialCards] = useState<Card[]>([]);
   const [isRageRound, setIsRageRound] = useState(false);
   const [rageCards, setRageCards] = useState<Card[]>([]);
-  const [plays, setPlays] = useState<LevelPokerHand[]>([]);
 
   const sortBy: SortBy = useMemo(
     () => (sortBySuit ? SortBy.SUIT : SortBy.RANK),
@@ -55,19 +51,6 @@ export const useGameState = () => {
   const game = useGame();
 
   const dojoHand = useCurrentHand(sortBy);
-  const {
-    setup: {
-      client,
-      account: { account }
-    },
-  } = useDojo();
-
-  if (client && account && plays.length == 0) {
-    getPlayerPokerHands(client, gameId).then((plays: any)=> {
-      if(plays!= undefined)
-        setPlays(plays);
-    })
-  }
 
   const dojoSpecialCards = useCurrentSpecialCards();
 
@@ -97,9 +80,11 @@ export const useGameState = () => {
   }, [dojoHand]);
 
   const setMultiAndPoints = (play: Plays) => {
-    const playerPokerHand = plays[play - 1];
-    const multi = typeof playerPokerHand.multi === 'number' ? playerPokerHand.multi : 0;
-    const points = typeof playerPokerHand.points === 'number' ? playerPokerHand.points : 0;
+    const playerPokerHand = PLAYS_DATA[play - 1];
+    const multi =
+      typeof playerPokerHand.multi === "number" ? playerPokerHand.multi : 0;
+    const points =
+      typeof playerPokerHand.points === "number" ? playerPokerHand.points : 0;
     setMulti(multi);
     setPoints(points);
   };
@@ -113,9 +98,7 @@ export const useGameState = () => {
         preSelectedModifiers
       );
       setPreSelectedPlay(play);
-      if (plays?.length != 0) {
-          setMultiAndPoints(play);
-      } 
+      setMultiAndPoints(play);
     } else {
       setPreSelectedPlay(Plays.NONE);
       resetMultiPoints();
@@ -153,7 +136,6 @@ export const useGameState = () => {
     setSortBySuit,
     score,
     apiHand: dojoHand,
-    plays,
     sortBy,
     sortedHand,
     username,

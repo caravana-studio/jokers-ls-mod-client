@@ -18,7 +18,7 @@ import {
   MODIFIERS_TUTORIAL_STEPS,
   SPECIAL_CARDS_TUTORIAL_STEPS,
   TUTORIAL_STYLE,
-} from "../../constants/gameTutorial.ts";
+} from "../../constants/gameTutorial";
 import {
   HAND_SECTION_ID,
   PRESELECTED_CARD_SECTION_ID,

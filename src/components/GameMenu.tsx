@@ -3,9 +3,9 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { GAME_ID, LOGGED_USER } from "../constants/localStorage.ts";
+import { GAME_ID, LOGGED_USER } from "../constants/localStorage";
 import { useAudioPlayer } from "../providers/AudioPlayerProvider.tsx";
-import { useGameContext } from "../providers/GameProvider.tsx";
+import { useGameContext } from "../providers/GameProvider";
 import { useResponsiveValues } from "../theme/responsiveSettings.tsx";
 
 interface GameMenuProps {

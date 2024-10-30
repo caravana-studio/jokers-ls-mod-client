@@ -2,7 +2,7 @@ import { Box, Flex, Heading } from "@chakra-ui/react";
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from "react-router-dom";
 import { useRound } from "../dojo/queries/useRound.tsx";
-import { VIOLET_LIGHT } from "../theme/colors.tsx";
+import { VIOLET_LIGHT } from "../theme/colors";
 import { RoundRewards } from "../types/RoundRewards.ts";
 import { CashSymbol } from "./CashSymbol.tsx";
 import { PinkBox } from "./PinkBox.tsx";

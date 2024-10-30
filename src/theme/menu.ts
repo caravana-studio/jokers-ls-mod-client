@@ -1,6 +1,6 @@
 import { menuAnatomy } from '@chakra-ui/anatomy';
 import { createMultiStyleConfigHelpers } from '@chakra-ui/react';
-import { BLUE} from "./colors";
+import { BLUE} from "../theme/colors";
 
 const { definePartsStyle, defineMultiStyleConfig } =
   createMultiStyleConfigHelpers(menuAnatomy.keys)
