@@ -1,0 +1,102 @@
+{
+  "error": {
+    "labels": {
+      "error-msj": "Error al crear el juego",
+      "label-error-btn": "CREAR NUEVO JUEGO"
+    }
+  },
+  "game": {
+    "compact-round-data": {
+      "my-score": "Puntaje",
+      "target": "Objetivo",
+      "round": "Ronda {{round}}"
+    },
+    "card-types": {
+      "Common": "Tradicional",
+      "Modifier": "Modificadora",
+      "Special": "Especial",
+      "Rage": "Rage",
+      "Neon": "Neón",
+      "Pack": "Paquete",
+      "Joker": "Comodín"
+    },
+    "card-highlight": {
+      "buttons": {
+        "change": "Cambiar",
+        "remove": "Eliminar",
+        "changing": "Cambiando...",
+        "removing": "Eliminando..."
+      }
+    },
+    "level-points": {
+      "level": "Nivel",
+      "target-score": "Puntos",
+      "score": "Suma {{score}} para superar el nivel {{level}}"
+    },
+    "score": "Tu puntaje:",
+    "multi-points": {
+      "points": "Puntos",
+      "multi": "Multi"
+    },
+    "special-cards": {
+      "locked-slot": "Este espacio esta bloqueado. Puedes desbloquearlo en la tienda.",
+      "special-cards-label": "Cartas especiales",
+      "remove-special-cards-label": "Eliminar",
+      "confirmation-modal": {
+        "title": "Eliminar carta especial",
+        "description": "¿Estás seguro de que quieres eliminar esta carta especial? No hay forma de deshacer esta acción."
+      }
+    },
+    "hand-section": {
+      "no-cards-label": "Te quedaste sin manos para jugar",
+      "sort-by": {
+        "sort-by-title": "Ordenar por",
+        "tooltip": {
+          "suit": "Palo",
+          "rank": "Valor"
+        }
+      },
+      "my-coins": "Monedas",
+      "modifier-change": "Cambiar",
+      "show-plays": "Mostrar jugadas"
+    },
+    "preselected-cards-section": {
+      "discard-btn-lbl": {
+        "lbl": "",
+        "discard": "Descartar",
+        "left": "{{discards}} restantes"
+      },
+      "play-btn-lbl": {
+        "play": "jugar mano",
+        "play-mobile": "jugar",
+        "left": "{{handsLeft}} restantes"
+      },
+      "current-play-lbl": {
+        "default": "Selecciona cartas para jugar",
+        "current-play": "Jugada Actual:",
+        "neon-play": "NEÓN"
+      }
+    },
+    "game-menu": {
+      "home-btn": "Ir al inicio",
+      "new-game-btn": "Crear nuevo juego",
+      "tutorial-btn": "Ver tutorial",
+      "sound-btn": "Sonido",
+      "logout-btn": "Cerrar sesión"
+    },
+    "plays": {
+      "title": "Jugadas disponibles",
+      "go-back-btn": "Volver al juego",
+      "table": {
+        "level-head": "Nivel",
+        "hand-head": "Mano",
+        "points-multi-head": "Puntos/Multi"
+      }
+    }
+  },
+  "confirmation-modal": {
+    "confirm": "Confirmar",
+    "close": "Cerrar"
+  },
+  "points":"puntos"
+}

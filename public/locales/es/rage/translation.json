@@ -1,0 +1,40 @@
+{
+    "rageCardsData": {
+        "401": {
+          "name": "Corazones Rotos",
+          "description": "Las cartas del palo de corazones no puntuarán durante este nivel"
+        },
+        "402": {
+          "name": "Tréboles Rotos",
+          "description": "Las cartas del palo de tréboles no puntuarán durante este nivel"
+        },
+        "403": {
+          "name": "Diamantes Rotos",
+          "description": "Las cartas del palo de diamantes no puntuarán durante este nivel"
+        },
+        "404": {
+          "name": "Picas Rotas",
+          "description": "Las cartas del palo de picas no puntuarán durante este nivel"
+        },
+        "405": {
+          "name": "Jokers Rotos",
+          "description": "Los Jokers no puntuarán durante este nivel"
+        },
+        "406": {
+          "name": "Mano Diminuta",
+          "description": "Tu mano se reducirá en 2 cartas durante este nivel"
+        },
+        "407": {
+          "name": "Cero Desperdicio",
+          "description": "No tienes descartes durante este nivel"
+        },
+        "408": {
+          "name": "Sacrificio Inesperado",
+          "description": "Una de tus cartas especiales será sacrificada"
+        },
+        "409": {
+          "name": "Cuarteto Estratégico",
+          "description": "Solo puedes jugar hasta 4 cartas durante este nivel"
+        }
+      }   
+}

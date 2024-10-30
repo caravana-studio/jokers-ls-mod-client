@@ -1,0 +1,70 @@
+{
+  "store": {
+    "labels": {
+      "reroll": "Reroll",
+      "see-my": "See my",
+      "special-cards": "Special cards",
+      "go-to": "Go to",
+      "next-level": "Next level",
+      "coins": "Coins:"
+    },
+    "titles": {
+      "level-game": "Level up your game",
+      "traditional": "traditional and neon cards",
+      "modifiers": "modifier cards",
+      "special": "special cards",
+      "improve-plays": "Improve your plays",
+      "my-special-cards": "My special cards",
+      "packs": "Packs"
+    },
+    "tooltip": {
+      "reroll-default": "Update available items",
+      "rerolled": "Available only once per level"
+    },
+    "plays-table": {
+      "hand": "Hand",
+      "level": "Level",
+      "price": "Price",
+      "points-multi": "Points/multi",
+      "level-up": "Level up",
+      "purchased": "Purchased"
+    },
+    "preview-card": {
+      "slot-title": "Slot for special cards",
+      "slot-description": "Unlock a new slot for special cards",
+      "title": {
+        "card-type": "Card type:",
+        "description": "Description:",
+        "details": "Details:",
+        "price": "Price:"
+      },
+      "labels": {
+        "buy": "Buy",
+        "special": "Special",
+        "modifier": "Modifier",
+        "traditional": "Traditional",
+        "temporary": "Temporary",
+        "close": "Close",
+        "temporal": "Temporal card. It will be destroyed after {{remaining}} levels.",
+        "tooltip": {
+          "no-space": "You don't have enough available slots for another special card. Buy a new slot in the store or remove one to buy this card",
+          "no-coins":"You don't have enough coins to buy this item"
+        }
+      }
+    },
+    "packs": {
+      "continue-btn": "Continue",
+      "cards-select-lbl": "Select the cards you want to keep",
+      "select-all-lbl": "Select all",
+      "special-cards-btn": "See my current special cards",
+      "error-lbl": "You can't continue because you have more special cards than the maximum allowed",
+      "confirmation-modal": {
+        "head": "No cards selected",
+        "description": "You have selected no cards. Are you sure you want to continue?"
+      }
+    },
+    "special-slot": {
+      "tooltip": "Unlock a new slot for special cards"
+    }
+  }
+}

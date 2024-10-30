@@ -1,0 +1,49 @@
+{
+  "packsData": {
+    "1": {
+      "name": "Paquete Básico",
+      "description": "Contiene principalmente cartas tradicionales y modificadores",
+      "details": "2% de probabilidad de obtener una carta especial\n5% de probabilidad de obtener un modificador\n4% de probabilidad de obtener un comodín\n1% de probabilidad de obtener un comodín de neón\n88% de probabilidad de obtener una carta tradicional\nTamaño del paquete 5"
+    },
+    "2": {
+      "name": "Paquete Avanzado",
+      "description": "Puede contener una carta especial o un comodín",
+      "details": "4% de probabilidad de obtener una carta especial\n10% de probabilidad de obtener un modificador\n8% de probabilidad de obtener un comodín\n2% de probabilidad de obtener un comodín de neón\n76% de probabilidad de obtener una carta tradicional\nTamaño del paquete 5"
+    },
+    "3": {
+      "name": "Paquete de Comodines",
+      "description": "Más posibilidades de obtener un comodín",
+      "details": "15% de probabilidad de obtener un comodín\n1% de probabilidad de obtener un comodín de neón\n84% de probabilidad de obtener una carta tradicional\nTamaño del paquete 3"
+    },
+    "4": {
+      "name": "Paquete de Cartas Especiales",
+      "description": "Más posibilidades de obtener una carta especial",
+      "details": "15% de probabilidad de obtener una carta especial\n20% de probabilidad de obtener un modificador\n65% de probabilidad de obtener una carta tradicional\nTamaño del paquete 3"
+    },
+    "5": {
+      "name": "Paquete de Modificadores",
+      "description": "Contiene principalmente modificadores",
+      "details": "50% de probabilidad de obtener un modificador\n50% de probabilidad de obtener una carta tradicional\nTamaño del paquete 5"
+    },
+    "6": {
+      "name": "Paquete de Figuras",
+      "description": "Contiene principalmente cartas de figuras",
+      "details": "70% de probabilidad de obtener una figura\n30% de probabilidad de obtener otras cartas tradicionales\nTamaño del paquete 5"
+    },
+    "7": {
+      "name": "Paquete del Comodín Engañoso",
+      "description": "1 comodín garantizado",
+      "details": "1 comodín garantizado\n6% de probabilidad de obtener un comodín\n2% de probabilidad de obtener un comodín de neón\n92% de probabilidad de obtener una carta tradicional\nTamaño del paquete 3"
+    },
+    "8": {
+      "name": "Paquete de los Amantes",
+      "description": "Todas las cartas con el palo de corazones, puede contener cartas especiales y modificadores.",
+      "details": "60% de cartas de corazones\n30% de probabilidad de obtener el As de Corazones\n9% de probabilidad de obtener un modificador del palo de corazones\n1% de probabilidad de obtener la carta especial 'Todas las cartas a corazones'\nTamaño del paquete 5"
+    },
+    "9": {
+      "name": "Paquete de Apuesta Especial",
+      "description": "Paquete pequeño con posibilidades de obtener una carta especial o modificador",
+      "details": "5% de probabilidad de obtener una carta especial\n10% de probabilidad de obtener un modificador\n85% de probabilidad de obtener una carta tradicional\nTamaño del paquete 3"
+    }
+  }
+}

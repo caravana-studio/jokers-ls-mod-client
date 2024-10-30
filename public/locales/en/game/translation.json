@@ -1,0 +1,102 @@
+{
+  "error": {
+    "labels": {
+      "error-msj": "error creating game",
+      "label-error-btn": "CREATE NEW GAME"
+    }
+  },
+  "game": {
+    "compact-round-data": {
+      "my-score": "My score",
+      "target": "Target",
+      "round": "Round {{round}}"
+    },
+    "card-types": {
+      "Common": "Traditional",
+      "Modifier": "Modifier",
+      "Special": "Special",
+      "Rage": "Rage",
+      "Neon": "Neon",
+      "Pack": "Pack",
+      "Joker": "Joker"
+    },
+    "card-highlight": {
+      "buttons": {
+        "change": "Change",
+        "remove": "Remove",
+        "changing": "Changing...",
+        "removing": "Removing..."
+      }
+    },
+    "level-points": {
+      "level": "Level",
+      "target-score": "Score",
+      "score": "Score {{score}} to clear the level {{level}}"
+    },
+    "score": "score:",
+    "multi-points": {
+      "points": "Points",
+      "multi": "Multi"
+    },
+    "special-cards": {
+      "locked-slot": "This slot is locked. You can unlock it in the store.",
+      "special-cards-label": "Special cards",
+      "remove-special-cards-label": "Remove",
+      "confirmation-modal": {
+        "title": "Remove special card",
+        "description": "Are you sure you want to remove this special card? There is no way to undo this action."
+      }
+    },
+    "hand-section": {
+      "no-cards-label": "you ran out of hands to play",
+      "sort-by": {
+        "sort-by-title": "Sort by",
+        "tooltip": {
+          "suit": "Suit",
+          "rank": "Rank"
+        }
+      },
+      "my-coins": "Coins",
+      "modifier-change": "Change",
+      "show-plays": "Show plays"
+    },
+    "preselected-cards-section": {
+      "discard-btn-lbl": {
+        "lbl": "drop here to ",
+        "discard": "discard",
+        "left": "{{discards}} left"
+      },
+      "play-btn-lbl": {
+        "play": "play hand",
+        "play-mobile": "play",
+        "left": "{{handsLeft}} left"
+      },
+      "current-play-lbl": {
+        "default": "Select some cards to play",
+        "current-play": "Current Play",
+        "neon-play": "NEON"
+      }
+    },
+    "game-menu": {
+      "home-btn": "Go to home",
+      "new-game-btn": "Start new game",
+      "tutorial-btn": "See tutorial",
+      "sound-btn": "Turn sound",
+      "logout-btn": "Logout"
+    },
+    "plays": {
+      "title": "Available plays",
+      "go-back-btn": "Go back to game",
+      "table": {
+        "level-head": "Level",
+        "hand-head": "Hand",
+        "points-multi-head": "Points/Multi"
+      }
+    }
+  },
+  "confirmation-modal": {
+    "confirm": "Confirm",
+    "close": "Close"
+  },
+  "points":"points"
+}

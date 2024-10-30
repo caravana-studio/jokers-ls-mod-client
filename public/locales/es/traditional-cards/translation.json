@@ -1,0 +1,220 @@
+{
+    "traditionalCardsData": {
+        "0": {
+            "name": "2 de Tréboles",
+            "description": "Suma +2 puntos"
+        },
+        "1": {
+            "name": "3 de Tréboles",
+            "description": "Suma +3 puntos"
+        },
+        "2": {
+            "name": "4 de Tréboles",
+            "description": "Suma +4 puntos"
+        },
+        "3": {
+            "name": "5 de Tréboles",
+            "description": "Suma +5 puntos"
+        },
+        "4": {
+            "name": "6 de Tréboles",
+            "description": "Suma +6 puntos"
+        },
+        "5": {
+            "name": "7 de Tréboles",
+            "description": "Suma +7 puntos"
+        },
+        "6": {
+            "name": "8 de Tréboles",
+            "description": "Suma +8 puntos"
+        },
+        "7": {
+            "name": "9 de Tréboles",
+            "description": "Suma +9 puntos"
+        },
+        "8": {
+            "name": "10 de Tréboles",
+            "description": "Suma +10 puntos"
+        },
+        "9": {
+            "name": "Jota de Tréboles",
+            "description": "Suma +10 puntos"
+        },
+        "10": {
+            "name": "Reina de Tréboles",
+            "description": "Suma +10 puntos"
+        },
+        "11": {
+            "name": "Rey de Tréboles",
+            "description": "Suma +10 puntos"
+        },
+        "12": {
+            "name": "As de Tréboles",
+            "description": "Suma +11 puntos"
+        },
+        "13": {
+            "name": "2 de Diamantes",
+            "description": "Suma +2 puntos"
+        },
+        "14": {
+            "name": "3 de Diamantes",
+            "description": "Suma +3 puntos"
+        },
+        "15": {
+            "name": "4 de Diamantes",
+            "description": "Suma +4 puntos"
+        },
+        "16": {
+            "name": "5 de Diamantes",
+            "description": "Suma +5 puntos"
+        },
+        "17": {
+            "name": "6 de Diamantes",
+            "description": "Suma +6 puntos"
+        },
+        "18": {
+            "name": "7 de Diamantes",
+            "description": "Suma +7 puntos"
+        },
+        "19": {
+            "name": "8 de Diamantes",
+            "description": "Suma +8 puntos"
+        },
+        "20": {
+            "name": "9 de Diamantes",
+            "description": "Suma +9 puntos"
+        },
+        "21": {
+            "name": "10 de Diamantes",
+            "description": "Suma +10 puntos"
+        },
+        "22": {
+            "name": "Jota de Diamantes",
+            "description": "Suma +10 puntos"
+        },
+        "23": {
+            "name": "Reina de Diamantes",
+            "description": "Suma +10 puntos"
+        },
+        "24": {
+            "name": "Rey de Diamantes",
+            "description": "Suma +10 puntos"
+        },
+        "25": {
+            "name": "As de Diamantes",
+            "description": "Suma +11 puntos"
+        },
+        "26": {
+            "name": "2 de Corazones",
+            "description": "Suma +2 puntos"
+        },
+        "27": {
+            "name": "3 de Corazones",
+            "description": "Suma +3 puntos"
+        },
+        "28": {
+            "name": "4 de Corazones",
+            "description": "Suma +4 puntos"
+        },
+        "29": {
+            "name": "5 de Corazones",
+            "description": "Suma +5 puntos"
+        },
+        "30": {
+            "name": "6 de Corazones",
+            "description": "Suma +6 puntos"
+        },
+        "31": {
+            "name": "7 de Corazones",
+            "description": "Suma +7 puntos"
+        },
+        "32": {
+            "name": "8 de Corazones",
+            "description": "Suma +8 puntos"
+        },
+        "33": {
+            "name": "9 de Corazones",
+            "description": "Suma +9 puntos"
+        },
+        "34": {
+            "name": "10 de Corazones",
+            "description": "Suma +10 puntos"
+        },
+        "35": {
+            "name": "Jota de Corazones",
+            "description": "Suma +10 puntos"
+        },
+        "36": {
+            "name": "Reina de Corazones",
+            "description": "Suma +10 puntos"
+        },
+        "37": {
+            "name": "Rey de Corazones",
+            "description": "Suma +10 puntos"
+        },
+        "38": {
+            "name": "As de Corazones",
+            "description": "Suma +11 puntos"
+        },
+        "39": {
+            "name": "2 de Picas",
+            "description": "Suma +2 puntos"
+        },
+        "40": {
+            "name": "3 de Picas",
+            "description": "Suma +3 puntos"
+        },
+        "41": {
+            "name": "4 de Picas",
+            "description": "Suma +4 puntos"
+        },
+        "42": {
+            "name": "5 de Picas",
+            "description": "Suma +5 puntos"
+        },
+        "43": {
+            "name": "6 de Picas",
+            "description": "Suma +6 puntos"
+        },
+        "44": {
+            "name": "7 de Picas",
+            "description": "Suma +7 puntos"
+        },
+        "45": {
+            "name": "8 de Picas",
+            "description": "Suma +8 puntos"
+        },
+        "46": {
+            "name": "9 de Picas",
+            "description": "Suma +9 puntos"
+        },
+        "47": {
+            "name": "10 de Picas",
+            "description": "Suma +10 puntos"
+        },
+        "48": {
+            "name": "Jota de Picas",
+            "description": "Suma +10 puntos"
+        },
+        "49": {
+            "name": "Reina de Picas",
+            "description": "Suma +10 puntos"
+        },
+        "50": {
+            "name": "Rey de Picas",
+            "description": "Suma +10 puntos"
+        },
+        "51": {
+            "name": "As de Picas",
+            "description": "Suma +11 puntos"
+        },
+        "52": {
+            "name": "Comodín",
+            "description": "Comodín que sustituye cualquier carta tradicional. +100 puntos y +1 multi"
+        },
+        "53": {
+            "name": "Comodín de Neón",
+            "description": "Comodín que sustituye cualquier carta tradicional. +500 puntos y +3 multi"
+        }
+        }
+}

@@ -1,0 +1,70 @@
+{
+  "store": {
+    "labels": {
+      "reroll": "Reembaralhar",
+      "see-my": "Ver meus",
+      "special-cards": "Cartas especiais",
+      "go-to": "Ir para",
+      "next-level": "Próximo nível",
+      "coins": "Moedas:"
+    },
+    "titles": {
+      "level-game": "Aprimore seu jogo",
+      "traditional": "cartas tradicionais e neon",
+      "modifiers": "cartas modificadoras",
+      "special": "cartas especiais",
+      "improve-plays": "Melhore suas jogadas",
+      "my-special-cards": "Minhas cartas especiais",
+      "packs": "Pacotes"
+    },
+    "tooltip": {
+      "reroll-default": "Atualizar itens disponíveis",
+      "rerolled": "Disponível apenas uma vez por nível"
+    },
+    "plays-table": {
+      "hand": "Mão",
+      "level": "Nível",
+      "price": "Preço",
+      "points-multi": "Pontos/multi",
+      "level-up": "Subir de nível",
+      "purchased": "Comprado"
+    },
+    "preview-card": {
+      "slot-title": "Slot para cartas especiais",
+      "slot-description": "Desbloqueie um novo slot para cartas especiais",
+      "title": {
+        "card-type": "Tipo de carta:",
+        "description": "Descrição:",
+        "details": "Detalhes:",
+        "price": "Preço:"
+      },
+      "labels": {
+        "buy": "Comprar",
+        "special": "Especial",
+        "modifier": "Modificador",
+        "traditional": "Tradicional",
+        "temporary": "Temporário",
+        "close": "Fechar",
+        "temporal": "Carta temporal. Será destruída após {{remaining}} níveis.",
+        "tooltip": {
+          "no-space": "Você não tem slots disponíveis suficientes para outra carta especial. Compre um novo slot na loja ou remova uma para comprar esta carta",
+          "no-coins": "Você não tem moedas suficientes para comprar este item"
+        }
+      }
+    },
+    "packs": {
+      "continue-btn": "Continuar",
+      "cards-select-lbl": "Selecione as cartas que deseja manter",
+      "select-all-lbl": "Selecionar tudo",
+      "special-cards-btn": "Ver minhas cartas especiais atuais",
+      "error-lbl": "Você não pode continuar porque tem mais cartas especiais do que o máximo permitido",
+      "confirmation-modal": {
+        "head": "Nenhuma carta selecionada",
+        "description": "Você não selecionou nenhuma carta. Tem certeza de que deseja continuar?"
+      }
+    },
+    "special-slot": {
+      "tooltip": "Desbloqueie um novo slot para cartas especiais"
+    }
+  }
+}

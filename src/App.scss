@@ -1,0 +1,24 @@
+@font-face {
+  src: url("../public/fonts/Orbitron.ttf");
+  font-family: "Orbitron";
+}
+@font-face {
+  src: url("../public/fonts/Oxanium.ttf");
+  font-family: "Oxanium";
+}
+@font-face {
+  src: url("../public/fonts/Sonara.otf");
+  font-family: "Sonara";
+}
+
+* {
+  font-family: "Oxanium";
+}
+
+.headline {
+  font-family: "Orbitron";
+}
+
+.italic {
+  font-family: "Sonara";
+}

@@ -1,0 +1,48 @@
+{
+    "playsData": {
+      "royalFlush": {
+        "name": "Royal Flush",
+        "description": "Maior sequência do mesmo naipe"
+      },
+      "straightFlush": {
+        "name": "Straight Flush",
+        "description": "Sequência do mesmo naipe"
+      },
+      "fiveOfAKind": {
+        "name": "Five of a Kind",
+        "description": "Cinco cartas do mesmo valor"
+      },
+      "fourOfAKind": {
+        "name": "Quadra",
+        "description": "Quatro cartas do mesmo valor"
+      },
+      "fullHouse": {
+        "name": "Full House",
+        "description": "Trinca e um par"
+      },
+      "straight": {
+        "name": "Sequência",
+        "description": "Cinco cartas consecutivas"
+      },
+      "flush": {
+        "name": "Flush",
+        "description": "Cinco cartas do mesmo naipe"
+      },
+      "threeOfAKind": {
+        "name": "Trinca",
+        "description": "Três cartas do mesmo valor"
+      },
+      "twoPair": {
+        "name": "Dois Pares",
+        "description": "Dois pares de cartas de valores diferentes"
+      },
+      "pair": {
+        "name": "Par",
+        "description": "Duas cartas do mesmo valor"
+      },
+      "highCard": {
+        "name": "Carta Alta",
+        "description": "Cartas que não são consecutivas e de naipes diferentes"
+      }
+    }
+  }  

@@ -1,0 +1,52 @@
+{
+  "game-over": {
+    "gameOver-msj": "FIN DEL JUEGO",
+    "table": {
+      "gameOver-leader-msj": "¡Felicitaciones! ¡Eres el mejor jugador en el leaderboard!",
+      "gameOver-top5-msj": "¡Buen trabajo! ¡Estás en el top 5! ¡Sigue así!"
+    },
+    "btn": {
+      "gameOver-share-btn": "COMPARTIR EN",
+      "gameOver-newGame-btn": "VOLVER A JUGAR"
+    }
+  },
+  "login": {
+    "error-labels": {
+      "error-noUsername-login": "Por favor, introduce un nombre de usuario",
+      "error-shortUsername-login": "El nombre de usuario debe tener al menos 3 caracteres",
+      "error-longUsername-login": "El nombre de usuario debe tener como máximo 15 caracteres",
+      "error-invalidUsername-login": "El nombre de usuario solo puede contener letras, números, puntos o guiones"
+    },
+    "labels": {
+      "label-login": "Nombre de usuario",
+      "placeholder-login": "Nombre de usuario"
+    },
+    "btn": {
+      "goBack-login-btn": "VOLVER",
+      "startGame-login-btn": "INICIAR JUEGO"
+    }
+  },
+  "rewards-details": {
+    "labels": {
+      "title-1": "Nivel",
+      "title-2": "superado!",
+      "base": "base",
+      "level-bonus": "Bonus del nivel",
+      "discards-left": "{{discards}} Descartes restantes",
+      "hands-left": "{{hands}} Manos restantes",
+      "rage-cards": "{{cards}} cartas Rage vencidas",
+      "total": "total",
+      "final-score": "- Puntuación final: {{score}} -",
+      "continue-btn": "continuar"
+    }
+  },
+  "special-cards": {
+    "title": "Cartas especiales",
+    "go-back": "Atrás",
+    "remove": "Eliminar",
+    "confirmation-modal": {
+      "title": "Eliminar carta especial",
+      "description": "¿Estás seguro de que quieres eliminar esta carta especial? No hay forma de deshacer esta acción."
+    }
+  }
+}

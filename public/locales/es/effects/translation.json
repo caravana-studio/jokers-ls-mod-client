@@ -1,0 +1,158 @@
+{
+  "modifierCardsData": {
+    "600": {
+      "name": "+10 Puntos",
+      "description": "La carta modificada sumará +10 puntos adicionales"
+    },
+    "601": {
+      "name": "+20 Puntos",
+      "description": "La carta modificada sumará +20 puntos adicionales"
+    },
+    "602": {
+      "name": "+50 Puntos",
+      "description": "La carta modificada sumará +50 puntos adicionales"
+    },
+    "603": {
+      "name": "+100 Puntos",
+      "description": "La carta modificada sumará +100 puntos adicionales"
+    },
+    "604": {
+      "name": "+1 multi",
+      "description": "La carta modificada sumará +1 al multiplicador"
+    },
+    "605": {
+      "name": "+2 multi",
+      "description": "La carta modificada sumará +2 al multiplicador"
+    },
+    "606": {
+      "name": "+5 multi",
+      "description": "La carta modificada sumará +5 al multiplicador"
+    },
+    "607": {
+      "name": "+10 multi",
+      "description": "La carta modificada sumará +10 al multiplicador"
+    },
+    "608": {
+      "name": "Cambiar a Tréboles",
+      "description": "La carta modificada será considerada como una carta de Tréboles"
+    },
+    "609": {
+      "name": "Cambiar a Diamantes",
+      "description": "La carta modificada será considerada como una carta de Diamantes"
+    },
+    "610": {
+      "name": "Cambiar a Corazones",
+      "description": "La carta modificada será considerada como una carta de Corazones"
+    },
+    "611": {
+      "name": "Cambiar a Picas",
+      "description": "La carta modificada será considerada como una carta de Picas"
+    }
+  },
+  "specialCardsData": {
+    "300": {
+      "name": "Corazones Multiplicados",
+      "description": "Añade +2 multi por cada carta de corazones jugada"
+    },
+    "301": {
+      "name": "Tréboles Multiplicados",
+      "description": "Añade +2 multi por cada carta de tréboles jugada"
+    },
+    "302": {
+      "name": "Diamantes Multiplicados",
+      "description": "Añade +2 multi por cada carta de diamantes jugada"
+    },
+    "303": {
+      "name": "Picas Multiplicadas",
+      "description": "Añade +2 multi por cada carta de picas jugada"
+    },
+    "304": {
+      "name": "Potenciador de Pareja",
+      "description": "Mejora la mano de PAREJA en 4 niveles"
+    },
+    "305": {
+      "name": "Potenciador de Doble Pareja",
+      "description": "Mejora la mano de DOBLE PAREJA en 4 niveles"
+    },
+    "306": {
+      "name": "Potenciador de Escalera",
+      "description": "Mejora la mano de ESCALERA en 4 niveles"
+    },
+    "307": {
+      "name": "Potenciador de Color",
+      "description": "Mejora la mano de COLOR en 4 niveles"
+    },
+    "308": {
+      "name": "Escalera Fácil",
+      "description": "La mano de escalera se puede hacer con 4 cartas"
+    },
+    "309": {
+      "name": "Color Fácil",
+      "description": "La mano de color se puede hacer con 4 cartas"
+    },
+    "310": {
+      "name": "Potenciador de Joker",
+      "description": "Todos los Jokers jugados puntúan el doble y tienen doble multi"
+    },
+    "311": {
+      "name": "Potenciador de Modificadores",
+      "description": "Todas las cartas de MODIFICADOR jugadas puntúan el doble y tienen doble multi"
+    },
+    "312": {
+      "name": "Potenciador de Figuras",
+      "description": "Todas las cartas de FIGURAS jugadas puntúan +50 puntos"
+    },
+    "313": {
+      "name": "Ases Multiplicados",
+      "description": "Añade +3 multi por cada carta de As jugada"
+    },
+    "314": {
+      "name": "El Amor está en el Aire",
+      "description": "Todas las cartas jugadas se consideran de corazones"
+    },
+    "315": {
+      "name": "El Ladrón de Manos",
+      "description": "Añade +1 manos y +1 descartes a la ronda"
+    },
+    "316": {
+      "name": "Ayuda Extra",
+      "description": "Aumenta el tamaño de la mano en 2"
+    },
+    "317": {
+      "name": "Suerte 7",
+      "description": "Todas las cartas 7 puntúan +77 puntos"
+    },
+    "318": {
+      "name": "Bono Neon",
+      "description": "Todas las cartas Neon puntúan +20 puntos"
+    },
+    "319": {
+      "name": "Fecha Límite",
+      "description": "Cuando juegues tu última mano, aumenta el nivel de juego 10 veces"
+    },
+    "320": {
+      "name": "Ventaja Inicial",
+      "description": "La primera mano jugada puntúa +100 puntos y +10 multi"
+    },
+    "321": {
+      "name": "Mano de la suerte",
+      "description": "Agrega 50 monedas por cada carta de diamantes que se juega"
+    },
+    "322": {
+      "name": "Maestría en descartes",
+      "description": "Suma +10 al multiplicador si no tienes descartes restantes"
+    },
+    "323": {
+      "name": "Segunda oportunidad",
+      "description": "Cuando pierdes, esta carta se destruye, pero puedes seguir jugando"
+    },
+    "324": {
+      "name": "Escudo del guardián",
+      "description": "Bloquea todas las cartas de rage por 1 nivel. Se destruye después"
+    },
+    "325": {
+      "name": "Sinergia de neón",
+      "description": "Si más del 50% de las cartas jugadas son neón, todas las demás cartas se convierten en neón"
+    }
+  }
+}

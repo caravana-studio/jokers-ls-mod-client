@@ -1,0 +1,89 @@
+{
+    "gameTutorial": {
+      "pointsTarget": {
+        "title": "Objetivo de puntos",
+        "content": "Estos son los puntos que necesitas para avanzar al siguiente nivel"
+      },
+      "playableHand": {
+        "title": "Mano jugable",
+        "content": "Esta es tu mano. Haz clic en las cartas para preseleccionarlas y formar una mano de póker"
+      },
+      "discardCards": {
+        "title": "Descartar cartas",
+        "content": "Descarta tus cartas preseleccionadas"
+      },
+      "playCards": {
+        "title": "Jugar cartas",
+        "content": "Cuando estés listo, puedes jugar tus cartas preseleccionadas"
+      },
+      "pointsMultiplier": {
+        "title": "Puntos y multiplicador",
+        "content": "Cada mano de póker tiene puntos base y multiplicador que contribuirán a tu puntuación final"
+      }
+    },
+    "storeTutorial": {
+      "coins": {
+        "title": "Monedas",
+        "content": "¡Felicidades! Después de derrotar un nivel, ganas monedas para gastar en la tienda."
+      },
+      "levelUpHands": {
+        "title": "Mejora tus manos",
+        "content": "Puedes mejorar tus manos. Cuanto mayor sea el nivel de tus manos de póker, más puntos y multiplicadores obtendrán"
+      },
+      "buyPacks": {
+        "title": "Comprar paquetes",
+        "content": "Aquí puedes obtener paquetes para mejorar tu mazo. Estos paquetes ofrecen la posibilidad de obtener cartas raras y especiales a un costo menor."
+      },
+      "buyCards": {
+        "title": "Comprar cartas tradicionales y de neón",
+        "content": "Aquí puedes comprar cartas tradicionales y de neón para mejorar tu mazo. Las cartas de neón otorgan el doble de puntos y +1 multiplicador."
+      },
+      "modifiers": {
+        "title": "Modificadores",
+        "content": "Los modificadores son cartas que se agregan a tu mazo y aplican efectos a tus cartas tradicionales, como agregar más puntos o cambiar el palo"
+      },
+      "specialCards": {
+        "title": "Cartas especiales",
+        "content": "Las cartas especiales otorgan poderes globales únicos y se activan inmediatamente. ¡Pueden cambiar el rumbo del juego!"
+      },
+      "rerollStore": {
+        "title": "Actualizar la tienda",
+        "content": "¿No encuentras lo que necesitas? Gasta algunas monedas para actualiza la tienda y ver un nuevo conjunto de cartas y manos para mejorar."
+      },
+      "nextLevel": {
+        "title": "Avanzar al siguiente nivel",
+        "content": "¿Listo para continuar? Haz clic aquí para avanzar al siguiente nivel y enfrentar nuevos desafíos."
+      }
+    },
+    "specialCardsTutorial": {
+      "specialCards": {
+        "title": "Cartas especiales",
+        "content": "Las cartas especiales se activan inmediatamente después de comprarlas en la tienda. Aplican sus efectos después de jugar tu mano."
+      },
+      "discardingCards": {
+        "title": "Descartar",
+        "content": "Si no deseas usar una carta especial, puedes descartarla en cualquier momento haciendo clic en el botón de descarte que aparecerá sobre la carta.",
+        "content-mobile": "Si no deseas usar una carta especial, puedes descartarla en cualquier momento arrastrándola hacia el botón de descarte." 
+      }
+    },
+    "modifiersTutorial": {
+      "modifierCard": {
+        "title": "Carta modificadora",
+        "content": "Las cartas modificadoras mejoran o alteran una carta específica. Arrastra y suelta un modificador sobre una carta preseleccionada para activar su efecto."
+      },
+      "discard": {
+        "title": "Descartar",
+        "content": "Haz clic en el botón de descarte que aparecerá sobre la carta para descartarla sin perder oportunidades de descarte.",
+        "content-mobile": "Arrastra el modificador y suéltalo en el botón de descarte para descartarlo sin perder oportunidades de descarte."
+      }
+    },
+    "joyride":
+    {
+      "back": "Atrás",
+      "next": "Siguiente",
+      "skip": "Saltar",
+      "close": "Cerrar",
+      "last": "Finalizar"
+    }
+  }
+  

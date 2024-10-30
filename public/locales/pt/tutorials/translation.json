@@ -1,0 +1,88 @@
+{
+    "gameTutorial": {
+        "pointsTarget": {
+            "title": "Meta de Pontos",
+            "content": "A quantidade de pontos que você precisa marcar para avançar para o próximo nível"
+        },
+        "playableHand": {
+            "title": "Mão Jogável",
+            "content": "Esta é a sua mão. Clique nas cartas para pré-selecioná-las e formar uma mão de poker"
+        },
+        "discardCards": {
+            "title": "Descartar Cartas",
+            "content": "Descarte suas cartas pré-selecionadas"
+        },
+        "playCards": {
+            "title": "Jogar Cartas",
+            "content": "Sempre que estiver pronto, você pode jogar suas cartas pré-selecionadas"
+        },
+        "pointsMultiplier": {
+            "title": "Pontos e Multiplicador",
+            "content": "Cada mão de poker tem pontos base e um multiplicador que contribuirá para sua pontuação final"
+        }
+    },
+    "storeTutorial": {
+        "coins": {
+            "title": "Moedas",
+            "content": "Parabéns! Após derrotar um nível, você ganha moedas para gastar na loja."
+        },
+        "levelUpHands": {
+            "title": "Aprimore suas Mãos",
+            "content": "Você pode melhorar suas mãos. Quanto maior o nível das suas mãos de poker, mais pontos e multiplica elas marcam"
+        },
+        "buyPacks": {
+            "title": "Comprar Pacotes",
+            "content": "Aqui você pode obter pacotes para impulsionar seu baralho. Esses pacotes oferecem a chance de obter cartas raras e especiais a um custo menor."
+        },
+        "buyCards": {
+            "title": "Comprar Cartas Tradicionais e Neon",
+            "content": "Aqui você pode comprar cartas tradicionais e neon para aprimorar seu baralho. As cartas neon marcam o dobro de pontos e +1 multi."
+        },
+        "modifiers": {
+            "title": "Modificadores",
+            "content": "Modificadores são cartas que são adicionadas ao seu baralho e aplicam efeitos às suas cartas tradicionais, como adicionar mais pontos ou mudar o naipe"
+        },
+        "specialCards": {
+            "title": "Cartas Especiais",
+            "content": "Cartas especiais concedem poderes globais únicos e ficam ativas imediatamente. Elas podem mudar o rumo do jogo!"
+        },
+        "rerollStore": {
+            "title": "Repetir a Loja",
+            "content": "Não está encontrando o que precisa? Gaste algumas moedas para repetir a loja e veja um novo conjunto de cartas e mãos para aprimorar."
+        },
+        "nextLevel": {
+            "title": "Avançar para o Próximo Nível",
+            "content": "Pronto para continuar? Clique aqui para avançar para o próximo nível e enfrentar novos desafios!"
+        }
+    },
+    "specialCardsTutorial": {
+        "specialCards": {
+            "title": "Cartas Especiais",
+            "content": "Cartas especiais ativam imediatamente após você comprá-las na loja. Elas aplicam seus efeitos após sua mão ser jogada."
+        },
+        "discardingCards": {
+            "title": "Descartar cartas especiais",
+            "content": "Se você não quiser usar uma carta especial, pode descartá-la a qualquer momento clicando no botão de descartar que aparecerá sobre a carta.",
+            "content-mobile": "Se você não quiser usar uma carta especial, pode descartá-la a qualquer momento arrastando-a para o botão de descartar."
+        }
+    },
+    "modifiersTutorial": {
+        "modifierCard": {
+            "title": "Carta Modificadora",
+            "content": "Cartas modificadoras melhoram ou alteram uma carta específica. Arraste e solte um modificador em uma carta pré-selecionada para ativar seu efeito."
+        },
+        "discard": {
+            "title": "Descartar",
+            "content": "Clique no botão de descartar que aparecerá sobre a carta para descartá-la sem perder nenhuma chance de descarte.",
+            "content-mobile": "Arraste o modificador e solte-o sobre o botão de descartar para descartá-lo sem perder nenhuma chance de descarte."
+        }
+    },
+    "joyride":
+    {
+        "back": "Voltar",
+        "next": "Próximo",
+        "skip": "Pular",
+        "close": "Fechar",
+        "last": "Finalizar"
+    }
+}

@@ -1,0 +1,89 @@
+{
+    "gameTutorial": {
+      "pointsTarget": {
+        "title": "Points Target",
+        "content": "The amount of points you need to score to proceed to the next level"
+      },
+      "playableHand": {
+        "title": "Playable Hand",
+        "content": "This is your hand. Click on cards to preselect them and form a poker hand"
+      },
+      "discardCards": {
+        "title": "Discard Cards",
+        "content": "Discard your preselected cards"
+      },
+      "playCards": {
+        "title": "Play Cards",
+        "content": "Whenever you are ready you can play your preselected cards"
+      },
+      "pointsMultiplier": {
+        "title": "Points and Multiplier",
+        "content": "Each poker hand has base points and a multiplier that will contribute to your final score"
+      }
+    },
+    "storeTutorial": {
+      "coins": {
+        "title": "Coins",
+        "content": "Congratulations! After defeating a level, you earn coins to spend in the store."
+      },
+      "levelUpHands": {
+        "title": "Level Up Your Hands",
+        "content": "You can upgrade your hands. The higher the level of your poker hands, the more points and multi they score"
+      },
+      "buyPacks": {
+        "title": "Buy Packs",
+        "content": "Here you can get packs to boost your deck. These packs offer a chance to obtain rare and special cards at a lower cost."
+      },
+      "buyCards": {
+        "title": "Buy Traditional and Neon Cards",
+        "content": "Here you can buy traditional and neon cards to enhance your deck. Neon cards score double points and +1 multi."
+      },
+      "modifiers": {
+        "title": "Modifiers",
+        "content": "Modifiers are cards that are added to your deck and apply effects to your traditional cards, like adding more points or changing the suit"
+      },
+      "specialCards": {
+        "title": "Special Cards",
+        "content": "Special cards grant unique global powers and get active immediately. These can turn the tide of the game!"
+      },
+      "rerollStore": {
+        "title": "Reroll the Store",
+        "content": "Not finding what you need? Spend some coins to reroll the store and see a fresh set of cards and hands to upgrade."
+      },
+      "nextLevel": {
+        "title": "Proceed to the Next Level",
+        "content": "Ready to continue? Click here to advance to the next level and face new challenges!"
+      }
+    },
+    "specialCardsTutorial": {
+      "specialCards": {
+        "title": "Special Cards",
+        "content": "Special cards activate immediately after you purchase them in the store. They apply their effects after your hand is played."
+      },
+      "discardingCards": {
+        "title": "Discarding special cards",
+        "content": "If you don’t want to use a special card, you can discard it at any time by clicking the discard button that will pop up over the card.",
+        "content-mobile": "If you don’t want to use a special card, you can discard it at any time by dragging it to the discard button."
+      }
+    },
+    "modifiersTutorial": {
+      "modifierCard": {
+        "title": "Modifier Card",
+        "content": "Modifier cards enhance or alter a specific card. Drag and drop a modifier onto a preselected card to activate its effect."
+      },
+      "discard": {
+        "title": "Discard",
+        "content": "Click the discard button that will pop up over the card to discard it without losing any discard chances.",
+        "content-mobile": "Drag the modifier and drop it onto the discard button to discard it without losing any discard chances."
+      }
+    },
+    "joyride":
+    {
+      "back": "Back",
+      "next": "Next",
+      "skip": "Skip",
+      "close": "Close",
+      "last": "Finish"
+    }
+  }
+  

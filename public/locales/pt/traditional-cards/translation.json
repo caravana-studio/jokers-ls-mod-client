@@ -1,0 +1,220 @@
+{
+    "traditionalCardsData": {
+      "0": {
+        "name": "2 de Paus",
+        "description": "Pontua +2 pontos"
+      },
+      "1": {
+        "name": "3 de Paus",
+        "description": "Pontua +3 pontos"
+      },
+      "2": {
+        "name": "4 de Paus",
+        "description": "Pontua +4 pontos"
+      },
+      "3": {
+        "name": "5 de Paus",
+        "description": "Pontua +5 pontos"
+      },
+      "4": {
+        "name": "6 de Paus",
+        "description": "Pontua +6 pontos"
+      },
+      "5": {
+        "name": "7 de Paus",
+        "description": "Pontua +7 pontos"
+      },
+      "6": {
+        "name": "8 de Paus",
+        "description": "Pontua +8 pontos"
+      },
+      "7": {
+        "name": "9 de Paus",
+        "description": "Pontua +9 pontos"
+      },
+      "8": {
+        "name": "10 de Paus",
+        "description": "Pontua +10 pontos"
+      },
+      "9": {
+        "name": "Valete de Paus",
+        "description": "Pontua +10 pontos"
+      },
+      "10": {
+        "name": "Dama de Paus",
+        "description": "Pontua +10 pontos"
+      },
+      "11": {
+        "name": "Rei de Paus",
+        "description": "Pontua +10 pontos"
+      },
+      "12": {
+        "name": "Ás de Paus",
+        "description": "Pontua +11 pontos"
+      },
+      "13": {
+        "name": "2 de Ouros",
+        "description": "Pontua +2 pontos"
+      },
+      "14": {
+        "name": "3 de Ouros",
+        "description": "Pontua +3 pontos"
+      },
+      "15": {
+        "name": "4 de Ouros",
+        "description": "Pontua +4 pontos"
+      },
+      "16": {
+        "name": "5 de Ouros",
+        "description": "Pontua +5 pontos"
+      },
+      "17": {
+        "name": "6 de Ouros",
+        "description": "Pontua +6 pontos"
+      },
+      "18": {
+        "name": "7 de Ouros",
+        "description": "Pontua +7 pontos"
+      },
+      "19": {
+        "name": "8 de Ouros",
+        "description": "Pontua +8 pontos"
+      },
+      "20": {
+        "name": "9 de Ouros",
+        "description": "Pontua +9 pontos"
+      },
+      "21": {
+        "name": "10 de Ouros",
+        "description": "Pontua +10 pontos"
+      },
+      "22": {
+        "name": "Valete de Ouros",
+        "description": "Pontua +10 pontos"
+      },
+      "23": {
+        "name": "Dama de Ouros",
+        "description": "Pontua +10 pontos"
+      },
+      "24": {
+        "name": "Rei de Ouros",
+        "description": "Pontua +10 pontos"
+      },
+      "25": {
+        "name": "Ás de Ouros",
+        "description": "Pontua +11 pontos"
+      },
+      "26": {
+        "name": "2 de Copas",
+        "description": "Pontua +2 pontos"
+      },
+      "27": {
+        "name": "3 de Copas",
+        "description": "Pontua +3 pontos"
+      },
+      "28": {
+        "name": "4 de Copas",
+        "description": "Pontua +4 pontos"
+      },
+      "29": {
+        "name": "5 de Copas",
+        "description": "Pontua +5 pontos"
+      },
+      "30": {
+        "name": "6 de Copas",
+        "description": "Pontua +6 pontos"
+      },
+      "31": {
+        "name": "7 de Copas",
+        "description": "Pontua +7 pontos"
+      },
+      "32": {
+        "name": "8 de Copas",
+        "description": "Pontua +8 pontos"
+      },
+      "33": {
+        "name": "9 de Copas",
+        "description": "Pontua +9 pontos"
+      },
+      "34": {
+        "name": "10 de Copas",
+        "description": "Pontua +10 pontos"
+      },
+      "35": {
+        "name": "Valete de Copas",
+        "description": "Pontua +10 pontos"
+      },
+      "36": {
+        "name": "Dama de Copas",
+        "description": "Pontua +10 pontos"
+      },
+      "37": {
+        "name": "Rei de Copas",
+        "description": "Pontua +10 pontos"
+      },
+      "38": {
+        "name": "Ás de Copas",
+        "description": "Pontua +11 pontos"
+      },
+      "39": {
+        "name": "2 de Espadas",
+        "description": "Pontua +2 pontos"
+      },
+      "40": {
+        "name": "3 de Espadas",
+        "description": "Pontua +3 pontos"
+      },
+      "41": {
+        "name": "4 de Espadas",
+        "description": "Pontua +4 pontos"
+      },
+      "42": {
+        "name": "5 de Espadas",
+        "description": "Pontua +5 pontos"
+      },
+      "43": {
+        "name": "6 de Espadas",
+        "description": "Pontua +6 pontos"
+      },
+      "44": {
+        "name": "7 de Espadas",
+        "description": "Pontua +7 pontos"
+      },
+      "45": {
+        "name": "8 de Espadas",
+        "description": "Pontua +8 pontos"
+      },
+      "46": {
+        "name": "9 de Espadas",
+        "description": "Pontua +9 pontos"
+      },
+      "47": {
+        "name": "10 de Espadas",
+        "description": "Pontua +10 pontos"
+      },
+      "48": {
+        "name": "Valete de Espadas",
+        "description": "Pontua +10 pontos"
+      },
+      "49": {
+        "name": "Dama de Espadas",
+        "description": "Pontua +10 pontos"
+      },
+      "50": {
+        "name": "Rei de Espadas",
+        "description": "Pontua +10 pontos"
+      },
+      "51": {
+        "name": "Ás de Espadas",
+        "description": "Pontua +11 pontos"
+      },
+      "52": {
+        "name": "Coringa",
+        "description": "Coringa que substitui qualquer carta tradicional. +100 pontos e +1 multi"
+      },
+      "53": {
+        "name": "Coringa Neon",
+        "description": "Coringa que substitui qualquer carta tradicional. +500 pontos e +3 multi"
+      }
+    }
+  }  

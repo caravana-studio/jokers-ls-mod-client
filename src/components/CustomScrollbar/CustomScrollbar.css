@@ -1,0 +1,32 @@
+.scrollable-container {
+    height: 100%;
+    scrollbar-width: thin;
+    padding: 0 10px 10px 10px;
+    overflow-x: hidden;
+    overflow-y: auto;
+} 
+ 
+.scrollable-container Table thead {
+    position: sticky;
+    top: 0px;
+    margin: 0 0 0 0;
+}
+
+.scrollable-container::-webkit-scrollbar {
+    width: 16px; 
+}
+
+.scrollable-container ::-webkit-scrollbar-track {
+    background: url('../../assets/scrollbar_container.svg') no-repeat center;
+    background-size: cover;
+}
+
+.scrollable-container ::-webkit-scrollbar-thumb {
+    background: url('../../assets/scrollbar_thumb.svg') no-repeat center;
+    background-size: cover;
+}
+
+.scrollable-container ::-webkit-scrollbar-thumb:hover {
+    background: url('../../assets/scrollbar_thumb.svg') no-repeat center;
+    background-size: cover;
+} 

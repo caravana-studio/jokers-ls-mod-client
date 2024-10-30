@@ -1,0 +1,158 @@
+{
+  "modifierCardsData": {
+    "600": {
+      "name": "+10 Points",
+      "description": "The modified card will score +10 additional points"
+    },
+    "601": {
+      "name": "+20 Points",
+      "description": "The modified card will score +20 additional points"
+    },
+    "602": {
+      "name": "+50 Points",
+      "description": "The modified card will score +50 additional points"
+    },
+    "603": {
+      "name": "+100 Points",
+      "description": "The modified card will score +100 additional points"
+    },
+    "604": {
+      "name": "+1 multi",
+      "description": "The modified card will add +1 to the multi"
+    },
+    "605": {
+      "name": "+2 multi",
+      "description": "The modified card will add +2 to the multi"
+    },
+    "606": {
+      "name": "+5 multi",
+      "description": "The modified card will add +5 to the multi"
+    },
+    "607": {
+      "name": "+10 multi",
+      "description": "The modified card will add +10 to the multi"
+    },
+    "608": {
+      "name": "Change to Clubs",
+      "description": "The modified card will be considered as a Clubs card"
+    },
+    "609": {
+      "name": "Change to Diamonds",
+      "description": "The modified card will be considered as a Diamonds card"
+    },
+    "610": {
+      "name": "Change to Hearts",
+      "description": "The modified card will be considered as a Hearts card"
+    },
+    "611": {
+      "name": "Change to Spades",
+      "description": "The modified card will be considered as a Spades card"
+    }
+  },
+  "specialCardsData": {
+    "300": {
+      "name": "Multiplied Hearts",
+      "description": "Adds +2 multi for every played Heart suited card"
+    },
+    "301": {
+      "name": "Multiplied Clubs",
+      "description": "Adds +2 multi for every played Clubs suited card"
+    },
+    "302": {
+      "name": "Multiplied Diamonds",
+      "description": "Adds +2 multi for every played Diamonds suited card"
+    },
+    "303": {
+      "name": "Multiplied Spades",
+      "description": "Adds +2 multi for every played Spades suited card"
+    },
+    "304": {
+      "name": "Pair Booster",
+      "description": "Level up PAIR hand by 4 levels"
+    },
+    "305": {
+      "name": "Two Pair Booster",
+      "description": "Level up TWO PAIR hand by 4 levels"
+    },
+    "306": {
+      "name": "Straight Booster",
+      "description": "Level up STRAIGHT hand by 4 levels"
+    },
+    "307": {
+      "name": "Flush Booster",
+      "description": "Level up FLUSH hand by 4 levels"
+    },
+    "308": {
+      "name": "Easy Straight",
+      "description": "Straight hand can be done with 4 cards"
+    },
+    "309": {
+      "name": "Easy Flush",
+      "description": "Flush hand can be done with 4 cards"
+    },
+    "310": {
+      "name": "Joker Booster",
+      "description": "All played Jokers score double points and double multi"
+    },
+    "311": {
+      "name": "Modifier Booster",
+      "description": "All played MODIFIER cards score double points and double multi"
+    },
+    "312": {
+      "name": "Figures Booster",
+      "description": "All played FIGURES cards score +50 points"
+    },
+    "313": {
+      "name": "Multiplied Aces",
+      "description": "Adds +3 multi for every played Ace card"
+    },
+    "314": {
+      "name": "Love is in the air",
+      "description": "All played cards are considered Heart suited"
+    },
+    "315": {
+      "name": "The hand thief",
+      "description": "Adds +1 hands and +1 discards to the round"
+    },
+    "316": {
+      "name": "Extra help",
+      "description": "Increase hand size by 2"
+    },
+    "317": {
+      "name": "Lucky 7",
+      "description": "All 7s score +77 points"
+    },
+    "318": {
+      "name": "Neon bonus",
+      "description": "All Neon cards score +20 points"
+    },
+    "319": {
+      "name": "Deadline",
+      "description": "When playing your last hand, increase the play level 10 times"
+    },
+    "320": {
+      "name": "Initial advantage",
+      "description": "The first played hand scores +100 points and +10 multi"
+    },
+    "321": {
+      "name": "Lucky hand",
+      "description": "Adds +50 cash for every Diamond suited card played"
+    },
+    "322": {
+      "name": "Discard mastery",
+      "description": "Adds +10 to the multi if you have no discards left"
+    },
+    "323": {
+      "name": "Second chance",
+      "description": "When you lose, this card gets destroyed but you can continue playing"
+    },
+    "324": {
+      "name": "Guardian's shield",
+      "description": "Blocks all rage cards for 1 level. Gets destroyed afterwards"
+    },
+    "325": {
+      "name": "Neon synergy",
+      "description": "If more than 50% of the played cards are neon, all the other cards get converted to neon"
+    }
+  }
+}

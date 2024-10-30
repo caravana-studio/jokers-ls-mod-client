@@ -1,0 +1,50 @@
+{
+    "packsData": {
+      "1": {
+        "name": "Pacote Básico",
+        "description": "Contém principalmente cartas tradicionais e modificadores",
+        "details": "2% de chance de obter uma carta especial\n5% de chance de obter uma carta modificadora\n4% de chance de obter um Coringa\n1% de chance de obter um Coringa Neon\n88% de chance de obter uma carta tradicional\nTamanho do pacote 5"
+      },
+      "2": {
+        "name": "Pacote Avançado",
+        "description": "Pode conter uma carta especial ou coringa",
+        "details": "4% de chance de obter uma carta especial\n10% de chance de obter uma carta modificadora\n8% de chance de obter um Coringa\n2% de chance de obter um Coringa Neon\n76% de chance de obter uma carta tradicional\nTamanho do pacote 5"
+      },
+      "3": {
+        "name": "Pacote de Coringas",
+        "description": "Mais chances de obter um Coringa",
+        "details": "15% de chance de obter um Coringa\n1% de chance de obter um Coringa Neon\n84% de chance de obter uma carta tradicional\nTamanho do pacote 3"
+      },
+      "4": {
+        "name": "Pacote de Especiais",
+        "description": "Mais chances de obter uma carta especial",
+        "details": "15% de chance de obter uma carta especial\n20% de chance de obter um modificador\n65% de chance de obter uma carta tradicional\nTamanho do pacote 3"
+      },
+      "5": {
+        "name": "Pacote de Modificadores",
+        "description": "Contém principalmente modificadores",
+        "details": "50% de chance de obter um modificador\n50% de chance de obter uma carta tradicional\nTamanho do pacote 5"
+      },
+      "6": {
+        "name": "Pacote de Figuras",
+        "description": "Contém principalmente cartas de figuras",
+        "details": "70% de chance de obter uma figura\n30% de chance de obter outras cartas tradicionais\nTamanho do pacote 5"
+      },
+      "7": {
+        "name": "Pacote do Coringa Enganador",
+        "description": "1 Coringa garantido",
+        "details": "1 Coringa garantido\n6% de chance de obter um Coringa\n2% de chance de obter um Coringa Neon\n92% de chance de obter uma carta tradicional\nTamanho do pacote 3"
+      },
+      "8": {
+        "name": "Pacote dos Amantes",
+        "description": "Todas as cartas do naipe de copas, pode conter cartas especiais e modificadores.",
+        "details": "60% carta de copas\n30% de chance de obter o Ás de Copas\n9% de chance de obter um modificador de copas\n1% de chance de obter a carta especial 'Todas as cartas para copas'\nTamanho do pacote 5"
+      },
+      "9": {
+        "name": "Pacote de Aposta Especial",
+        "description": "Pacote pequeno com chances de obter uma carta especial ou modificador",
+        "details": "5% de chance de obter uma carta especial\n10% de chance de obter um modificador\n85% de chance de obter uma carta tradicional\nTamanho do pacote 3"
+      }
+    }
+  }
+  

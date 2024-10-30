@@ -1,0 +1,220 @@
+{
+    "traditionalCardsData": {
+        "0": {
+            "name": "2 of Clubs",
+            "description": "Scores +2 points"
+        },
+        "1": {
+            "name": "3 of Clubs",
+            "description": "Scores +3 points"
+        },
+        "2": {
+            "name": "4 of Clubs",
+            "description": "Scores +4 points"
+        },
+        "3": {
+            "name": "5 of Clubs",
+            "description": "Scores +5 points"
+        },
+        "4": {
+            "name": "6 of Clubs",
+            "description": "Scores +6 points"
+        },
+        "5": {
+            "name": "7 of Clubs",
+            "description": "Scores +7 points"
+        },
+        "6": {
+            "name": "8 of Clubs",
+            "description": "Scores +8 points"
+        },
+        "7": {
+            "name": "9 of Clubs",
+            "description": "Scores +9 points"
+        },
+        "8": {
+            "name": "10 of Clubs",
+            "description": "Scores +10 points"
+        },
+        "9": {
+            "name": "Jack of Clubs",
+            "description": "Scores +10 points"
+        },
+        "10": {
+            "name": "Queen of Clubs",
+            "description": "Scores +10 points"
+        },
+        "11": {
+            "name": "King of Clubs",
+            "description": "Scores +10 points"
+        },
+        "12": {
+            "name": "Ace of Clubs",
+            "description": "Scores +11 points"
+        },
+        "13": {
+            "name": "2 of Diamonds",
+            "description": "Scores +2 points"
+        },
+        "14": {
+            "name": "3 of Diamonds",
+            "description": "Scores +3 points"
+        },
+        "15": {
+            "name": "4 of Diamonds",
+            "description": "Scores +4 points"
+        },
+        "16": {
+            "name": "5 of Diamonds",
+            "description": "Scores +5 points"
+        },
+        "17": {
+            "name": "6 of Diamonds",
+            "description": "Scores +6 points"
+        },
+        "18": {
+            "name": "7 of Diamonds",
+            "description": "Scores +7 points"
+        },
+        "19": {
+            "name": "8 of Diamonds",
+            "description": "Scores +8 points"
+        },
+        "20": {
+            "name": "9 of Diamonds",
+            "description": "Scores +9 points"
+        },
+        "21": {
+            "name": "10 of Diamonds",
+            "description": "Scores +10 points"
+        },
+        "22": {
+            "name": "Jack of Diamonds",
+            "description": "Scores +10 points"
+        },
+        "23": {
+            "name": "Queen of Diamonds",
+            "description": "Scores +10 points"
+        },
+        "24": {
+            "name": "King of Diamonds",
+            "description": "Scores +10 points"
+        },
+        "25": {
+            "name": "Ace of Diamonds",
+            "description": "Scores +11 points"
+        },
+        "26": {
+            "name": "2 of Hearts",
+            "description": "Scores +2 points"
+        },
+        "27": {
+            "name": "3 of Hearts",
+            "description": "Scores +3 points"
+        },
+        "28": {
+            "name": "4 of Hearts",
+            "description": "Scores +4 points"
+        },
+        "29": {
+            "name": "5 of Hearts",
+            "description": "Scores +5 points"
+        },
+        "30": {
+            "name": "6 of Hearts",
+            "description": "Scores +6 points"
+        },
+        "31": {
+            "name": "7 of Hearts",
+            "description": "Scores +7 points"
+        },
+        "32": {
+            "name": "8 of Hearts",
+            "description": "Scores +8 points"
+        },
+        "33": {
+            "name": "9 of Hearts",
+            "description": "Scores +9 points"
+        },
+        "34": {
+            "name": "10 of Hearts",
+            "description": "Scores +10 points"
+        },
+        "35": {
+            "name": "Jack of Hearts",
+            "description": "Scores +10 points"
+        },
+        "36": {
+            "name": "Queen of Hearts",
+            "description": "Scores +10 points"
+        },
+        "37": {
+            "name": "King of Hearts",
+            "description": "Scores +10 points"
+        },
+        "38": {
+            "name": "Ace of Hearts",
+            "description": "Scores +11 points"
+        },
+        "39": {
+            "name": "2 of Spades",
+            "description": "Scores +2 points"
+        },
+        "40": {
+            "name": "3 of Spades",
+            "description": "Scores +3 points"
+        },
+        "41": {
+            "name": "4 of Spades",
+            "description": "Scores +4 points"
+        },
+        "42": {
+            "name": "5 of Spades",
+            "description": "Scores +5 points"
+        },
+        "43": {
+            "name": "6 of Spades",
+            "description": "Scores +6 points"
+        },
+        "44": {
+            "name": "7 of Spades",
+            "description": "Scores +7 points"
+        },
+        "45": {
+            "name": "8 of Spades",
+            "description": "Scores +8 points"
+        },
+        "46": {
+            "name": "9 of Spades",
+            "description": "Scores +9 points"
+        },
+        "47": {
+            "name": "10 of Spades",
+            "description": "Scores +10 points"
+        },
+        "48": {
+            "name": "Jack of Spades",
+            "description": "Scores +10 points"
+        },
+        "49": {
+            "name": "Queen of Spades",
+            "description": "Scores +10 points"
+        },
+        "50": {
+            "name": "King of Spades",
+            "description": "Scores +10 points"
+        },
+        "51": {
+            "name": "Ace of Spades",
+            "description": "Scores +11 points"
+        },
+        "52": {
+            "name": "Joker",
+            "description": "Wildcard that substitutes any traditional card. +100 points and +1 multi"
+        },
+        "53": {
+            "name": "Joker of Neon",
+            "description": "Wildcard that substitutes any traditional card. +500 points and +3 multi"
+        }
+        }
+}

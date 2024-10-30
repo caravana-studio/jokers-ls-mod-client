@@ -1,0 +1,48 @@
+{
+    "playsData": {
+        "royalFlush": {
+          "name": "Escalera real de color",
+          "description": "La escalera de color más alta"
+        },
+        "straightFlush": {
+          "name": "Escalera de color",
+          "description": "Escalera del mismo palo"
+        },
+        "fiveOfAKind": {
+          "name": "Repóker",
+          "description": "Cinco cartas del mismo valor"
+        },
+        "fourOfAKind": {
+          "name": "Póker",
+          "description": "Cuatro cartas del mismo valor"
+        },
+        "fullHouse": {
+          "name": "Full",
+          "description": "Trío y un par"
+        },
+        "straight": {
+          "name": "Escalera",
+          "description": "Cinco cartas consecutivas"
+        },
+        "flush": {
+          "name": "Color",
+          "description": "Cinco cartas del mismo palo"
+        },
+        "threeOfAKind": {
+          "name": "Trío",
+          "description": "Tres cartas del mismo valor"
+        },
+        "twoPair": {
+          "name": "Doble par",
+          "description": "Dos pares de cartas de diferente valor"
+        },
+        "pair": {
+          "name": "Par",
+          "description": "Dos cartas del mismo valor"
+        },
+        "highCard": {
+          "name": "Carta alta",
+          "description": "Cartas no consecutivas y de palos diferentes"
+        }
+      }
+}

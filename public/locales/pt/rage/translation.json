@@ -1,0 +1,40 @@
+{
+  "rageCardsData": {
+    "401": {
+      "name": "Corações Partidos",
+      "description": "Cartas de naipe de coração não pontuarão durante este nível"
+    },
+    "402": {
+      "name": "Paus Partidos",
+      "description": "Cartas de naipe de paus não pontuarão durante este nível"
+    },
+    "403": {
+      "name": "Ouros Partidos",
+      "description": "Cartas de naipe de ouros não pontuarão durante este nível"
+    },
+    "404": {
+      "name": "Espadas Partidas",
+      "description": "Cartas de naipe de espadas não pontuarão durante este nível"
+    },
+    "405": {
+      "name": "Coringas Quebrados",
+      "description": "Coringas não pontuarão durante este nível"
+    },
+    "406": {
+      "name": "Apreensão Diminuída",
+      "description": "Sua mão será reduzida em 2 cartas durante este nível"
+    },
+    "407": {
+      "name": "Desperdício Zero",
+      "description": "Você não terá descartes durante este nível"
+    },
+    "408": {
+      "name": "Sacrifício Inesperado",
+      "description": "Uma de suas cartas especiais será sacrificada"
+    },
+    "409": {
+      "name": "Quarteto Estratégico",
+      "description": "Você só pode jogar até 4 cartas durante este nível"
+    }
+  }
+}

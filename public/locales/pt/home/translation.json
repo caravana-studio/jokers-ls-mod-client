@@ -1,0 +1,32 @@
+{
+    "home": {
+      "slogan": "CONSTRUA SEU DECK, DOMINE O JOGO",
+      "btn": {
+        "leaderboard-btn": "Ver classificação",
+        "playDemo-btn": "Jogar demo"
+      },
+      "join-discord": "¡Únete a nuestro Discord!"
+    },
+    "leaderboard": {
+      "btn": {
+        "returnLeaderboard-btn": "Voltar para o início"
+      },
+      "table-head": {
+        "position-leaderboard-head": "Posição",
+        "username-leaderboard-head": "Nome de usuário",
+        "score-leaderboard-head": "Pontuação",
+        "level-leaderboard-head": "Nível"
+      }
+    },
+    "tournament": {
+      "table-head": {
+        "prize-leaderboard-head": "Prêmio",
+        "tournament-tooltip": "Os prêmios serão distribuídos para os 10 melhores jogadores ao final do torneio"
+      },
+      "labels": {
+        "days-countdown-tournament": "dias",
+        "label-countdown-tournament": "para o torneio terminar"
+      }
+    }
+  }
+  

@@ -1,0 +1,31 @@
+{
+    "home": {
+        "slogan": "CONSTRUYE TU MAZO, DOMINA EL JUEGO",
+        "btn": {
+            "leaderboard-btn": "Ver leaderboard",
+            "playDemo-btn": "Jugar demo"
+        },
+        "join-discord": "¡Únete a nuestro Discord!"
+    },
+    "leaderboard": {
+        "btn": {
+            "returnLeaderboard-btn": "Volver al inicio"
+        },
+        "table-head": {
+            "position-leaderboard-head": "Puesto",
+            "username-leaderboard-head": "Nombre",
+            "score-leaderboard-head": "Puntos",
+            "level-leaderboard-head": "Nivel"
+        }
+    },
+    "tournament": {
+        "table-head": {
+            "prize-leaderboard-head": "Premio",
+            "tournament-tooltip": "Los premios serán distribuidos a los mejores 10 jugadores al final del torneo"
+        },
+        "labels": {
+            "days-countdown-tournament": "días",
+            "label-countdown-tournament": "para la finalización del torneo"
+        }
+    }
+}

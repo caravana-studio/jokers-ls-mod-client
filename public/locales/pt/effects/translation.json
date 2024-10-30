@@ -1,0 +1,158 @@
+{
+  "modifierCardsData": {
+    "600": {
+      "name": "+10 Pontos",
+      "description": "A carta modificada ganhará +10 pontos adicionais"
+    },
+    "601": {
+      "name": "+20 Pontos",
+      "description": "A carta modificada ganhará +20 pontos adicionais"
+    },
+    "602": {
+      "name": "+50 Pontos",
+      "description": "A carta modificada ganhará +50 pontos adicionais"
+    },
+    "603": {
+      "name": "+100 Pontos",
+      "description": "A carta modificada ganhará +100 pontos adicionais"
+    },
+    "604": {
+      "name": "+1 multiplicador",
+      "description": "A carta modificada adicionará +1 ao multiplicador"
+    },
+    "605": {
+      "name": "+2 multiplicador",
+      "description": "A carta modificada adicionará +2 ao multiplicador"
+    },
+    "606": {
+      "name": "+5 multiplicador",
+      "description": "A carta modificada adicionará +5 ao multiplicador"
+    },
+    "607": {
+      "name": "+10 multiplicador",
+      "description": "A carta modificada adicionará +10 ao multiplicador"
+    },
+    "608": {
+      "name": "Mudar para Paus",
+      "description": "A carta modificada será considerada como uma carta de Paus"
+    },
+    "609": {
+      "name": "Mudar para Ouros",
+      "description": "A carta modificada será considerada como uma carta de Ouros"
+    },
+    "610": {
+      "name": "Mudar para Copas",
+      "description": "A carta modificada será considerada como uma carta de Copas"
+    },
+    "611": {
+      "name": "Mudar para Espadas",
+      "description": "A carta modificada será considerada como uma carta de Espadas"
+    }
+  },
+  "specialCardsData": {
+    "300": {
+      "name": "Copas Multiplicadas",
+      "description": "Adiciona +2 ao multiplicador para cada carta de Copas jogada"
+    },
+    "301": {
+      "name": "Paus Multiplicadas",
+      "description": "Adiciona +2 ao multiplicador para cada carta de Paus jogada"
+    },
+    "302": {
+      "name": "Ouros Multiplicadas",
+      "description": "Adiciona +2 ao multiplicador para cada carta de Ouros jogada"
+    },
+    "303": {
+      "name": "Espadas Multiplicadas",
+      "description": "Adiciona +2 ao multiplicador para cada carta de Espadas jogada"
+    },
+    "304": {
+      "name": "Impulsionador de Par",
+      "description": "Aumenta o nível da mão de PAR em 4 níveis"
+    },
+    "305": {
+      "name": "Impulsionador de Dois Pares",
+      "description": "Aumenta o nível da mão de DOIS PARES em 4 níveis"
+    },
+    "306": {
+      "name": "Impulsionador de Sequência",
+      "description": "Aumenta o nível da mão de SEQUÊNCIA em 4 níveis"
+    },
+    "307": {
+      "name": "Impulsionador de Flush",
+      "description": "Aumenta o nível da mão de FLUSH em 4 níveis"
+    },
+    "308": {
+      "name": "Sequência Fácil",
+      "description": "A mão de Sequência pode ser feita com 4 cartas"
+    },
+    "309": {
+      "name": "Flush Fácil",
+      "description": "A mão de Flush pode ser feita com 4 cartas"
+    },
+    "310": {
+      "name": "Impulsionador de Coringa",
+      "description": "Todos os Coringas jogados marcam pontos e multiplicador em dobro"
+    },
+    "311": {
+      "name": "Impulsionador de Modificadores",
+      "description": "Todas as cartas de MODIFICADOR jogadas marcam pontos e multiplicador em dobro"
+    },
+    "312": {
+      "name": "Impulsionador de Figuras",
+      "description": "Todas as cartas de FIGURAS jogadas ganham +50 pontos"
+    },
+    "313": {
+      "name": "Ases Multiplicados",
+      "description": "Adiciona +3 ao multiplicador para cada carta de Ás jogada"
+    },
+    "314": {
+      "name": "O amor está no ar",
+      "description": "Todas as cartas jogadas são consideradas como sendo de Copas"
+    },
+    "315": {
+      "name": "O ladrão de mãos",
+      "description": "Adiciona +1 mão e +1 descarte à rodada"
+    },
+    "316": {
+      "name": "Ajuda extra",
+      "description": "Aumenta o tamanho da mão em 2"
+    },
+    "317": {
+      "name": "Número da sorte 7",
+      "description": "Todos os 7s ganham +77 pontos"
+    },
+    "318": {
+      "name": "Bônus Neon",
+      "description": "Todas as cartas Neon ganham +20 pontos"
+    },
+    "319": {
+      "name": "Prazo final",
+      "description": "Ao jogar sua última mão, aumenta o nível de jogo 10 vezes"
+    },
+    "320": {
+      "name": "Vantagem inicial",
+      "description": "A primeira mão jogada ganha +100 pontos e +10 no multiplicador"
+    },
+    "321": {
+      "name": "Mão da sorte",
+      "description": "Adiciona 50 moedas para cada carta de ouros que for jogada"
+    },
+    "322": {
+      "name": "Maestria em descarte",
+      "description": "Adiciona +10 ao multiplicador se não houver descartes restantes"
+    },
+    "323": {
+      "name": "Segunda chance",
+      "description": "Quando você perde, esta carta é destruída, mas você pode continuar jogando"
+    },
+    "324": {
+      "name": "Escudo do guardião",
+      "description": "Bloqueia todas as cartas de rage por 1 nível. É destruído depois"
+    },
+    "325": {
+      "name": "Sinergia de neon",
+      "description": "Se mais de 50% das cartas jogadas são neon, todas as outras cartas são convertidas em neon"
+    }
+  }
+}

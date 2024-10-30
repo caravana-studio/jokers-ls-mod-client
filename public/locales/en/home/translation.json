@@ -1,0 +1,40 @@
+{
+    "home":
+    {
+        "slogan":"BUILD YOUR DECK, RULE THE GAME",
+        "btn":
+        {
+            "leaderboard-btn": "See leaderboard",
+            "playDemo-btn": "Play demo"
+        },
+        "join-discord": "Join our Discord!"
+    },
+    "leaderboard":
+    {
+        "btn":
+        {
+            "returnLeaderboard-btn": "Go back home"
+        },
+        "table-head":
+        {
+            "position-leaderboard-head": "Position",
+            "username-leaderboard-head": "Username",
+            "score-leaderboard-head": "Score",
+            "level-leaderboard-head": "Level"
+        }
+
+    },
+    "tournament":
+    {
+        "table-head":
+        {
+            "prize-leaderboard-head": "Prize",
+            "tournament-tooltip": "Prizes will be distributed to the top 10 players at the end of the tournament"
+        },
+        "labels":
+        {
+            "days-countdown-tournament": "days",
+            "label-countdown-tournament": "for the tournament to finish"
+        }
+    }
+}
