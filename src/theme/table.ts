@@ -10,7 +10,7 @@ const leaderboard = definePartsStyle({
     color: "white",
     fontFamily: "VT323",
     textAlign: "center",
-    fontSize: ["9px", "sm", "sm", "md"],
+    fontSize: ["9px", "md", "lg", "xl"],
   },
   thead: {
     tr: {
@@ -30,8 +30,8 @@ const leaderboard = definePartsStyle({
           borderBottomWidth: 0,
         },
         td: {
-          color: VIOLET_LIGHT,
-          fontSize: ["10px", "sm", "sm", "md"],
+          color: 'white',
+          fontSize: ["9px", "md", "lg", "xl"],
           px: [1, 1, 4],
           py: [1, 2, 2, 2],
         },
@@ -41,8 +41,8 @@ const leaderboard = definePartsStyle({
           borderBottomWidth: 0,
         },
         td: {
-          color: VIOLET_LIGHT,
-          fontSize: ["10px","sm", "sm", "md"],
+          color: 'white',
+          fontSize: ["9px", "md", "lg", "xl"],
           px: [1, 1, 4],
           py: [1, 2, 2, 2],
         },

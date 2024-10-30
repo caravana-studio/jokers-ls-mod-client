@@ -11,19 +11,14 @@ import {
   Tr,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import CustomScrollbar from "../../components/CustomScrollbar/CustomScrollbar";
 import { TiltCard } from "../../components/TiltCard";
-import { PLAYS_DATA, PLAYS } from "../../constants/plays";
-import { LevelPokerHand } from "../../dojo/typescript/models.gen";
-import { useDojo } from "../../dojo/useDojo";
-import { getPlayerPokerHands } from "../../dojo/getPlayerPokerHands";
-import { parseHand } from "../../enums/hands";
-import { useGameContext } from "../../providers/GameProvider";
+import { PLAYS_DATA } from "../../constants/plays";
 import { BLUE_LIGHT } from "../../theme/colors";
+import { useResponsiveValues } from "../../theme/responsiveSettings";
 import theme from "../../theme/theme";
 import { Card } from "../../types/Card";
-import { useTranslation } from "react-i18next";
-import { useResponsiveValues } from "../../theme/responsiveSettings";
 
 const { blueLight, blue, violet } = theme.colors;
 
@@ -37,26 +32,13 @@ interface PlaysAvailableTableProps {
   };
 }
 
+const plays = PLAYS_DATA;
+
 export const PlaysAvailableTable: React.FC<PlaysAvailableTableProps> = ({
   maxHeight,
 }) => {
-  const { gameId } = useGameContext();
-  const [plays, setPlays] = useState<LevelPokerHand[]>([]);
   const [playsExampleIndex, setPlaysExampleIndex] = useState(0);
   const { t } = useTranslation(["game"]);
-
-  const {
-    setup: {
-      client,
-      account: { account },
-    },
-  } = useDojo();
-
-  if (client && account && plays.length == 0) {
-    getPlayerPokerHands(client, gameId).then((plays: any) => {
-      setPlays(plays);
-    });
-  }
 
   const { isSmallScreen, cardScale } = useResponsiveValues();
 
@@ -197,15 +179,6 @@ export const PlaysAvailableTable: React.FC<PlaysAvailableTableProps> = ({
                       opacity: 1,
                     };
 
-                    const levelTd = (
-                      <Td
-                        sx={opacitySx}
-                        textColor={textColor}
-                        fontSize={isSmallScreen ? 9 : 13}
-                      >
-                        {play.level.toString()}
-                      </Td>
-                    );
                     const nameTd = (
                       <Td
                         sx={opacitySx}
@@ -213,8 +186,7 @@ export const PlaysAvailableTable: React.FC<PlaysAvailableTableProps> = ({
                         textColor={textColor}
                         fontSize={isSmallScreen ? 9 : 13}
                       >
-                        {play.poker_hand &&
-                          PLAYS[parseHand(play.poker_hand.toString()).value]}
+                        {play.name}
                       </Td>
                     );
                     const pointsMultiTd = (
@@ -259,12 +231,7 @@ export const PlaysAvailableTable: React.FC<PlaysAvailableTableProps> = ({
                         onClick={() => setPlaysExampleIndex(index)}
                         sx={{ cursor: "pointer" }}
                       >
-                        {
-                          <>
-                            {levelTd}
-                            {nameTd}
-                          </>
-                        }
+                        {<>{nameTd}</>}
 
                         {pointsMultiTd}
                       </Tr>

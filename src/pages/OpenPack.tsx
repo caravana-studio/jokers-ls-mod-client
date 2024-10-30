@@ -5,7 +5,6 @@ import { Background } from "../components/Background";
 import { ConfirmationModal } from "../components/ConfirmationModal";
 import { Loading } from "../components/Loading";
 import { TiltCard } from "../components/TiltCard";
-import { useStore } from "../providers/StoreProvider";
 import { BLUE, BLUE_LIGHT } from "../theme/colors";
 import { Card } from "../types/Card";
 import { getCardUniqueId } from "../utils/getCardUniqueId";
@@ -76,10 +75,9 @@ export const OpenPack = () => {
 
   const allSelected = cardsToKeep.length === cards.length;
 
-  const { selectCardsFromPack } = useStore();
 
   const confirmSelectCards = () => {
-    selectCardsFromPack(cardsToKeep.map((c) => c.idx));
+    // selectCardsFromPack(cardsToKeep.map((c) => c.idx));
     setCards([]);
     navigate("/redirect/store");
   };

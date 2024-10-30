@@ -24,10 +24,23 @@ const solid = defineStyle({
 });
 
 const secondarySolid = defineStyle({
-  backgroundColor: "violet",
+  backgroundColor: "transparent !important",
+  borderRadius: 0,
+  fontSize: "40px",
+  px: "60px",
+  py: "25px",
+  border: `4px solid white`,
+  color: "white",
   boxShadow: {
-    base: `0px 0px 10px 6px ${VIOLET}`,
-    md: `0px 0px 20px 12px ${VIOLET}`,
+    base: `0px 0px 10px 0px white`,
+    md: `0px 0px 15px 1px white`,
+  },
+  _hover: {
+    borderColor: "white",
+    boxShadow: {
+      base: `0px 0px 20px 2px white`,
+      md: `0px 0px 30px 2px white`,
+    },
   },
 });
 
