@@ -7,13 +7,20 @@ import { Background } from "../components/Background";
 import { DiscordLink } from "../components/DiscordLink";
 import { Leaderboard } from "../components/Leaderboard";
 import { PoweredBy } from "../components/PoweredBy";
+import { LOGGED_USER } from "../constants/localStorage";
 import { LS_GREEN } from "../theme/colors";
 
 export const Home = () => {
   const [leaderboardOpen, setLeaderboardOpen] = useState(false);
 
-  const navigate = useNavigate();
   const { t } = useTranslation(["home"]);
+  const navigate = useNavigate();
+
+  const onPlayClick = () => {
+    //TODO: Remove this when integrating the controller
+    window.localStorage.setItem(LOGGED_USER, "nicon44");
+    navigate("/choose-class");
+  };
 
   return (
     <Background bgDecoration type="home">
@@ -48,9 +55,15 @@ export const Home = () => {
               width={{ base: "85%", sm: "75%", md: "70%" }}
               src="/logos/logo.png"
               alt="logo"
-              
             />
-            <Text fontSize="50px" lineHeight='1' mb='60px' mt='-40px' color="lsGreen" textShadow={`0px 0px 10px ${LS_GREEN}`}>
+            <Text
+              fontSize="50px"
+              lineHeight="1"
+              mb="60px"
+              mt="-40px"
+              color="lsGreen"
+              textShadow={`0px 0px 10px ${LS_GREEN}`}
+            >
               LOOT SURVIVOR MOD
             </Text>
 
@@ -64,16 +77,11 @@ export const Home = () => {
                 onClick={() => {
                   setLeaderboardOpen(true);
                 }}
-                width='350px'
+                width="350px"
               >
                 leaderboard
               </Button>
-              <Button
-                onClick={() => {
-                  navigate("/login");
-                }}
-                width='350px'
-              >
+              <Button onClick={onPlayClick} width="350px">
                 play
               </Button>
             </Flex>

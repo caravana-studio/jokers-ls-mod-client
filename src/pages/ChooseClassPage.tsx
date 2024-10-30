@@ -1,24 +1,29 @@
 import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Background } from "../components/Background";
 import CachedImage from "../components/CachedImage";
+import { PositionedGameMenu } from "../components/GameMenu";
+import { Loading } from "../components/Loading";
+import { useGame } from "../dojo/queries/useGame";
+import { useDojo } from "../dojo/useDojo";
+import { useGameContext } from "../providers/GameProvider";
 import { LS_GREEN } from "../theme/colors";
 
 const CLASSES = [
   {
-    id: 1,
+    id: 0,
     title: "Scribe",
     element: "book",
     description: "- +4 Jokers",
   },
   {
-    id: 2,
+    id: 1,
     title: "Warrior",
     element: "sword",
     description: "- +1 Joker /n - +2 point modifiers /n - +2 multi modifiers",
   },
   {
-    id: 3,
+    id: 2,
     title: "Wizard",
     element: "wand",
     description: "- +1 special card /n - +2 Jokers",
@@ -26,9 +31,45 @@ const CLASSES = [
 ];
 
 export const ChooseClassPage = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [selectedClass, setSelectedClass] = useState<number | undefined>();
+  const {
+    setup: { masterAccount },
+    account: { account },
+  } = useDojo();
+
+  const {
+    checkOrCreateGame,
+    selectDeckType,
+    gameLoading,
+    error,
+    redirectBasedOnGameState,
+    lockRedirection,
+  } = useGameContext();
+
+  const game = useGame();
+
+  useEffect(() => {
+    if (account !== masterAccount) {
+      checkOrCreateGame();
+    }
+  }, [account, masterAccount]);
+
+  useEffect(() => {
+    redirectBasedOnGameState();
+  }, [game?.state, lockRedirection]);
+
+  if (gameLoading || error) {
+    return (
+      <Background bgDecoration type="skulls">
+        {gameLoading ? <Loading /> : <Heading size="xxl">ERROR</Heading>}
+      </Background>
+    );
+  }
+
   return (
     <Background bgDecoration type="skulls">
+      <PositionedGameMenu decoratedPage />
       <Flex
         width="100%"
         height="100%"
@@ -50,13 +91,29 @@ export const ChooseClassPage = () => {
             <ClassBox
               key={classBox.id}
               {...classBox}
-              onClick={() => setSelectedClass(classBox.id)}
+              onClick={() => {
+                setSelectedClass(classBox.id);
+              }}
               selected={selectedClass === classBox.id}
             />
           ))}
         </Flex>
         <Flex>
-          <Button mb={8} size='lg' isDisabled={!selectedClass}>CONTINUE</Button>
+          <Button
+            mb={8}
+            size="lg"
+            isDisabled={selectedClass === undefined || isLoading}
+            onClick={() => {
+              if (selectedClass !== undefined) {
+                setIsLoading(true);
+                selectDeckType(selectedClass).finally(() => {
+                  setIsLoading(false);
+                });
+              }
+            }}
+          >
+            {isLoading ? "Loading..." : "CONTINUE"}
+          </Button>
         </Flex>
       </Flex>
     </Background>
