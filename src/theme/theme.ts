@@ -1,4 +1,4 @@
-import { buttonTheme } from "./button.ts";
+import { buttonTheme } from "./button";
 import {
   BLUE,
   BLUE_LIGHT,
@@ -12,14 +12,14 @@ import {
   SPADES,
   VIOLET,
   VIOLET_LIGHT,
-} from "./colors.tsx";
-import { headingTheme } from "./heading.ts";
-import { inputTheme } from "./input.ts";
+} from "./colors";
+import { headingTheme } from "./heading";
+import { inputTheme } from "./input";
 import { menuTheme } from "./menu.ts";
-import { modalTheme } from "./modal.ts";
-import { tableTheme } from "./table.ts";
-import { textTheme } from "./text.ts";
-import { tooltipTheme } from "./tooltip.ts";
+import { modalTheme } from "./modal";
+import { tableTheme } from "./table";
+import { textTheme } from "./text";
+import { tooltipTheme } from "./tooltip";
 
 export default {
   colors: {

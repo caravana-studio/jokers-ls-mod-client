@@ -9,8 +9,8 @@ const AudioPlayer = () => {
     <Box
       sx={{
         position: "fixed",
-        bottom: "20px",
-        left: "20px",
+        bottom: "65px",
+        left: "40px",
         zIndex: 1000,
       }}
     >

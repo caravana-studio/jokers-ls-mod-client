@@ -5,15 +5,12 @@ export const PoweredBy = () => {
     <Box
       sx={{
         position: "fixed",
-        bottom: "2.5vh",
+        bottom: "60px",
         zIndex: 1000,
-        color: "white",
-        filter: "blur(0.5px)",
         opacity: 0.7,
-        letterSpacing: "0.25em",
       }}
     >
-      <Text fontFamily="VT323">powered by Dojo and Starknet</Text>
+      <Text size='xl' >powered by Dojo and Starknet</Text>
     </Box>
   );
 };
