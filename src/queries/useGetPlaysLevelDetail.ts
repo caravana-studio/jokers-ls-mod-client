@@ -1,8 +1,8 @@
 import { gql } from "graphql-tag";
 import { useQuery } from "react-query";
 import { parseHand } from "../enums/hands.ts";
-import graphQLClient from "../graphQLClient";
-import { PokerPlay } from "../types/PokerPlay";
+import graphQLClient from "../graphQLClient.ts";
+import { PokerPlay } from "../types/PokerPlay.ts";
 
 export const PLAYS_LEVEL_QUERY_KEY = "playerLevelPokerHandModels";
 

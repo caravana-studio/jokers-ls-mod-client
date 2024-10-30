@@ -2,13 +2,13 @@ import { Box, Button, Flex, HStack, Heading, Text } from "@chakra-ui/react";
 import { isMobile } from "react-device-detect";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { Background } from "../components/Background";
-import CachedImage from "../components/CachedImage.tsx";
-import { PositionedDiscordLink } from "../components/DiscordLink.tsx";
-import { PositionedGameMenu } from "../components/GameMenu.tsx";
+import { Background } from "./Background.tsx";
+import CachedImage from "./CachedImage.tsx";
+import { PositionedDiscordLink } from "./DiscordLink.tsx";
+import { PositionedGameMenu } from "./GameMenu.tsx";
 import { CARD_WIDTH } from "../constants/visualProps.ts";
 import { Coins } from "../pages/store/Coins.tsx";
-import theme from "../theme/theme";
+import theme from "../theme/theme.ts";
 import { CashSymbol } from "./CashSymbol.tsx";
 
 const SIZE_MULTIPLIER = isMobile ? 1.3 : 2;

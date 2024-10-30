@@ -16,7 +16,7 @@ export const LoadingScreen = ({ error = false }: LoadingScreenProps) => {
         justifyContent: "center",
         flexDirection: "column",
         alignItems: "center",
-        fontFamily: "Orbitron",
+        fontFamily: "VT323",
         fontSize: 30,
         letterSpacing: "0.25em",
         background: `url(bg/home-bg.jpg)`,

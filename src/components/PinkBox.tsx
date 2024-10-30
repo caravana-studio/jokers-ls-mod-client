@@ -16,7 +16,7 @@ export const PinkBox = ({ children, title, button, onClick }: PinkBoxProps) => {
       alignItems="center"
       w="80%"
       maxW="550px"
-      fontFamily="Orbitron"
+      fontFamily="Jersey"
     >
       <Box
         w="100%"

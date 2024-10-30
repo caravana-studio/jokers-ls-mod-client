@@ -9,9 +9,9 @@ import {
   Tr
 } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
-import { useGetLeaderboard } from "../queries/useGetLeaderboard";
+import { useGetLeaderboard } from "../queries/useGetLeaderboard.ts";
 import { VIOLET, VIOLET_LIGHT } from "../theme/colors.tsx";
-import { RollingNumber } from "./RollingNumber";
+import { RollingNumber } from "./RollingNumber.tsx";
 
 const CURRENT_LEADER_STYLES = {
   position: "relative",

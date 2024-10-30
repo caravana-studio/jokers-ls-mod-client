@@ -5,6 +5,8 @@ export const VIOLET_LIGHT = "#DCA2EA";
 export const PASTEL_PINK = "#fdbed6";
 export const PASTEL_PINK_DARK = "#c27c98";
 
+export const LS_GREEN = "#33ff33";
+
 export const NEON_GREEN = "#20c6ed";
 export const NEON_PINK = "#A144B2";
 

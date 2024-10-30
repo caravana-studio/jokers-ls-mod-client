@@ -12,17 +12,17 @@ import {
   CARD_WIDTH,
   MODIFIERS_OFFSET,
   TILT_OPTIONS,
-} from "../constants/visualProps";
+} from "../constants/visualProps.ts";
 
 import ClockIcon from "../assets/clock.svg?component";
 import { useIsSilent } from "../hooks/useIsSilent.tsx";
 import { VIOLET } from "../theme/colors.tsx";
-import { Card } from "../types/Card";
+import { Card } from "../types/Card.ts";
 import { getTemporalCardText } from "../utils/getTemporalCardText.ts";
 import { getTooltip } from "../utils/getTooltip.tsx";
-import { AnimatedCard } from "./AnimatedCard";
+import { AnimatedCard } from "./AnimatedCard.tsx";
 import CachedImage from "./CachedImage.tsx";
-import { DraggableCard } from "./DraggableCard";
+import { DraggableCard } from "./DraggableCard.tsx";
 import { HoloEffect } from "./HoloEffect.tsx";
 import { PriceBox } from "./PriceBox.tsx";
 

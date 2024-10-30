@@ -1,6 +1,6 @@
 export const inputTheme = {
   baseStyle: {
-    fontFamily: "Orbitron",
+    fontFamily: "VT323",
   },
   field: {
     color: "#555",
@@ -12,14 +12,14 @@ export const inputTheme = {
   variants: {
     "neon-white": {
       field: {
-        fontFamily: "Orbitron",
+        fontFamily: "VT323",
         letterSpacing: ".15rem",
         borderRadius: 0,
         bg: "transparent",
         color: "white",
         padding: 0,
         _placeholder: {
-          fontFamily: "Orbitron",
+          fontFamily: "VT323",
           color: "rgba(255, 255, 255, 0.8)",
           letterSpacing: ".15rem",
         },

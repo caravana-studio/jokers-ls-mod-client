@@ -1,24 +1,16 @@
 @font-face {
-  src: url("../public/fonts/Orbitron.ttf");
-  font-family: "Orbitron";
+  src: url("../public/fonts/Jersey10.ttf");
+  font-family: "Jersey";
 }
 @font-face {
-  src: url("../public/fonts/Oxanium.ttf");
-  font-family: "Oxanium";
-}
-@font-face {
-  src: url("../public/fonts/Sonara.otf");
-  font-family: "Sonara";
+  src: url("../public/fonts/VT323.ttf");
+  font-family: "VT323";
 }
 
 * {
-  font-family: "Oxanium";
+  font-family: "VT323";
 }
 
 .headline {
-  font-family: "Orbitron";
-}
-
-.italic {
-  font-family: "Sonara";
+  font-family: "Jersey";
 }

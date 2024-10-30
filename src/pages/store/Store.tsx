@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useGame } from "../../dojo/queries/useGame.tsx";
-import { useGameContext } from "../../providers/GameProvider";
-import { useStore } from "../../providers/StoreProvider";
-import { Background } from "../../components/Background";
-import { StoreContent } from "./StoreContent";
-import { StoreContentMobile } from "./StoreContent.mobile";
+import { useGameContext } from "../../providers/GameProvider.tsx";
+import { useStore } from "../../providers/StoreProvider.tsx";
+import { Background } from "../../components/Background.tsx";
+import { StoreContent } from "./StoreContent.tsx";
+import { StoreContentMobile } from "./StoreContent.mobile.tsx";
 import useStoreContent from "./UseStoreContent.ts";
 import { Loading } from "../../components/Loading.tsx";
 

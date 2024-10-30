@@ -1,6 +1,6 @@
 import { Flex, Img, Text, Tooltip } from "@chakra-ui/react";
 import { SortBy as SortByEnum } from "../enums/sortBy.ts";
-import { useGameContext } from "../providers/GameProvider";
+import { useGameContext } from "../providers/GameProvider.tsx";
 import { useTranslation } from "react-i18next";
 import { useResponsiveValues } from "../theme/responsiveSettings.tsx";
 import CachedImage from "./CachedImage.tsx";
