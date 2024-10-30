@@ -50,7 +50,7 @@ export const useGameActions = () => {
     }
   };
 
-  const selectSpecials = async (gameId: number, cardsIndex: []) => {
+  const selectSpecials = async (gameId: number, cardsIndex: number[]) => {
     try {
       showTransactionToast();
       const { transaction_hash } =
@@ -79,7 +79,7 @@ export const useGameActions = () => {
     }
   };
 
-  const selectModifiers = async (gameId: number, cardsIndex: []) => {
+  const selectModifiers = async (gameId: number, cardsIndex: number[]) => {
     try {
       showTransactionToast();
       const { transaction_hash } =
