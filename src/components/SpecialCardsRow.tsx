@@ -13,6 +13,7 @@ import { ConfirmationModal } from "./ConfirmationModal.tsx";
 import { LockedSlot } from "./LockedSlot.tsx";
 import { TiltCard } from "./TiltCard.tsx";
 import { FilledUnlockedSlot } from "./UnlockedSlot.tsx";
+import { LS_GREEN_OPACTITY } from "../theme/colors.tsx";
 
 interface SpecialCardsRowProps {
   cards: Card[];
@@ -32,16 +33,8 @@ export const SpecialCardsRow = ({ cards }: SpecialCardsRowProps) => {
   const { highlightCard } = useCardHighlight();
 
   const game = useGame();
-  const unlockedSpecialSlots = game?.len_max_current_special_cards ?? 1;
-
-  const lockedSlots =
-    unlockedSpecialSlots === MAX_SPECIAL_CARDS
-      ? 0
-      : Math.max(0, 5 - unlockedSpecialSlots);
-
-  const freeUnlockedSlots = Math.max(0, 5 - cards.length - lockedSlots);
-
-  const visibleCards = cards.length + freeUnlockedSlots + lockedSlots;
+  // const maxLength = game?.len_max_current_special_cards ?? 5;
+  const maxLength = 5;
 
   useEffect(() => {
     if (roundRewards) {
@@ -67,15 +60,11 @@ export const SpecialCardsRow = ({ cards }: SpecialCardsRowProps) => {
     }
   };
 
-  const slotWidth = (visibleCards > 6 ? 88 : 92) / visibleCards;
-
   return (
     <Flex
-      width="100%"
       height={`${cardHeight}px`}
-      gap={{ base: 2, sm: 3 }}
       alignItems={"center"}
-      justifyContent={"center"}
+      justifyContent={"space-between"}
     >
       {cards.map((card) => {
         const isDiscarded = discardedCards.includes(card.id);
@@ -84,7 +73,7 @@ export const SpecialCardsRow = ({ cards }: SpecialCardsRowProps) => {
             className="special-cards-step-1"
             key={card.idx}
             justifyContent="center"
-            width={`${slotWidth}%`}
+            width={`100%`}
             maxWidth={`${cardWidth + 7}px`}
             position="relative"
             zIndex={1}
@@ -147,22 +136,26 @@ export const SpecialCardsRow = ({ cards }: SpecialCardsRowProps) => {
           </Flex>
         );
       })}
-      {Array.from({ length: freeUnlockedSlots }).map((_, index) => (
-        <Flex key={`unlocked-slot-${index}`} maxWidth={`${slotWidth}%`}>
-          <FilledUnlockedSlot
-            key={`unlocked-${index}`}
-            scale={cardScale - cardScale * 0.1}
-          />
-        </Flex>
-      ))}
-      {Array.from({ length: lockedSlots }).map((_, index) => (
-        <Flex key={`locked-slot-${index}`} maxWidth={`${slotWidth}%`}>
-          <LockedSlot
-            key={`locked-${index}`}
-            scale={cardScale - cardScale * 0.1}
-          />
-        </Flex>
-      ))}
+      <Flex
+        style={{
+          boxShadow: `0px 0px 10px 3px ${LS_GREEN_OPACTITY}`,
+          borderRadius: "10px",
+        }}
+        gap={2}
+        p={2}
+      >
+        {Array.from({ length: maxLength }).map((_, index) => (
+          <Flex key={`slot-${index}`} maxWidth={`100%`}>
+            <Box
+              width={`${CARD_WIDTH * cardScale - cardScale * 0.1}`}
+              height={`${CARD_HEIGHT * cardScale - cardScale * 0.1}`}
+              minWidth={`${CARD_WIDTH * cardScale - cardScale * 0.1}`}
+              border={"1.5px solid white"}
+              borderRadius={"5px"}
+            ></Box>
+          </Flex>
+        ))}
+      </Flex>
       {cardToDiscard !== null && (
         <ConfirmationModal
           close={() => setCardToDiscard(null)}

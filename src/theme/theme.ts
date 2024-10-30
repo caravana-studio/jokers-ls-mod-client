@@ -61,11 +61,11 @@ export default {
     },
   },
   breakpoints: {
-    base: "0em",    
-    sm: "42em",   
-    md: "78em",     
-    lg: "90em",   
-    xl: "125em",  
+    base: "0em",
+    sm: "42em",
+    md: "78em",
+    lg: "90em",
+    xl: "125em",
   },
 
   components: {

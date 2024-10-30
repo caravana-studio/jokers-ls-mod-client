@@ -64,7 +64,6 @@ export const PreselectedCardsSection = ({
             justifyContent="center"
             alignItems={"center"}
             height="188px"
-            background={"url(grid.png)"}
             width="90%"
           >
             {preSelectedCards.map((idx) => {

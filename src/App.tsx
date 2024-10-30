@@ -4,7 +4,6 @@ import "./App.scss";
 
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
-import { GamePage } from "./pages/Game/GamePage";
 import { GameOver } from "./pages/GameOver";
 import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
@@ -21,6 +20,7 @@ import { GameProvider } from "./providers/GameProvider";
 import { StoreProvider } from "./providers/StoreProvider";
 import customTheme from "./theme/theme";
 import { ChooseClassPage } from "./pages/ChooseClassPage";
+import { GamePage } from "./pages/Game/GamePage";
 
 function App() {
   const theme = extendTheme(customTheme);
@@ -32,6 +32,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/choose-class" element={<ChooseClassPage />} />
+              <Route path="/game" element={<GamePage />} />
             </Routes>
           </AudioPlayerProvider>
         </GameProvider>

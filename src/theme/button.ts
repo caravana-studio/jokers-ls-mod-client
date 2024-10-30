@@ -1,5 +1,4 @@
 import { BLUE, LS_GREEN, NEON_GREEN, VIOLET } from "./colors";
-
 import { defineStyle, defineStyleConfig } from "@chakra-ui/react";
 
 const solid = defineStyle({
@@ -24,10 +23,23 @@ const solid = defineStyle({
 });
 
 const secondarySolid = defineStyle({
-  backgroundColor: "violet",
+  backgroundColor: "transparent !important",
+  borderRadius: 0,
+  fontSize: "40px",
+  px: "60px",
+  py: "25px",
+  border: `4px solid white`,
+  color: "white",
   boxShadow: {
-    base: `0px 0px 10px 6px ${VIOLET}`,
-    md: `0px 0px 20px 12px ${VIOLET}`,
+    base: `0px 0px 10px 0px white`,
+    md: `0px 0px 15px 1px white`,
+  },
+  _hover: {
+    borderColor: "white",
+    boxShadow: {
+      base: `0px 0px 20px 2px white`,
+      md: `0px 0px 30px 2px white`,
+    },
   },
 });
 
@@ -57,6 +69,43 @@ const defaultOutline = defineStyle({
   backgroundColor: "transparent",
   border: `1px solid rgb(255,255,255) !important`,
   color: "rgb(255,255,255)",
+});
+
+const defaultOutlineLoot = defineStyle({
+  backgroundColor: "transparent",
+  border: `2px solid rgb(255,255,255) !important`,
+  borderRadius: 1,
+  color: "rgb(255,255,255)",
+});
+
+const defaultOutlineGlowLoot = defineStyle({
+  backgroundColor: "transparent",
+  border: `2px solid rgb(255,255,255) !important`,
+  borderRadius: 1,
+  color: "rgb(255,255,255)",
+  boxShadow: `0px 0px 20px 3px white, inset 0px 0px 25px 0px white`,
+  _hover: {
+    borderColor: "white",
+    boxShadow: {
+      base: `0px 0px 20px 2px white`,
+      md: `0px 0px 30px 2px white`,
+    },
+  },
+});
+
+const defaultGreenOutlineGlow = defineStyle({
+  backgroundColor: "transparent",
+  border: `2px solid ${LS_GREEN} !important`,
+  borderRadius: 1,
+  color: "green",
+  boxShadow: `0px 0px 20px 3px ${LS_GREEN}, inset 0px 0px 25px 0px ${LS_GREEN}`,
+  _hover: {
+    borderColor: "lsGreen",
+    boxShadow: {
+      base: `0px 0px 20px 2px ${LS_GREEN}`,
+      md: `0px 0px 30px 2px ${LS_GREEN}`,
+    },
+  },
 });
 
 const outlinePrimaryGlow = defineStyle({
@@ -135,6 +184,9 @@ export const buttonTheme = defineStyleConfig({
     discardSecondarySolid,
     outlineSecondaryGlow,
     outlinePrimaryGlow,
+    defaultOutlineLoot,
+    defaultOutlineGlowLoot,
+    defaultGreenOutlineGlow,
   },
   sizes: {
     sm: {

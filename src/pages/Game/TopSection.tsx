@@ -7,6 +7,8 @@ import { SpecialCards } from "../../components/SpecialCards.tsx";
 import { CARD_WIDTH } from "../../constants/visualProps.ts";
 import { useGameContext } from "../../providers/GameProvider.tsx";
 import CachedImage from "../../components/CachedImage.tsx";
+import { Obstacle } from "./Obstacle.tsx";
+import { Collab } from "./collab.tsx";
 
 export const TopSection = () => {
   const { isRageRound } = useGameContext();
@@ -16,22 +18,15 @@ export const TopSection = () => {
       width="100%"
       justifyContent={"space-between"}
       alignItems={"flex-start"}
+      pl={"70px"}
+      pr={"10px"}
     >
-      <Box mr={4}>
-        <CachedImage
-          src="logos/logo-variant.svg"
-          width={{ base: "110px", sm: "150px", md: "260px" }}
-          alt="logo"
-          mb="30px"
-        />
-        <LevelPoints />
-      </Box>
+      <Obstacle />
+      <Collab />
       <Flex
-        px={2}
         flexDirection="row"
         justifyContent="flex-start"
         alignItems="flex-start"
-        mx={2}
         flexGrow={1}
         minWidth={{ base: "250px", md: "500px" }}
         maxWidth={`${(CARD_WIDTH + 20) * 5}px`}
@@ -40,7 +35,7 @@ export const TopSection = () => {
         <SpecialCards />
         {isRageRound && <RageCards />}
       </Flex>
-      <Flex
+      {/* <Flex
         flexDirection="column"
         ml={4}
         height="100%"
@@ -48,7 +43,7 @@ export const TopSection = () => {
       >
         <Score />
         <MultiPoints />
-      </Flex>
+      </Flex> */}
     </Flex>
   );
 };

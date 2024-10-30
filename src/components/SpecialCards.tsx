@@ -1,12 +1,13 @@
 import { Box, Button, Flex, Text, useTheme } from "@chakra-ui/react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useGame } from "../dojo/queries/useGame.tsx";
+import { useGame } from "../dojo/queries/useGame";
 import { useGameContext } from "../providers/GameProvider.tsx";
 import { Card } from "../types/Card.ts";
 import { ConfirmationModal } from "./ConfirmationModal.tsx";
 import { useResponsiveValues } from "../theme/responsiveSettings.tsx";
 import { SpecialCardsRow } from "./SpecialCardsRow.tsx";
+import { LS_GREEN } from "../theme/colors.tsx";
 
 interface SpecialCardsProps {
   inStore?: boolean;
@@ -28,21 +29,14 @@ export const SpecialCards = ({ inStore = false }: SpecialCardsProps) => {
   const { cardScale } = useResponsiveValues();
 
   return (
-    <Box
-      className="special-cards-step-3"
-      width={width}
-      boxShadow={
-        inStore
-          ? "none"
-          : `0px 26px 30px -30px ${isRageRound ? colors.neonPink : colors.neonGreen}`
-      }
-    >
-      <SpecialCardsRow cards={specialCards} />
-      <Flex mt={{ base: 0, sm: 1 }} mx={1} justifyContent="space-between">
-        <Box>
+    <Box className="special-cards-step-3" width={width}>
+      <Flex justifyContent="space-around" flexDir={"column"}>
+        <SpecialCardsRow cards={specialCards} />
+        <Box mt={2}>
           {!inStore && (
-            <Text size={{ base: "l", sm: "m" }}>
-              {t("game.special-cards.special-cards-label")}
+            <Text fontSize={"1.3rem"}>
+              Special cards (0/5)
+              {/* {t("game.special-cards.special-cards-label")} */}
             </Text>
           )}
         </Box>

@@ -13,7 +13,6 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { AnimatedCard } from "../../components/AnimatedCard";
 import { ShowPlays } from "../../components/ShowPlays";
-import { SortBy } from "../../components/SortBy";
 import { TiltCard } from "../../components/TiltCard";
 import { HAND_SECTION_ID } from "../../constants/general";
 import { CARD_HEIGHT, CARD_WIDTH } from "../../constants/visualProps";
@@ -21,7 +20,7 @@ import { useRound } from "../../dojo/queries/useRound";
 import { useCardHighlight } from "../../providers/CardHighlightProvider";
 import { useGameContext } from "../../providers/GameProvider";
 import { useResponsiveValues } from "../../theme/responsiveSettings";
-import { Coins } from "./Coins";
+import { HealthBar } from "../../components/HealthBar";
 
 export const HandSection = () => {
   const {
@@ -66,18 +65,6 @@ export const HandSection = () => {
 
   return (
     <>
-      {!isSmallScreen && (
-        <Flex
-          flexDirection="column"
-          justifyContent="space-between"
-          sx={{ mr: 4 }}
-          pb={1}
-          height={cardHeight}
-        >
-          <SortBy />
-          <Coins />
-        </Flex>
-      )}
       <Box
         pr={!isSmallScreen ? 12 : 10}
         pl={!isSmallScreen ? 4 : 2}
@@ -86,7 +73,22 @@ export const HandSection = () => {
         height={isSmallScreen ? cardHeight : "100%"}
         display={"flex"}
         alignItems={"end"}
+        position={"relative"}
       >
+        <Flex
+          top={"5"}
+          right={"-500"}
+          width="70%"
+          justifyContent="flex-end"
+          alignItems="flex-end"
+          position="absolute"
+          m={0}
+          p={0}
+          direction="column"
+        >
+          <HealthBar />
+        </Flex>
+
         <SimpleGrid
           sx={{
             opacity: !roundRewards && handsLeft > 0 ? 1 : 0.3,
@@ -192,6 +194,7 @@ export const HandSection = () => {
               justifyContent={"flex-end"}
               alignItems="flex-end"
               position="absolute"
+              opacity={!roundRewards && handsLeft > 0 ? 1 : 0}
             >
               <ShowPlays />
             </Flex>
