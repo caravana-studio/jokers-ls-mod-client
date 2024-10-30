@@ -6,6 +6,7 @@ export const PASTEL_PINK = "#fdbed6";
 export const PASTEL_PINK_DARK = "#c27c98";
 
 export const LS_GREEN = "#33ff33";
+export const LS_GREEN_OPACTITY = "rgb(51, 255, 51, 0.5)";
 
 export const NEON_GREEN = "#20c6ed";
 export const NEON_PINK = "#A144B2";

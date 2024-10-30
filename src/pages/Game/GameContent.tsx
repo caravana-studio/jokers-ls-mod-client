@@ -169,9 +169,9 @@ export const GameContent = () => {
     );
   }
 
-  if (gameLoading || !game) {
-    return <Loading />;
-  }
+  //   if (gameLoading || !game) {
+  //     return <Loading />;
+  //   }
 
   return (
     <Box
@@ -228,8 +228,8 @@ export const GameContent = () => {
             top={0}
             zIndex={0}
           />
-          <Box sx={{ height: "100%", width: "100%" }} px={"70px"}>
-            <Box sx={{ height: "30%", width: "100%" }} pt={"60px"}>
+          <Box sx={{ height: "100%", width: "100%" }}>
+            <Box sx={{ height: "30%", width: "100%" }} mb={5}>
               <TopSection />
             </Box>
             <Box height={"70%"} width={"100%"}>
@@ -246,6 +246,8 @@ export const GameContent = () => {
                     flexDirection: "row",
                     alignItems: "center",
                     justifyContent: "space-between",
+                    backgroundColor: "rgba(0, 0, 0, 0.6)",
+                    px: "70px",
                   }}
                 >
                   <PreselectedCardsSection isTutorialRunning={run} />
@@ -283,15 +285,6 @@ export const GameContent = () => {
             setRun(true);
           }}
         />
-        <Box
-          sx={{
-            position: "fixed",
-            bottom: 14,
-            right: 20,
-          }}
-        >
-          <GameDeck />
-        </Box>
       </Box>
     </Box>
   );
