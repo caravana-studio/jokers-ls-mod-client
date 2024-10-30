@@ -16,15 +16,15 @@ import { useTranslation } from "react-i18next";
 import { CashSymbol } from "../../components/CashSymbol.tsx";
 import { PLAYS } from "../../constants/plays.ts";
 import { getPlayerPokerHands } from "../../dojo/getPlayerPokerHands.tsx";
-import { useGame } from "../../dojo/queries/useGame";
-import { useShopItems } from "../../dojo/queries/useShopItems";
+import { useGame } from "../../dojo/queries/useGame.tsx";
+import { useShopItems } from "../../dojo/queries/useShopItems.ts";
 import { LevelPokerHand } from "../../dojo/typescript/models.gen.ts";
 import { useDojo } from "../../dojo/useDojo.tsx";
 import { parseHand } from "../../enums/hands.ts";
-import { useGameContext } from "../../providers/GameProvider";
-import { useStore } from "../../providers/StoreProvider";
-import { BLUE } from "../../theme/colors";
-import theme from "../../theme/theme";
+import { useGameContext } from "../../providers/GameProvider.tsx";
+import { useStore } from "../../providers/StoreProvider.tsx";
+import { BLUE } from "../../theme/colors.tsx";
+import theme from "../../theme/theme.ts";
 
 interface PlaysTableProps {
   inStore?: boolean;

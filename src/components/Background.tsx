@@ -1,10 +1,10 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { PropsWithChildren } from "react";
 import { useResponsiveValues } from "../theme/responsiveSettings";
 import CachedImage from "./CachedImage";
 
 interface BackgroundProps extends PropsWithChildren {
-  type?: "game" | "store" | "home" | "white" | "rage";
+  type?: "game" | "store" | "home" | "white" | "rage" | "skulls" | "cave" | "beast";
   dark?: boolean;
   scrollOnMobile?: boolean;
   bgDecoration?: boolean;
@@ -53,6 +53,7 @@ export const Background = ({
         bottom: isSmallScreen ? 0 : "unset",
         boxShadow: dark ? "inset 0 0 0 1000px rgba(0,0,0,.4)" : "none",
         overflow: scrollOnMobile && isSmallScreen ? "scroll" : "unset",
+        py: '90px'
       }}
     >
       {bgDecoration ? (
@@ -78,45 +79,7 @@ const BackgroundDecoration = ({ children }: PropsWithChildren) => {
           top={0}
         />
       )}
-      <Box
-        height="15%"
-        width="100%"
-        display="flex"
-        justifyContent={isSmallScreen ? "center" : "space-between"}
-        alignItems="center"
-        padding={isSmallScreen ? "0 50px" : "25px 50px 0px 50px"}
-      >
-        <CachedImage
-          alignSelf="center"
-          justifySelf="end"
-          src="/logos/logo-variant.svg"
-          alt="logo-variant"
-          width={"65%"}
-          maxW={"300px"}
-          ml={4}
-        />
-        {!isSmallScreen && (
-          <CachedImage
-            alignSelf="center"
-            justifySelf="end"
-            src="/logos/joker-logo.png"
-            alt="/logos/joker-logo.png"
-            width={"25%"}
-            maxW={"150px"}
-          />
-        )}
-      </Box>
-      <Box
-        sx={{
-          height: { base: "80%", sm: "60%" },
-          width: "100%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
         {children}
-      </Box>
       {!isSmallScreen && (
         <>
           <CachedImage
@@ -127,24 +90,6 @@ const BackgroundDecoration = ({ children }: PropsWithChildren) => {
             position="fixed"
             bottom={0}
           />
-          <Box
-            sx={{
-              position: "fixed",
-              bottom: 16,
-              left: 12,
-            }}
-          >
-            <Text size="m">BUILD YOUR DECK</Text>
-          </Box>
-          <Box
-            sx={{
-              position: "fixed",
-              bottom: 16,
-              right: 12,
-            }}
-          >
-            <Text size="m">RULE THE GAME</Text>
-          </Box>
         </>
       )}
     </Box>

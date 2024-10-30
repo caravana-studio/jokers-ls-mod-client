@@ -1,7 +1,7 @@
 import { Box, Button, Flex, Text, useTheme } from "@chakra-ui/react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useGame } from "../dojo/queries/useGame";
+import { useGame } from "../dojo/queries/useGame.tsx";
 import { useGameContext } from "../providers/GameProvider.tsx";
 import { Card } from "../types/Card.ts";
 import { ConfirmationModal } from "./ConfirmationModal.tsx";

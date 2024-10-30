@@ -1,27 +1,29 @@
-import { buttonTheme } from "./button";
+import { buttonTheme } from "./button.ts";
 import {
   BLUE,
   BLUE_LIGHT,
   CLUBS,
   DIAMONDS,
   HEARTS,
+  LS_GREEN,
   NEON,
   NEON_GREEN,
   PASTEL_PINK,
   SPADES,
   VIOLET,
   VIOLET_LIGHT,
-} from "./colors";
-import { headingTheme } from "./heading";
-import { inputTheme } from "./input";
+} from "./colors.tsx";
+import { headingTheme } from "./heading.ts";
+import { inputTheme } from "./input.ts";
 import { menuTheme } from "./menu.ts";
-import { modalTheme } from "./modal";
-import { tableTheme } from "./table";
-import { textTheme } from "./text";
-import { tooltipTheme } from "./tooltip";
+import { modalTheme } from "./modal.ts";
+import { tableTheme } from "./table.ts";
+import { textTheme } from "./text.ts";
+import { tooltipTheme } from "./tooltip.ts";
 
 export default {
   colors: {
+    lsGreen: LS_GREEN,
     blue: BLUE,
     blueLight: BLUE_LIGHT,
     violet: VIOLET,

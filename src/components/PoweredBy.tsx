@@ -13,7 +13,7 @@ export const PoweredBy = () => {
         letterSpacing: "0.25em",
       }}
     >
-      <Text fontFamily="Orbitron">powered by Dojo and Starknet</Text>
+      <Text fontFamily="VT323">powered by Dojo and Starknet</Text>
     </Box>
   );
 };

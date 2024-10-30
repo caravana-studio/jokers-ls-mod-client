@@ -6,7 +6,7 @@ import {
   useState,
 } from "react";
 import { useNavigate } from "react-router-dom";
-import { GAME_ID, SORT_BY_SUIT } from "../constants/localStorage";
+import { GAME_ID, SORT_BY_SUIT } from "../constants/localStorage.ts";
 import {
   discardSfx,
   multiSfx,
@@ -19,16 +19,16 @@ import { useDojo } from "../dojo/useDojo.tsx";
 import { useGameActions } from "../dojo/useGameActions.tsx";
 import { gameExists } from "../dojo/utils/getGame.tsx";
 import { getLSGameId } from "../dojo/utils/getLSGameId.tsx";
-import { Plays } from "../enums/plays";
+import { Plays } from "../enums/plays.ts";
 import { SortBy } from "../enums/sortBy.ts";
 import { useAudio } from "../hooks/useAudio.tsx";
-import { useCardAnimations } from "../providers/CardAnimationsProvider";
+import { useCardAnimations } from "./CardAnimationsProvider.tsx";
 import { useDiscards } from "../state/useDiscards.tsx";
 import { useGameState } from "../state/useGameState.tsx";
-import { Card } from "../types/Card";
+import { Card } from "../types/Card.ts";
 import { RoundRewards } from "../types/RoundRewards.ts";
-import { PlayEvents } from "../types/ScoreData";
-import { changeCardSuit } from "../utils/changeCardSuit";
+import { PlayEvents } from "../types/ScoreData.ts";
+import { changeCardSuit } from "../utils/changeCardSuit.ts";
 
 interface IGameContext {
   gameId: number;

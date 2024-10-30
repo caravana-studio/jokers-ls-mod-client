@@ -1,15 +1,15 @@
 import { PropsWithChildren, createContext, useContext, useState } from "react";
 
 import { buyPackSfx, buySfx, levelUpSfx, rerollSfx } from "../constants/sfx.ts";
-import { BlisterPackItem } from "../dojo/typescript/models.gen";
-import { useDojo } from "../dojo/useDojo";
-import { useShopActions } from "../dojo/useShopActions";
+import { BlisterPackItem } from "../dojo/typescript/models.gen.ts";
+import { useDojo } from "../dojo/useDojo.tsx";
+import { useShopActions } from "../dojo/useShopActions.tsx";
 import { useAudio } from "../hooks/useAudio.tsx";
-import { Card } from "../types/Card";
-import { PokerHandItem } from "../types/PokerHandItem";
-import { getCardType } from "../utils/getCardType";
-import { getCardUniqueId } from "../utils/getCardUniqueId";
-import { useGameContext } from "./GameProvider";
+import { Card } from "../types/Card.ts";
+import { PokerHandItem } from "../types/PokerHandItem.ts";
+import { getCardType } from "../utils/getCardType.ts";
+import { getCardUniqueId } from "../utils/getCardUniqueId.ts";
+import { useGameContext } from "./GameProvider.tsx";
 
 interface IStoreContext {
   buyCard: (card: Card) => Promise<boolean>;

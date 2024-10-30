@@ -2,7 +2,7 @@ import { NEON_GREEN, NEON_PINK } from "./colors";
 
 export const textTheme = {
   baseStyle: {
-    fontFamily: "Oxanium",
+    fontFamily: "VT323",
     color: "white",
   },
   variants: {

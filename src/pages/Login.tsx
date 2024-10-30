@@ -4,8 +4,8 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import AudioPlayer from "../components/AudioPlayer.tsx";
 import { Background } from "../components/Background.tsx";
-import { GAME_ID, LOGGED_USER } from "../constants/localStorage";
-import { useCustomToast } from "../hooks/useCustomToast";
+import { GAME_ID, LOGGED_USER } from "../constants/localStorage.ts";
+import { useCustomToast } from "../hooks/useCustomToast.tsx";
 import { VIOLET } from "../theme/colors.tsx";
 
 const regExpression = /^[a-zA-Z0-9._-]+$/;

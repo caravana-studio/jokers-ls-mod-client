@@ -8,7 +8,7 @@ const { definePartsStyle, defineMultiStyleConfig } =
 const leaderboard = definePartsStyle({
   td: {
     color: "white",
-    fontFamily: "Orbitron",
+    fontFamily: "VT323",
     textAlign: "center",
     fontSize: ["9px", "sm", "sm", "md"],
   },
@@ -54,7 +54,7 @@ const leaderboard = definePartsStyle({
 const store = definePartsStyle({
   td: {
     color: "white",
-    fontFamily: "Orbitron",
+    fontFamily: "VT323",
     textAlign: "center",
     fontSize: [8, 10, 12, 14],
   },
@@ -84,7 +84,7 @@ const store = definePartsStyle({
 const storeMobile = definePartsStyle({
   td: {
     color: "white",
-    fontFamily: "Orbitron",
+    fontFamily: "VT323",
     textAlign: "center",
     fontSize: 11,
   },
@@ -114,7 +114,7 @@ const storeMobile = definePartsStyle({
 
 const baseStyle = definePartsStyle({
   table: {
-    fontFamily: "Orbitron",
+    fontFamily: "VT323",
   },
 });
 
