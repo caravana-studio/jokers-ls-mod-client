@@ -1,8 +1,5 @@
 import { shortString } from "starknet";
-import {
-  GAME_ID_EVENT,
-  GAME_OVER_EVENT
-} from "../constants/dojoEventKeys";
+import { GAME_ID_EVENT, GAME_OVER_EVENT } from "../constants/dojoEventKeys";
 import { getCardsFromEvents } from "../utils/getCardsFromEvents";
 import { getNumberValueFromEvents } from "../utils/getNumberValueFromEvent";
 import { getPlayEvents } from "../utils/playEvents/getPlayEvents";
@@ -24,6 +21,92 @@ export const useGameActions = () => {
     setup: { client },
     account: { account },
   } = useDojo();
+
+  const selectDeck = async (gameId: number, deckId: number) => {
+    try {
+      showTransactionToast();
+      const { transaction_hash } = await client.game_system.select_deck({
+        account,
+        game_id: gameId,
+        deck_id: deckId,
+      });
+
+      showTransactionToast(transaction_hash);
+
+      const tx = await account.waitForTransaction(transaction_hash, {
+        retryInterval: 100,
+      });
+
+      updateTransactionToast(transaction_hash, tx.isSuccess());
+      if (tx.isSuccess()) {
+        console.log("Success at select deck:", tx);
+      } else {
+        console.error("Error at select deck:", tx);
+      }
+    } catch (e) {
+      failedTransactionToast();
+      console.log(e);
+      return 0;
+    }
+  };
+
+  const selectSpecials = async (gameId: number, cardsIndex: []) => {
+    try {
+      showTransactionToast();
+      const { transaction_hash } =
+        await client.game_system.select_special_cards({
+          account,
+          game_id: gameId,
+          cards_index: cardsIndex,
+        });
+
+      showTransactionToast(transaction_hash);
+
+      const tx = await account.waitForTransaction(transaction_hash, {
+        retryInterval: 100,
+      });
+
+      updateTransactionToast(transaction_hash, tx.isSuccess());
+      if (tx.isSuccess()) {
+        console.log("Success at select specialCards:", tx);
+      } else {
+        console.error("Error at select specialCards:", tx);
+      }
+    } catch (e) {
+      failedTransactionToast();
+      console.log(e);
+      return 0;
+    }
+  };
+
+  const selectModifiers = async (gameId: number, cardsIndex: []) => {
+    try {
+      showTransactionToast();
+      const { transaction_hash } =
+        await client.game_system.select_modifier_cards({
+          account,
+          game_id: gameId,
+          cards_index: cardsIndex,
+        });
+
+      showTransactionToast(transaction_hash);
+
+      const tx = await account.waitForTransaction(transaction_hash, {
+        retryInterval: 100,
+      });
+
+      updateTransactionToast(transaction_hash, tx.isSuccess());
+      if (tx.isSuccess()) {
+        console.log("Success at select modifiers:", tx);
+      } else {
+        console.error("Error at select modifiers:", tx);
+      }
+    } catch (e) {
+      failedTransactionToast();
+      console.log(e);
+      return 0;
+    }
+  };
 
   const createGame = async (username: string) => {
     try {
@@ -201,5 +284,8 @@ export const useGameActions = () => {
     discardEffectCard,
     discardSpecialCard,
     play,
+    selectDeck,
+    selectSpecials,
+    selectModifiers,
   };
 };
