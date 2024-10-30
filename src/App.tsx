@@ -12,6 +12,7 @@ import { GameProvider } from "./providers/GameProvider";
 import customTheme from "./theme/theme";
 import { ChooseModifiersPage } from "./pages/ChooseModifiersPage";
 import { ChooseSpecialsPage } from "./pages/ChooseSpecialsPage";
+import { GamePage } from "./pages/Game/GamePage";
 
 function App() {
   const theme = extendTheme(customTheme);
@@ -28,6 +29,7 @@ function App() {
                 element={<ChooseModifiersPage />}
               />
               <Route path="/choose-specials" element={<ChooseSpecialsPage />} />
+              <Route path="/game" element={<GamePage />} />
             </Routes>
           </AudioPlayerProvider>
         </GameProvider>
