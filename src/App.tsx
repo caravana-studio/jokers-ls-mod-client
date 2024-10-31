@@ -1,6 +1,7 @@
 import { ChakraBaseProvider, extendTheme } from "@chakra-ui/react";
 import { Route, Routes } from "react-router-dom";
 import "./App.scss";
+
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { ChooseClassPage } from "./pages/ChooseClassPage";
@@ -9,6 +10,8 @@ import { AudioPlayerProvider } from "./providers/AudioPlayerProvider";
 import { CardAnimationsProvider } from "./providers/CardAnimationsProvider";
 import { GameProvider } from "./providers/GameProvider";
 import customTheme from "./theme/theme";
+import { ChooseModifiersPage } from "./pages/ChooseModifiersPage";
+import { ChooseSpecialsPage } from "./pages/ChooseSpecialsPage";
 import { GamePage } from "./pages/Game/GamePage";
 
 function App() {
@@ -21,6 +24,11 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/choose-class" element={<ChooseClassPage />} />
+              <Route
+                path="/choose-modifiers"
+                element={<ChooseModifiersPage />}
+              />
+              <Route path="/choose-specials" element={<ChooseSpecialsPage />} />
               <Route path="/game" element={<GamePage />} />
             </Routes>
           </AudioPlayerProvider>

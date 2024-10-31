@@ -1,8 +1,14 @@
-import { Flex } from "@chakra-ui/react";
+import { Flex, SystemStyleObject } from "@chakra-ui/react";
 import { PropsWithChildren } from "react";
-import { CARD_HEIGHT, CARD_WIDTH } from "../constants/visualProps";
 
-export const FullScreenCardContainer = ({ children }: PropsWithChildren) => {
+interface FullScreenCardContainerProps extends PropsWithChildren {
+  sx?: SystemStyleObject;
+}
+
+export const FullScreenCardContainer = ({
+  children,
+  sx,
+}: FullScreenCardContainerProps) => {
   return (
     <Flex
       sx={{
@@ -10,6 +16,7 @@ export const FullScreenCardContainer = ({ children }: PropsWithChildren) => {
         justifyContent: "center",
         alignItems: "center",
         flexWrap: "wrap",
+        ...sx,
       }}
       gap={3}
     >

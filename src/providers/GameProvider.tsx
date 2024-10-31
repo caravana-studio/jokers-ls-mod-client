@@ -76,8 +76,8 @@ interface IGameContext {
   preSelectCard: (cardIndex: number) => void;
   unPreSelectCard: (cardIndex: number) => void;
   selectDeckType: (deckType: number) => Promise<number | undefined>;
-  selectSpecialCards: (cardIndex: []) => void;
-  selectModifierCards: (cardIndex: []) => void;
+  selectSpecialCards: (cardIndex: number[]) => Promise<number | undefined>;
+  selectModifierCards: (cardIndex: number[]) => Promise<number | undefined>;
   redirectBasedOnGameState: () => void;
 }
 
@@ -128,8 +128,8 @@ const GameContext = createContext<IGameContext>({
   preSelectCard: (_) => {},
   unPreSelectCard: (_) => {},
   selectDeckType: (_) => new Promise((resolve) => resolve(undefined)),
-  selectSpecialCards: (_) => {},
-  selectModifierCards: (_) => {},
+  selectSpecialCards: (_) => new Promise((resolve) => resolve(undefined)),
+  selectModifierCards: (_) => new Promise((resolve) => resolve(undefined)),
   redirectBasedOnGameState: () => {},
 });
 export const useGameContext = () => useContext(GameContext);
@@ -236,12 +236,24 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     return selectDeckPromise;
   };
 
-  const selectSpecialCards = async (cardIndex: []) => {
-    selectSpecials(gameId, cardIndex);
+  const selectSpecialCards = async (cardIndex: number[]) => {
+    const specialPromise = selectSpecials(gameId, cardIndex);
+
+    specialPromise.then(() => {
+      navigate("/choose-modifiers");
+    });
+
+    return specialPromise;
   };
 
-  const selectModifierCards = async (cardIndex: []) => {
-    selectModifiers(gameId, cardIndex);
+  const selectModifierCards = async (cardIndex: number[]) => {
+    const modifiersPromise = selectModifiers(gameId, cardIndex);
+
+    modifiersPromise.then(() => {
+      navigate("/game");
+    });
+
+    return modifiersPromise;
   };
 
   const executeCreateGame = async () => {
