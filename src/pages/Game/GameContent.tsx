@@ -9,9 +9,8 @@ import {
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Joyride, { CallBackProps } from "react-joyride";
-import { GameDeck } from "../../components/GameDeck.tsx";
+import { useParams } from "react-router-dom";
 import { PositionedGameMenu } from "../../components/GameMenu.tsx";
-import { Loading } from "../../components/Loading.tsx";
 import {
   GAME_TUTORIAL_STEPS,
   JOYRIDE_LOCALES,
@@ -33,7 +32,6 @@ import { useGameContext } from "../../providers/GameProvider.tsx";
 import { HandSection } from "./HandSection.tsx";
 import { MidSection } from "./MidSection.tsx";
 import { TopSection } from "./TopSection.tsx";
-import { useParams } from "react-router-dom";
 
 export const GameContent = () => {
   const {
