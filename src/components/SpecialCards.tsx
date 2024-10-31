@@ -25,11 +25,10 @@ export const SpecialCards = ({ inStore = false }: SpecialCardsProps) => {
   const [preselectedCard, setPreselectedCard] = useState<Card | undefined>();
   const [confirmationModalOpen, setConfirmationModalOpen] = useState(false);
 
-  const width = !isRageRound ? "100%" : rageCards.length === 1 ? "82%" : "74%";
   const { cardScale } = useResponsiveValues();
 
   return (
-    <Box className="special-cards-step-3" width={width}>
+    <Box className="special-cards-step-3">
       <Flex justifyContent="space-around" flexDir={"column"}>
         <SpecialCardsRow cards={specialCards} />
         <Box mt={2}>

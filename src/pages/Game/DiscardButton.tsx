@@ -1,5 +1,6 @@
-import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
+import { Button, Flex, Text } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
 import { useGameContext } from "../../providers/GameProvider";
 import { useResponsiveValues } from "../../theme/responsiveSettings";
 import { ButtonContainer } from "./ButtonContainer";
@@ -11,6 +12,8 @@ interface DiscardButtonProps {
 
 export const DiscardButton = ({ highlight = false }: DiscardButtonProps) => {
   const { preSelectedCards, discard, preSelectionLocked } = useGameContext();
+
+  const { mode } = useParams();
 
   //   const cantDiscard =
   //     !highlight &&
@@ -36,27 +39,31 @@ export const DiscardButton = ({ highlight = false }: DiscardButtonProps) => {
         isDisabled={cantDiscard}
         className="game-tutorial-step-3"
       >
-        {isSmallScreen ? (
-          <Box>
-            <Text fontFamily="Jersey" fontSize={16} height={"16px"}>
-              {t("game.preselected-cards-section.discard-btn-lbl.discard")}
-            </Text>
-            <Heading mt={1} fontSize={9}>
-              {t("game.preselected-cards-section.discard-btn-lbl.left", {
-                discards: discards,
-              })}
-            </Heading>
-          </Box>
-        ) : (
-          // t(
-          //   "game.preselected-cards-section.discard-btn-lbl.discard"
-          // ).toUpperCase()
-          <Text fontFamily="Jersey" fontSize={"1.5rem"}>
-            DISCARD
-          </Text>
-        )}
+        <Text fontFamily="Jersey" fontSize={"1.5rem"}>
+          {mode === "beast" ? (
+            <Flex gap={3}>
+              DISCARD <SkullIcon />
+            </Flex>
+          ) : (
+            "DISCARD"
+          )}
+        </Text>
       </Button>
-      {!isSmallScreen && (
+      {mode === "beast" ? (
+        <Button
+        mt={2}
+          width={["48%", "48%", "180px"]}
+          onClick={() => {
+            alert("not implemented yet");
+          }}
+          variant="defaultOutlineGlowLoot"
+          boxShadow='none'
+        >
+          <Text fontFamily="Jersey" fontSize={"1.5rem"}>
+            END TURN
+          </Text>
+        </Button>
+      ) : (
         <Flex direction="row" align="center" gap={8}>
           {Array.from({ length: discards }).map((_, index) => (
             <SkullIcon key={index} />

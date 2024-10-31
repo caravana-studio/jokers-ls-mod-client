@@ -21,7 +21,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/choose-class" element={<ChooseClassPage />} />
-              <Route path="/game" element={<GamePage />} />
+              <Route path="/game/:mode" element={<GamePage />} />
             </Routes>
           </AudioPlayerProvider>
         </GameProvider>

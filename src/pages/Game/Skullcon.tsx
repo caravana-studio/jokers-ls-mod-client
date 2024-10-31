@@ -1,10 +1,10 @@
 import { Flex } from "@chakra-ui/react";
 import Skull from "../../assets/skull.svg?component";
 
-export const SkullIcon = ({ color = "white", used = false }) => {
+export const SkullIcon = ({ color = "white", used = false, size = "15px" }) => {
   return (
     <Flex alignItems="center">
-      <Skull width="15px" fill={color} opacity={used ? "50%" : "100%"} />
+      <Skull width={size} height={size} fill={color} opacity={used ? "30%" : "100%"} />
     </Flex>
   );
 };

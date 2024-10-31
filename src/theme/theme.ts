@@ -1,5 +1,6 @@
 import { buttonTheme } from "./button";
 import {
+  BEAST_RED,
   BLUE,
   BLUE_LIGHT,
   CLUBS,
@@ -48,6 +49,7 @@ export default {
     HEARTS,
     SPADES,
     NEON,
+    beastRed: BEAST_RED,
   },
   styles: {
     global: {
