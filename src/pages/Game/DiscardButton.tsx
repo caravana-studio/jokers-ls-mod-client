@@ -39,25 +39,28 @@ export const DiscardButton = ({ highlight = false }: DiscardButtonProps) => {
         isDisabled={cantDiscard}
         className="game-tutorial-step-3"
       >
-        <Text fontFamily="Jersey" fontSize={"1.5rem"}>
-          {mode === "beast" ? (
-            <Flex gap={3}>
-              DISCARD <SkullIcon />
-            </Flex>
-          ) : (
-            "DISCARD"
-          )}
-        </Text>
+        {mode === "beast" ? (
+          <Flex gap={3}>
+            <Text fontFamily="Jersey" fontSize={"1.5rem"}>
+              DISCARD
+            </Text>
+            <SkullIcon />
+          </Flex>
+        ) : (
+          <Text fontFamily="Jersey" fontSize={"1.5rem"}>
+            DISCARD
+          </Text>
+        )}
       </Button>
       {mode === "beast" ? (
         <Button
-        mt={2}
+          mt={2}
           width={["48%", "48%", "180px"]}
           onClick={() => {
             alert("not implemented yet");
           }}
           variant="defaultOutlineGlowLoot"
-          boxShadow='none'
+          boxShadow="none"
         >
           <Text fontFamily="Jersey" fontSize={"1.5rem"}>
             END TURN

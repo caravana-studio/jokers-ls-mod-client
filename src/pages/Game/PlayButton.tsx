@@ -42,16 +42,19 @@ export const PlayButton = ({ highlight = false }: PlayButtonProps) => {
         isDisabled={cantPlay}
         className="game-tutorial-step-4"
       >
-        <Text fontFamily="Jersey" color={LS_GREEN} fontSize={"1.5rem"}>
-          {mode === "beast" ? (
-            <Flex gap={3}>
-              PLAY <SkullIcon color={LS_GREEN} />
-              <SkullIcon color={LS_GREEN} />
-            </Flex>
-          ) : (
-            "PLAY"
-          )}
-        </Text>
+        {mode === "beast" ? (
+          <Flex gap={3}>
+            <Text fontFamily="Jersey" color={LS_GREEN} fontSize={"1.5rem"}>
+              PLAY
+            </Text>
+            <SkullIcon color={LS_GREEN} />
+            <SkullIcon color={LS_GREEN} />
+          </Flex>
+        ) : (
+          <Text fontFamily="Jersey" color={LS_GREEN} fontSize={"1.5rem"}>
+            PLAY
+          </Text>
+        )}
       </Button>
       {mode !== "beast" && (
         <Flex direction="row" align="center" gap={8}>

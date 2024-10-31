@@ -9,6 +9,7 @@ import { useGameContext } from "../../providers/GameProvider.tsx";
 import { BEAST_RED } from "../../theme/colors.tsx";
 import { useResponsiveValues } from "../../theme/responsiveSettings.tsx";
 import { DiscardButton } from "./DiscardButton.tsx";
+import { Obstacle } from "./Obstacle.tsx";
 import { PlayButton } from "./PlayButton.tsx";
 
 interface MidSectionProps {
@@ -123,6 +124,7 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
                 </Box>
               </Flex>
             )}
+            {mode === "obstacle" && <Obstacle />}
           </Flex>
         </Box>
         <Box className="game-tutorial-step-4">
