@@ -5,12 +5,12 @@ import { useDojo } from "../useDojo";
 import { getLSGameId } from "../utils/getLSGameId";
 
 export const useRound = () => {
-  const {
-    setup: {
-      clientComponents: { Round },
-    },
-  } = useDojo();
-  const gameId = getLSGameId();
-  const entityId = getEntityIdFromKeys([BigInt(gameId)]) as Entity;
-  return useComponentValue(Round, entityId);
+  // const {
+  //   setup: {
+  //     clientComponents: { Round },
+  //   },
+  // } = useDojo();
+  // const gameId = getLSGameId();
+  // const entityId = getEntityIdFromKeys([BigInt(gameId)]) as Entity;
+  // return useComponentValue(Round, entityId);
 };
