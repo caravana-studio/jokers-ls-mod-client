@@ -101,6 +101,7 @@ export async function setup({ ...config }: DojoConfig) {
           ],
         },
       },
+      dont_include_hashed_keys: false,
     };
 
     if (gameID) {
