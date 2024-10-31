@@ -31,7 +31,7 @@ import {
 import { useGame } from "../../dojo/queries/useGame.tsx";
 import { useGameContext } from "../../providers/GameProvider.tsx";
 import { HandSection } from "./HandSection.tsx";
-import { MidSection, PreselectedCardsSection } from "./MidSection.tsx";
+import { MidSection } from "./MidSection.tsx";
 import { TopSection } from "./TopSection.tsx";
 import { useParams } from "react-router-dom";
 

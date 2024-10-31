@@ -250,7 +250,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     const modifiersPromise = selectModifiers(gameId, cardIndex);
 
     modifiersPromise.then(() => {
-      navigate("/game");
+      navigate("/game/:beast");
     });
 
     return modifiersPromise;
