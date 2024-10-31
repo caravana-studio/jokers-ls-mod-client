@@ -1,4 +1,4 @@
-import { Box, Heading, useTheme } from "@chakra-ui/react";
+import { Box, Heading, Text, useTheme } from "@chakra-ui/react";
 import { isMobile } from "react-device-detect";
 import { useGameContext } from "../providers/GameProvider";
 import { RollingNumber } from "./RollingNumber";
@@ -10,20 +10,18 @@ export const MultiPoints = () => {
   
   return (
     <Box
-      gap={{ base: 1, md: 1.5 }}
+      gap={3}
       sx={{ display: "flex", alignItems: "center" }}
       className="game-tutorial-step-6"
     >
       <PointBox type="points">
-        <Heading size={{ base: "xs", md: "s" }}>{t('game.multi-points.points')}</Heading>
-        <Heading size={{ base: "s", md: "m" }}>
+        <Heading color="white" size={{ base: "s", md: "m" }}>
           <RollingNumber n={points} />
         </Heading>
       </PointBox>
-      {!isMobile && <Heading size="s">x</Heading>}
+      {!isMobile && <Text size="xl">x</Text>}
       <PointBox type="multi">
-        <Heading size={{ base: "xs", md: "s" }}>{t('game.multi-points.multi')}</Heading>
-        <Heading size={{ base: "s", md: "m" }}>
+        <Heading color="white" size={{ base: "s", md: "m" }}>
           <RollingNumber n={multi} />
         </Heading>
       </PointBox>
@@ -32,22 +30,21 @@ export const MultiPoints = () => {
 };
 
 interface PointBoxProps {
-  children: JSX.Element[];
+  children: JSX.Element;
   type: "points" | "multi" | "level";
 }
 
 export const PointBox = ({ children, type }: PointBoxProps) => {
   const { colors } = useTheme();
   const colorMap = {
-    points: colors.neonGreen,
-    multi: colors.neonPink,
+    points: 'white',
+    multi: colors.lsGreen,
     level: "#FFF",
   };
 
   const color = colorMap[type];
   return (
     <Box
-      height={{ base: 43, sm: 53, md: 81 }}
       minWidth={{ base: 70, md: 120 }}
       p={{ base: 1, md: 2 }}
       sx={{
@@ -57,8 +54,9 @@ export const PointBox = ({ children, type }: PointBoxProps) => {
         alignItems: "center",
         textShadow: `0 0 5px ${color}`,
       }}
+      backgroundColor='rgba(0,0,0,0.5)'
 
-      boxShadow={{base: `0px 0px 10px 4px ${color} `, sm: `0px 0px 17px 7px ${color}`}}
+      boxShadow={`0px 0px 5px 2px ${color} `}
       borderRadius={{ base: 15, md: 20 }}
     >
       {children}

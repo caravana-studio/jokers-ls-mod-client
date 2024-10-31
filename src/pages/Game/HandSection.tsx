@@ -75,20 +75,6 @@ export const HandSection = () => {
         alignItems={"end"}
         position={"relative"}
       >
-        <Flex
-          top={"5"}
-          right={"-500"}
-          width="70%"
-          justifyContent="flex-end"
-          alignItems="flex-end"
-          position="absolute"
-          m={0}
-          p={0}
-          direction="column"
-        >
-          <HealthBar />
-        </Flex>
-
         <SimpleGrid
           sx={{
             opacity: !roundRewards && handsLeft > 0 ? 1 : 0.3,

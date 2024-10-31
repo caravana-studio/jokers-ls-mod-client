@@ -1,11 +1,12 @@
-import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
+import { Button, Flex, Text } from "@chakra-ui/react";
+import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
 import { useRound } from "../../dojo/queries/useRound";
 import { useGameContext } from "../../providers/GameProvider";
-import { ButtonContainer } from "./ButtonContainer";
-import { useTranslation } from "react-i18next";
-import { useResponsiveValues } from "../../theme/responsiveSettings";
-import { SkullIcon } from "./Skullcon";
 import { LS_GREEN } from "../../theme/colors";
+import { useResponsiveValues } from "../../theme/responsiveSettings";
+import { ButtonContainer } from "./ButtonContainer";
+import { SkullIcon } from "./Skullcon";
 
 interface PlayButtonProps {
   highlight?: boolean;
@@ -13,6 +14,7 @@ interface PlayButtonProps {
 
 export const PlayButton = ({ highlight = false }: PlayButtonProps) => {
   const { preSelectedCards, play, preSelectionLocked } = useGameContext();
+  const { mode } = useParams();
 
   const round = useRound();
   // const handsLeft = round?.hands ?? 0;
@@ -40,25 +42,18 @@ export const PlayButton = ({ highlight = false }: PlayButtonProps) => {
         isDisabled={cantPlay}
         className="game-tutorial-step-4"
       >
-        {isSmallScreen ? (
-          <Box>
-            <Text fontFamily="Jersey" fontSize={16} height={"16px"}>
-              {t("game.preselected-cards-section.play-btn-lbl.play-mobile")}
-            </Text>
-            <Heading mt={1} fontSize={9}>
-              {t("game.preselected-cards-section.play-btn-lbl.left", {
-                handsLeft: handsLeft,
-              })}
-            </Heading>
-          </Box>
-        ) : (
-          <Text fontFamily="Jersey" color={LS_GREEN} fontSize={"1.5rem"}>
-            PLAY
-            {/* {t("game.preselected-cards-section.play-btn-lbl.play-mobile")} */}
-          </Text>
-        )}
+        <Text fontFamily="Jersey" color={LS_GREEN} fontSize={"1.5rem"}>
+          {mode === "beast" ? (
+            <Flex gap={3}>
+              PLAY <SkullIcon color={LS_GREEN} />
+              <SkullIcon color={LS_GREEN} />
+            </Flex>
+          ) : (
+            "PLAY"
+          )}
+        </Text>
       </Button>
-      {!isSmallScreen && (
+      {mode !== "beast" && (
         <Flex direction="row" align="center" gap={8}>
           {Array.from({ length: handsLeft }).map((_, index) => (
             <SkullIcon key={index} color={LS_GREEN} />

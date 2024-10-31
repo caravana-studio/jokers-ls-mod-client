@@ -31,8 +31,9 @@ import {
 import { useGame } from "../../dojo/queries/useGame.tsx";
 import { useGameContext } from "../../providers/GameProvider.tsx";
 import { HandSection } from "./HandSection.tsx";
-import { PreselectedCardsSection } from "./PreselectedCardsSection.tsx";
+import { MidSection, PreselectedCardsSection } from "./MidSection.tsx";
 import { TopSection } from "./TopSection.tsx";
+import { useParams } from "react-router-dom";
 
 export const GameContent = () => {
   const {
@@ -53,6 +54,8 @@ export const GameContent = () => {
       },
     })
   );
+
+  const { mode } = useParams();
 
   const [run, setRun] = useState(false);
   const [runSpecial, setRunSpecial] = useState(false);
@@ -177,6 +180,7 @@ export const GameContent = () => {
     <Box
       sx={{
         height: "100%",
+        width: "100%",
       }}
     >
       <Box
@@ -220,7 +224,7 @@ export const GameContent = () => {
 
         <Box sx={{ width: "100%", height: "100%" }}>
           <Image
-            src={`/borders/top${isRageRound ? "-rage" : ""}.png`}
+            src={`/borders/top${mode === "beast" ? "-rage" : ""}.png`}
             height="8%"
             width="100%"
             maxHeight="70px"
@@ -240,7 +244,7 @@ export const GameContent = () => {
               >
                 <Box
                   sx={{
-                    height: "55%",
+                    height: "45%",
                     width: "100%",
                     display: "flex",
                     flexDirection: "row",
@@ -250,14 +254,14 @@ export const GameContent = () => {
                     px: "70px",
                   }}
                 >
-                  <PreselectedCardsSection isTutorialRunning={run} />
+                  <MidSection isTutorialRunning={run} />
                 </Box>
                 <Box
                   pb={"60px"}
                   mr={{ base: 10, md: 20 }}
                   sx={{
                     display: "flex",
-                    height: "45%",
+                    height: "55%",
                     alignItems: "flex-end",
                     justifyContent: "center",
                   }}
@@ -268,7 +272,7 @@ export const GameContent = () => {
             </Box>
           </Box>
           <Image
-            src={`/borders/bottom${isRageRound ? "-rage" : ""}.png`}
+            src={`/borders/bottom${mode === "beast" ? "-rage" : ""}.png`}
             maxHeight="70px"
             height="8%"
             width="100%"
