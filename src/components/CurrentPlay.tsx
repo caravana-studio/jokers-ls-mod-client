@@ -9,7 +9,7 @@ export const CurrentPlay = () => {
   const { t } = useTranslation(["game"]);
 
   return (
-    <Flex gap={{base: 2, md: 4}} alignItems={"center"} justifyContent={"flex-start"}
+    <Flex gap={{base: 2, md: 4}} alignItems={"center"} justifyContent={"center"}
     >
       <Text size="l">
         {preSelectedPlay === Plays.NONE

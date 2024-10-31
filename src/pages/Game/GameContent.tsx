@@ -1,17 +1,10 @@
 import { Box, Button, Flex, Heading, Image } from "@chakra-ui/react";
-import {
-  DndContext,
-  DragEndEvent,
-  PointerSensor,
-  useSensor,
-  useSensors,
-} from "@dnd-kit/core";
+import { PointerSensor, useSensor, useSensors } from "@dnd-kit/core";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Joyride, { CallBackProps } from "react-joyride";
-import { GameDeck } from "../../components/GameDeck.tsx";
+import { useParams } from "react-router-dom";
 import { PositionedGameMenu } from "../../components/GameMenu.tsx";
-import { Loading } from "../../components/Loading.tsx";
 import {
   GAME_TUTORIAL_STEPS,
   JOYRIDE_LOCALES,
@@ -20,10 +13,6 @@ import {
   TUTORIAL_STYLE,
 } from "../../constants/gameTutorial";
 import {
-  HAND_SECTION_ID,
-  PRESELECTED_CARD_SECTION_ID,
-} from "../../constants/general.ts";
-import {
   SKIP_TUTORIAL_GAME,
   SKIP_TUTORIAL_MODIFIERS,
   SKIP_TUTORIAL_SPECIAL_CARDS,
@@ -31,9 +20,8 @@ import {
 import { useGame } from "../../dojo/queries/useGame.tsx";
 import { useGameContext } from "../../providers/GameProvider.tsx";
 import { HandSection } from "./HandSection.tsx";
-import { MidSection, PreselectedCardsSection } from "./MidSection.tsx";
+import { MidSection } from "./MidSection.tsx";
 import { TopSection } from "./TopSection.tsx";
-import { useParams } from "react-router-dom";
 
 export const GameContent = () => {
   const {
@@ -101,26 +89,6 @@ export const GameContent = () => {
   );
 
   const game = useGame();
-
-  const handleDragEnd = (event: DragEndEvent) => {
-    const draggedCard = Number(event.active?.id);
-    const isModifier = hand.find((c) => c.idx === draggedCard)?.isModifier;
-
-    const modifiedCard = Number(event.over?.id);
-    if (!isNaN(modifiedCard) && !isNaN(draggedCard) && isModifier) {
-      const index = preSelectedCards.indexOf(modifiedCard);
-      if (index !== -1) {
-        addModifier(modifiedCard, draggedCard);
-      }
-    } else if (
-      !isModifier &&
-      (event.over?.id === PRESELECTED_CARD_SECTION_ID || !isNaN(modifiedCard))
-    ) {
-      preSelectCard(draggedCard);
-    } else if (event.over?.id === HAND_SECTION_ID) {
-      unPreSelectCard(draggedCard);
-    }
-  };
 
   useEffect(() => {
     const showSpecialCardTutorial = !localStorage.getItem(
@@ -237,38 +205,31 @@ export const GameContent = () => {
               <TopSection />
             </Box>
             <Box height={"70%"} width={"100%"}>
-              <DndContext
-                sensors={sensors}
-                onDragEnd={handleDragEnd}
-                autoScroll={false}
+              <Box
+                sx={{
+                  height: "45%",
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  backgroundColor: "rgba(0, 0, 0, 0.6)",
+                  px: "70px",
+                }}
               >
-                <Box
-                  sx={{
-                    height: "45%",
-                    width: "100%",
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    backgroundColor: "rgba(0, 0, 0, 0.6)",
-                    px: "70px",
-                  }}
-                >
-                  <MidSection isTutorialRunning={run} />
-                </Box>
-                <Box
-                  pb={"60px"}
-                  mr={{ base: 10, md: 20 }}
-                  sx={{
-                    display: "flex",
-                    height: "55%",
-                    alignItems: "flex-end",
-                    justifyContent: "center",
-                  }}
-                >
-                  <HandSection />
-                </Box>
-              </DndContext>
+                <MidSection isTutorialRunning={run} />
+              </Box>
+              <Box
+                mr={{ base: 10, md: 20 }}
+                sx={{
+                  display: "flex",
+                  height: "65%",
+                  alignItems: "flex-end",
+                  justifyContent: "center",
+                }}
+              >
+                <HandSection />
+              </Box>
             </Box>
           </Box>
           <Image

@@ -629,7 +629,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
   };
 
   const togglePreselected = (cardIndex: number) => {
-    if (!preSelectionLocked && handsLeft > 0) {
+    if (!preSelectionLocked) {
       if (cardIsPreselected(cardIndex)) {
         unPreSelectCard(cardIndex);
         preselectCardSound();
