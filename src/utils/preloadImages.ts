@@ -12,46 +12,46 @@ const getDefaultImageUrls = (): string[] => {
   const imageUrls: string[] = [];
 
   Object.keys(TRADITIONAL_CARDS_DATA).forEach((key) => {
-    imageUrls.push(`Cards/${key}.png`);
+    imageUrls.push(`/Cards/${key}.png`);
   });
 
   Object.keys(NEON_CARDS_DATA).forEach((key) => {
-    imageUrls.push(`Cards/${key}.png`);
+    imageUrls.push(`/Cards/${key}.png`);
   });
 
   // Modifier cards
   Object.keys(MODIFIER_CARDS_DATA).forEach((key) => {
-    imageUrls.push(`Cards/${key}.png`);
+    imageUrls.push(`/Cards/${key}.png`);
   });
 
   // Special cards
   Object.keys(SPECIAL_CARDS_DATA).forEach((key) => {
-    imageUrls.push(`Cards/${key}.png`);
+    imageUrls.push(`/Cards/${key}.png`);
   });
 
   // Packs
   Object.keys(PACKS_DATA).forEach((key) => {
-    imageUrls.push(`Cards/packs/${key}.png`);
+    imageUrls.push(`/Cards/packs/${key}.png`);
   });
 
   // Backgrounds
-  imageUrls.push("bg/game-bg.jpg");
-  imageUrls.push("bg/home-bg.jpg");
-  imageUrls.push("bg/store-bg.jpg");
-  imageUrls.push("redirect/bg/store-bg.jpg");
-  imageUrls.push("redirect/bg/game-bg.jpg");
+  imageUrls.push("/bg/game-bg.jpg");
+  imageUrls.push("/bg/home-bg.jpg");
+  imageUrls.push("/bg/store-bg.jpg");
+  imageUrls.push("/redirect/bg/store-bg.jpg");
+  imageUrls.push("/redirect/bg/game-bg.jpg");
 
   // Logos
-  imageUrls.push("logos/jn-logo.png");
-  imageUrls.push("logos/joker-logo.png");
-  imageUrls.push("logos/logo-variant.svg");
-  imageUrls.push("logos/logo.png");
+  imageUrls.push("/logos/jn-logo.png");
+  imageUrls.push("/logos/joker-logo.png");
+  imageUrls.push("/logos/logo-variant.svg");
+  imageUrls.push("/logos/logo.png");
 
   // Borders
-  imageUrls.push("borders/bottom.png");
-  imageUrls.push("borders/bottom-rage.png");
-  imageUrls.push("borders/top.png");
-  imageUrls.push("borders/top-rage.png");
+  imageUrls.push("/borders/bottom.png");
+  imageUrls.push("/borders/bottom-rage.png");
+  imageUrls.push("/borders/top.png");
+  imageUrls.push("/borders/top-rage.png");
 
   // Sort
   imageUrls.push("sort/heart-on.png");

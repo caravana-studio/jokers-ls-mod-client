@@ -139,7 +139,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
   const [lockRedirection, setLockRedirection] = useState(false);
 
   const round = useRound();
-  const handsLeft = round?.hands ?? 0;
+  const handsLeft = 0;
 
   const navigate = useNavigate();
   const {

@@ -16,7 +16,6 @@ import { ShowPlays } from "../../components/ShowPlays";
 import { TiltCard } from "../../components/TiltCard";
 import { HAND_SECTION_ID } from "../../constants/general";
 import { CARD_HEIGHT, CARD_WIDTH } from "../../constants/visualProps";
-import { useRound } from "../../dojo/queries/useRound";
 import { useCardHighlight } from "../../providers/CardHighlightProvider";
 import { useGameContext } from "../../providers/GameProvider";
 import { useResponsiveValues } from "../../theme/responsiveSettings";
@@ -36,8 +35,7 @@ export const HandSection = () => {
 
   const [discarding, setDiscarding] = useState(false);
 
-  const round = useRound();
-  const handsLeft = round?.hands ?? 0;
+  const handsLeft = 1;
 
   const { activeNode } = useDndContext();
 
