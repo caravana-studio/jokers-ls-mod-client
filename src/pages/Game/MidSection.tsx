@@ -3,14 +3,13 @@ import { useDroppable } from "@dnd-kit/core";
 import { useParams } from "react-router-dom";
 import CachedImage from "../../components/CachedImage.tsx";
 import { ProgressBar } from "../../components/CompactRoundData/ProgressBar.tsx";
-import { CurrentPlay } from "../../components/CurrentPlay.tsx";
+import { MultiPoints } from "../../components/MultiPoints.tsx";
 import { PRESELECTED_CARD_SECTION_ID } from "../../constants/general.ts";
 import { useGameContext } from "../../providers/GameProvider.tsx";
 import { BEAST_RED } from "../../theme/colors.tsx";
 import { useResponsiveValues } from "../../theme/responsiveSettings.tsx";
 import { DiscardButton } from "./DiscardButton.tsx";
 import { PlayButton } from "./PlayButton.tsx";
-import { MultiPoints } from "../../components/MultiPoints.tsx";
 
 interface MidSectionProps {
   isTutorialRunning?: boolean;
@@ -73,11 +72,33 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
             width="90%"
           >
             {mode === "beast" && (
-              <Flex flexDirection="column" width="80%" gap={2}>
-                <Flex position='relative'mt={'-360px'} justifyContent='center' alignItems='center' textAlign='center'>
-                  <CachedImage  src="/beasts/berserker.png" />
+              <Flex
+                flexDirection="column"
+                width="80%"
+                justifyContent={"flex-end"}
+                pb="30px"
+                height={"100%"}
+                gap={2}
+              >
+                <Flex
+                  position="relative"
+                  mt={"-360px"}
+                  justifyContent="center"
+                  alignItems="center"
+                  textAlign="center"
+                >
+                  <CachedImage
+                    src="/beasts/berserker.png"
+                    maxHeight="50vh"
+                    zIndex={100}
+                  />
                 </Flex>
-                <Flex width="100%" mt={'-140px'} justifyContent="space-between" alignItems='flex-end'>
+                <Flex
+                  width="100%"
+                  mt={"-140px"}
+                  justifyContent="space-between"
+                  alignItems="flex-end"
+                >
                   <Box>
                     <Text lineHeight={1} size="l">
                       Tier {tier}
@@ -93,7 +114,7 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
                     {lifeLeft}
                   </Text>
                 </Flex>
-                <Box width="100%">
+                <Box width="100%" zIndex={1000}>
                   <ProgressBar
                     progress={80}
                     color={BEAST_RED}
@@ -108,8 +129,8 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
           <PlayButton highlight={isTutorialRunning} />
         </Box>
       </Flex>
-      <Box mb={'-20px'}>
-      <MultiPoints />
+      <Box mb={"-20px"} zIndex={300}>
+        <MultiPoints />
       </Box>
     </Flex>
   );

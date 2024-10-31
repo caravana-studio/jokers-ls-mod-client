@@ -15,12 +15,14 @@ export const TopSection = () => {
       alignItems={"flex-start"}
       px={"70px"}
     >
-      <Box position="absolute" top="70px" left="0" width="100%">
+      <Box position="absolute" top="70px" left="0" width="100%"
+          zIndex={1000}>
         <Heading
           textTransform="uppercase"
           variant="neonGreen"
           fontSize="70px"
           textAlign="center"
+          textShadow='0 0 10px black'
         >
           {mode}
         </Heading>
