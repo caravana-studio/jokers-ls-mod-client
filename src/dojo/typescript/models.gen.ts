@@ -1257,14 +1257,13 @@ export function defineContractComponents(world: World) {
         world,
         {
           game_id: RecsType.Number,
-          health: RecsType.Number,
           energy: RecsType.Number,
         },
         {
           metadata: {
             namespace: "jokers_of_neon",
             name: "PlayerBeast",
-            types: ["u32", "u32", "u8"],
+            types: ["u32", "u8"],
             customTypes: [],
           },
         }

@@ -7,6 +7,7 @@ import { ButtonContainer } from "./ButtonContainer";
 import { SkullIcon } from "./Skullcon";
 import { useChallengePlayer } from "../../dojo/queries/useChallenge";
 import { useGame } from "../../dojo/queries/useGame";
+import { useBeastPlayer, useGameModeBeast } from "../../dojo/queries/useBeast";
 
 interface DiscardButtonProps {
   highlight?: boolean;
@@ -25,12 +26,17 @@ export const DiscardButton = ({ highlight = false }: DiscardButtonProps) => {
   const challengePlayer = useChallengePlayer();
   const discards = challengePlayer?.discards ?? 0;
 
+  const beastGameMode = useGameModeBeast();
+  const cost_discard = beastGameMode?.cost_discard ?? 0;
+
+  const beastPlayer = useBeastPlayer();
+  const energyLeft = beastPlayer?.energy ?? 0;
+
+  const hasDiscards = discards > 0 || energyLeft > 0;
+
   const cantDiscard =
     !highlight &&
-    (preSelectionLocked ||
-      preSelectedCards?.length === 0 ||
-      !discards ||
-      discards === 0);
+    (preSelectionLocked || preSelectedCards?.length === 0 || !hasDiscards);
 
   const { t } = useTranslation(["game"]);
   const { isSmallScreen } = useResponsiveValues();
@@ -51,7 +57,9 @@ export const DiscardButton = ({ highlight = false }: DiscardButtonProps) => {
             <Text fontFamily="Jersey" fontSize={"1.5rem"}>
               DISCARD
             </Text>
-            <SkullIcon />
+            {Array.from({ length: cost_discard }).map((_, index) => (
+              <SkullIcon key={index} />
+            ))}
           </Flex>
         ) : (
           <Text fontFamily="Jersey" fontSize={"1.5rem"}>

@@ -28,6 +28,7 @@ import { Card } from "../types/Card";
 import { RoundRewards } from "../types/RoundRewards.ts";
 import { PlayEvents } from "../types/ScoreData";
 import { changeCardSuit } from "../utils/changeCardSuit";
+import { Beast } from "../dojo/typescript/models.gen.ts";
 
 interface IGameContext {
   gameId: number;
@@ -81,6 +82,8 @@ interface IGameContext {
   createNewLevel: () => Promise<any>;
   obstacleIds: number[];
   refetchObstacleIds: () => void;
+  beast: Beast | undefined;
+  refetchBeast: () => void;
 }
 
 const GameContext = createContext<IGameContext>({
@@ -136,6 +139,8 @@ const GameContext = createContext<IGameContext>({
   createNewLevel: () => new Promise((resolve) => resolve(undefined)),
   obstacleIds: [],
   refetchObstacleIds: () => {},
+  beast: undefined,
+  refetchBeast: () => {},
 });
 export const useGameContext = () => useContext(GameContext);
 
@@ -220,6 +225,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     obstacleIds,
     setObstacleIds,
     refetchObstacleIds,
+    refetchBeast,
   } = state;
 
   const resetLevel = () => {

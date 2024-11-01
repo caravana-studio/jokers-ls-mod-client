@@ -20,6 +20,7 @@ import { useCardHighlight } from "../../providers/CardHighlightProvider";
 import { useGameContext } from "../../providers/GameProvider";
 import { useResponsiveValues } from "../../theme/responsiveSettings";
 import { useChallengePlayer } from "../../dojo/queries/useChallenge";
+import { useBeastPlayer } from "../../dojo/queries/useBeast";
 
 export const HandSection = () => {
   const {
@@ -37,6 +38,10 @@ export const HandSection = () => {
 
   const challengePlayer = useChallengePlayer();
   const handsLeft = challengePlayer?.plays ?? 0;
+
+  const beastPlayer = useBeastPlayer();
+  const energyLeft = beastPlayer?.energy ?? 0;
+  const canPlay = handsLeft > 0 || energyLeft > 0;
 
   const { activeNode } = useDndContext();
 
@@ -76,7 +81,7 @@ export const HandSection = () => {
       >
         <SimpleGrid
           sx={{
-            opacity: !roundRewards && handsLeft > 0 ? 1 : 0.3,
+            opacity: !roundRewards && canPlay ? 1 : 0.3,
             minWidth: `${cardWidth * 4}px`,
             maxWidth: `${cardWidth * 6.5}px`,
           }}
@@ -179,14 +184,14 @@ export const HandSection = () => {
               justifyContent={"flex-end"}
               alignItems="flex-end"
               position="absolute"
-              opacity={!roundRewards && handsLeft > 0 ? 1 : 0}
+              opacity={!roundRewards && canPlay ? 1 : 0}
             >
               <ShowPlays />
             </Flex>
           )}
         </SimpleGrid>
       </Box>
-      {handsLeft === 0 && (
+      {!canPlay && (
         <Heading
           ml={{ base: "0", md: "100px" }}
           size={{ base: "sm", md: "md" }}
