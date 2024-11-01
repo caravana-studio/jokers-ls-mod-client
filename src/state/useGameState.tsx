@@ -4,7 +4,6 @@ import { PLAYS_DATA } from "../constants/plays";
 import { useCurrentHand } from "../dojo/queries/useCurrentHand";
 import { useCurrentSpecialCards } from "../dojo/queries/useCurrentSpecialCards";
 import { useGame } from "../dojo/queries/useGame";
-import { useRound } from "../dojo/queries/useRound";
 import { getLSGameId } from "../dojo/utils/getLSGameId";
 import { Plays } from "../enums/plays";
 import { SortBy } from "../enums/sortBy";
@@ -35,7 +34,6 @@ export const useGameState = () => {
   const [sortBySuit, setSortBySuit] = useState(
     !!localStorage.getItem(SORT_BY_SUIT)
   );
-  const [lockedScore, setLockedScore] = useState<number | undefined>(undefined);
   const [lockedCash, setLockedCash] = useState<number | undefined>(undefined);
   const [lockedSpecialCards, setLockedSpecialCards] = useState<Card[]>([]);
   const [isRageRound, setIsRageRound] = useState(false);
@@ -47,7 +45,6 @@ export const useGameState = () => {
   );
   const sortedHand = useMemo(() => sortCards(hand, sortBy), [hand, sortBy]);
 
-  const round = useRound();
   const game = useGame();
 
   const dojoHand = useCurrentHand(sortBy);
@@ -63,7 +60,6 @@ export const useGameState = () => {
   const dojoScore = 0;
   const dojoCash = game?.cash ?? 0;
 
-  const score = lockedScore ?? dojoScore;
   const cash = lockedCash || lockedCash === 0 ? lockedCash : dojoCash;
 
   const resetMultiPoints = () => {
@@ -134,7 +130,6 @@ export const useGameState = () => {
     setRoundRewards,
     sortBySuit,
     setSortBySuit,
-    score,
     apiHand: dojoHand,
     sortBy,
     sortedHand,
@@ -143,7 +138,6 @@ export const useGameState = () => {
     setPlayIsNeon,
     specialCards,
     setLockedSpecialCards,
-    setLockedScore,
     isRageRound,
     setIsRageRound,
     cash,

@@ -1,7 +1,6 @@
 import { Button, Flex, Text } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
-import { useRound } from "../../dojo/queries/useRound";
 import { useGameContext } from "../../providers/GameProvider";
 import { LS_GREEN } from "../../theme/colors";
 import { useResponsiveValues } from "../../theme/responsiveSettings";
@@ -16,7 +15,6 @@ export const PlayButton = ({ highlight = false }: PlayButtonProps) => {
   const { preSelectedCards, play, preSelectionLocked } = useGameContext();
   const { mode } = useParams();
 
-  const round = useRound();
   // const handsLeft = round?.hands ?? 0;
 
   // const cantPlay =
