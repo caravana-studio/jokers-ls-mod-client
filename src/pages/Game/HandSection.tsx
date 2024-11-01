@@ -3,24 +3,26 @@ import {
   Button,
   Flex,
   GridItem,
-  Heading,
   SimpleGrid,
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
 import { useDndContext, useDroppable } from "@dnd-kit/core";
 import { useState } from "react";
+import { isMobile } from "react-device-detect";
 import { useTranslation } from "react-i18next";
 import { AnimatedCard } from "../../components/AnimatedCard";
 import { ShowPlays } from "../../components/ShowPlays";
+import { SortBy } from "../../components/SortBy";
 import { TiltCard } from "../../components/TiltCard";
 import { HAND_SECTION_ID } from "../../constants/general";
 import { CARD_HEIGHT, CARD_WIDTH } from "../../constants/visualProps";
-import { useCardHighlight } from "../../providers/CardHighlightProvider";
+import { useChallengePlayer } from "../../dojo/queries/useChallenge";
 import { useGameContext } from "../../providers/GameProvider";
 import { useResponsiveValues } from "../../theme/responsiveSettings";
-import { useChallengePlayer } from "../../dojo/queries/useChallenge";
 import { useBeastPlayer } from "../../dojo/queries/useBeast";
+
+const TRANSLATE_Y_PX = isMobile ? 3 : 10;
 
 export const HandSection = () => {
   const {
@@ -31,8 +33,6 @@ export const HandSection = () => {
     preSelectedModifiers,
     roundRewards,
   } = useGameContext();
-
-  const { highlightCard } = useCardHighlight();
 
   const [discarding, setDiscarding] = useState(false);
 
@@ -79,6 +79,9 @@ export const HandSection = () => {
         alignItems={"end"}
         position={"relative"}
       >
+        <Box mb={"20px"} mr="10px">
+          <SortBy />
+        </Box>
         <SimpleGrid
           sx={{
             opacity: !roundRewards && canPlay ? 1 : 0.3,
@@ -92,8 +95,13 @@ export const HandSection = () => {
             const isPreselected = cardIsPreselected(card.idx);
             return (
               <GridItem
+                zIndex={1000}
                 key={card.idx + "-" + index}
-                sx={{ pointerEvents: isPreselected ? "none" : "auto" }}
+                sx={{
+                  transform: ` rotate(${
+                    (index - hand.length / 2 + 0.5) * 3
+                  }deg) translateY(${Math.abs(index - hand.length / 2 + 0.5) * TRANSLATE_Y_PX}px)`,
+                }}
                 w="100%"
                 onContextMenu={(e) => {
                   e.stopPropagation();
@@ -152,46 +160,37 @@ export const HandSection = () => {
                     )}
                   </Flex>
                 )}
-                {!isPreselected && (
-                  <AnimatedCard idx={card.idx} discarded={card.discarded}>
+                <AnimatedCard idx={card.idx} discarded={card.discarded}>
+                  <Box
+                    sx={{
+                      borderRadius: "8px",
+                      transform: isPreselected
+                        ? `translateY(-40px)`
+                        : "translateY(0px)",
+                      transition: "transform 0.3s ease, box-shadow 0.5s ease",
+                      boxShadow: isPreselected ? "0px 0px 10px 6px white" : "",
+                    }}
+                  >
                     <TiltCard
                       card={card}
                       scale={cardScale}
-                      cursor={
-                        card.isModifier
-                          ? activeNode
-                            ? "grabbing"
-                            : "grab"
-                          : "pointer"
-                      }
+                      cursor={"pointer"}
                       onClick={() => {
-                        if (isSmallScreen) {
-                          highlightCard(card);
-                        } else if (!card.isModifier) {
-                          togglePreselected(card.idx);
-                        }
+                        togglePreselected(card.idx);
                       }}
                     />
-                  </AnimatedCard>
-                )}
+                  </Box>
+                </AnimatedCard>
               </GridItem>
             );
           })}
-          {!isSmallScreen && (
-            <Flex
-              bottom={"-35px"}
-              width="calc(100% + 30px)"
-              justifyContent={"flex-end"}
-              alignItems="flex-end"
-              position="absolute"
-              opacity={!roundRewards && canPlay ? 1 : 0}
-            >
-              <ShowPlays />
-            </Flex>
-          )}
         </SimpleGrid>
+        <Box mb={"20px"} ml="40px">
+          <ShowPlays />
+        </Box>
       </Box>
-      {!canPlay && (
+
+      {/* {!canPlay === 0 && (
         <Heading
           ml={{ base: "0", md: "100px" }}
           size={{ base: "sm", md: "md" }}
@@ -202,7 +201,7 @@ export const HandSection = () => {
         >
           {t("game.hand-section.no-cards-label")}
         </Heading>
-      )}
+      )} */}
     </>
   );
 };

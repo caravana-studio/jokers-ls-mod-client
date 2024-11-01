@@ -3,6 +3,7 @@ import { useDroppable } from "@dnd-kit/core";
 import { useParams } from "react-router-dom";
 import CachedImage from "../../components/CachedImage.tsx";
 import { ProgressBar } from "../../components/CompactRoundData/ProgressBar.tsx";
+import { CurrentPlay } from "../../components/CurrentPlay.tsx";
 import { MultiPoints } from "../../components/MultiPoints.tsx";
 import { PRESELECTED_CARD_SECTION_ID } from "../../constants/general.ts";
 import { useGameContext } from "../../providers/GameProvider.tsx";
@@ -140,9 +141,10 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
           <PlayButton highlight={isTutorialRunning} />
         </Box>
       </Flex>
-      <Box mb={"-20px"} zIndex={300}>
+      <Flex flexDirection="column" gap={1} mb={"-50px"} zIndex={300}>
         <MultiPoints />
-      </Box>
+        <CurrentPlay />
+      </Flex>
     </Flex>
   );
 };

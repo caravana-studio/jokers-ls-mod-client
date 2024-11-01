@@ -22,7 +22,6 @@ import { getTemporalCardText } from "../utils/getTemporalCardText.ts";
 import { getTooltip } from "../utils/getTooltip.tsx";
 import { AnimatedCard } from "./AnimatedCard";
 import CachedImage from "./CachedImage.tsx";
-import { DraggableCard } from "./DraggableCard";
 import { HoloEffect } from "./HoloEffect.tsx";
 import { PriceBox } from "./PriceBox.tsx";
 
@@ -50,7 +49,7 @@ export const TiltCard = ({
 
   const isSilent = useIsSilent(card);
 
-  const tiltCardComponent = (
+  return (
     <Box
       width={cardWith}
       sx={{ cursor: cursor && !purchased ? cursor : "default" }}
@@ -94,6 +93,8 @@ export const TiltCard = ({
               hasArrow
               label={getTooltip(card, isPack)}
               closeOnPointerDown
+              fontSize="18px"
+              lineHeight={1}
             >
               <Box
                 position="relative"
@@ -175,6 +176,8 @@ export const TiltCard = ({
                   label={getTooltip(c)}
                   placement="top"
                   closeOnPointerDown
+                  fontSize="18px"
+                  lineHeight={1}
                 >
                   <CachedImage
                     sx={{ maxWidth: "unset" }}
@@ -195,11 +198,6 @@ export const TiltCard = ({
       })}
     </Box>
   );
-
-  // when is a special card, prefix with s and use idx instead of id
-  const cardId = card.isSpecial ? "s" + card.idx.toString() : card.id ?? "";
-
-  return <DraggableCard id={cardId}>{tiltCardComponent}</DraggableCard>;
 };
 
 interface TemporalBadgeProps {
