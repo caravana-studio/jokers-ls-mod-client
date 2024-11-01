@@ -27,7 +27,7 @@ export const SpecialCardsRow = ({ cards }: SpecialCardsRowProps) => {
   const [cardToDiscard, setCardToDiscard] = useState<number | null>(null);
   const { t } = useTranslation(["game"]);
   const { isSmallScreen } = useResponsiveValues();
-  const scale = 0.8;
+  const scale = 0.75;
   const cardWidth = CARD_WIDTH * scale;
   const cardHeight = CARD_HEIGHT * scale;
 
