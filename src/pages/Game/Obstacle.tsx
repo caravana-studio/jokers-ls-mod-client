@@ -4,18 +4,18 @@ import { OBSTACLES } from "../../data/obstacles";
 import { useGameContext } from "../../providers/GameProvider";
 
 export const Obstacle: React.FC = () => {
-  const { obstacleIds, refetchObstacleIds } = useGameContext();
+  const { obstacles, refetchObstacles } = useGameContext();
 
   const missions =
-    obstacleIds?.map((id) => ({
-      description: OBSTACLES[id]?.description ?? "Not found",
-      checked: false,
+    obstacles?.map((obstacle) => ({
+      description: OBSTACLES[obstacle.id]?.description ?? "Not found",
+      checked: obstacle.completed,
     })) ?? [];
 
   useEffect(() => {
     if (missions.length === 0) {
       console.log("refetching obstacle ids");
-      refetchObstacleIds();
+      refetchObstacles();
     }
   }, [missions]);
 

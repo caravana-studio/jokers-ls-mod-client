@@ -1,7 +1,6 @@
 import { useComponentValue } from "@dojoengine/react";
 import { Entity } from "@dojoengine/recs";
 import { getEntityIdFromKeys } from "@dojoengine/utils";
-import { useMemo } from "react";
 import { useDojo } from "../useDojo";
 import { getLSGameId } from "../utils/getLSGameId";
 
@@ -25,12 +24,13 @@ export const useChallenge = () => {
   const gameId = getLSGameId();
   const entityId = getEntityIdFromKeys([BigInt(gameId)]) as Entity;
   const challengeResult = useComponentValue(Challenge, entityId);
-  const challengeIds = useMemo(
-    () =>
-      (challengeResult?.active_ids ?? []).map(
-        (id) => id && Number((id as any)?.value)
-      ),
-    [challengeResult?.active_ids]
-  );
-  return challengeIds;
+  const challenges = (challengeResult?.active_ids ?? []).map((challenge) => {
+    const id = challenge[0] ? Number((challenge[0] as any)?.value) : 0;
+    const completed = challenge[1]
+      ? Boolean((challenge[1] as any)?.value)
+      : false;
+    return { id, completed };
+  });
+
+  return challenges;
 };

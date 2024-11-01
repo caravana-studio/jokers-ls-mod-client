@@ -42,7 +42,7 @@ export const useGameState = () => {
   const [isRageRound, setIsRageRound] = useState(false);
   const [rageCards, setRageCards] = useState<Card[]>([]);
   const [beast, setBeast] = useState<Beast | undefined>(undefined);
-  const [obstacleIds, setObstacleIds] = useState<number[]>([]);
+  const [obstacles, setObstacles] = useState<{ id: number; completed: boolean }[]>([]);
 
   const sortBy: SortBy = useMemo(
     () => (sortBySuit ? SortBy.SUIT : SortBy.RANK),
@@ -112,12 +112,12 @@ export const useGameState = () => {
     }
   }, [preSelectedCards, preSelectedModifiers]);
 
-  const challengeIds = useChallenge();
+  const challenges = useChallenge();
 
   const beastData = useBeast();
 
-  const refetchObstacleIds = () => {
-    setObstacleIds(challengeIds);
+  const refetchObstacles = () => {
+    setObstacles(challenges);
   };
 
   const refetchBeast = () => {
@@ -169,9 +169,9 @@ export const useGameState = () => {
     setRageCards,
     beast,
     setBeast,
-    obstacleIds,
-    setObstacleIds,
-    refetchObstacleIds,
+    obstacles,
+    setObstacles,
+    refetchObstacles,
     refetchBeast,
   };
 };

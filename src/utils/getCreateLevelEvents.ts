@@ -1,5 +1,6 @@
 import { BEAST_EVENT, OBSTACLE_EVENT } from "../constants/dojoEventKeys";
 import { DojoEvent } from "../types/DojoEvent";
+import { getCardsFromEvents } from "./getCardsFromEvents";
 import { getNumberValueFromEvent } from "./getNumberValueFromEvent";
 
 export const getCreateLevelEvents = (events: DojoEvent[]) => {
@@ -8,20 +9,17 @@ export const getCreateLevelEvents = (events: DojoEvent[]) => {
   );
   const beastEvent = events.find((event) => event.keys[0] === BEAST_EVENT);
 
+  const cards = getCardsFromEvents(events);
+
   if (obstacleEvent) {
-    console.log("obstacle event found");
-    console.log(obstacleEvent);
-    const ids: number[] = [];
+    const obstacles: { id: number; completed: boolean }[] = [];
     const numberOfIds = getNumberValueFromEvent(obstacleEvent, 0) ?? 0;
-    for (let i = 0; i < numberOfIds; i++) {
+    for (let i = 0; i < numberOfIds * 2; i = i + 2) {
       const id = getNumberValueFromEvent(obstacleEvent, i + 1) ?? 0;
-      ids.push(id);
+      obstacles.push({ id, completed: false });
     }
-    console.log(ids);
-    return { isObstacle: true, obstacleIds: ids };
+    return { isObstacle: true, obstacles, cards };
   } else if (beastEvent) {
-    console.log("beast event found");
-    console.log(beastEvent);
     const beast_id = getNumberValueFromEvent(beastEvent, 0) ?? 0;
     const tier = getNumberValueFromEvent(beastEvent, 1) ?? 0;
     const level = getNumberValueFromEvent(beastEvent, 2) ?? 0;
@@ -32,6 +30,7 @@ export const getCreateLevelEvents = (events: DojoEvent[]) => {
     return {
       isBeast: true,
       beast: { beast_id, tier, level, health, current_health, attack },
+      cards,
     };
   }
   return undefined;
