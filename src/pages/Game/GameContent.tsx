@@ -30,7 +30,6 @@ export const GameContent = () => {
     gameLoading,
     error,
     executeCreateGame,
-    addModifier,
     preSelectCard,
     unPreSelectCard,
   } = useGameContext();
