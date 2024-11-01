@@ -1,0 +1,140 @@
+{
+    "challengesData": {
+      "1": {
+        "name": "Royal Flush",
+        "description": "Play Royal Flush."
+      },
+      "2": {
+        "name": "Straight Flush",
+        "description": "Play Straight Flush."
+      },
+      "3": {
+        "name": "Five of a Kind",
+        "description": "Play Five of a Kind."
+      },
+      "4": {
+        "name": "Four of a Kind",
+        "description": "Play Four of a Kind."
+      },
+      "5": {
+        "name": "Full House",
+        "description": "Play Full House."
+      },
+      "6": {
+        "name": "Flush",
+        "description": "Play Flush."
+      },
+      "7": {
+        "name": "Straight",
+        "description": "Play Straight."
+      },
+      "8": {
+        "name": "Three of a Kind",
+        "description": "Play Three of a Kind."
+      },
+      "9": {
+        "name": "Two Pair",
+        "description": "Play Two Pair."
+      },
+      "10": {
+        "name": "Pair",
+        "description": "Play Pair."
+      },
+      "11": {
+        "name": "High Card",
+        "description": "Win with High Card."
+      },
+      "12": {
+        "name": "Hearts",
+        "description": "Include a Heart card in a play."
+      },
+      "13": {
+        "name": "Clubs",
+        "description": "Include a Club card in a play."
+      },
+      "14": {
+        "name": "Diamonds",
+        "description": "Include a Diamond card in a play."
+      },
+      "15": {
+        "name": "Spades",
+        "description": "Include a Spade card in a play."
+      },
+      "16": {
+        "name": "One",
+        "description": "Include a card with the number 1 in a play."
+      },
+      "17": {
+        "name": "Two",
+        "description": "Include a card with the number 2 in a play."
+      },
+      "18": {
+        "name": "Three",
+        "description": "Include a card with the number 3 in a play."
+      },
+      "19": {
+        "name": "Four",
+        "description": "Include a card with the number 4 in a play."
+      },
+      "20": {
+        "name": "Five",
+        "description": "Include a card with the number 5 in a play."
+      },
+      "21": {
+        "name": "Six",
+        "description": "Include a card with the number 6 in a play."
+      },
+      "22": {
+        "name": "Seven",
+        "description": "Include a card with the number 7 in a play."
+      },
+      "23": {
+        "name": "Eight",
+        "description": "Include a card with the number 8 in a play."
+      },
+      "24": {
+        "name": "Nine",
+        "description": "Include a card with the number 9 in a play."
+      },
+      "25": {
+        "name": "Ten",
+        "description": "Include a card with the number 10 in a play."
+      },
+      "26": {
+        "name": "Jack",
+        "description": "Include a Jack card in a play."
+      },
+      "27": {
+        "name": "Queen",
+        "description": "Include a Queen card in a play."
+      },
+      "28": {
+        "name": "King",
+        "description": "Include a King card in a play."
+      },
+      "29": {
+        "name": "Ace",
+        "description": "Include an Ace card in a play."
+      },
+      "30": {
+        "name": "Joker",
+        "description": "Play a Joker in a hand."
+      },
+      "31": {
+        "name": "500 Points",
+        "description": "Earn 500 points in one hand."
+      },
+      "32": {
+        "name": "1000 Points",
+        "description": "Earn 1000 points in one hand."
+      },
+      "33": {
+        "name": "2000 Points",
+        "description": "Earn 2000 points in one hand."
+      },
+      "34": {
+        "name": "5000 Points",
+        "description": "Earn 5000 points in one hand."
+      }
+    }
+  }
