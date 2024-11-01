@@ -2,8 +2,6 @@ import { useMemo } from "react";
 import { Deck } from "../../types/Deck";
 import { useDojo } from "../useDojo";
 import { getLSGameId } from "../utils/getLSGameId";
-import { useGame } from "./useGame";
-import { useRound } from "./useRound";
 import { getEntityIdFromKeys } from "@dojoengine/utils";
 import { Entity } from "@dojoengine/recs";
 import { useComponentValue } from "@dojoengine/react";

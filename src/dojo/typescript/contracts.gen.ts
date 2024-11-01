@@ -2,7 +2,7 @@
 // Import the necessary types from the recs SDK
 // generate again with `sozo build --typescript`
 import { DojoProvider } from "@dojoengine/core";
-import { Account } from "starknet";
+import * as models from "./models.gen";
 
 export type IWorld = Awaited<ReturnType<typeof setupWorld>>;
 

@@ -61,7 +61,6 @@ interface IGameContext {
   checkOrCreateGame: () => void;
   restartGame: () => void;
   preSelectionLocked: boolean;
-  score: number;
   lockRedirection: boolean;
   specialCards: Card[];
   playIsNeon: boolean;
@@ -116,7 +115,6 @@ const GameContext = createContext<IGameContext>({
   checkOrCreateGame: () => {},
   restartGame: () => {},
   preSelectionLocked: false,
-  score: 0,
   lockRedirection: false,
   specialCards: [],
   playIsNeon: false,
@@ -142,8 +140,6 @@ export const useGameContext = () => useContext(GameContext);
 export const GameProvider = ({ children }: PropsWithChildren) => {
   const state = useGameState();
   const [lockRedirection, setLockRedirection] = useState(false);
-
-  const handsLeft = 0;
 
   const navigate = useNavigate();
   const {
@@ -210,8 +206,6 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     setPlayIsNeon,
     setLockedSpecialCards,
     specialCards,
-    setLockedScore,
-    score,
     cash,
     setLockedCash,
     setIsRageRound,
@@ -241,6 +235,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
   const selectDeckType = async (deckType: number) => {
     const selectDeckPromise = selectDeck(gameId, deckType);
     selectDeckPromise.then(() => {
+      setLockRedirection(true);
       navigate("/choose-specials");
     });
     return selectDeckPromise;
@@ -250,6 +245,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     const specialPromise = selectSpecials(gameId, cardIndex);
 
     specialPromise.then(() => {
+      setLockRedirection(true);
       navigate("/choose-modifiers");
     });
 
@@ -552,11 +548,10 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
 
       setTimeout(() => {
         setAnimatedCard(undefined);
-        setLockedScore(undefined);
 
         setPlayAnimation(false);
         clearPreSelection();
-        handsLeft > 0 && setPreSelectionLocked(false);
+        setPreSelectionLocked(false);
         setPlayIsNeon(false);
         setLockedSpecialCards([]);
         if (playEvents.gameOver) {
@@ -589,7 +584,6 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     setPreSelectionLocked(true);
     setLockRedirection(true);
     setLockedSpecialCards(specialCards);
-    setLockedScore(score);
     setLockedCash(cash);
     play(gameId, preSelectedCards, preSelectedModifiers)
       .then((response) => {
@@ -607,7 +601,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
   };
 
   const clearPreSelection = () => {
-    if (!preSelectionLocked && handsLeft > 0) {
+    if (!preSelectionLocked) {
       resetMultiPoints();
       setPreSelectedCards([]);
       setPreSelectedModifiers({});
@@ -653,7 +647,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
   };
 
   const togglePreselected = (cardIndex: number) => {
-    if (!preSelectionLocked && handsLeft > 0) {
+    if (!preSelectionLocked) {
       if (cardIsPreselected(cardIndex)) {
         unPreSelectCard(cardIndex);
         preselectCardSound();

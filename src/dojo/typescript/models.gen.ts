@@ -75,6 +75,25 @@ export const BlisterPackItemDefinition = {
   purchased: RecsType.Boolean,
 };
 
+// Type definition for `jokers_of_neon::models::status::shop::shop::BlisterPackItem` struct
+export interface BlisterPackItem {
+    game_id: Number;
+    idx: Number;
+    blister_pack_id: Number;
+    cost: Number;
+    purchased: Boolean;
+    
+}
+export const BlisterPackItemDefinition = {
+    game_id: RecsType.Number,
+    idx: RecsType.Number,
+    blister_pack_id: RecsType.Number,
+    cost: RecsType.Number,
+    purchased: RecsType.Boolean,
+    
+};
+
+
 // Type definition for `jokers_of_neon::models::status::shop::shop::BlisterPackResult` struct
 export interface BlisterPackResult {
   game_id: Number;
@@ -248,6 +267,49 @@ export const ChallengePlayerDefinition = {
   discards: RecsType.Number,
   plays: RecsType.Number,
 };
+
+// Type definition for `jokers_of_neon::models::data::challenge::Challenge` struct
+export interface Challenge {
+    game_id: Number;
+    active_ids: Number[];
+    
+}
+export const ChallengeDefinition = {
+    game_id: RecsType.Number,
+    active_ids: RecsType.NumberArray,
+    
+};
+
+
+// Type definition for `jokers_of_neon::models::data::events::ChallengeCompleted` struct
+export interface ChallengeCompleted {
+    player: BigInt;
+    player_name: BigInt;
+    game_id: Number;
+    
+}
+export const ChallengeCompletedDefinition = {
+    player: RecsType.BigInt,
+    player_name: RecsType.BigInt,
+    game_id: RecsType.Number,
+    
+};
+
+
+// Type definition for `jokers_of_neon::models::data::challenge::ChallengePlayer` struct
+export interface ChallengePlayer {
+    game_id: Number;
+    discards: Number;
+    plays: Number;
+    
+}
+export const ChallengePlayerDefinition = {
+    game_id: RecsType.Number,
+    discards: RecsType.Number,
+    plays: RecsType.Number,
+    
+};
+
 
 // Type definition for `jokers_of_neon::models::data::events::CreateGameEvent` struct
 export interface CreateGameEvent {
@@ -427,6 +489,38 @@ export const LastBeastLevelDefinition = {
   level: RecsType.Number,
 };
 
+// Type definition for `jokers_of_neon::models::data::beast::GameModeBeast` struct
+export interface GameModeBeast {
+    game_id: Number;
+    cost_discard: Number;
+    cost_play: Number;
+    energy_max_player: Number;
+    
+}
+export const GameModeBeastDefinition = {
+    game_id: RecsType.Number,
+    cost_discard: RecsType.Number,
+    cost_play: RecsType.Number,
+    energy_max_player: RecsType.Number,
+    
+};
+
+
+// Type definition for `jokers_of_neon::models::data::last_beast_level::LastBeastLevel` struct
+export interface LastBeastLevel {
+    game_id: Number;
+    current_probability: Number;
+    level: Number;
+    
+}
+export const LastBeastLevelDefinition = {
+    game_id: RecsType.Number,
+    current_probability: RecsType.Number,
+    level: RecsType.Number,
+    
+};
+
+
 // Type definition for `jokers_of_neon::models::data::card::Suit` enum
 export type Suit =
   | { type: "None" }
@@ -522,6 +616,21 @@ export const PlayerBeastDefinition = {
   health: RecsType.Number,
   energy: RecsType.Number,
 };
+
+// Type definition for `jokers_of_neon::models::data::beast::PlayerBeast` struct
+export interface PlayerBeast {
+    game_id: Number;
+    health: Number;
+    energy: Number;
+    
+}
+export const PlayerBeastDefinition = {
+    game_id: RecsType.Number,
+    health: RecsType.Number,
+    energy: RecsType.Number,
+    
+};
+
 
 // Type definition for `jokers_of_neon::models::data::events::PokerHandEvent` struct
 export interface PokerHandEvent {
