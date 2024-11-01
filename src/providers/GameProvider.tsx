@@ -14,7 +14,6 @@ import {
   preselectedCardSfx,
 } from "../constants/sfx.ts";
 import { useGame } from "../dojo/queries/useGame.tsx";
-import { useRound } from "../dojo/queries/useRound.tsx";
 import { useDojo } from "../dojo/useDojo.tsx";
 import { useGameActions } from "../dojo/useGameActions.tsx";
 import { gameExists } from "../dojo/utils/getGame.tsx";
@@ -140,7 +139,6 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
   const state = useGameState();
   const [lockRedirection, setLockRedirection] = useState(false);
 
-  const round = useRound();
   const handsLeft = 0;
 
   const navigate = useNavigate();

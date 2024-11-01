@@ -1,13 +1,13 @@
 import { Button, Flex, Text } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
-import { useRound } from "../../dojo/queries/useRound";
 import { useGameContext } from "../../providers/GameProvider";
 import { LS_GREEN } from "../../theme/colors";
 import { useResponsiveValues } from "../../theme/responsiveSettings";
 import { ButtonContainer } from "./ButtonContainer";
 import { SkullIcon } from "./Skullcon";
 import { useChallengePlayer } from "../../dojo/queries/useChallenge";
+import { useGame } from "../../dojo/queries/useGame";
 
 interface PlayButtonProps {
   highlight?: boolean;
@@ -16,6 +16,10 @@ interface PlayButtonProps {
 export const PlayButton = ({ highlight = false }: PlayButtonProps) => {
   const { preSelectedCards, play, preSelectionLocked } = useGameContext();
   const { mode } = useParams();
+  const game = useGame();
+
+  //TODO: draw all the skulls and make the skulls used darker
+  //game?.max_hands;
 
   const challengePlayer = useChallengePlayer();
   const handsLeft = challengePlayer?.plays ?? 0;

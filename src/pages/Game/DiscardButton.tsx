@@ -6,6 +6,7 @@ import { useResponsiveValues } from "../../theme/responsiveSettings";
 import { ButtonContainer } from "./ButtonContainer";
 import { SkullIcon } from "./Skullcon";
 import { useChallengePlayer } from "../../dojo/queries/useChallenge";
+import { useGame } from "../../dojo/queries/useGame";
 
 interface DiscardButtonProps {
   highlight?: boolean;
@@ -15,6 +16,11 @@ export const DiscardButton = ({ highlight = false }: DiscardButtonProps) => {
   const { preSelectedCards, discard, preSelectionLocked } = useGameContext();
 
   const { mode } = useParams();
+
+  const game = useGame();
+
+  //TODO: draw all the skulls and make the skulls used darker
+  //game?.max_hands;
 
   const challengePlayer = useChallengePlayer();
   const discards = challengePlayer?.discards ?? 0;
