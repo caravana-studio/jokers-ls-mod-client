@@ -1,6 +1,7 @@
 import { shortString } from "starknet";
 import { GAME_ID_EVENT, GAME_OVER_EVENT } from "../constants/dojoEventKeys";
 import { getCardsFromEvents } from "../utils/getCardsFromEvents";
+import { getCreateLevelEvents } from "../utils/getCreateLevelEvents";
 import { getNumberValueFromEvents } from "../utils/getNumberValueFromEvent";
 import { getPlayEvents } from "../utils/playEvents/getPlayEvents";
 import {
@@ -105,6 +106,36 @@ export const useGameActions = () => {
       failedTransactionToast();
       console.log(e);
       return 0;
+    }
+  };
+
+  const createLevel = async (gameId: number) => {
+    try {
+      showTransactionToast();
+      const { transaction_hash } = await client.game_system.create_level({
+        account,
+        game_id: gameId,
+      });
+
+      showTransactionToast(transaction_hash);
+
+      const tx = await account.waitForTransaction(transaction_hash, {
+        retryInterval: 100,
+      });
+
+      updateTransactionToast(transaction_hash, tx.isSuccess());
+      if (tx.isSuccess()) {
+        const events = tx.events;
+        console.log("Success at createLevel:", tx);
+        return getCreateLevelEvents(events);
+      } else {
+        console.error("Error at createLevel:", tx);
+        return undefined;
+      }
+    } catch (e) {
+      failedTransactionToast();
+      console.log(e);
+      return undefined;
     }
   };
 
@@ -287,5 +318,6 @@ export const useGameActions = () => {
     selectDeck,
     selectSpecials,
     selectModifiers,
+    createLevel,
   };
 };

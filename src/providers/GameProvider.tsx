@@ -14,7 +14,7 @@ import {
   preselectedCardSfx,
 } from "../constants/sfx.ts";
 import { useGame } from "../dojo/queries/useGame.tsx";
-import { useRound } from "../dojo/queries/useRound.tsx";
+import { Beast } from "../dojo/typescript/models.gen.ts";
 import { useDojo } from "../dojo/useDojo.tsx";
 import { useGameActions } from "../dojo/useGameActions.tsx";
 import { gameExists } from "../dojo/utils/getGame.tsx";
@@ -62,7 +62,6 @@ interface IGameContext {
   checkOrCreateGame: () => void;
   restartGame: () => void;
   preSelectionLocked: boolean;
-  score: number;
   lockRedirection: boolean;
   specialCards: Card[];
   playIsNeon: boolean;
@@ -79,6 +78,11 @@ interface IGameContext {
   selectSpecialCards: (cardIndex: number[]) => Promise<number | undefined>;
   selectModifierCards: (cardIndex: number[]) => Promise<number | undefined>;
   redirectBasedOnGameState: () => void;
+  createNewLevel: () => Promise<any>;
+  obstacles: { id: number; completed: boolean }[];
+  refetchObstacles: () => void;
+  beast: Beast | undefined;
+  refetchBeast: () => void;
 }
 
 const GameContext = createContext<IGameContext>({
@@ -114,7 +118,6 @@ const GameContext = createContext<IGameContext>({
   checkOrCreateGame: () => {},
   restartGame: () => {},
   preSelectionLocked: false,
-  score: 0,
   lockRedirection: false,
   specialCards: [],
   playIsNeon: false,
@@ -131,15 +134,18 @@ const GameContext = createContext<IGameContext>({
   selectSpecialCards: (_) => new Promise((resolve) => resolve(undefined)),
   selectModifierCards: (_) => new Promise((resolve) => resolve(undefined)),
   redirectBasedOnGameState: () => {},
+  createNewLevel: () => new Promise((resolve) => resolve(undefined)),
+  obstacles: [],
+  refetchObstacles: () => {},
+  beast: undefined,
+  refetchBeast: () => {},
 });
 export const useGameContext = () => useContext(GameContext);
 
 export const GameProvider = ({ children }: PropsWithChildren) => {
   const state = useGameState();
   const [lockRedirection, setLockRedirection] = useState(false);
-
-  const round = useRound();
-  const handsLeft = round?.hands ?? 0;
+  const handsLeft = 0;
 
   const navigate = useNavigate();
   const {
@@ -159,6 +165,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     selectDeck,
     selectSpecials,
     selectModifiers,
+    createLevel,
   } = useGameActions();
 
   const { discards, discard: stateDiscard, rollbackDiscard } = useDiscards();
@@ -205,11 +212,15 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     setPlayIsNeon,
     setLockedSpecialCards,
     specialCards,
-    setLockedScore,
-    score,
     cash,
     setLockedCash,
     setIsRageRound,
+    beast,
+    setBeast,
+    obstacles,
+    setObstacles,
+    refetchObstacles,
+    refetchBeast,
   } = state;
 
   const resetLevel = () => {
@@ -231,6 +242,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
   const selectDeckType = async (deckType: number) => {
     const selectDeckPromise = selectDeck(gameId, deckType);
     selectDeckPromise.then(() => {
+      setLockRedirection(true);
       navigate("/choose-specials");
     });
     return selectDeckPromise;
@@ -240,6 +252,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     const specialPromise = selectSpecials(gameId, cardIndex);
 
     specialPromise.then(() => {
+      setLockRedirection(true);
       navigate("/choose-modifiers");
     });
 
@@ -249,11 +262,26 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
   const selectModifierCards = async (cardIndex: number[]) => {
     const modifiersPromise = selectModifiers(gameId, cardIndex);
 
-    modifiersPromise.then(() => {
-      navigate("/game");
+    modifiersPromise.then(async () => {
+      createNewLevel();
     });
 
     return modifiersPromise;
+  };
+
+  const createNewLevel = async () => {
+    const nextLevelPromise = createLevel(gameId);
+    nextLevelPromise.then((response) => {
+      response?.cards && replaceCards(response.cards);
+      if (response?.isBeast && response?.beast) {
+        setBeast({ ...response.beast, game_id: gameId });
+        navigate("/game/beast");
+      } else if (response?.isObstacle && response?.obstacles) {
+        setObstacles(response?.obstacles);
+        navigate("/game/obstacle");
+      }
+    });
+    return nextLevelPromise;
   };
 
   const executeCreateGame = async () => {
@@ -266,6 +294,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
         const { gameId: newGameId, hand } = response;
         if (newGameId) {
           resetLevel();
+          setLockRedirection(true);
           navigate("/choose-class");
           setHand(hand);
           setGameId(newGameId);
@@ -296,6 +325,17 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
       // filter out null cards (represented by card_id 9999)
       .filter((card) => card.card_id !== 9999);
     setHand(newHand);
+  };
+
+  const setObstacleCompleted = (id: number) => {
+    setObstacles(
+      obstacles.map((obstacle) => {
+        if (obstacle.id === id) {
+          return { ...obstacle, completed: true };
+        }
+        return obstacle;
+      })
+    );
   };
 
   const animatePlay = (playEvents: PlayEvents) => {
@@ -528,26 +568,25 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
 
       setTimeout(() => {
         setAnimatedCard(undefined);
-        setLockedScore(undefined);
 
         setPlayAnimation(false);
         clearPreSelection();
-        handsLeft > 0 && setPreSelectionLocked(false);
+        setPreSelectionLocked(false);
         setPlayIsNeon(false);
         setLockedSpecialCards([]);
+        if (playEvents.itemChallengeCompleted) {
+          playEvents.itemChallengeCompleted.forEach((id) => {
+            setObstacleCompleted(id);
+          });
+        }
         if (playEvents.gameOver) {
           console.log("GAME OVER");
           setTimeout(() => {
             navigate(`/gameover/${gameId}`);
             setLockRedirection(false);
           }, 1000);
-        } else if (playEvents.levelPassed && playEvents.detailEarned) {
-          const { level } = playEvents.levelPassed;
+        } else if (playEvents.levelPassed || playEvents.obstacleDefeated) {
           setTimeout(() => {
-            setRoundRewards({
-              ...playEvents.detailEarned!,
-              level: level,
-            });
             navigate("/rewards");
           }, 1000);
           setPreSelectionLocked(true);
@@ -565,7 +604,6 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     setPreSelectionLocked(true);
     setLockRedirection(true);
     setLockedSpecialCards(specialCards);
-    setLockedScore(score);
     setLockedCash(cash);
     play(gameId, preSelectedCards, preSelectedModifiers)
       .then((response) => {
@@ -583,7 +621,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
   };
 
   const clearPreSelection = () => {
-    if (!preSelectionLocked && handsLeft > 0) {
+    if (!preSelectionLocked) {
       resetMultiPoints();
       setPreSelectedCards([]);
       setPreSelectedModifiers({});
@@ -629,7 +667,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
   };
 
   const togglePreselected = (cardIndex: number) => {
-    if (!preSelectionLocked && handsLeft > 0) {
+    if (!preSelectionLocked) {
       if (cardIsPreselected(cardIndex)) {
         unPreSelectCard(cardIndex);
         preselectCardSound();
@@ -798,6 +836,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     selectDeckType,
     selectSpecialCards,
     selectModifierCards,
+    createNewLevel,
   };
 
   return (

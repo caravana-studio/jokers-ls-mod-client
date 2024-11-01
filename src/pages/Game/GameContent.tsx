@@ -1,11 +1,5 @@
 import { Box, Button, Flex, Heading, Image } from "@chakra-ui/react";
-import {
-  DndContext,
-  DragEndEvent,
-  PointerSensor,
-  useSensor,
-  useSensors,
-} from "@dnd-kit/core";
+import { PointerSensor, useSensor, useSensors } from "@dnd-kit/core";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Joyride, { CallBackProps } from "react-joyride";
@@ -18,10 +12,6 @@ import {
   SPECIAL_CARDS_TUTORIAL_STEPS,
   TUTORIAL_STYLE,
 } from "../../constants/gameTutorial";
-import {
-  HAND_SECTION_ID,
-  PRESELECTED_CARD_SECTION_ID,
-} from "../../constants/general.ts";
 import {
   SKIP_TUTORIAL_GAME,
   SKIP_TUTORIAL_MODIFIERS,
@@ -60,7 +50,6 @@ export const GameContent = () => {
   const [runTutorialModifiers, setRunTutorialModifiers] = useState(false);
   const [specialTutorialCompleted, setSpecialTutorialCompleted] =
     useState(false);
-  const { isRageRound } = useGameContext();
   const { t } = useTranslation(["game"]);
 
   useEffect(() => {
@@ -99,26 +88,6 @@ export const GameContent = () => {
   );
 
   const game = useGame();
-
-  const handleDragEnd = (event: DragEndEvent) => {
-    const draggedCard = Number(event.active?.id);
-    const isModifier = hand.find((c) => c.idx === draggedCard)?.isModifier;
-
-    const modifiedCard = Number(event.over?.id);
-    if (!isNaN(modifiedCard) && !isNaN(draggedCard) && isModifier) {
-      const index = preSelectedCards.indexOf(modifiedCard);
-      if (index !== -1) {
-        addModifier(modifiedCard, draggedCard);
-      }
-    } else if (
-      !isModifier &&
-      (event.over?.id === PRESELECTED_CARD_SECTION_ID || !isNaN(modifiedCard))
-    ) {
-      preSelectCard(draggedCard);
-    } else if (event.over?.id === HAND_SECTION_ID) {
-      unPreSelectCard(draggedCard);
-    }
-  };
 
   useEffect(() => {
     const showSpecialCardTutorial = !localStorage.getItem(
@@ -230,43 +199,41 @@ export const GameContent = () => {
             top={0}
             zIndex={0}
           />
-          <Box sx={{ height: "100%", width: "100%" }}>
-            <Box sx={{ height: "30%", width: "100%" }} mb={5}>
+          <Box
+            sx={{ height: "100%", width: "100%" }}
+            display={"flex"}
+            flexDirection={"column"}
+            justifyContent={"space-around"}
+          >
+            <Box sx={{ width: "100%" }} mb={2}>
               <TopSection />
             </Box>
-            <Box height={"70%"} width={"100%"}>
-              <DndContext
-                sensors={sensors}
-                onDragEnd={handleDragEnd}
-                autoScroll={false}
+            <Box width={"100%"}>
+              <Box
+                mb={2}
+                sx={{
+                  width: "100%",
+                  height: "50%",
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  backgroundColor: "rgba(0, 0, 0, 0.6)",
+                  px: "70px",
+                }}
               >
-                <Box
-                  sx={{
-                    height: "45%",
-                    width: "100%",
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    backgroundColor: "rgba(0, 0, 0, 0.6)",
-                    px: "70px",
-                  }}
-                >
-                  <MidSection isTutorialRunning={run} />
-                </Box>
-                <Box
-                  pb={"60px"}
-                  mr={{ base: 10, md: 20 }}
-                  sx={{
-                    display: "flex",
-                    height: "55%",
-                    alignItems: "flex-end",
-                    justifyContent: "center",
-                  }}
-                >
-                  <HandSection />
-                </Box>
-              </DndContext>
+                <MidSection isTutorialRunning={run} />
+              </Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  height: "auto",
+                  alignItems: "flex-end",
+                  justifyContent: "center",
+                }}
+              >
+                <HandSection />
+              </Box>
             </Box>
           </Box>
           <Image

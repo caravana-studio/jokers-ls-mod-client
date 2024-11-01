@@ -35,7 +35,7 @@ export const SortBy = () => {
         >
           <CachedImage
             cursor="pointer"
-            src={`sort/heart-${sortBy === SortByEnum.SUIT ? "on" : "off"}.png`}
+            src={`/sort/heart-${sortBy === SortByEnum.SUIT ? "on" : "off"}.png`}
             height={{ base: 5, sm: 8 }}
             onClick={() => {
               toggleSortBy();
@@ -49,7 +49,7 @@ export const SortBy = () => {
         >
           <CachedImage
             cursor="pointer"
-            src={`sort/rank-${sortBy === SortByEnum.SUIT ? "off" : "on"}.png`}
+            src={`/sort/rank-${sortBy === SortByEnum.SUIT ? "off" : "on"}.png`}
             height={{ base: 5, sm: 8 }}
             onClick={() => {
               toggleSortBy();

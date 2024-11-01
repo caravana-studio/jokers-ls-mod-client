@@ -1,9 +1,9 @@
-import { useNavigate } from "react-router-dom";
+import { InfoIcon } from "@chakra-ui/icons";
+import { Button, Flex, Text } from "@chakra-ui/react";
 import { useState } from "react";
 import { isMobile } from "react-device-detect";
-import { Button, Flex, Text } from "@chakra-ui/react";
-import { InfoIcon } from "@chakra-ui/icons";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 export const ShowPlays = () => {
   const [hoveredButton, setHoveredButton] = useState(false);
@@ -15,9 +15,9 @@ export const ShowPlays = () => {
       variant={hoveredButton ? "defaultGreenOutlineGlow" : "defaultOutline"}
       borderRadius={"8px"}
       height={isMobile ? 6 : 8}
-      borderColor="transparent !important"
+      border="2px solid transparent !important"
       _hover={{
-        borderColor: "white !important",
+        border: "2px solid white !important",
       }}
       size={"xs"}
       className="game-tutorial-step-5"
