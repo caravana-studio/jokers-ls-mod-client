@@ -79,7 +79,7 @@ interface IGameContext {
   selectSpecialCards: (cardIndex: number[]) => Promise<number | undefined>;
   selectModifierCards: (cardIndex: number[]) => Promise<number | undefined>;
   redirectBasedOnGameState: () => void;
-  createNewLevel: () => Promise<number | undefined>;
+  createNewLevel: () => Promise<any>;
 }
 
 const GameContext = createContext<IGameContext>({

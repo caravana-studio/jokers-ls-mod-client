@@ -19,7 +19,7 @@ import { CARD_HEIGHT, CARD_WIDTH } from "../../constants/visualProps";
 import { useCardHighlight } from "../../providers/CardHighlightProvider";
 import { useGameContext } from "../../providers/GameProvider";
 import { useResponsiveValues } from "../../theme/responsiveSettings";
-import { HealthBar } from "../../components/HealthBar";
+import { useChallengePlayer } from "../../dojo/queries/useChallenge";
 
 export const HandSection = () => {
   const {
@@ -35,7 +35,8 @@ export const HandSection = () => {
 
   const [discarding, setDiscarding] = useState(false);
 
-  const handsLeft = 1;
+  const challengePlayer = useChallengePlayer();
+  const handsLeft = challengePlayer?.plays ?? 0;
 
   const { activeNode } = useDndContext();
 

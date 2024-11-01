@@ -47,9 +47,7 @@ export const useCurrentHand = (sortBy: SortBy) => {
 
   const sortedCards = sortCards(cards, sortBy);
 
-  const allUndefined = sortedCards.every(
-    (card) => card.img === "undefined.png"
-  );
+  const anyUndefined = sortedCards.some((card) => card.img === "undefined.png");
 
-  return allUndefined ? [] : sortedCards;
+  return anyUndefined ? [] : sortedCards;
 };

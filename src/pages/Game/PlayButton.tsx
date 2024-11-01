@@ -7,6 +7,7 @@ import { LS_GREEN } from "../../theme/colors";
 import { useResponsiveValues } from "../../theme/responsiveSettings";
 import { ButtonContainer } from "./ButtonContainer";
 import { SkullIcon } from "./Skullcon";
+import { useChallengePlayer } from "../../dojo/queries/useChallenge";
 
 interface PlayButtonProps {
   highlight?: boolean;
@@ -16,19 +17,17 @@ export const PlayButton = ({ highlight = false }: PlayButtonProps) => {
   const { preSelectedCards, play, preSelectionLocked } = useGameContext();
   const { mode } = useParams();
 
-  const round = useRound();
-  // const handsLeft = round?.hands ?? 0;
+  const challengePlayer = useChallengePlayer();
+  const handsLeft = challengePlayer?.plays ?? 0;
 
-  // const cantPlay =
-  //   !highlight &&
-  //   (preSelectionLocked ||
-  //     preSelectedCards?.length === 0 ||
-  //     !handsLeft ||
-  //     handsLeft === 0);
+  const cantPlay =
+    !highlight &&
+    (preSelectionLocked ||
+      preSelectedCards?.length === 0 ||
+      !handsLeft ||
+      handsLeft === 0);
   const { t } = useTranslation(["game"]);
   const { isSmallScreen } = useResponsiveValues();
-  const cantPlay = false;
-  const handsLeft = 3;
 
   return (
     <ButtonContainer>

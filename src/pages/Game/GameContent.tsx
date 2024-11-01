@@ -9,7 +9,7 @@ import {
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Joyride, { CallBackProps } from "react-joyride";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { PositionedGameMenu } from "../../components/GameMenu.tsx";
 import {
   GAME_TUTORIAL_STEPS,

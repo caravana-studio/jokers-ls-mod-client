@@ -5,6 +5,7 @@ import { useGameContext } from "../../providers/GameProvider";
 import { useResponsiveValues } from "../../theme/responsiveSettings";
 import { ButtonContainer } from "./ButtonContainer";
 import { SkullIcon } from "./Skullcon";
+import { useChallengePlayer } from "../../dojo/queries/useChallenge";
 
 interface DiscardButtonProps {
   highlight?: boolean;
@@ -15,15 +16,15 @@ export const DiscardButton = ({ highlight = false }: DiscardButtonProps) => {
 
   const { mode } = useParams();
 
-  //   const cantDiscard =
-  //     !highlight &&
-  //     (preSelectionLocked ||
-  //       preSelectedCards?.length === 0 ||
-  //       !discards ||
-  //       discards === 0);
+  const challengePlayer = useChallengePlayer();
+  const discards = challengePlayer?.discards ?? 0;
 
-  const cantDiscard = false;
-  const discards = 3;
+  const cantDiscard =
+    !highlight &&
+    (preSelectionLocked ||
+      preSelectedCards?.length === 0 ||
+      !discards ||
+      discards === 0);
 
   const { t } = useTranslation(["game"]);
   const { isSmallScreen } = useResponsiveValues();
