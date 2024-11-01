@@ -230,7 +230,12 @@ export const GameContent = () => {
             top={0}
             zIndex={0}
           />
-          <Box sx={{ height: "100%", width: "100%" }}>
+          <Box
+            sx={{ height: "100%", width: "100%" }}
+            display={"flex"}
+            flexDirection={"column"}
+            justifyContent={"space-around"}
+          >
             <Box sx={{ width: "100%" }} mb={2}>
               <TopSection />
             </Box>
@@ -244,6 +249,7 @@ export const GameContent = () => {
                   mb={2}
                   sx={{
                     width: "100%",
+                    height: "50%",
                     display: "flex",
                     flexDirection: "row",
                     alignItems: "center",
