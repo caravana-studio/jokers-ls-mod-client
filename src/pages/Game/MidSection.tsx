@@ -82,7 +82,7 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
               >
                 <Flex
                   position="relative"
-                  mt={"-190px"}
+                  mt={"-185px"}
                   justifyContent="center"
                   alignItems="center"
                   textAlign="center"
@@ -90,7 +90,7 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
                   <CachedImage
                     src="/beasts/berserker.png"
                     maxHeight="45vh"
-                    zIndex={100}
+                    zIndex={1}
                   />
                 </Flex>
                 <Flex
