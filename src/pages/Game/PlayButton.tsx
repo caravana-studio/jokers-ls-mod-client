@@ -38,7 +38,7 @@ export const PlayButton = ({ highlight = false }: PlayButtonProps) => {
   const { isSmallScreen } = useResponsiveValues();
 
   const beastGameMode = useGameModeBeast();
-  const playCost = beastGameMode?.cost_play ?? 0;
+  const playCost = beastGameMode?.cost_play ?? 2;
 
   return (
     <ButtonContainer>

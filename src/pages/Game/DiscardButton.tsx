@@ -27,7 +27,7 @@ export const DiscardButton = ({ highlight = false }: DiscardButtonProps) => {
   const discards = challengePlayer?.discards ?? 0;
 
   const beastGameMode = useGameModeBeast();
-  const cost_discard = beastGameMode?.cost_discard ?? 0;
+  const cost_discard = beastGameMode?.cost_discard ?? 1;
 
   const beastPlayer = useBeastPlayer();
   const energyLeft = beastPlayer?.energy ?? 0;
