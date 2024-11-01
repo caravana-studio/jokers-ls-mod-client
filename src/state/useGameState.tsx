@@ -13,6 +13,7 @@ import { Card } from "../types/Card";
 import { RoundRewards } from "../types/RoundRewards";
 import { checkHand } from "../utils/checkHand";
 import { sortCards } from "../utils/sortCards";
+import { useBeast } from "../dojo/queries/useBeast";
 
 export const useGameState = () => {
   const [gameId, setGameId] = useState<number>(getLSGameId());
@@ -106,8 +107,14 @@ export const useGameState = () => {
 
   const challengeIds = useChallenge();
 
+  const beastData = useBeast();
+
   const refetchObstacleIds = () => {
     setObstacleIds(challengeIds);
+  };
+
+  const refetchBeast = () => {
+    setBeast(beastData);
   };
 
   return {
@@ -158,5 +165,6 @@ export const useGameState = () => {
     obstacleIds,
     setObstacleIds,
     refetchObstacleIds,
+    refetchBeast,
   };
 };
