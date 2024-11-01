@@ -2,139 +2,135 @@
     "challengesData": {
     "1": {
       "name": "Escalera Real",
-      "description": "Logra una Escalera Real en una jugada para completar este desafío."
+      "description": "Juega Escalera Real"
     },
     "2": {
       "name": "Escalera de Color",
-      "description": "Obtén una Escalera de Color en una jugada para cumplir este desafío."
+      "description": "Juega Escalera de Color"
     },
     "3": {
-      "name": "Quintilla",
-      "description": "Consigue una Quintilla en una mano para superar este reto."
+      "name": "RePóker",
+      "description": "Juega RePóker"
     },
     "4": {
       "name": "Póker",
-      "description": "Haz un Póker en una jugada para completar este desafío."
+      "description": "Juega Póker"
     },
     "5": {
       "name": "Full House",
-      "description": "Logra un Full House para ganar este desafío."
+      "description": "Juega Full House"
     },
     "6": {
       "name": "Color",
-      "description": "Obtén un Color en una jugada para completar este reto."
+      "description": "Juega Color"
     },
     "7": {
       "name": "Escalera",
-      "description": "Consigue una Escalera para cumplir con este desafío."
+      "description": "Juega Escalera"
     },
     "8": {
       "name": "Trío",
-      "description": "Logra un Trío en una jugada para completar este desafío."
+      "description": "Juega Trío"
     },
     "9": {
       "name": "Doble Par",
-      "description": "Obtén un Doble Par para superar este reto."
+      "description": "Juega Doble Par"
     },
     "10": {
       "name": "Par",
-      "description": "Haz un Par en una jugada para completar este desafío."
+      "description": "Juega Par"
     },
     "11": {
       "name": "Carta Alta",
-      "description": "Gana con Carta Alta para cumplir con este desafío."
+      "description": "Juega Carta Alta"
     },
     "12": {
       "name": "Corazones",
-      "description": "Gana una mano con una carta de Corazones para completar este reto."
+      "description": "Incuye una carta de Corazones en una jugada"
     },
     "13": {
       "name": "Tréboles",
-      "description": "Gana una mano con una carta de Tréboles para superar este desafío."
+      "description": "Incuye una carta de Tréboles en una jugada"
     },
     "14": {
       "name": "Diamantes",
-      "description": "Gana una mano con una carta de Diamantes para cumplir este reto."
+      "description": "Incuye una carta de Diamantes en una jugada"
     },
     "15": {
       "name": "Espadas",
-      "description": "Gana una mano con una carta de Espadas para completar este desafío."
-    },
-    "16": {
-      "name": "Número 1",
-      "description": "Juega una carta con el número 1 para completar este desafío."
-    },
-    "17": {
-      "name": "Número 2",
-      "description": "Juega una carta con el número 2 para superar este reto."
+      "description": "Incuye una carta de Espadas en una jugada"
     },
     "18": {
-      "name": "Número 3",
-      "description": "Juega una carta con el número 3 para cumplir con este desafío."
+      "name": "Número 2",
+      "description": "Incluye el número 2 en una jugada"
     },
     "19": {
-      "name": "Número 4",
-      "description": "Juega una carta con el número 4 para completar este reto."
+      "name": "Número 3",
+      "description": "Incluye el número 3 en una jugada"
     },
     "20": {
-      "name": "Número 5",
-      "description": "Juega una carta con el número 5 para cumplir con este desafío."
+      "name": "Número 4",
+      "description": "Incluye el número 4 en una jugada"
     },
     "21": {
-      "name": "Número 6",
-      "description": "Juega una carta con el número 6 para superar este reto."
+      "name": "Número 5",
+      "description": "Incluye el número 5 en una jugada"
     },
     "22": {
-      "name": "Número 7",
-      "description": "Juega una carta con el número 7 para completar este desafío."
+      "name": "Número 6",
+      "description": "Incluye el número 6 en una jugada"
     },
     "23": {
-      "name": "Número 8",
-      "description": "Juega una carta con el número 8 para superar este reto."
+      "name": "Número 7",
+      "description": "Incluye el número 7 en una jugada"
     },
     "24": {
-      "name": "Número 9",
-      "description": "Juega una carta con el número 9 para cumplir este desafío."
+      "name": "Número 8",
+      "description": "Incluye el número 8 en una jugada"
     },
     "25": {
-      "name": "Número 10",
-      "description": "Juega una carta con el número 10 para completar este desafío."
+      "name": "Número 9",
+      "description": "Incluye el número 9 en una jugada"
     },
     "26": {
-      "name": "Jota",
-      "description": "Juega una carta de Jota para cumplir este reto."
+      "name": "Número 10",
+      "description": "Incluye el número 10 en una jugada"
     },
     "27": {
-      "name": "Reina",
-      "description": "Juega una carta de Reina para completar este desafío."
+      "name": "Jota",
+      "description": "Incluye una Jota en una jugada"
     },
     "28": {
-      "name": "Rey",
-      "description": "Juega una carta de Rey para superar este reto."
+      "name": "Reina",
+      "description": "Incluye una Reina en una jugada"
     },
     "29": {
-      "name": "As",
-      "description": "Juega una carta de As para cumplir con este desafío."
+      "name": "Rey",
+      "description": "Incluye un Rey en una jugada"
     },
     "30": {
-      "name": "Joker",
-      "description": "Juega un Joker en una mano para completar este desafío."
+      "name": "As",
+      "description": "Incluye un As en una jugada"
     },
     "31": {
-      "name": "500 Puntos",
-      "description": "Alcanza 500 puntos en una partida para superar este reto."
+      "name": "Joker",
+      "description": "Incluye un Joker en una jugada"
     },
     "32": {
-      "name": "1000 Puntos",
-      "description": "Logra 1000 puntos en una partida para completar este desafío."
+      "name": "500 Puntos",
+      "description": "Consigue 500 puntos en una jugada"
     },
     "33": {
-      "name": "2000 Puntos",
-      "description": "Consigue 2000 puntos en una partida para cumplir con este reto."
+      "name": "1000 Puntos",
+      "description": "Consigue 1000 puntos en una jugada"
     },
     "34": {
+      "name": "2000 Puntos",
+      "description": "Consigue 2000 puntos en una jugada"
+    },
+    "35": {
       "name": "5000 Puntos",
-      "description": "Llega a 5000 puntos en una partida para superar este desafío."
+      "description": "Consigue 5000 puntos en una jugada"
     }
 }
 }

@@ -1,141 +1,136 @@
 {
-    "challengesData": {
+  "challengesData": {
       "1": {
-        "name": "Flush Royal",
-        "description": "Jogue um Flush Royal."
+          "name": "Royal Flush",
+          "description": "Jogue um Royal Flush"
       },
       "2": {
-        "name": "Flush Estriado",
-        "description": "Jogue um Flush Estriado."
+          "name": "Straight Flush",
+          "description": "Jogue um Straight Flush"
       },
       "3": {
-        "name": "Cinco da Mesma Categoria",
-        "description": "Jogue Cinco da Mesma Categoria."
+          "name": "RePoker",
+          "description": "Jogue um RePoker"
       },
       "4": {
-        "name": "Quadra",
-        "description": "Jogue uma Quadra."
+          "name": "Poker",
+          "description": "Jogue um Poker"
       },
       "5": {
-        "name": "Full Hand",
-        "description": "Jogue um Full Hand."
+          "name": "Full House",
+          "description": "Jogue um Full House"
       },
       "6": {
-        "name": "Flush",
-        "description": "Jogue um Flush."
+          "name": "Cor",
+          "description": "Jogue uma Cor"
       },
       "7": {
-        "name": "Sequência",
-        "description": "Jogue uma Sequência."
+          "name": "Sequência",
+          "description": "Jogue uma Sequência"
       },
       "8": {
-        "name": "Trinca",
-        "description": "Jogue uma Trinca."
+          "name": "Trio",
+          "description": "Jogue um Trio"
       },
       "9": {
-        "name": "Dois Pares",
-        "description": "Jogue Dois Pares."
+          "name": "Dois Pares",
+          "description": "Jogue Dois Pares"
       },
       "10": {
-        "name": "Par",
-        "description": "Jogue um Par."
+          "name": "Par",
+          "description": "Jogue um Par"
       },
       "11": {
-        "name": "Carta Alta",
-        "description": "Ganhe com Carta Alta."
+          "name": "Carta Alta",
+          "description": "Jogue uma Carta Alta"
       },
       "12": {
-        "name": "Corações",
-        "description": "Inclua uma carta de Corações em uma jogada."
+          "name": "Copas",
+          "description": "Inclua uma carta de Copas em uma jogada"
       },
       "13": {
-        "name": "Paus",
-        "description": "Inclua uma carta de Paus em uma jogada."
+          "name": "Paus",
+          "description": "Inclua uma carta de Paus em uma jogada"
       },
       "14": {
-        "name": "Ouros",
-        "description": "Inclua uma carta de Ouros em uma jogada."
+          "name": "Ouros",
+          "description": "Inclua uma carta de Ouros em uma jogada"
       },
       "15": {
-        "name": "Espadas",
-        "description": "Inclua uma carta de Espadas em uma jogada."
-      },
-      "16": {
-        "name": "Um",
-        "description": "Inclua uma carta com o número 1 em uma jogada."
-      },
-      "17": {
-        "name": "Dois",
-        "description": "Inclua uma carta com o número 2 em uma jogada."
+          "name": "Espadas",
+          "description": "Inclua uma carta de Espadas em uma jogada"
       },
       "18": {
-        "name": "Três",
-        "description": "Inclua uma carta com o número 3 em uma jogada."
+          "name": "Número 2",
+          "description": "Inclua o número 2 em uma jogada"
       },
       "19": {
-        "name": "Quatro",
-        "description": "Inclua uma carta com o número 4 em uma jogada."
+          "name": "Número 3",
+          "description": "Inclua o número 3 em uma jogada"
       },
       "20": {
-        "name": "Cinco",
-        "description": "Inclua uma carta com o número 5 em uma jogada."
+          "name": "Número 4",
+          "description": "Inclua o número 4 em uma jogada"
       },
       "21": {
-        "name": "Seis",
-        "description": "Inclua uma carta com o número 6 em uma jogada."
+          "name": "Número 5",
+          "description": "Inclua o número 5 em uma jogada"
       },
       "22": {
-        "name": "Sete",
-        "description": "Inclua uma carta com o número 7 em uma jogada."
+          "name": "Número 6",
+          "description": "Inclua o número 6 em uma jogada"
       },
       "23": {
-        "name": "Oito",
-        "description": "Inclua uma carta com o número 8 em uma jogada."
+          "name": "Número 7",
+          "description": "Inclua o número 7 em uma jogada"
       },
       "24": {
-        "name": "Nove",
-        "description": "Inclua uma carta com o número 9 em uma jogada."
+          "name": "Número 8",
+          "description": "Inclua o número 8 em uma jogada"
       },
       "25": {
-        "name": "Dez",
-        "description": "Inclua uma carta com o número 10 em uma jogada."
+          "name": "Número 9",
+          "description": "Inclua o número 9 em uma jogada"
       },
       "26": {
-        "name": "Valete",
-        "description": "Inclua uma carta de Valete em uma jogada."
+          "name": "Número 10",
+          "description": "Inclua o número 10 em uma jogada"
       },
       "27": {
-        "name": "Dama",
-        "description": "Inclua uma carta de Dama em uma jogada."
+          "name": "Valete",
+          "description": "Inclua um Valete em uma jogada"
       },
       "28": {
-        "name": "Rei",
-        "description": "Inclua uma carta de Rei em uma jogada."
+          "name": "Rainha",
+          "description": "Inclua uma Rainha em uma jogada"
       },
       "29": {
-        "name": "Ás",
-        "description": "Inclua uma carta de Ás em uma jogada."
+          "name": "Rei",
+          "description": "Inclua um Rei em uma jogada"
       },
       "30": {
-        "name": "Coringa",
-        "description": "Jogue um Coringa em uma mão."
+          "name": "Ás",
+          "description": "Inclua um Ás em uma jogada"
       },
       "31": {
-        "name": "500 Pontos",
-        "description": "Ganhe 500 pontos em uma mão."
+          "name": "Joker",
+          "description": "Inclua um Joker em uma jogada"
       },
       "32": {
-        "name": "1000 Pontos",
-        "description": "Ganhe 1000 pontos em uma mão."
+          "name": "500 Pontos",
+          "description": "Consiga 500 pontos em uma jogada"
       },
       "33": {
-        "name": "2000 Pontos",
-        "description": "Ganhe 2000 pontos em uma mão."
+          "name": "1000 Pontos",
+          "description": "Consiga 1000 pontos em uma jogada"
       },
       "34": {
-        "name": "5000 Pontos",
-        "description": "Ganhe 5000 pontos em uma mão."
+          "name": "2000 Pontos",
+          "description": "Consiga 2000 pontos em uma jogada"
+      },
+      "35": {
+          "name": "5000 Pontos",
+          "description": "Consiga 5000 pontos em uma jogada"
       }
-    }
   }
-  
+}
