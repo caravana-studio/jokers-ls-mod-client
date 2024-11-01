@@ -145,6 +145,7 @@ export const useGameContext = () => useContext(GameContext);
 export const GameProvider = ({ children }: PropsWithChildren) => {
   const state = useGameState();
   const [lockRedirection, setLockRedirection] = useState(false);
+  const handsLeft = 0;
 
   const navigate = useNavigate();
   const {

@@ -199,15 +199,21 @@ export const GameContent = () => {
             top={0}
             zIndex={0}
           />
-          <Box sx={{ height: "100%", width: "100%" }}>
-            <Box sx={{ height: "30%", width: "100%" }} mb={5}>
+          <Box
+            sx={{ height: "100%", width: "100%" }}
+            display={"flex"}
+            flexDirection={"column"}
+            justifyContent={"space-around"}
+          >
+            <Box sx={{ width: "100%" }} mb={2}>
               <TopSection />
             </Box>
-            <Box height={"70%"} width={"100%"}>
+            <Box width={"100%"}>
               <Box
+                mb={2}
                 sx={{
-                  height: "45%",
                   width: "100%",
+                  height: "50%",
                   display: "flex",
                   flexDirection: "row",
                   alignItems: "center",
@@ -219,10 +225,9 @@ export const GameContent = () => {
                 <MidSection isTutorialRunning={run} />
               </Box>
               <Box
-                mr={{ base: 10, md: 20 }}
                 sx={{
                   display: "flex",
-                  height: "65%",
+                  height: "auto",
                   alignItems: "flex-end",
                   justifyContent: "center",
                 }}

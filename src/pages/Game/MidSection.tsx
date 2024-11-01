@@ -58,7 +58,6 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
       width={"100%"}
       height={"100%"}
     >
-      <Box height="60px"></Box>
       <Flex
         flexDirection={"row"}
         width={"100%"}
@@ -81,7 +80,7 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
           <Flex
             justifyContent="center"
             alignItems={"center"}
-            height="188px"
+            height="auto"
             width="90%"
           >
             {mode === "beast" && (
@@ -89,21 +88,20 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
                 flexDirection="column"
                 width="80%"
                 justifyContent={"flex-end"}
-                pb="30px"
                 height={"100%"}
                 gap={2}
               >
                 <Flex
                   position="relative"
-                  mt={"-360px"}
+                  mt={"-200px"}
                   justifyContent="center"
                   alignItems="center"
                   textAlign="center"
                 >
                   <CachedImage
                     src="/beasts/berserker.png"
-                    maxHeight="50vh"
-                    zIndex={100}
+                    maxHeight="45vh"
+                    zIndex={1}
                   />
                 </Flex>
                 <Flex
@@ -127,7 +125,7 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
                     {lifeLeft.toString()}
                   </Text>
                 </Flex>
-                <Box width="100%" zIndex={1000}>
+                <Box width="100%">
                   <ProgressBar
                     progress={(lifeLeft.valueOf() / maxHealth.valueOf()) * 100}
                     color={BEAST_RED}
@@ -143,6 +141,7 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
           <PlayButton highlight={isTutorialRunning} />
         </Box>
       </Flex>
+
       <Flex flexDirection="column" gap={1} mb={"-50px"} zIndex={300}>
         <MultiPoints />
         <CurrentPlay />

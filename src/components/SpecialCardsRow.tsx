@@ -23,9 +23,10 @@ export const SpecialCardsRow = ({ cards }: SpecialCardsRowProps) => {
   const [hoveredButton, setHoveredButton] = useState<number | null>(null);
   const [cardToDiscard, setCardToDiscard] = useState<number | null>(null);
   const { t } = useTranslation(["game"]);
-  const { cardScale, isSmallScreen } = useResponsiveValues();
-  const cardWidth = CARD_WIDTH * cardScale;
-  const cardHeight = CARD_HEIGHT * cardScale;
+  const { isSmallScreen } = useResponsiveValues();
+  const scale = 0.75;
+  const cardWidth = CARD_WIDTH * scale;
+  const cardHeight = CARD_HEIGHT * scale;
 
   const { highlightCard } = useCardHighlight();
 
@@ -85,7 +86,7 @@ export const SpecialCardsRow = ({ cards }: SpecialCardsRowProps) => {
               <AnimatedCard
                 idx={card.idx}
                 isSpecial={!!card.isSpecial}
-                scale={cardScale - cardScale * 0.1}
+                scale={scale}
               >
                 <Box position="relative">
                   <Flex
@@ -101,7 +102,7 @@ export const SpecialCardsRow = ({ cards }: SpecialCardsRowProps) => {
                         height={8}
                         fontSize="8px"
                         px={"16px"}
-                        size={isSmallScreen ? "xs" : "md"}
+                        size={"md"}
                         borderRadius={"10px"}
                         variant={"discardSecondarySolid"}
                         display="flex"
@@ -125,7 +126,7 @@ export const SpecialCardsRow = ({ cards }: SpecialCardsRowProps) => {
                       isSmallScreen && highlightCard(card);
                     }}
                     card={card}
-                    scale={cardScale - cardScale * 0.1}
+                    scale={scale}
                   />
                 </Box>
               </AnimatedCard>
@@ -144,9 +145,9 @@ export const SpecialCardsRow = ({ cards }: SpecialCardsRowProps) => {
         {Array.from({ length: emptySlots }).map((_, index) => (
           <Flex key={`slot-${index}`} maxWidth={`100%`}>
             <Box
-              width={`${CARD_WIDTH * cardScale - cardScale * 0.1}`}
-              height={`${CARD_HEIGHT * cardScale - cardScale * 0.1}`}
-              minWidth={`${CARD_WIDTH * cardScale - cardScale * 0.1}`}
+              width={`${cardWidth - cardWidth * 0.1}`}
+              height={`${cardHeight - cardHeight * 0.1}`}
+              minWidth={`${cardWidth - cardWidth * 0.1}`}
               border={"1.5px solid white"}
               borderRadius={"5px"}
             ></Box>

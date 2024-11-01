@@ -28,17 +28,21 @@ export const TopSection = () => {
           {mode}
         </Heading>
       </Box>
-      <Flex flexDirection="column" gap={4}>
-        <CachedImage
-          src="/logos/logo-variant-ls.png"
-          alt="logo"
-          width="280px"
-        />
-        <HealthBar />
-        {mode === "beast" && <Energy />}
-      </Flex>
+      <Flex width={"100%"} justifyContent={"space-between"}>
+        <Flex flexDirection="column" gap={4}>
+          <CachedImage
+            src="/logos/logo-variant-ls.png"
+            alt="logo"
+            width="280px"
+          />
+          <HealthBar />
+          {mode === "beast" && <Energy />}
+        </Flex>
 
-      <SpecialCards />
+        <Flex>
+          <SpecialCards />
+        </Flex>
+      </Flex>
     </Flex>
   );
 };

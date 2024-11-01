@@ -70,8 +70,8 @@ export const HandSection = () => {
   return (
     <>
       <Box
-        pr={!isSmallScreen ? 12 : 10}
-        pl={!isSmallScreen ? 4 : 2}
+        pt={16}
+        px={2}
         className="game-tutorial-step-2 tutorial-modifiers-step-1"
         ref={setNodeRef}
         height={isSmallScreen ? cardHeight : "100%"}
