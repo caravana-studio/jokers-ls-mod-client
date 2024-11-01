@@ -12,6 +12,7 @@ import { useResponsiveValues } from "../../theme/responsiveSettings.tsx";
 import { DiscardButton } from "./DiscardButton.tsx";
 import { Obstacle } from "./Obstacle.tsx";
 import { PlayButton } from "./PlayButton.tsx";
+import { useEffect } from "react";
 
 interface MidSectionProps {
   isTutorialRunning?: boolean;
@@ -25,7 +26,15 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
     togglePreselected,
     discardAnimation,
     playAnimation,
+    beast,
+    refetchBeast,
   } = useGameContext();
+
+  useEffect(() => {
+    if (!beast) {
+      refetchBeast();
+    }
+  }, [beast]);
 
   const { setNodeRef } = useDroppable({
     id: PRESELECTED_CARD_SECTION_ID,
@@ -34,10 +43,12 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
 
   const { mode } = useParams();
 
-  const tier = 2;
-  const level = 5;
+  const tier = beast?.tier ?? 0;
+  const level = beast?.level ?? 0;
   const name = "Nameless King";
-  const lifeLeft = 899;
+  const beast_id = beast?.beast_id ?? 0;
+  const maxHealth = beast?.health ?? 0;
+  const lifeLeft = beast?.current_health ?? 0;
 
   return (
     <Flex
@@ -101,22 +112,22 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
                 >
                   <Box>
                     <Text lineHeight={1} size="l">
-                      Tier {tier}
+                      Tier {tier.toString()}
                     </Text>
                     <Text lineHeight={1} size="l">
-                      Level {level}
+                      Level {level.toString()}
                     </Text>
                     <Text lineHeight={1} size="l" color={BEAST_RED}>
                       {name}
                     </Text>
                   </Box>
                   <Text lineHeight={1} size="l">
-                    {lifeLeft}
+                    {lifeLeft.toString()}
                   </Text>
                 </Flex>
                 <Box width="100%">
                   <ProgressBar
-                    progress={80}
+                    progress={(lifeLeft.valueOf() / maxHealth.valueOf()) * 100}
                     color={BEAST_RED}
                     borderColor={BEAST_RED}
                   />

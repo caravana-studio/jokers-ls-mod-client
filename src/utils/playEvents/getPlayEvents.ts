@@ -1,4 +1,7 @@
-import { GAME_OVER_EVENT } from "../../constants/dojoEventKeys";
+import {
+  CHALLENGE_COMPLETED_EVENT,
+  GAME_OVER_EVENT,
+} from "../../constants/dojoEventKeys";
 import { DojoEvent } from "../../types/DojoEvent";
 import { PlayEvents } from "../../types/ScoreData";
 import { getCardsFromEvents } from "../getCardsFromEvents";
@@ -6,6 +9,7 @@ import { getCashEvents } from "./getCashEvents";
 import { getDetailEarnedEvent } from "./getDetailEarnedEvent";
 import { getGlobalEvents } from "./getGlobalEvents";
 import { getHandEvent } from "./getHandEvent";
+import { getItemChallengeCompletedEvent } from "./getItemChallengeCompleted";
 import { getLevelPassedEvent } from "./getLevelPassedEvent";
 import { getModifierSuitEvents } from "./getModifierSuitEvents";
 import { getMultiPointEvents } from "./getMultiPointEvents";
@@ -21,6 +25,10 @@ export const getPlayEvents = (events: DojoEvent[]): PlayEvents => {
     cardScore: getTraditionalCardsEvents(events),
     specialCards: getMultiPointEvents(events),
     gameOver: !!events.find((event) => event.keys[0] === GAME_OVER_EVENT),
+    obstacleDefeated: !!events.find(
+      (event) => event.keys[0] === CHALLENGE_COMPLETED_EVENT
+    ),
+    itemChallengeCompleted: getItemChallengeCompletedEvent(events),
     levelPassed: getLevelPassedEvent(events),
     detailEarned: getDetailEarnedEvent(events),
     levelEvent: getSpecialLevelEvent(events),

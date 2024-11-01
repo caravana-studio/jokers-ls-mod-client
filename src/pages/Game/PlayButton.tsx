@@ -6,6 +6,9 @@ import { LS_GREEN } from "../../theme/colors";
 import { useResponsiveValues } from "../../theme/responsiveSettings";
 import { ButtonContainer } from "./ButtonContainer";
 import { SkullIcon } from "./Skullcon";
+import { useChallengePlayer } from "../../dojo/queries/useChallenge";
+import { useGame } from "../../dojo/queries/useGame";
+import { useBeastPlayer, useGameModeBeast } from "../../dojo/queries/useBeast";
 
 interface PlayButtonProps {
   highlight?: boolean;
@@ -14,19 +17,28 @@ interface PlayButtonProps {
 export const PlayButton = ({ highlight = false }: PlayButtonProps) => {
   const { preSelectedCards, play, preSelectionLocked } = useGameContext();
   const { mode } = useParams();
+  const game = useGame();
 
-  // const handsLeft = round?.hands ?? 0;
+  //TODO: draw all the skulls and make the skulls used darker
+  //game?.max_hands;
 
-  // const cantPlay =
-  //   !highlight &&
-  //   (preSelectionLocked ||
-  //     preSelectedCards?.length === 0 ||
-  //     !handsLeft ||
-  //     handsLeft === 0);
+  const challengePlayer = useChallengePlayer();
+  const handsLeft = challengePlayer?.plays ?? 0;
+
+  const beastPlayer = useBeastPlayer();
+  const energyLeft = beastPlayer?.energy ?? 0;
+
+  const hasHands = handsLeft > 0 || energyLeft > 0;
+
+  const cantPlay =
+    !highlight &&
+    (preSelectionLocked || preSelectedCards?.length === 0 || !hasHands);
+
   const { t } = useTranslation(["game"]);
   const { isSmallScreen } = useResponsiveValues();
-  const cantPlay = false;
-  const handsLeft = 3;
+
+  const beastGameMode = useGameModeBeast();
+  const playCost = beastGameMode?.cost_play ?? 2;
 
   return (
     <ButtonContainer>
@@ -45,8 +57,9 @@ export const PlayButton = ({ highlight = false }: PlayButtonProps) => {
             <Text fontFamily="Jersey" color={LS_GREEN} fontSize={"1.5rem"}>
               PLAY
             </Text>
-            <SkullIcon color={LS_GREEN} />
-            <SkullIcon color={LS_GREEN} />
+            {Array.from({ length: playCost }).map((_, index) => (
+              <SkullIcon key={index} color={LS_GREEN} />
+            ))}
           </Flex>
         ) : (
           <Text fontFamily="Jersey" color={LS_GREEN} fontSize={"1.5rem"}>

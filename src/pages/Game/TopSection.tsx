@@ -4,9 +4,11 @@ import CachedImage from "../../components/CachedImage.tsx";
 import { HealthBar } from "../../components/HealthBar.tsx";
 import { SpecialCards } from "../../components/SpecialCards.tsx";
 import { Energy } from "./Energy.tsx";
+import { useGame } from "../../dojo/queries/useGame.tsx";
 
 export const TopSection = () => {
   const { mode } = useParams();
+
   return (
     <Flex
       height="100%"

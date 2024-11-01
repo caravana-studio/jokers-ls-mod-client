@@ -50,7 +50,6 @@ export const GameContent = () => {
   const [runTutorialModifiers, setRunTutorialModifiers] = useState(false);
   const [specialTutorialCompleted, setSpecialTutorialCompleted] =
     useState(false);
-  const { isRageRound } = useGameContext();
   const { t } = useTranslation(["game"]);
 
   useEffect(() => {

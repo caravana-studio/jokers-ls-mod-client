@@ -1,10 +1,15 @@
 import { Flex } from "@chakra-ui/react";
 import { LS_GREEN } from "../../theme/colors";
 import { SkullIcon } from "./Skullcon";
+import { useBeastPlayer, useGameModeBeast } from "../../dojo/queries/useBeast";
 
 export const Energy = () => {
-  const maxEnergy = 3;
-  const usedEnergy = 1;
+  const beastGameMode = useGameModeBeast();
+  const playerBeast = useBeastPlayer();
+
+  const maxEnergy = beastGameMode?.energy_max_player ?? 0;
+  const usedEnergy = maxEnergy - (playerBeast?.energy ?? 0);
+
   return (
     <Flex
       direction="row"

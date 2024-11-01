@@ -1,9 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
 import { LOGGED_USER, SORT_BY_SUIT } from "../constants/localStorage";
 import { PLAYS_DATA } from "../constants/plays";
+import { useChallenge } from "../dojo/queries/useChallenge";
 import { useCurrentHand } from "../dojo/queries/useCurrentHand";
 import { useCurrentSpecialCards } from "../dojo/queries/useCurrentSpecialCards";
 import { useGame } from "../dojo/queries/useGame";
+import { Beast } from "../dojo/typescript/models.gen";
 import { getLSGameId } from "../dojo/utils/getLSGameId";
 import { Plays } from "../enums/plays";
 import { SortBy } from "../enums/sortBy";
@@ -11,6 +13,7 @@ import { Card } from "../types/Card";
 import { RoundRewards } from "../types/RoundRewards";
 import { checkHand } from "../utils/checkHand";
 import { sortCards } from "../utils/sortCards";
+import { useBeast } from "../dojo/queries/useBeast";
 
 export const useGameState = () => {
   const [gameId, setGameId] = useState<number>(getLSGameId());
@@ -38,6 +41,8 @@ export const useGameState = () => {
   const [lockedSpecialCards, setLockedSpecialCards] = useState<Card[]>([]);
   const [isRageRound, setIsRageRound] = useState(false);
   const [rageCards, setRageCards] = useState<Card[]>([]);
+  const [beast, setBeast] = useState<Beast | undefined>(undefined);
+  const [obstacles, setObstacles] = useState<{ id: number; completed: boolean }[]>([]);
 
   const sortBy: SortBy = useMemo(
     () => (sortBySuit ? SortBy.SUIT : SortBy.RANK),
@@ -50,6 +55,8 @@ export const useGameState = () => {
   const dojoHand = useCurrentHand(sortBy);
 
   const dojoSpecialCards = useCurrentSpecialCards();
+
+  const beastFetchData = useBeast();
 
   const specialCards =
     lockedSpecialCards.length > 0 ? lockedSpecialCards : dojoSpecialCards;
@@ -74,6 +81,11 @@ export const useGameState = () => {
       setHand(dojoHand);
     }
   }, [dojoHand]);
+
+  useEffect(() => {
+    if (beastFetchData?.current_health != beast?.current_health)
+      setBeast(beastFetchData);
+  }, [beastFetchData]);
 
   const setMultiAndPoints = (play: Plays) => {
     const playerPokerHand = PLAYS_DATA[play - 1];
@@ -100,6 +112,18 @@ export const useGameState = () => {
       resetMultiPoints();
     }
   }, [preSelectedCards, preSelectedModifiers]);
+
+  const challenges = useChallenge();
+
+  const beastData = useBeast();
+
+  const refetchObstacles = () => {
+    setObstacles(challenges);
+  };
+
+  const refetchBeast = () => {
+    setBeast(beastData);
+  };
 
   return {
     gameId,
@@ -144,5 +168,11 @@ export const useGameState = () => {
     setLockedCash,
     rageCards,
     setRageCards,
+    beast,
+    setBeast,
+    obstacles,
+    setObstacles,
+    refetchObstacles,
+    refetchBeast,
   };
 };
