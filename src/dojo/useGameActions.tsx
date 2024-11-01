@@ -108,6 +108,33 @@ export const useGameActions = () => {
     }
   };
 
+  const createLevel = async (gameId: number) => {
+    try {
+      showTransactionToast();
+      const { transaction_hash } = await client.game_system.create_level({
+        account,
+        game_id: gameId,
+      });
+
+      showTransactionToast(transaction_hash);
+
+      const tx = await account.waitForTransaction(transaction_hash, {
+        retryInterval: 100,
+      });
+
+      updateTransactionToast(transaction_hash, tx.isSuccess());
+      if (tx.isSuccess()) {
+        console.log("Success at createLevel:", tx);
+      } else {
+        console.error("Error at createLevel:", tx);
+      }
+    } catch (e) {
+      failedTransactionToast();
+      console.log(e);
+      return 0;
+    }
+  };
+
   const createGame = async (username: string) => {
     try {
       showTransactionToast();
@@ -287,5 +314,6 @@ export const useGameActions = () => {
     selectDeck,
     selectSpecials,
     selectModifiers,
+    createLevel,
   };
 };

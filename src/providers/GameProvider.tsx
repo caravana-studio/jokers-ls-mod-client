@@ -79,6 +79,7 @@ interface IGameContext {
   selectSpecialCards: (cardIndex: number[]) => Promise<number | undefined>;
   selectModifierCards: (cardIndex: number[]) => Promise<number | undefined>;
   redirectBasedOnGameState: () => void;
+  createNewLevel: () => Promise<number | undefined>;
 }
 
 const GameContext = createContext<IGameContext>({
@@ -131,6 +132,7 @@ const GameContext = createContext<IGameContext>({
   selectSpecialCards: (_) => new Promise((resolve) => resolve(undefined)),
   selectModifierCards: (_) => new Promise((resolve) => resolve(undefined)),
   redirectBasedOnGameState: () => {},
+  createNewLevel: () => new Promise((resolve) => resolve(undefined)),
 });
 export const useGameContext = () => useContext(GameContext);
 
@@ -159,6 +161,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     selectDeck,
     selectSpecials,
     selectModifiers,
+    createLevel,
   } = useGameActions();
 
   const { discards, discard: stateDiscard, rollbackDiscard } = useDiscards();
@@ -250,10 +253,16 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     const modifiersPromise = selectModifiers(gameId, cardIndex);
 
     modifiersPromise.then(() => {
-      navigate("/game/:beast");
+      navigate("/game/demo");
     });
 
     return modifiersPromise;
+  };
+
+  const createNewLevel = async () => {
+    const nextLevelPromise = createLevel(gameId);
+
+    return nextLevelPromise;
   };
 
   const executeCreateGame = async () => {
@@ -798,6 +807,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     selectDeckType,
     selectSpecialCards,
     selectModifierCards,
+    createNewLevel,
   };
 
   return (

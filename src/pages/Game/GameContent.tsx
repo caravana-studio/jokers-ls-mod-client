@@ -9,7 +9,7 @@ import {
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Joyride, { CallBackProps } from "react-joyride";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { PositionedGameMenu } from "../../components/GameMenu.tsx";
 import {
   GAME_TUTORIAL_STEPS,
@@ -60,8 +60,9 @@ export const GameContent = () => {
   const [runTutorialModifiers, setRunTutorialModifiers] = useState(false);
   const [specialTutorialCompleted, setSpecialTutorialCompleted] =
     useState(false);
-  const { isRageRound } = useGameContext();
+  const { isRageRound, createNewLevel } = useGameContext();
   const { t } = useTranslation(["game"]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const showTutorial = !localStorage.getItem(SKIP_TUTORIAL_GAME);
@@ -99,6 +100,12 @@ export const GameContent = () => {
   );
 
   const game = useGame();
+
+  if (mode !== "beast" && mode !== "obstacle") {
+    if (game?.substate == "BEAST") navigate("/game/beast");
+
+    if (game?.substate == "OBSTACLE") navigate("/game/obstacle");
+  }
 
   const handleDragEnd = (event: DragEndEvent) => {
     const draggedCard = Number(event.active?.id);
@@ -143,6 +150,12 @@ export const GameContent = () => {
       }
     }
   }, [game, hand, specialTutorialCompleted]);
+
+  useEffect(() => {
+    if (!mode && game?.substate == "CREATE_LEVEL") {
+      createNewLevel();
+    }
+  }, [game?.substate]);
 
   if (error) {
     return (
