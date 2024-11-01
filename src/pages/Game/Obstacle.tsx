@@ -1,17 +1,23 @@
 import { Checkbox, Flex, Text } from "@chakra-ui/react";
-import React from "react";
-import { useChallenge } from "../../dojo/queries/useChallenge";
-import { CHALLENGE } from "../../constants/challenge";
+import React, { useEffect } from "react";
+import { OBSTACLES } from "../../data/obstacles";
+import { useGameContext } from "../../providers/GameProvider";
 
 export const Obstacle: React.FC = () => {
-  const challenge = useChallenge();
+  const { obstacleIds, refetchObstacleIds } = useGameContext();
 
-  //TODO: Cast the text
   const missions =
-    (challenge?.active_ids as number[]).map((id) => ({
-      description: id.toString().valueOf(),
+    obstacleIds?.map((id) => ({
+      description: OBSTACLES[id]?.description ?? "Not found",
       checked: false,
     })) ?? [];
+
+  useEffect(() => {
+    if (missions.length === 0) {
+      console.log("refetching obstacle ids");
+      refetchObstacleIds();
+    }
+  }, [missions]);
 
   return (
     <Flex width="100%" justifyContent="center">

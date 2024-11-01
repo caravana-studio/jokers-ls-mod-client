@@ -79,6 +79,8 @@ interface IGameContext {
   selectModifierCards: (cardIndex: number[]) => Promise<number | undefined>;
   redirectBasedOnGameState: () => void;
   createNewLevel: () => Promise<any>;
+  obstacleIds: number[];
+  refetchObstacleIds: () => void;
 }
 
 const GameContext = createContext<IGameContext>({
@@ -132,6 +134,8 @@ const GameContext = createContext<IGameContext>({
   selectModifierCards: (_) => new Promise((resolve) => resolve(undefined)),
   redirectBasedOnGameState: () => {},
   createNewLevel: () => new Promise((resolve) => resolve(undefined)),
+  obstacleIds: [],
+  refetchObstacleIds: () => {},
 });
 export const useGameContext = () => useContext(GameContext);
 
@@ -215,6 +219,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     setBeast,
     obstacleIds,
     setObstacleIds,
+    refetchObstacleIds,
   } = state;
 
   const resetLevel = () => {
