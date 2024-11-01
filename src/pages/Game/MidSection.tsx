@@ -99,9 +99,9 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
                   textAlign="center"
                 >
                   <CachedImage
-                    src="/beasts/berserker.png"
                     maxHeight="45vh"
                     zIndex={1}
+                    src={`/beasts/${beast_id}.png`}
                   />
                 </Flex>
                 <Flex
