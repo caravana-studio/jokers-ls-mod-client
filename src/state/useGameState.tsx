@@ -56,6 +56,8 @@ export const useGameState = () => {
 
   const dojoSpecialCards = useCurrentSpecialCards();
 
+  const beastFetchData = useBeast();
+
   const specialCards =
     lockedSpecialCards.length > 0 ? lockedSpecialCards : dojoSpecialCards;
 
@@ -78,6 +80,11 @@ export const useGameState = () => {
       setHand(dojoHand);
     }
   }, [dojoHand]);
+
+  useEffect(() => {
+    if (beastFetchData?.current_health != beast?.current_health)
+      setBeast(beastFetchData);
+  }, [beastFetchData]);
 
   const setMultiAndPoints = (play: Plays) => {
     const playerPokerHand = PLAYS_DATA[play - 1];

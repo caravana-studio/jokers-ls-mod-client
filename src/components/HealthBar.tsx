@@ -10,8 +10,6 @@ export const HealthBar = () => {
   const maxHp = game?.player_hp ?? 0;
   const hp = game?.current_player_hp ?? 0;
 
-  console.log((hp.valueOf() / maxHp.valueOf()) * 100);
-
   return (
     <Flex width="100%" direction="column" alignItems="flex-end">
       <Flex width="100%" justifyContent="space-between">
