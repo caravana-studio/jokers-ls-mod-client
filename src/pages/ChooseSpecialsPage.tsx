@@ -27,14 +27,11 @@ export const ChooseSpecialsPage = () => {
   const blisterPackResult = useBlisterPackResult();
 
   useEffect(() => {
-    redirectBasedOnGameState();
-  }, [game?.state, lockRedirection]);
-
-  useEffect(() => {
     if (blisterPackResult?.cardsPicked) {
       setCards([]);
     } else {
-      setCards(blisterPackResult?.cards ?? []);
+      if (blisterPackResult.cards.length > 0)
+        setCards(blisterPackResult?.cards);
     }
   }, [blisterPackResult]);
 

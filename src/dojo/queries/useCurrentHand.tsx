@@ -1,8 +1,4 @@
-import {
-  Component,
-  Entity,
-  getComponentValue
-} from "@dojoengine/recs";
+import { Component, Entity, getComponentValue } from "@dojoengine/recs";
 import { getEntityIdFromKeys } from "@dojoengine/utils";
 import { SortBy } from "../../enums/sortBy";
 import { Card } from "../../types/Card";
@@ -50,5 +46,8 @@ export const useCurrentHand = (sortBy: SortBy) => {
     });
 
   const sortedCards = sortCards(cards, sortBy);
-  return sortedCards;
+
+  const anyUndefined = sortedCards.some((card) => card.img === "undefined.png");
+
+  return anyUndefined ? [] : sortedCards;
 };

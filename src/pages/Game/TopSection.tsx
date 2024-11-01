@@ -4,9 +4,11 @@ import CachedImage from "../../components/CachedImage.tsx";
 import { HealthBar } from "../../components/HealthBar.tsx";
 import { SpecialCards } from "../../components/SpecialCards.tsx";
 import { Energy } from "./Energy.tsx";
+import { useGame } from "../../dojo/queries/useGame.tsx";
 
 export const TopSection = () => {
   const { mode } = useParams();
+
   return (
     <Flex
       height="100%"
@@ -15,14 +17,13 @@ export const TopSection = () => {
       alignItems={"flex-start"}
       px={"70px"}
     >
-      <Box position="absolute" top="70px" left="0" width="100%"
-          zIndex={1000}>
+      <Box position="absolute" top="70px" left="0" width="100%" zIndex={1000}>
         <Heading
           textTransform="uppercase"
           variant="neonGreen"
           fontSize="70px"
           textAlign="center"
-          textShadow='0 0 10px black'
+          textShadow="0 0 10px black"
         >
           {mode}
         </Heading>
