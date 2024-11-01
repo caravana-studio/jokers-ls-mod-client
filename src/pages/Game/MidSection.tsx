@@ -101,7 +101,7 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
                   textAlign="center"
                 >
                   <CachedImage
-                    src="/beasts/berserker.png"
+                    src={`/beasts/${beast_id}.png`}
                     maxHeight="50vh"
                     zIndex={100}
                   />
