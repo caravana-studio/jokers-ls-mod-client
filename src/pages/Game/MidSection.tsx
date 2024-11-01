@@ -77,13 +77,12 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
                 flexDirection="column"
                 width="80%"
                 justifyContent={"flex-end"}
-                pb="30px"
                 height={"100%"}
                 gap={2}
               >
                 <Flex
                   position="relative"
-                  mt={"-185px"}
+                  mt={"-200px"}
                   justifyContent="center"
                   alignItems="center"
                   textAlign="center"

@@ -226,7 +226,6 @@ export const GameContent = () => {
                 <MidSection isTutorialRunning={run} />
               </Box>
               <Box
-                mr={{ base: 10, md: 20 }}
                 sx={{
                   display: "flex",
                   height: "auto",
