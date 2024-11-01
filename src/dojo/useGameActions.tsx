@@ -1,6 +1,7 @@
 import { shortString } from "starknet";
 import { GAME_ID_EVENT, GAME_OVER_EVENT } from "../constants/dojoEventKeys";
 import { getCardsFromEvents } from "../utils/getCardsFromEvents";
+import { getCreateLevelEvents } from "../utils/getCreateLevelEvents";
 import { getNumberValueFromEvents } from "../utils/getNumberValueFromEvent";
 import { getPlayEvents } from "../utils/playEvents/getPlayEvents";
 import {
@@ -124,14 +125,17 @@ export const useGameActions = () => {
 
       updateTransactionToast(transaction_hash, tx.isSuccess());
       if (tx.isSuccess()) {
+        const events = tx.events;
         console.log("Success at createLevel:", tx);
+        return getCreateLevelEvents(events);
       } else {
         console.error("Error at createLevel:", tx);
+        return undefined;
       }
     } catch (e) {
       failedTransactionToast();
       console.log(e);
-      return 0;
+      return undefined;
     }
   };
 

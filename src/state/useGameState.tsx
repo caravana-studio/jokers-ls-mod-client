@@ -12,6 +12,7 @@ import { Card } from "../types/Card";
 import { RoundRewards } from "../types/RoundRewards";
 import { checkHand } from "../utils/checkHand";
 import { sortCards } from "../utils/sortCards";
+import { Beast } from "../dojo/typescript/models.gen";
 
 export const useGameState = () => {
   const [gameId, setGameId] = useState<number>(getLSGameId());
@@ -40,6 +41,8 @@ export const useGameState = () => {
   const [lockedSpecialCards, setLockedSpecialCards] = useState<Card[]>([]);
   const [isRageRound, setIsRageRound] = useState(false);
   const [rageCards, setRageCards] = useState<Card[]>([]);
+  const [beast, setBeast] = useState<Beast | undefined>(undefined);
+  const [obstacleIds, setObstacleIds] = useState<number[]>([]);
 
   const sortBy: SortBy = useMemo(
     () => (sortBySuit ? SortBy.SUIT : SortBy.RANK),
@@ -150,5 +153,9 @@ export const useGameState = () => {
     setLockedCash,
     rageCards,
     setRageCards,
+    beast,
+    setBeast,
+    obstacleIds,
+    setObstacleIds,
   };
 };

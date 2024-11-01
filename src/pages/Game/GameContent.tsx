@@ -60,9 +60,7 @@ export const GameContent = () => {
   const [runTutorialModifiers, setRunTutorialModifiers] = useState(false);
   const [specialTutorialCompleted, setSpecialTutorialCompleted] =
     useState(false);
-  const { isRageRound, createNewLevel } = useGameContext();
   const { t } = useTranslation(["game"]);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const showTutorial = !localStorage.getItem(SKIP_TUTORIAL_GAME);
@@ -100,12 +98,6 @@ export const GameContent = () => {
   );
 
   const game = useGame();
-
-  if (mode !== "beast" && mode !== "obstacle") {
-    if (game?.substate == "BEAST") navigate("/game/beast");
-
-    if (game?.substate == "OBSTACLE") navigate("/game/obstacle");
-  }
 
   const handleDragEnd = (event: DragEndEvent) => {
     const draggedCard = Number(event.active?.id);
@@ -150,12 +142,6 @@ export const GameContent = () => {
       }
     }
   }, [game, hand, specialTutorialCompleted]);
-
-  useEffect(() => {
-    if (!mode && game?.substate == "CREATE_LEVEL") {
-      createNewLevel();
-    }
-  }, [game?.substate]);
 
   if (error) {
     return (

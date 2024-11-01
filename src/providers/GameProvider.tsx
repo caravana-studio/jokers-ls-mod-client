@@ -213,6 +213,10 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     cash,
     setLockedCash,
     setIsRageRound,
+    beast,
+    setBeast,
+    obstacleIds,
+    setObstacleIds,
   } = state;
 
   const resetLevel = () => {
@@ -252,8 +256,8 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
   const selectModifierCards = async (cardIndex: number[]) => {
     const modifiersPromise = selectModifiers(gameId, cardIndex);
 
-    modifiersPromise.then(() => {
-      navigate("/game/demo");
+    modifiersPromise.then(async () => {
+      createNewLevel();
     });
 
     return modifiersPromise;
@@ -261,7 +265,15 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
 
   const createNewLevel = async () => {
     const nextLevelPromise = createLevel(gameId);
-
+    nextLevelPromise.then((response) => {
+      if (response?.isBeast && response?.beast) {
+        setBeast({ ...response.beast, game_id: gameId });
+        navigate("/game/beast");
+      } else if (response?.isObstacle && response?.obstacleIds) {
+        setObstacleIds(response?.obstacleIds);
+        navigate("/game/obstacle");
+      }
+    });
     return nextLevelPromise;
   };
 
