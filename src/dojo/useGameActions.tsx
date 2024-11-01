@@ -175,16 +175,15 @@ export const useGameActions = () => {
   const discard = async (
     gameId: number,
     cards: number[],
-    modifiers: { [key: number]: number[] }
+    modifiers: number[] 
   ) => {
-    const { modifiers1 } = getModifiersForContract(cards, modifiers);
     try {
       showTransactionToast();
       const { transaction_hash } = await client.game_system.discard({
         account,
         game_id: gameId,
         cards_index: cards,
-        modifiers_index: modifiers1,
+        modifiers_index: modifiers,
       });
       showTransactionToast(transaction_hash);
 
@@ -279,16 +278,15 @@ export const useGameActions = () => {
   const play = async (
     gameId: number,
     cards: number[],
-    modifiers: { [key: number]: number[] }
+    modifiers: number[]
   ) => {
-    const { modifiers1 } = getModifiersForContract(cards, modifiers);
     try {
       showTransactionToast();
       const { transaction_hash } = await client.game_system.play({
         account,
         game_id: gameId,
         cards_index: cards,
-        modifiers_index: modifiers1,
+        modifiers_index: modifiers,
       });
       showTransactionToast(transaction_hash);
 

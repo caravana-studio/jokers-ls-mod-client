@@ -27,9 +27,7 @@ export const useGameState = () => {
   const [playAnimation, setPlayAnimation] = useState(false);
   const [error, setError] = useState(false);
   const [preSelectedCards, setPreSelectedCards] = useState<number[]>([]);
-  const [preSelectedModifiers, setPreSelectedModifiers] = useState<{
-    [key: number]: number[];
-  }>({});
+  const [preSelectedModifiers, setPreSelectedModifiers] = useState<number[]>([]);
   const [hand, setHand] = useState<Card[]>([]);
   const [roundRewards, setRoundRewards] = useState<RoundRewards | undefined>(
     undefined
@@ -103,7 +101,7 @@ export const useGameState = () => {
         hand,
         preSelectedCards,
         specialCards,
-        preSelectedModifiers
+        []
       );
       setPreSelectedPlay(play);
       setMultiAndPoints(play);
@@ -111,7 +109,7 @@ export const useGameState = () => {
       setPreSelectedPlay(Plays.NONE);
       resetMultiPoints();
     }
-  }, [preSelectedCards, preSelectedModifiers]);
+  }, [preSelectedCards]);
 
   const challenges = useChallenge();
 
