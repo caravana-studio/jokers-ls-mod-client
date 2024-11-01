@@ -231,18 +231,18 @@ export const GameContent = () => {
             zIndex={0}
           />
           <Box sx={{ height: "100%", width: "100%" }}>
-            <Box sx={{ height: "30%", width: "100%" }} mb={5}>
+            <Box sx={{ width: "100%" }} mb={2}>
               <TopSection />
             </Box>
-            <Box height={"70%"} width={"100%"}>
+            <Box width={"100%"}>
               <DndContext
                 sensors={sensors}
                 onDragEnd={handleDragEnd}
                 autoScroll={false}
               >
                 <Box
+                  mb={2}
                   sx={{
-                    height: "45%",
                     width: "100%",
                     display: "flex",
                     flexDirection: "row",
@@ -255,11 +255,10 @@ export const GameContent = () => {
                   <MidSection isTutorialRunning={run} />
                 </Box>
                 <Box
-                  pb={"60px"}
                   mr={{ base: 10, md: 20 }}
                   sx={{
                     display: "flex",
-                    height: "55%",
+                    height: "auto",
                     alignItems: "flex-end",
                     justifyContent: "center",
                   }}

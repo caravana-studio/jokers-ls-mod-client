@@ -46,7 +46,6 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
       width={"100%"}
       height={"100%"}
     >
-      <Box height="60px"></Box>
       <Flex
         flexDirection={"row"}
         width={"100%"}
@@ -115,7 +114,7 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
                     {lifeLeft}
                   </Text>
                 </Flex>
-                <Box width="100%" zIndex={1000}>
+                <Box width="100%">
                   <ProgressBar
                     progress={80}
                     color={BEAST_RED}
@@ -131,7 +130,7 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
           <PlayButton highlight={isTutorialRunning} />
         </Box>
       </Flex>
-      <Box mb={"-20px"} zIndex={300}>
+      <Box zIndex={300}>
         <MultiPoints />
       </Box>
     </Flex>
