@@ -46,7 +46,9 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
   const tier = beast?.tier ?? 0;
   const level = beast?.level ?? 0;
   const name = "Nameless King";
-  const lifeLeft = beast?.health ?? 0;
+  const beast_id = beast?.beast_id ?? 0;
+  const maxHealth = beast?.health ?? 0;
+  const lifeLeft = beast?.current_health ?? 0;
 
   return (
     <Flex
@@ -127,7 +129,7 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
                 </Flex>
                 <Box width="100%" zIndex={1000}>
                   <ProgressBar
-                    progress={80}
+                    progress={(lifeLeft.valueOf() / maxHealth.valueOf()) * 100}
                     color={BEAST_RED}
                     borderColor={BEAST_RED}
                   />

@@ -8,8 +8,7 @@ import { useGame } from "../../dojo/queries/useGame.tsx";
 
 export const TopSection = () => {
   const { mode } = useParams();
-  const game = useGame();
-  const hp = 100;
+
   return (
     <Flex
       height="100%"
@@ -35,7 +34,7 @@ export const TopSection = () => {
           alt="logo"
           width="280px"
         />
-        <HealthBar progress={100} />
+        <HealthBar />
         {mode === "beast" && <Energy />}
       </Flex>
 
