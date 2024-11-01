@@ -28,6 +28,7 @@ const getEntities = async <S extends Schema>(
     query.offset = cursor;
 
     const fetchedEntities = await client.getEntities(query);
+    console.log(fetchedEntities);
 
     setEntities(fetchedEntities, components);
 

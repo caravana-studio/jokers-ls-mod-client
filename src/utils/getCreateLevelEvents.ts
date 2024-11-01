@@ -22,12 +22,17 @@ export const getCreateLevelEvents = (events: DojoEvent[]) => {
   } else if (beastEvent) {
     console.log("beast event found");
     console.log(beastEvent);
-    const tier = getNumberValueFromEvent(beastEvent, 0) ?? 0;
-    const level = getNumberValueFromEvent(beastEvent, 1) ?? 0;
-    const health = getNumberValueFromEvent(beastEvent, 2) ?? 0;
-    const attack = getNumberValueFromEvent(beastEvent, 3) ?? 0;
+    const beast_id = getNumberValueFromEvent(beastEvent, 0) ?? 0;
+    const tier = getNumberValueFromEvent(beastEvent, 1) ?? 0;
+    const level = getNumberValueFromEvent(beastEvent, 2) ?? 0;
+    const health = getNumberValueFromEvent(beastEvent, 3) ?? 0;
+    const current_health = getNumberValueFromEvent(beastEvent, 4) ?? 0;
+    const attack = getNumberValueFromEvent(beastEvent, 5) ?? 0;
     console.log(tier, level, health, attack);
-    return { isBeast: true, beast: { tier, level, health, attack } };
+    return {
+      isBeast: true,
+      beast: { beast_id, tier, level, health, current_health, attack },
+    };
   }
   return undefined;
 };
