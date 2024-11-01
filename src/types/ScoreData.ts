@@ -16,6 +16,7 @@ export interface PlayEvents {
   cards: Card[];
   score: number;
   cashEvents?: CashEvent[];
+  obstacleDefeated: boolean;
 }
 
 export interface LevelPassedEvent {

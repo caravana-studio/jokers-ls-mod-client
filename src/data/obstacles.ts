@@ -1,95 +1,105 @@
 import { ObstacleMap } from "../types/Obstacle";
-
-//TODO: Update with real data
 export const OBSTACLES: ObstacleMap = {
   1: {
-    description: "Play one straight hand.",
+    description: "Complete a Royal Flush.",
   },
   2: {
-    description: "Do not use Jokers.",
+    description: "Complete a Straight Flush.",
   },
   3: {
-    description: "Score exactly 15 points in one hand.",
+    description: "Complete Five of a Kind.",
   },
   4: {
-    description: "Only play red cards in one hand.",
+    description: "Complete Four of a Kind.",
   },
   5: {
-    description: "Play one pair in your first turn.",
+    description: "Complete a Full House.",
   },
   6: {
-    description: "Use three different suits in one hand.",
+    description: "Complete a Flush.",
   },
   7: {
-    description: "Do not play any face cards (J, Q, K) this round.",
+    description: "Complete a Straight.",
   },
   8: {
-    description: "Win with only even-numbered cards.",
+    description: "Complete Three of a Kind.",
   },
   9: {
-    description: "Play two hands with at least one Joker each.",
+    description: "Complete a Double Pair.",
   },
   10: {
-    description: "Do not play any card above a 7.",
+    description: "Complete a Pair.",
   },
   11: {
-    description: "Play three consecutive cards of the same suit.",
+    description: "Win with a High Card.",
   },
   12: {
-    description: "Score exactly 10 points in one hand.",
+    description: "Play a Heart suited card.",
   },
   13: {
-    description: "Play an odd-numbered straight (e.g., 3, 5, 7).",
+    description: "Play a Club suited card.",
   },
   14: {
-    description: "Play a hand without Jokers.",
+    description: "Play a Diamond suited card.",
   },
   15: {
-    description: "Do not play any hearts this round.",
+    description: "Play a Spade suited card.",
   },
   16: {
-    description: "Play one full house in your first hand.",
+    description: "Play a hand featuring the card One.",
   },
   17: {
-    description: "Play only odd-numbered cards.",
+    description: "Play a hand featuring the card Two.",
   },
   18: {
-    description: "Do not use any aces this round.",
+    description: "Play a hand featuring the card Three.",
   },
   19: {
-    description: "Play a four-of-a-kind.",
+    description: "Play a hand featuring the card Four.",
   },
   20: {
-    description: "Win a round using only spades.",
+    description: "Play a hand featuring the card Five.",
   },
   21: {
-    description: "Play a flush with diamonds.",
+    description: "Play a hand featuring the card Six.",
   },
   22: {
-    description: "Play a hand without using any red cards.",
+    description: "Play a hand featuring the card Seven.",
   },
   23: {
-    description: "Score a total of 25 points across two rounds.",
+    description: "Play a hand featuring the card Eight.",
   },
   24: {
-    description: "Do not play any cards from clubs.",
+    description: "Play a hand featuring the card Nine.",
   },
   25: {
-    description: "Play a hand that adds up to an odd number.",
+    description: "Play a hand featuring the card Ten.",
   },
   26: {
-    description: "Use at least one King and one Queen in a hand.",
+    description: "Play a hand featuring the card Jack.",
   },
   27: {
-    description: "Score at least 20 points without using Jokers.",
+    description: "Play a hand featuring the card Queen.",
   },
   28: {
-    description: "Play a hand where all cards are of the same color.",
+    description: "Play a hand featuring the card King.",
   },
   29: {
-    description: "Use exactly three cards in a hand.",
+    description: "Play a hand featuring the card Ace.",
   },
   30: {
-    description: "Win a round with at least one ace.",
+    description: "Play a hand featuring a Joker.",
+  },
+  31: {
+    description: "Score a total of 500 points.",
+  },
+  32: {
+    description: "Score a total of 1000 points.",
+  },
+  33: {
+    description: "Score a total of 2000 points.",
+  },
+  34: {
+    description: "Score a total of 5000 points.",
   },
 };

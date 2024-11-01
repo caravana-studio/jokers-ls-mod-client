@@ -286,6 +286,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
         const { gameId: newGameId, hand } = response;
         if (newGameId) {
           resetLevel();
+          setLockRedirection(true);
           navigate("/choose-class");
           setHand(hand);
           setGameId(newGameId);
@@ -560,13 +561,8 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
             navigate(`/gameover/${gameId}`);
             setLockRedirection(false);
           }, 1000);
-        } else if (playEvents.levelPassed && playEvents.detailEarned) {
-          const { level } = playEvents.levelPassed;
+        } else if (playEvents.levelPassed || playEvents.obstacleDefeated) {
           setTimeout(() => {
-            setRoundRewards({
-              ...playEvents.detailEarned!,
-              level: level,
-            });
             navigate("/rewards");
           }, 1000);
           setPreSelectionLocked(true);

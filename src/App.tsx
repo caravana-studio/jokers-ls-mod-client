@@ -14,6 +14,7 @@ import { CardAnimationsProvider } from "./providers/CardAnimationsProvider";
 import { GameProvider } from "./providers/GameProvider";
 import customTheme from "./theme/theme";
 import { PlaysLayout } from "./pages/Plays/PlaysLayout";
+import { RewardsPage } from "./pages/RewardsPage";
 
 function App() {
   const theme = extendTheme(customTheme);
@@ -32,6 +33,8 @@ function App() {
               />
               <Route path="/choose-specials" element={<ChooseSpecialsPage />} />
               <Route path="/plays" element={<PlaysLayout />} />
+              <Route path="/gameover/:gameId" element={<>Game Over</>} />
+              <Route path="/rewards" element={<RewardsPage />} />
             </Routes>
           </AudioPlayerProvider>
         </GameProvider>
