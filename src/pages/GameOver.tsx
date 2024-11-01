@@ -1,4 +1,4 @@
-import { Button, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
 import { faXTwitter } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect } from "react";
@@ -58,7 +58,7 @@ export const GameOver = () => {
   }, [position]);
 
   return (
-    <Background type="game" bgDecoration>
+    <Background type="home" bgDecoration>
       <PositionedGameMenu decoratedPage />
       <Flex
         height="100%"
@@ -67,8 +67,8 @@ export const GameOver = () => {
         alignItems="center"
         gap={4}
       >
-        <Flex flexDirection="column" width="100%">
-          <Heading size="md" variant="italic" textAlign={"center"} mb={3}>
+        <Box>
+          <Heading mb={"40px"} size="xl" textAlign={"center"}>
             {t("game-over.gameOver-msj")}
           </Heading>
           <Text size={"md"} textAlign={"center"} mb={10} mx={6}>
@@ -108,7 +108,7 @@ export const GameOver = () => {
           <Flex mt={{ base: 4, sm: 10 }} justifyContent="center">
             <DiscordLink />
           </Flex>
-        </Flex>
+        </Box>
       </Flex>
     </Background>
   );

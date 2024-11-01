@@ -13,6 +13,7 @@ import { AudioPlayerProvider } from "./providers/AudioPlayerProvider";
 import { CardAnimationsProvider } from "./providers/CardAnimationsProvider";
 import { GameProvider } from "./providers/GameProvider";
 import customTheme from "./theme/theme";
+import { GameOver } from "./pages/GameOver";
 import { PlaysLayout } from "./pages/Plays/PlaysLayout";
 import { RewardsPage } from "./pages/RewardsPage";
 
@@ -32,6 +33,7 @@ function App() {
                 element={<ChooseModifiersPage />}
               />
               <Route path="/choose-specials" element={<ChooseSpecialsPage />} />
+              <Route path="/gameover/:gameId" element={<GameOver />} />
               <Route path="/plays" element={<PlaysLayout />} />
               <Route path="/gameover/:gameId" element={<>Game Over</>} />
               <Route path="/rewards" element={<RewardsPage />} />
