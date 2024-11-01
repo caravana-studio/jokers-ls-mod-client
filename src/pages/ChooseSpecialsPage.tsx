@@ -1,16 +1,17 @@
 import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
-import { Background } from "../components/Background";
 import { useEffect, useState } from "react";
-import { Card } from "../types/Card";
+import { Background } from "../components/Background";
+import { PositionedGameMenu } from "../components/GameMenu";
 import { TiltCard } from "../components/TiltCard";
-import { FullScreenCardContainer } from "./FullScreenCardContainer";
-import { getCardUniqueId } from "../utils/getCardUniqueId";
+import { useBlisterPackResult } from "../dojo/queries/useBlisterPackResult";
+import { useGame } from "../dojo/queries/useGame";
+import { useGameContext } from "../providers/GameProvider";
 import { LS_GREEN } from "../theme/colors";
 import { useResponsiveValues } from "../theme/responsiveSettings";
-import { Collab } from "./Game/collab";
-import { useGame } from "../dojo/queries/useGame";
-import { useBlisterPackResult } from "../dojo/queries/useBlisterPackResult";
-import { useGameContext } from "../providers/GameProvider";
+import { Card } from "../types/Card";
+import { getCardUniqueId } from "../utils/getCardUniqueId";
+import { FullScreenCardContainer } from "./FullScreenCardContainer";
+import { Collab } from "./Game/Collab";
 
 export const ChooseSpecialsPage = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -47,6 +48,10 @@ export const ChooseSpecialsPage = () => {
 
   return (
     <Background bgDecoration type="skulls">
+      <Flex height='100%' flexDirection='column' justifyContent='space-between' alignItems='center'>
+      <PositionedGameMenu decoratedPage />
+      <Box>
+
       <Heading size={"xxl"} textAlign={"center"} variant="neonGreen">
         - Special cards -
       </Heading>
@@ -62,6 +67,9 @@ export const ChooseSpecialsPage = () => {
         effects remain active throughout the game, enhancing your strategy as
         you progress.
       </Text>
+      </Box>
+      <Box width='100%'>
+
       <Heading size={"xl"} textAlign={"center"} variant="neonGreen" my={4}>
         Choose up to 2
       </Heading>
@@ -117,16 +125,18 @@ export const ChooseSpecialsPage = () => {
           );
         })}
       </FullScreenCardContainer>
+      </Box>
       <Flex justifyContent={"center"} my={4}>
         <Button onClick={confirmSelectCards} isDisabled={isLoading}>
           Continue
         </Button>
       </Flex>
       {!isSmallScreen && (
-        <Box position={"fixed"} left={8} top={12}>
+        <Box position={"fixed"} left={'80px'} top={12}>
           <Collab />
         </Box>
       )}
+      </Flex>
     </Background>
   );
 };

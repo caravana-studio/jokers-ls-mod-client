@@ -18,7 +18,6 @@ import { SortBy } from "../../components/SortBy";
 import { TiltCard } from "../../components/TiltCard";
 import { HAND_SECTION_ID } from "../../constants/general";
 import { CARD_HEIGHT, CARD_WIDTH } from "../../constants/visualProps";
-import { useRound } from "../../dojo/queries/useRound";
 import { useGameContext } from "../../providers/GameProvider";
 import { useResponsiveValues } from "../../theme/responsiveSettings";
 
@@ -35,9 +34,6 @@ export const HandSection = () => {
   } = useGameContext();
 
   const [discarding, setDiscarding] = useState(false);
-
-  const round = useRound();
-  const handsLeft = round?.hands ?? 0;
 
   const { activeNode } = useDndContext();
 
@@ -80,7 +76,7 @@ export const HandSection = () => {
         </Box>
         <SimpleGrid
           sx={{
-            opacity: !roundRewards && handsLeft > 0 ? 1 : 0.3,
+            opacity: !roundRewards ? 1 : 0.3,
             minWidth: `${cardWidth * 4}px`,
             maxWidth: `${cardWidth * 6.5}px`,
           }}
@@ -185,7 +181,7 @@ export const HandSection = () => {
           <ShowPlays />
         </Box>
       </Box>
-      {handsLeft === 0 && (
+      {/* {handsLeft === 0 && (
         <Heading
           ml={{ base: "0", md: "100px" }}
           size={{ base: "sm", md: "md" }}
@@ -196,7 +192,7 @@ export const HandSection = () => {
         >
           {t("game.hand-section.no-cards-label")}
         </Heading>
-      )}
+      )} */}
     </>
   );
 };

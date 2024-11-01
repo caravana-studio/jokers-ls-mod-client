@@ -4,19 +4,19 @@ import CachedImage from "../../components/CachedImage";
 
 export const Collab: React.FC = () => {
   return (
-    <Flex align="center" justify="center">
+    <Flex align="center" justify="center" gap={1}>
       <CachedImage
         src="/logos/logo-merge.png"
         alt="JON Logo"
-        width="20%"
+        width="40px"
         objectFit="contain"
       />
 
-      <Text color="white" fontSize="2rem" fontWeight="bold">
+      <Text color="white" fontSize="1.5rem" fontFamily='serif'>
         ×
       </Text>
 
-      <Image src="/logos/ls-logo.png" alt="Skull Logo" width="18%" />
+      <Image src="/logos/ls-logo.png" alt="Skull Logo" width="32px" />
     </Flex>
   );
 };

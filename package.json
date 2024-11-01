@@ -9,7 +9,7 @@
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "codegen": "graphql-codegen",
-    "generate": "sozo build --typescript --manifest-path ../jokers-of-neon-contracts/Scarb.toml --bindings-output ./src/dojo",
+    "generate": "sozo build --typescript --manifest-path ../jokers-ls-mod-contracts/Scarb.toml --bindings-output ./src/dojo",
     "test": "vitest"
   },
   "dependencies": {

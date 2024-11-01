@@ -1,11 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 import { useGame } from "../dojo/queries/useGame";
-import { useRound } from "../dojo/queries/useRound";
 
 export const useDiscards = () => {
-  const round = useRound();
   const game = useGame()
-  const discardsLeft = round?.discard ?? 0;
+  const discardsLeft = /* round?.discard ?? */ 0;
   const [optimisticDiscards, setOptimisticDiscards] = useState<
     number | undefined
   >(undefined);
