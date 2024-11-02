@@ -11,16 +11,9 @@ import { FullScreenCardContainer } from "./FullScreenCardContainer";
 import RewardsSection from "./RewardsSection";
 
 export const RewardsPage = () => {
-  const { roundRewards, createNewLevel } = useGameContext();
-  const navigate = useNavigate();
-
   useEffect(() => {
     runConfettiAnimation();
   }, []);
-
-  // if (!roundRewards) {
-  //   navigate("/redirect/store");
-  // }
 
   return (
     <Background type="skulls" dark bgDecoration>

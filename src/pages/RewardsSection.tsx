@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Box, Text, Flex, Button } from "@chakra-ui/react";
 import { LS_GREEN } from "../theme/colors";
 import { useGameContext } from "../providers/GameProvider";
+import { useGame } from "../dojo/queries/useGame";
 
 interface RewardCardProps {
   index: number;
@@ -77,8 +78,13 @@ const RewardCard = ({
 };
 
 const RewardsSection = () => {
-  const [selectedReward, setSelectedReward] = useState(null);
+  const { redirectBasedOnGameState } = useGameContext();
   const { createNewReward } = useGameContext();
+  const game = useGame();
+
+  if (game?.substate != "CREATE_REWARD") {
+    redirectBasedOnGameState();
+  }
 
   const rewards = [
     {

@@ -824,6 +824,8 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
           navigate("/game/obstacle");
         } else if (game?.substate === "BEAST") {
           navigate("/game/beast");
+        } else if (game?.substate === "CREATE_REWARD") {
+          navigate("/rewards");
         } else if (game?.substate === "REWARD_CARDS_PACK") {
           navigate("/rewards/pack");
         } else if (game?.substate === "REWARD_SPECIALS") {
