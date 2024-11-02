@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Box, Text, Flex, Button } from "@chakra-ui/react";
 import { LS_GREEN } from "../theme/colors";
+import { useGameContext } from "../providers/GameProvider";
 
 interface RewardCardProps {
   index: number;
@@ -77,6 +78,7 @@ const RewardCard = ({
 
 const RewardsSection = () => {
   const [selectedReward, setSelectedReward] = useState(null);
+  const { createNewReward } = useGameContext();
 
   const rewards = [
     {
@@ -86,13 +88,13 @@ const RewardsSection = () => {
     },
     {
       id: 1,
-      type: "special",
-      description: "Select 1 from a total of 5 available",
+      type: "pack",
+      description: "Open a pack of cards that can contain Jokers and modifiers",
     },
     {
       id: 2,
-      type: "pack",
-      description: "Open a pack of cards that can contain Jokers and modifiers",
+      type: "special",
+      description: "Select 1 from a total of 5 available",
     },
   ];
 
@@ -104,7 +106,7 @@ const RewardsSection = () => {
           {...reward}
           index={index}
           onSelect={() => {
-            console.log("Selected");
+            createNewReward(reward.id, reward.type);
           }}
         />
       ))}

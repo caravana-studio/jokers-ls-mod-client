@@ -66,7 +66,11 @@ export async function setupWorld(provider: DojoProvider) {
           {
             contractName: contract_name,
             entrypoint: "select_reward",
-            calldata: [props.game_id, ...props.cards_index],
+            calldata: [
+              props.game_id,
+              props.cards_index.length,
+              ...props.cards_index,
+            ],
           },
           "jokers_of_neon"
         );

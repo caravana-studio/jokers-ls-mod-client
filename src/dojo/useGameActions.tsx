@@ -11,6 +11,7 @@ import {
 } from "../utils/transactionNotifications";
 import { useDojo } from "./useDojo";
 import { getModifiersForContract } from "./utils/getModifiersForContract";
+import { getCreateRewardsEvents } from "../utils/getCreateRewardsEvent";
 
 const createGameEmptyResponse = {
   gameId: 0,
@@ -189,15 +190,43 @@ export const useGameActions = () => {
 
       updateTransactionToast(transaction_hash, tx.isSuccess());
 
-      //  TODO: get events
-      // if (tx.isSuccess()) {
-      //   const events = tx.events;
-      //   console.log("Success at createLevel:", tx);
-      //   return getCreateLevelEvents(events);
-      // } else {
-      //   console.error("Error at createLevel:", tx);
-      //   return undefined;
-      // }
+      if (tx.isSuccess()) {
+        const events = tx.events;
+        console.log("Success at createReward:", tx);
+        return getCreateRewardsEvents(events);
+      } else {
+        console.error("Error at createReward:", tx);
+        return undefined;
+      }
+    } catch (e) {
+      failedTransactionToast();
+      console.log(e);
+      return undefined;
+    }
+  };
+
+  const selectRewards = async (gameId: number, cardsIndex: number[]) => {
+    try {
+      showTransactionToast();
+      const { transaction_hash } = await client.game_system.select_reward({
+        account,
+        game_id: gameId,
+        cards_index: cardsIndex,
+      });
+
+      showTransactionToast(transaction_hash);
+
+      const tx = await account.waitForTransaction(transaction_hash, {
+        retryInterval: 100,
+      });
+
+      updateTransactionToast(transaction_hash, tx.isSuccess());
+
+      if (tx.isSuccess()) {
+        console.log("Success at selectRewards:", tx);
+      } else {
+        console.error("Error at selectRewards:", tx);
+      }
     } catch (e) {
       failedTransactionToast();
       console.log(e);
@@ -346,5 +375,7 @@ export const useGameActions = () => {
     selectSpecials,
     selectModifiers,
     createLevel,
+    createReward,
+    selectRewards,
   };
 };
