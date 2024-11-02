@@ -36,7 +36,24 @@ const Animation = forwardRef(
       }
     }, [isRunning, duration, onEnd]);
 
-    return <div>{isRunning && <img key={animKey} src={gifSrc} />}</div>;
+    return (
+      <div style={{ width: "100%", height: "100%", position: "relative" }}>
+        {isRunning && (
+          <img
+            key={animKey}
+            src={gifSrc}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              position: "absolute",
+              top: 0,
+              left: 0,
+            }}
+          />
+        )}
+      </div>
+    );
   }
 );
 

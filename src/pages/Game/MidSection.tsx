@@ -13,7 +13,7 @@ import { DiscardButton } from "./DiscardButton.tsx";
 import { Obstacle } from "./Obstacle.tsx";
 import { PlayButton } from "./PlayButton.tsx";
 import { useEffect, useRef } from "react";
-import Animation from "../../components/Animation.tsx";
+import AttackAnimation from "../../components/Animation/AttackAnimation.tsx";
 
 interface MidSectionProps {
   isTutorialRunning?: boolean;
@@ -109,24 +109,13 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
                   alignItems="center"
                   textAlign="center"
                 >
-                  <CachedImage
-                    maxHeight="45vh"
-                    zIndex={1}
-                    src={`/beasts/${beast_id}.png`}
+                  <AttackAnimation
+                    ref={attackAnimRef}
+                    duration={1000}
+                    damagePoints={attackAnimation}
+                    image={`/beasts/${beast_id}.png`}
+                    onEnd={() => setAttackAnimation(0)}
                   />
-                  <Box
-                    position={"absolute"}
-                    top={0}
-                    left={"50%"}
-                    width={"240px"}
-                  >
-                    <Animation
-                      ref={attackAnimRef}
-                      gifSrc="/animations/attack_anim.gif"
-                      duration={1000}
-                      onEnd={() => setAttackAnimation(0)}
-                    />
-                  </Box>
                 </Flex>
                 <Flex
                   width="100%"
