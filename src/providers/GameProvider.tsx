@@ -591,7 +591,11 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
             navigate(`/gameover/${gameId}`);
             setLockRedirection(false);
           }, 1000);
-        } else if (playEvents.levelPassed || playEvents.obstacleDefeated) {
+        } else if (
+          playEvents.levelPassed ||
+          playEvents.obstacleDefeated ||
+          playEvents.playWinGameEvent
+        ) {
           setTimeout(() => {
             navigate("/rewards");
           }, 1000);
@@ -810,7 +814,11 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
         navigate("/choose-modifiers");
       } else if (game?.state === "IN_GAME") {
         console.log("redirecting to IN_GAME");
-        navigate("/game");
+        if (game.substate === "OBSTACLE") {
+          navigate("/game/obstacle");
+        } else if (game.substate === "BEAST") {
+          navigate("/game/beast");
+        }
       } else if (game?.state === "OPEN_BLISTER_PACK") {
         console.log("redirecting to OPEN_BLISTER_PACK");
         navigate("/open-pack");

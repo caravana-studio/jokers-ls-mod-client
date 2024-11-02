@@ -19,6 +19,13 @@ export interface PlayEvents {
   obstacleDefeated: boolean;
   itemChallengeCompleted?: number[];
   playerAttack?: number;
+  playWinGameEvent?: PlayWinGameEvent;
+}
+
+export interface PlayWinGameEvent {
+  game_id: number;
+  level: number;
+  player_score: number;
 }
 
 export interface LevelPassedEvent {
