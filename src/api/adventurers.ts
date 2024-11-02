@@ -64,7 +64,6 @@ export const getAdventurers = async (owner: string): Promise<Adventurer[]> => {
 
   for (const adventurer of adventurerData) {
     const details = await getAdventurerDetails(adventurer.id);
-    console.log("details", details);
     adventurers.push({
       ...adventurer,
       ...details,
@@ -110,9 +109,7 @@ export const getAdventurerDetails = async (tokenId: number) => {
       }),
     });
 
-    console.log("adventurer_response", adventurer_response);
     const data = await adventurer_response.json();
-    console.log("data", data);
     let adventurer = {
       id: tokenId,
       health: parseInt(data.result[0], 16),
