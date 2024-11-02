@@ -5,14 +5,15 @@ import { Toaster } from "sonner";
 import { dojoConfig } from "../dojoConfig.ts";
 import App from "./App.tsx";
 
+import i18n from "i18next";
+import { I18nextProvider } from "react-i18next";
 import { DojoProvider } from "./dojo/DojoContext.tsx";
 import { setup } from "./dojo/setup.ts";
+import localI18n from "./i18n.ts";
 import "./index.css";
 import { LoadingScreen } from "./pages/LoadingScreen.tsx";
+import { StarknetProvider } from "./providers/StarknetProvider.tsx";
 import { preloadImages } from "./utils/preloadImages.ts";
-import { I18nextProvider } from "react-i18next";
-import localI18n from "./i18n.ts";
-import i18n from "i18next";
 
 async function init() {
   const rootElement = document.getElementById("root");
@@ -32,16 +33,18 @@ async function init() {
     const setupResult = await setup(dojoConfig);
     const queryClient = new QueryClient();
     root.render(
-      <DojoProvider value={setupResult}>
-        <BrowserRouter>
-          <QueryClientProvider client={queryClient}>
-            <Toaster />
-            <I18nextProvider i18n={localI18n} defaultNS={undefined}>
-              <App />
-            </I18nextProvider>
-          </QueryClientProvider>
-        </BrowserRouter>
-      </DojoProvider>
+      <StarknetProvider>
+        <DojoProvider value={setupResult}>
+          <BrowserRouter>
+            <QueryClientProvider client={queryClient}>
+              <Toaster />
+              <I18nextProvider i18n={localI18n} defaultNS={undefined}>
+                <App />
+              </I18nextProvider>
+            </QueryClientProvider>
+          </BrowserRouter>
+        </DojoProvider>
+      </StarknetProvider>
     );
   } catch (e) {
     console.error(e);

@@ -1,7 +1,10 @@
 import { Divider, Flex, Heading, Text } from "@chakra-ui/react";
+import { useContractRead } from "@starknet-react/core";
 import CachedImage from "../../components/CachedImage";
+import { Loading } from "../../components/Loading.tsx";
 import { LS_GREEN } from "../../theme/colors";
 import { Adventurer } from "../../types/Adventurer";
+import { abi } from "./abi.ts";
 
 interface AdventurerBoxProps {
   adventurer: Adventurer;
@@ -16,10 +19,23 @@ export const AdventurerBox = ({
   isSelected,
   otherIsSelected,
 }: AdventurerBoxProps) => {
-  const amountOfCardsToPick = Math.max(1, Math.round(adventurer.level / 10));
-  const amountOfCardsToSelectFrom = Math.max(
-    2,
-    Math.round(adventurer.level / 3)
+  const { data, error, isLoading } = useContractRead({
+    abi,
+    functionName: "get_adventurer",
+    address:
+      "0x033150a5c88087a5944b887f6ece3bb0329d3d844ca632e44039ab9f1edb32a8",
+    args: [adventurer.id],
+  });
+
+  if (isLoading) return <Loading />;
+  if (error) return <div>Error loading adventurer</div>;
+
+  const level = Number((data as any)?.level ?? 1);
+
+  const amountOfCardsToPick = Math.min(4, Math.max(1, Math.floor(level / 10)));
+  const amountOfCardsToSelectFrom = Math.min(
+    10,
+    Math.max(2, Math.floor(level / 3))
   );
   return (
     <Flex
@@ -33,7 +49,7 @@ export const AdventurerBox = ({
       boxShadow={isSelected ? `0px 0px 15px 5px ${LS_GREEN}` : "none"}
       opacity={otherIsSelected ? 0.5 : 1}
     >
-      <Flex width="60%" flexDirection="column" justifyContent='center' px={8}>
+      <Flex width="60%" flexDirection="column" justifyContent="center" px={8}>
         <Flex gap={6} w="100%">
           <CachedImage
             src="/logos/skull.png"
@@ -51,7 +67,7 @@ export const AdventurerBox = ({
                 #{adventurer.id}
               </Text>
               <Text color="lsGreen" fontSize="25px" fontWeight="bold">
-                LVL: {adventurer.level}
+                LVL: {level}
               </Text>
             </Flex>
             <Text color="lsGreen" fontSize="lg" mb={4}>
@@ -88,7 +104,7 @@ export const AdventurerBox = ({
         justifyContent="center"
       >
         <Heading size="xl" color="white">
-          +{adventurer.vit * 5} HP
+          +{level} HP
         </Heading>
         <Heading size="m" color="white" textAlign="center">
           Select {amountOfCardsToPick} cards from a total of{" "}
