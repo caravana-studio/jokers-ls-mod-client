@@ -18,6 +18,7 @@ export interface PlayEvents {
   cashEvents?: CashEvent[];
   obstacleDefeated: boolean;
   itemChallengeCompleted?: number[];
+  playerAttack?: number;
 }
 
 export interface LevelPassedEvent {
@@ -73,3 +74,4 @@ export interface CashEvent {
   idx: number;
   special_idx: number;
 }
+

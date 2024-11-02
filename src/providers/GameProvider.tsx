@@ -83,6 +83,8 @@ interface IGameContext {
   refetchObstacles: () => void;
   beast: Beast | undefined;
   refetchBeast: () => void;
+  attackAnimation: number;
+  setAttackAnimation: (point: number) => void;
 }
 
 const GameContext = createContext<IGameContext>({
@@ -139,6 +141,8 @@ const GameContext = createContext<IGameContext>({
   refetchObstacles: () => {},
   beast: undefined,
   refetchBeast: () => {},
+  attackAnimation: 0,
+  setAttackAnimation: () => {},
 });
 export const useGameContext = () => useContext(GameContext);
 
@@ -185,6 +189,8 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
   );
 
   const { setAnimatedCard } = useCardAnimations();
+
+  const [attackAnimation, setAttackAnimation] = useState(0);
 
   const {
     gameId,
@@ -609,6 +615,8 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
       .then((response) => {
         if (response) {
           animatePlay(response);
+          if (response.playerAttack)
+            setAttackAnimation(response.playerAttack.valueOf());
         } else {
           setPreSelectionLocked(false);
           clearPreSelection();
@@ -847,6 +855,8 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
         lockRedirection,
         discards,
         redirectBasedOnGameState,
+        attackAnimation,
+        setAttackAnimation,
       }}
     >
       {children}

@@ -12,7 +12,8 @@ import { useResponsiveValues } from "../../theme/responsiveSettings.tsx";
 import { DiscardButton } from "./DiscardButton.tsx";
 import { Obstacle } from "./Obstacle.tsx";
 import { PlayButton } from "./PlayButton.tsx";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import Animation from "../../components/Animation.tsx";
 
 interface MidSectionProps {
   isTutorialRunning?: boolean;
@@ -28,13 +29,23 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
     playAnimation,
     beast,
     refetchBeast,
+    attackAnimation,
+    setAttackAnimation,
   } = useGameContext();
+
+  const attackAnimRef = useRef<{ runAnim: () => void }>(null);
 
   useEffect(() => {
     if (!beast) {
       refetchBeast();
     }
   }, [beast]);
+
+  useEffect(() => {
+    if (attackAnimation > 0) {
+      attackAnimRef.current?.runAnim();
+    }
+  }, [attackAnimation]);
 
   const { setNodeRef } = useDroppable({
     id: PRESELECTED_CARD_SECTION_ID,
@@ -102,6 +113,12 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
                     maxHeight="45vh"
                     zIndex={1}
                     src={`/beasts/${beast_id}.png`}
+                  />
+                  <Animation
+                    ref={attackAnimRef}
+                    gifSrc="/animations/attack_anim.gif"
+                    duration={1000}
+                    onEnd={() => setAttackAnimation(0)}
                   />
                 </Flex>
                 <Flex
