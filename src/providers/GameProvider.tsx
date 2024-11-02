@@ -42,7 +42,6 @@ interface IGameContext {
   play: () => void;
   hand: Card[];
   setHand: (cards: Card[]) => void;
-  getModifiers: (preSelectedCardIndex: number) => Card[];
   togglePreselected: (cardIndex: number) => void;
   discardAnimation: boolean;
   playAnimation: boolean;
@@ -52,8 +51,7 @@ interface IGameContext {
   ) => Promise<{ success: boolean; cards: Card[] }>;
   error: boolean;
   clearPreSelection: () => void;
-  preSelectedModifiers: { [key: number]: number[] };
-  addModifier: (cardIdx: number, modifierIdx: number) => void;
+  preSelectedModifiers: number[];
   roundRewards: RoundRewards | undefined;
   sortBy: SortBy;
   toggleSortBy: () => void;
@@ -85,6 +83,7 @@ interface IGameContext {
   refetchBeast: () => void;
   attackAnimation: number;
   setAttackAnimation: (point: number) => void;
+  togglePreselectedModifier: (cardIndex: number) => void;
 }
 
 const GameContext = createContext<IGameContext>({
@@ -99,9 +98,6 @@ const GameContext = createContext<IGameContext>({
   play: () => {},
   hand: [],
   setHand: (_) => {},
-  getModifiers: (_) => {
-    return [];
-  },
   togglePreselected: (_) => {},
   discardAnimation: false,
   playAnimation: false,
@@ -110,8 +106,7 @@ const GameContext = createContext<IGameContext>({
     new Promise((resolve) => resolve({ success: false, cards: [] })),
   error: false,
   clearPreSelection: () => {},
-  preSelectedModifiers: {},
-  addModifier: (_, __) => {},
+  preSelectedModifiers: [],
   roundRewards: undefined,
   sortBy: SortBy.RANK,
   toggleSortBy: () => {},
@@ -143,6 +138,7 @@ const GameContext = createContext<IGameContext>({
   refetchBeast: () => {},
   attackAnimation: 0,
   setAttackAnimation: () => {},
+  togglePreselectedModifier: (_) => {},
 });
 export const useGameContext = () => useContext(GameContext);
 
@@ -602,7 +598,6 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
           setTimeout(() => {
             navigate("/rewards");
           }, 1000);
-          setPreSelectionLocked(true);
         } else {
           setLockedCash(undefined);
           playEvents.cards && replaceCards(playEvents.cards);
@@ -618,7 +613,14 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     setLockRedirection(true);
     setLockedSpecialCards(specialCards);
     setLockedCash(cash);
-    play(gameId, preSelectedCards, preSelectedModifiers)
+
+    const newModifiers = [
+      ...preSelectedModifiers,
+      ...Array(preSelectedCards.length - preSelectedModifiers.length).fill(100),
+    ];
+
+    console.log(preSelectedModifiers);
+    play(gameId, preSelectedCards, newModifiers)
       .then((response) => {
         if (response) {
           animatePlay(response);
@@ -637,7 +639,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     if (!preSelectionLocked) {
       resetMultiPoints();
       setPreSelectedCards([]);
-      setPreSelectedModifiers({});
+      setPreSelectedModifiers([]);
     }
   };
 
@@ -646,26 +648,11 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     setMulti(0);
   };
 
-  const getModifiers = (preSelectedCardIndex: number) => {
-    const modifierIndexes = preSelectedModifiers[preSelectedCardIndex];
-    return (
-      modifierIndexes?.map((modifierIdx) => {
-        return hand.find((c) => c.idx === modifierIdx)!;
-      }) ?? []
-    );
-  };
-
   const cardIsPreselected = (cardIndex: number) => {
     return preSelectedCards.filter((idx) => idx === cardIndex).length > 0;
   };
 
   const unPreSelectCard = (cardIndex: number) => {
-    setPreSelectedModifiers((prev) => {
-      return {
-        ...prev,
-        [cardIndex]: [],
-      };
-    });
     setPreSelectedCards((prev) => {
       return prev.filter((idx) => cardIndex !== idx);
     });
@@ -687,6 +674,18 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
       } else if (preSelectedCards.length < 5) {
         preSelectCard(cardIndex);
         preselectCardSound();
+      }
+    }
+  };
+
+  const togglePreselectedModifier = (cardIndex: number) => {
+    if (!preSelectionLocked) {
+      if (preSelectedModifiers.includes(cardIndex)) {
+        setPreSelectedModifiers(
+          preSelectedModifiers.filter((idx) => idx !== cardIndex)
+        );
+      } else {
+        setPreSelectedModifiers([...preSelectedModifiers, cardIndex]);
       }
     }
   };
@@ -752,19 +751,6 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
         setPreSelectionLocked(false);
       });
     return discardPromise;
-  };
-
-  const addModifier = (cardIdx: number, modifierIdx: number) => {
-    const modifiers = preSelectedModifiers[cardIdx] ?? [];
-    if (modifiers.length < 1) {
-      const newModifiers = [...modifiers, modifierIdx];
-      setPreSelectedModifiers((prev) => {
-        return {
-          ...prev,
-          [cardIdx]: newModifiers,
-        };
-      });
-    }
   };
 
   const onShopSkip = () => {
@@ -836,12 +822,11 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     setPreSelectedCards,
     play: onPlayClick,
     setHand,
-    getModifiers,
     togglePreselected,
+    togglePreselectedModifier,
     discard: onDiscardClick,
     discardEffectCard: onDiscardEffectCard,
     clearPreSelection,
-    addModifier,
     toggleSortBy,
     onShopSkip,
     discardSpecialCard: onDiscardSpecialCard,

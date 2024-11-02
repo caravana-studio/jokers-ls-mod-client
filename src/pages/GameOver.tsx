@@ -24,7 +24,7 @@ export const GameOver = () => {
 
   const gameId = Number(params.gameId);
 
-  const { restartGame, setIsRageRound } = useGameContext();
+  const { restartGame, setIsRageRound, executeCreateGame } = useGameContext();
 
   const { play: looseSound, stop: stopLooseSound } = useAudio(looseSfx);
   const { data: fullLeaderboard } = useGetLeaderboard();
@@ -68,14 +68,14 @@ export const GameOver = () => {
         gap={4}
       >
         <Box>
-          <Heading mb={"40px"} size="xl" textAlign={"center"}>
+          <Heading mb={"40px"} size="xxl" textAlign={"center"}>
             {t("game-over.gameOver-msj")}
           </Heading>
           <Text size={"md"} textAlign={"center"} mb={10} mx={6}>
             {congratulationsMsj}
           </Text>
           <Leaderboard gameId={gameId} lines={4} />
-          <Flex mt={16} justifyContent={"space-between"} gap={4}>
+          <Flex mt={16} justifyContent={"space-between"} gap={12}>
             <Button
               width={"50%"}
               variant="solid"
@@ -99,7 +99,7 @@ export const GameOver = () => {
                 localStorage.removeItem(GAME_ID);
                 restartGame();
                 stopLooseSound();
-                navigate("/demo");
+                executeCreateGame();
               }}
             >
               {t("game-over.btn.gameOver-newGame-btn")}

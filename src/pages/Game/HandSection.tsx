@@ -7,7 +7,7 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import { useDndContext, useDroppable } from "@dnd-kit/core";
+import { useDroppable } from "@dnd-kit/core";
 import { useState } from "react";
 import { isMobile } from "react-device-detect";
 import { useTranslation } from "react-i18next";
@@ -17,10 +17,10 @@ import { SortBy } from "../../components/SortBy";
 import { TiltCard } from "../../components/TiltCard";
 import { HAND_SECTION_ID } from "../../constants/general";
 import { CARD_HEIGHT, CARD_WIDTH } from "../../constants/visualProps";
+import { useBeastPlayer } from "../../dojo/queries/useBeast";
 import { useChallengePlayer } from "../../dojo/queries/useChallenge";
 import { useGameContext } from "../../providers/GameProvider";
 import { useResponsiveValues } from "../../theme/responsiveSettings";
-import { useBeastPlayer } from "../../dojo/queries/useBeast";
 
 const TRANSLATE_Y_PX = isMobile ? 3 : 10;
 
@@ -29,6 +29,7 @@ export const HandSection = () => {
     hand,
     preSelectedCards,
     togglePreselected,
+    togglePreselectedModifier,
     discardEffectCard,
     preSelectedModifiers,
     roundRewards,
@@ -43,8 +44,6 @@ export const HandSection = () => {
   const energyLeft = beastPlayer?.energy ?? 0;
   const canPlay = handsLeft > 0 || energyLeft > 0;
 
-  const { activeNode } = useDndContext();
-
   const { setNodeRef } = useDroppable({
     id: HAND_SECTION_ID,
   });
@@ -52,9 +51,7 @@ export const HandSection = () => {
   const cardIsPreselected = (cardIndex: number) => {
     return (
       preSelectedCards.filter((idx) => idx === cardIndex).length > 0 ||
-      Object.values(preSelectedModifiers).some((array) =>
-        array.includes(cardIndex)
-      )
+      preSelectedModifiers.includes(cardIndex)
     );
   };
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -176,7 +173,9 @@ export const HandSection = () => {
                       scale={cardScale}
                       cursor={"pointer"}
                       onClick={() => {
-                        togglePreselected(card.idx);
+                        card.isModifier
+                          ? togglePreselectedModifier(card.idx)
+                          : togglePreselected(card.idx);
                       }}
                     />
                   </Box>

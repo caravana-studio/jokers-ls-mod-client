@@ -1,7 +1,6 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
 import { useDroppable } from "@dnd-kit/core";
 import { useParams } from "react-router-dom";
-import CachedImage from "../../components/CachedImage.tsx";
 import { ProgressBar } from "../../components/CompactRoundData/ProgressBar.tsx";
 import { CurrentPlay } from "../../components/CurrentPlay.tsx";
 import { MultiPoints } from "../../components/MultiPoints.tsx";
@@ -20,8 +19,29 @@ interface MidSectionProps {
 }
 
 export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
-  const { beast, refetchBeast, attackAnimation, setAttackAnimation } =
-    useGameContext();
+  const {
+    preSelectedCards,
+    hand,
+    togglePreselected,
+    discardAnimation,
+    playAnimation,
+    beast,
+    refetchBeast,
+    attackAnimation,
+    setAttackAnimation,
+  } = useGameContext();
+
+  useEffect(() => {
+    if (!beast) {
+      refetchBeast();
+    }
+  }, [beast]);
+
+  const { setNodeRef } = useDroppable({
+    id: PRESELECTED_CARD_SECTION_ID,
+  });
+
+  const { mode } = useParams();
 
   const tier = beast?.tier ?? 0;
   const level = beast?.level ?? 0;
@@ -52,12 +72,6 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
       attackAnimRef.current?.runAnim();
     }
   }, [attackAnimation]);
-
-  const { setNodeRef } = useDroppable({
-    id: PRESELECTED_CARD_SECTION_ID,
-  });
-
-  const { mode } = useParams();
 
   return (
     <Flex
