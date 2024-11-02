@@ -27,7 +27,9 @@ export const useGameState = () => {
   const [playAnimation, setPlayAnimation] = useState(false);
   const [error, setError] = useState(false);
   const [preSelectedCards, setPreSelectedCards] = useState<number[]>([]);
-  const [preSelectedModifiers, setPreSelectedModifiers] = useState<number[]>([]);
+  const [preSelectedModifiers, setPreSelectedModifiers] = useState<number[]>(
+    []
+  );
   const [hand, setHand] = useState<Card[]>([]);
   const [roundRewards, setRoundRewards] = useState<RoundRewards | undefined>(
     undefined
@@ -40,7 +42,9 @@ export const useGameState = () => {
   const [isRageRound, setIsRageRound] = useState(false);
   const [rageCards, setRageCards] = useState<Card[]>([]);
   const [beast, setBeast] = useState<Beast | undefined>(undefined);
-  const [obstacles, setObstacles] = useState<{ id: number; completed: boolean }[]>([]);
+  const [obstacles, setObstacles] = useState<
+    { id: number; completed: boolean }[]
+  >([]);
 
   const sortBy: SortBy = useMemo(
     () => (sortBySuit ? SortBy.SUIT : SortBy.RANK),
@@ -81,7 +85,10 @@ export const useGameState = () => {
   }, [dojoHand]);
 
   useEffect(() => {
-    if (beastFetchData?.current_health != beast?.current_health)
+    if (
+      beastFetchData &&
+      beastFetchData?.current_health != beast?.current_health
+    )
       setBeast(beastFetchData);
   }, [beastFetchData]);
 
@@ -97,12 +104,7 @@ export const useGameState = () => {
 
   useEffect(() => {
     if (preSelectedCards.length > 0) {
-      let play = checkHand(
-        hand,
-        preSelectedCards,
-        specialCards,
-        []
-      );
+      let play = checkHand(hand, preSelectedCards, specialCards, []);
       setPreSelectedPlay(play);
       setMultiAndPoints(play);
     } else {

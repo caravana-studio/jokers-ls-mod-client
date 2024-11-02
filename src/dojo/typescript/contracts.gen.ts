@@ -32,26 +32,26 @@ export async function setupWorld(provider: DojoProvider) {
             }
         };
             
-
-    
-        // Call the `create_level` system with the specified Account and calldata
-        const create_level = async (props: { account: Account, game_id: number }) => {
-            try {
-                return await provider.execute(
-                    props.account,
-                    {
-                        contractName: contract_name,
-                        entrypoint: "create_level",
-                        calldata: [props.game_id],
-                    },
-                    "jokers_of_neon"
-                );
-            } catch (error) {
-                console.error("Error executing create_level:", error);
-                throw error;
-            }
-        };
-            
+    // Call the `create_level` system with the specified Account and calldata
+    const create_level = async (props: {
+      account: Account;
+      game_id: number;
+    }) => {
+      try {
+        return await provider.execute(
+          props.account,
+          {
+            contractName: contract_name,
+            entrypoint: "create_level",
+            calldata: [props.game_id],
+          },
+          "jokers_of_neon"
+        );
+      } catch (error) {
+        console.error("Error executing create_level:", error);
+        throw error;
+      }
+    };
 
     
         // Call the `create_reward` system with the specified Account and calldata

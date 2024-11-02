@@ -2,6 +2,7 @@ import { shortString } from "starknet";
 import { GAME_ID_EVENT, GAME_OVER_EVENT } from "../constants/dojoEventKeys";
 import { getCardsFromEvents } from "../utils/getCardsFromEvents";
 import { getCreateLevelEvents } from "../utils/getCreateLevelEvents";
+import { getCreateRewardsEvents } from "../utils/getCreateRewardsEvent";
 import { getNumberValueFromEvents } from "../utils/getNumberValueFromEvent";
 import { getPlayEvents } from "../utils/playEvents/getPlayEvents";
 import {
@@ -200,10 +201,74 @@ export const useGameActions = () => {
     }
   };
 
+  const createReward = async (gameId: number, rewardId: number) => {
+    try {
+      showTransactionToast();
+      const { transaction_hash } = await client.game_system.create_reward({
+        account,
+        game_id: gameId,
+        reward_index: rewardId,
+      });
+
+      showTransactionToast(transaction_hash);
+
+      const tx = await account.waitForTransaction(transaction_hash, {
+        retryInterval: 100,
+      });
+
+      updateTransactionToast(transaction_hash, tx.isSuccess());
+
+      if (tx.isSuccess()) {
+        const events = tx.events;
+        console.log("Success at createReward:", tx);
+        return getCreateRewardsEvents(events);
+      } else {
+        console.error("Error at createReward:", tx);
+        return undefined;
+      }
+    } catch (e) {
+      failedTransactionToast();
+      console.log(e);
+      return undefined;
+    }
+  };
+
+  const selectRewards = async (gameId: number, cardsIndex: number[]) => {
+    try {
+      showTransactionToast();
+      const { transaction_hash } = await client.game_system.select_reward({
+        account,
+        game_id: gameId,
+        cards_index: cardsIndex,
+      });
+
+      showTransactionToast(transaction_hash);
+
+      const tx = await account.waitForTransaction(transaction_hash, {
+        retryInterval: 100,
+      });
+
+      updateTransactionToast(transaction_hash, tx.isSuccess());
+
+      if (tx.isSuccess()) {
+        const events = tx.events;
+        console.log("Success at selectRewards:", tx);
+        return getCreateLevelEvents(events);
+      } else {
+        console.error("Error at selectRewards:", tx);
+        return undefined;
+      }
+    } catch (e) {
+      failedTransactionToast();
+      console.log(e);
+      return undefined;
+    }
+  };
+
   const discard = async (
     gameId: number,
     cards: number[],
-    modifiers: number[] 
+    modifiers: number[]
   ) => {
     try {
       showTransactionToast();
@@ -303,11 +368,7 @@ export const useGameActions = () => {
     }
   };
 
-  const play = async (
-    gameId: number,
-    cards: number[],
-    modifiers: number[]
-  ) => {
+  const play = async (gameId: number, cards: number[], modifiers: number[]) => {
     try {
       showTransactionToast();
       const { transaction_hash } = await client.game_system.play({
@@ -405,5 +466,7 @@ export const useGameActions = () => {
     useAdventurer,
     skipAdventurer,
     selectAdventurerCs,
+    createReward,
+    selectRewards,
   };
 };

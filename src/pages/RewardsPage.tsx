@@ -1,4 +1,4 @@
-import { Button } from "@chakra-ui/react";
+import { Box, Button, Center, Flex } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Background } from "../components/Background";
@@ -6,25 +6,33 @@ import { PositionedDiscordLink } from "../components/DiscordLink";
 import { PositionedGameMenu } from "../components/GameMenu";
 import { useGameContext } from "../providers/GameProvider";
 import { runConfettiAnimation } from "../utils/runConfettiAnimation";
+import { TopSection } from "./Game/TopSection";
+import { FullScreenCardContainer } from "./FullScreenCardContainer";
+import RewardsSection from "./RewardsSection";
 
 export const RewardsPage = () => {
-  const { roundRewards, createNewLevel } = useGameContext();
-  const navigate = useNavigate();
-
   useEffect(() => {
     runConfettiAnimation();
   }, []);
 
-  if (!roundRewards) {
-    navigate("/redirect/store");
-  }
-
   return (
-    <Background type="game" dark bgDecoration>
+    <Background type="skulls" dark bgDecoration>
       <PositionedGameMenu decoratedPage />
-      {/* <RewardsDetail roundRewards={roundRewards} /> */}
-      <Button onClick={() => createNewLevel()}>Continue</Button>
-      <PositionedDiscordLink />
+      <Flex direction={"column"}>
+        <TopSection inRewardsPag />
+        <FullScreenCardContainer>
+          <RewardsSection />
+        </FullScreenCardContainer>
+        {/* <Button
+          width={"30%"}
+          mt={8}
+          alignSelf={"center"}
+          onClick={() => createNewLevel()}
+        >
+          Continue
+        </Button> */}
+        <PositionedDiscordLink />
+      </Flex>
     </Background>
   );
 };

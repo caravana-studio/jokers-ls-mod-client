@@ -1,30 +1,33 @@
-import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Button, Center, Flex } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { Background } from "../components/Background";
+import { PositionedDiscordLink } from "../components/DiscordLink";
 import { PositionedGameMenu } from "../components/GameMenu";
-import { TiltCard } from "../components/TiltCard";
-import { useBlisterPackResult } from "../dojo/queries/useBlisterPackResult";
-import { useGame } from "../dojo/queries/useGame";
 import { useGameContext } from "../providers/GameProvider";
-import { LS_GREEN } from "../theme/colors";
-import { useResponsiveValues } from "../theme/responsiveSettings";
+import { runConfettiAnimation } from "../utils/runConfettiAnimation";
+import { TopSection } from "./Game/TopSection";
+import { FullScreenCardContainer } from "./FullScreenCardContainer";
+import RewardsSection from "./RewardsSection";
+import { useBlisterPackResult } from "../dojo/queries/useBlisterPackResult";
 import { Card } from "../types/Card";
 import { getCardUniqueId } from "../utils/getCardUniqueId";
-import { FullScreenCardContainer } from "./FullScreenCardContainer";
-import { Collab } from "./Game/collab.tsx";
+import { useResponsiveValues } from "../theme/responsiveSettings";
+import { LS_GREEN } from "../theme/colors";
+import { TiltCard } from "../components/TiltCard";
 
-export const ChooseModifiersPage = () => {
-  const [isLoading, setIsLoading] = useState(false);
+export const RewardsSelection = () => {
+  const { mode } = useParams();
   const [cards, setCards] = useState<Card[]>();
   const [cardsToKeep, setCardsToKeep] = useState<Card[]>([]);
-  const { isSmallScreen, cardScale } = useResponsiveValues();
-  const adjustedCardScale = cardScale * 0.75;
-  const maxCards = 5;
-
-  const { selectModifierCards, redirectBasedOnGameState, lockRedirection } =
-    useGameContext();
-  const game = useGame();
+  const { selectNewRewards } = useGameContext();
+  const [isLoading, setIsLoading] = useState(false);
   const blisterPackResult = useBlisterPackResult();
+  console.log(blisterPackResult);
+
+  const { isSmallScreen, cardScale } = useResponsiveValues();
+  const adjustedCardScale = cardScale * 1.5;
+  const maxCards = mode === "specials" ? 1 : 3;
 
   useEffect(() => {
     if (blisterPackResult?.cardsPicked) {
@@ -35,46 +38,27 @@ export const ChooseModifiersPage = () => {
     }
   }, [blisterPackResult]);
 
+  useEffect(() => {
+    runConfettiAnimation();
+  }, []);
+
   const confirmSelectCards = () => {
     setIsLoading(true);
-    selectModifierCards(cardsToKeep.map((c) => c.idx)).finally(() => {
+    selectNewRewards(cardsToKeep.map((c) => c.idx)).finally(() => {
       setIsLoading(false);
     });
     setCards([]);
   };
 
+  // if (!roundRewards) {
+  //   navigate("/redirect/store");
+  // }
+
   return (
-    <Background bgDecoration type="skulls">
-      <Flex
-        height="100%"
-        width="100%"
-        flexDirection="column"
-        justifyContent="space-between"
-        alignItems="center"
-      >
-        <PositionedGameMenu decoratedPage />
-        <Box w="100%">
-          <Heading size={"xxl"} textAlign={"center"} variant="neonGreen">
-            - Modifier cards -
-          </Heading>
-          <Text
-            size={"l"}
-            width={isSmallScreen ? "100%" : "50%"}
-            margin={"0 auto"}
-            textAlign={"center"}
-            lineHeight={1}
-          >
-            Modifier cards add unique effects to individual cards when played.
-            Once added to your deck, they can be used whenever drawn, allowing
-            for flexible and strategic play.
-          </Text>
-        </Box>
-        <Heading size={"xl"} textAlign={"center"} variant="neonGreen" mt={2}>
-          Choose up to 5
-        </Heading>
-        <FullScreenCardContainer
-          sx={{ width: isSmallScreen ? "100%" : "60%", margin: "0 auto" }}
-        >
+    <Background type="skulls" dark bgDecoration>
+      <PositionedGameMenu decoratedPage />
+      <Flex direction={"column"}>
+        <FullScreenCardContainer>
           {cards?.map((card, index) => {
             return (
               <Flex
@@ -126,16 +110,16 @@ export const ChooseModifiersPage = () => {
             );
           })}
         </FullScreenCardContainer>
-        <Flex justifyContent={"center"} my={4}>
-          <Button onClick={confirmSelectCards} isDisabled={isLoading}>
-            Continue
-          </Button>
-        </Flex>
-        {!isSmallScreen && (
-          <Box position={"fixed"} left={"80px"} top={12}>
-            <Collab />
-          </Box>
-        )}
+
+        <Button
+          width={"30%"}
+          mt={8}
+          alignSelf={"center"}
+          onClick={confirmSelectCards}
+        >
+          Continue
+        </Button>
+        <PositionedDiscordLink />
       </Flex>
     </Background>
   );
