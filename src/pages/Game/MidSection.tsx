@@ -12,7 +12,7 @@ import { useResponsiveValues } from "../../theme/responsiveSettings.tsx";
 import { DiscardButton } from "./DiscardButton.tsx";
 import { Obstacle } from "./Obstacle.tsx";
 import { PlayButton } from "./PlayButton.tsx";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import AttackAnimation from "../../components/Animation/AttackAnimation.tsx";
 
 interface MidSectionProps {
@@ -33,12 +33,25 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
     setAttackAnimation,
   } = useGameContext();
 
+  const tier = beast?.tier ?? 0;
+  const level = beast?.level ?? 0;
+  const name = "Nameless King";
+  const beast_id = beast?.beast_id ?? 0;
+  const maxHealth = beast?.health ?? 0;
+  const lifeLeft = beast?.current_health ?? 0;
+
   const attackAnimRef = useRef<{ runAnim: () => void }>(null);
+  const [hpBarValue, setHpBarValue] = useState(
+    (lifeLeft.valueOf() / maxHealth.valueOf()) * 100
+  );
 
   useEffect(() => {
     if (!beast) {
       refetchBeast();
     }
+
+    if (lifeLeft !== 0 && maxHealth !== 0)
+      setHpBarValue((lifeLeft.valueOf() / maxHealth.valueOf()) * 100);
   }, [beast]);
 
   useEffect(() => {
@@ -53,13 +66,6 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
   const { cardScale } = useResponsiveValues();
 
   const { mode } = useParams();
-
-  const tier = beast?.tier ?? 0;
-  const level = beast?.level ?? 0;
-  const name = "Nameless King";
-  const beast_id = beast?.beast_id ?? 0;
-  const maxHealth = beast?.health ?? 0;
-  const lifeLeft = beast?.current_health ?? 0;
 
   return (
     <Flex
@@ -114,7 +120,12 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
                     duration={400}
                     damagePoints={attackAnimation}
                     image={`/beasts/${beast_id}.png`}
-                    onEnd={() => setAttackAnimation(0)}
+                    onEnd={() => {
+                      setHpBarValue(
+                        (lifeLeft.valueOf() / maxHealth.valueOf()) * 100
+                      );
+                      setAttackAnimation(0);
+                    }}
                   />
                 </Flex>
                 <Flex
@@ -140,7 +151,7 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
                 </Flex>
                 <Box width="100%">
                   <ProgressBar
-                    progress={(lifeLeft.valueOf() / maxHealth.valueOf()) * 100}
+                    progress={hpBarValue}
                     color={BEAST_RED}
                     borderColor={BEAST_RED}
                   />
