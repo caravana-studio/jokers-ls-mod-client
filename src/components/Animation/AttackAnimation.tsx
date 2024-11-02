@@ -22,7 +22,10 @@ const AttackAnimation = forwardRef(
     const [showDamage, setShowDamage] = useState(false);
     const [shake, setShake] = useState(false);
     const attackParticle = "/animations/attack_anim_02.gif";
+
     const attackParticleAudio = "/music/attack.mp3";
+    const takeDamageAudio = "/music/attack_02.mp3";
+    const audioRef = useRef<HTMLAudioElement | null>(null);
 
     const runAnim = () => {
       animationRef.current?.runAnim();
@@ -33,6 +36,11 @@ const AttackAnimation = forwardRef(
     }));
 
     const handleOnParticleEnd = () => {
+      if (audioRef.current) {
+        audioRef.current.currentTime = 0;
+        audioRef.current.play();
+      }
+
       setShake(true);
       setShowDamage(true);
 
@@ -64,7 +72,6 @@ const AttackAnimation = forwardRef(
             position: "relative",
           }}
         />
-
         <Box
           position={"absolute"}
           top={0}
@@ -81,6 +88,7 @@ const AttackAnimation = forwardRef(
             onEnd={handleOnParticleEnd}
           />
         </Box>
+        <audio ref={audioRef} src={takeDamageAudio} preload="auto" />
 
         {showDamage && (
           <span
