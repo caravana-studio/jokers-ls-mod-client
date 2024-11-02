@@ -19,9 +19,7 @@ export const DiscardButton = ({ highlight = false }: DiscardButtonProps) => {
   const { mode } = useParams();
 
   const game = useGame();
-
-  //TODO: draw all the skulls and make the skulls used darker
-  //game?.max_hands;
+  const maxDiscard = game?.max_discard ?? 0;
 
   const challengePlayer = useChallengePlayer();
   const discards = challengePlayer?.discards ?? 0;
@@ -83,8 +81,8 @@ export const DiscardButton = ({ highlight = false }: DiscardButtonProps) => {
         </Button>
       ) : (
         <Flex direction="row" align="center" gap={8}>
-          {Array.from({ length: discards }).map((_, index) => (
-            <SkullIcon key={index} />
+          {Array.from({ length: maxDiscard }).map((_, index) => (
+            <SkullIcon key={index} used={index >= discards} />
           ))}
         </Flex>
       )}
