@@ -172,10 +172,43 @@ export const useGameActions = () => {
     }
   };
 
+  const createReward = async (gameId: number, rewardId: number) => {
+    try {
+      showTransactionToast();
+      const { transaction_hash } = await client.game_system.create_reward({
+        account,
+        game_id: gameId,
+        reward_index: rewardId,
+      });
+
+      showTransactionToast(transaction_hash);
+
+      const tx = await account.waitForTransaction(transaction_hash, {
+        retryInterval: 100,
+      });
+
+      updateTransactionToast(transaction_hash, tx.isSuccess());
+
+      //  TODO: get events
+      // if (tx.isSuccess()) {
+      //   const events = tx.events;
+      //   console.log("Success at createLevel:", tx);
+      //   return getCreateLevelEvents(events);
+      // } else {
+      //   console.error("Error at createLevel:", tx);
+      //   return undefined;
+      // }
+    } catch (e) {
+      failedTransactionToast();
+      console.log(e);
+      return undefined;
+    }
+  };
+
   const discard = async (
     gameId: number,
     cards: number[],
-    modifiers: number[] 
+    modifiers: number[]
   ) => {
     try {
       showTransactionToast();
@@ -275,11 +308,7 @@ export const useGameActions = () => {
     }
   };
 
-  const play = async (
-    gameId: number,
-    cards: number[],
-    modifiers: number[]
-  ) => {
+  const play = async (gameId: number, cards: number[], modifiers: number[]) => {
     try {
       showTransactionToast();
       const { transaction_hash } = await client.game_system.play({
