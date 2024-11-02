@@ -15,12 +15,12 @@ import { useTranslation } from "react-i18next";
 import CustomScrollbar from "../../components/CustomScrollbar/CustomScrollbar";
 import { TiltCard } from "../../components/TiltCard";
 import { PLAYS_DATA } from "../../constants/plays";
-import { BLUE_LIGHT } from "../../theme/colors";
+import { LS_GREEN } from "../../theme/colors";
 import { useResponsiveValues } from "../../theme/responsiveSettings";
 import theme from "../../theme/theme";
 import { Card } from "../../types/Card";
 
-const { blueLight, blue, violet } = theme.colors;
+const { blue, violet, lsGreen, white } = theme.colors;
 
 interface PlaysAvailableTableProps {
   maxHeight?: {
@@ -47,9 +47,9 @@ export const PlaysAvailableTable: React.FC<PlaysAvailableTableProps> = ({
       {plays ? (
         <TableContainer
           maxHeight={maxHeight}
-          border={`2px solid ${blueLight}`}
+          border={`1px solid ${lsGreen}`}
           borderRadius={"25px"}
-          boxShadow={`0px 0px 20px 15px ${blue}`}
+          boxShadow={`0px 0px 20px 10px ${lsGreen}`}
           backgroundColor="rgba(0, 0, 0, 1)"
         >
           <CustomScrollbar>
@@ -74,9 +74,9 @@ export const PlaysAvailableTable: React.FC<PlaysAvailableTableProps> = ({
                 <Tr>
                   {
                     <>
-                      <Td fontSize={isSmallScreen ? 12 : 17}>
+                      {/* <Td fontSize={isSmallScreen ? 12 : 17}>
                         {t("game.plays.table.level-head").toUpperCase()}
-                      </Td>
+                      </Td> */}
                       <Td fontSize={isSmallScreen ? 12 : 17}>
                         {t("game.plays.table.hand-head").toUpperCase()}
                       </Td>
@@ -88,7 +88,7 @@ export const PlaysAvailableTable: React.FC<PlaysAvailableTableProps> = ({
                 </Tr>
                 <Tr>
                   <Td
-                    colSpan={3}
+                    colSpan={2}
                     sx={{
                       position: "sticky",
                       top: "0px",
@@ -115,6 +115,7 @@ export const PlaysAvailableTable: React.FC<PlaysAvailableTableProps> = ({
                         wordWrap: "break-word",
                         overflowWrap: "break-word",
                       }}
+                      fontSize={"1.2rem"}
                     >
                       {PLAYS_DATA[playsExampleIndex].description}
                     </Text>
@@ -122,7 +123,7 @@ export const PlaysAvailableTable: React.FC<PlaysAvailableTableProps> = ({
                 </Tr>
                 <Tr>
                   <Td
-                    colSpan={3}
+                    colSpan={2}
                     sx={{ position: "sticky", backgroundColor: "black" }}
                     p={2}
                   >
@@ -174,7 +175,7 @@ export const PlaysAvailableTable: React.FC<PlaysAvailableTableProps> = ({
                 {plays &&
                   [...plays].map((play, index) => {
                     const textColor =
-                      playsExampleIndex === index ? BLUE_LIGHT : "white";
+                      playsExampleIndex === index ? LS_GREEN : "white";
                     const opacitySx = {
                       opacity: 1,
                     };
@@ -184,7 +185,7 @@ export const PlaysAvailableTable: React.FC<PlaysAvailableTableProps> = ({
                         sx={opacitySx}
                         textAlign={"center"}
                         textColor={textColor}
-                        fontSize={isSmallScreen ? 9 : 13}
+                        fontSize={isSmallScreen ? 13 : 18}
                       >
                         {play.name}
                       </Td>
@@ -198,11 +199,11 @@ export const PlaysAvailableTable: React.FC<PlaysAvailableTableProps> = ({
                           justifyContent={"center"}
                         >
                           <Box
-                            backgroundColor={`${blue}`}
+                            backgroundColor={`transparent`}
                             borderRadius={4}
                             width={isSmallScreen ? "40px" : "60px"}
                             mr={1}
-                            boxShadow={`0px 0px 10px 6px ${blue}`}
+                            boxShadow={`0px 0px 5px 3px ${white}`}
                             fontWeight={"400"}
                           >
                             {play.points.toString()}
@@ -211,11 +212,11 @@ export const PlaysAvailableTable: React.FC<PlaysAvailableTableProps> = ({
                             x
                           </Heading>
                           <Box
-                            backgroundColor={"neonPink"}
+                            backgroundColor={"transparent"}
                             borderRadius={4}
                             width={isSmallScreen ? "40px" : "60px"}
                             ml={1}
-                            boxShadow={`0px 0px 10px 6px ${violet}`}
+                            boxShadow={`0px 0px 5px 3px ${lsGreen}`}
                             fontWeight={"400"}
                           >
                             {play.multi.toString()}
