@@ -10,4 +10,5 @@ export interface Adventurer {
   int: number;
   wis: number;
   luck: number;
+  health?: number;
 }

@@ -1,4 +1,4 @@
-import { Divider, Flex, Grid, Heading, Text } from "@chakra-ui/react";
+import { Divider, Flex, Heading, Text } from "@chakra-ui/react";
 import CachedImage from "../../components/CachedImage";
 import { LS_GREEN } from "../../theme/colors";
 import { Adventurer } from "../../types/Adventurer";
@@ -33,7 +33,7 @@ export const AdventurerBox = ({
       boxShadow={isSelected ? `0px 0px 15px 5px ${LS_GREEN}` : "none"}
       opacity={otherIsSelected ? 0.5 : 1}
     >
-      <Flex width="60%" flexDirection="column" py={4} px={8}>
+      <Flex width="60%" flexDirection="column" justifyContent='center' px={8}>
         <Flex gap={6} w="100%">
           <CachedImage
             src="/logos/skull.png"
@@ -59,22 +59,23 @@ export const AdventurerBox = ({
             </Text>
           </Flex>
         </Flex>
-        <Flex>
-          <Grid
-            templateColumns="repeat(4, 1fr)"
-            textAlign={"right"}
-            gap={1}
-            mb={4}
-          >
+        <Flex justifyContent={"space-between"}>
+          <Flex flexDirection={"column"} gap={2}>
             <Text color="lsGreen">{adventurer.gold} GOLD</Text>
             <Text color="lsGreen">{adventurer.dex} DEX</Text>
+          </Flex>
+          <Flex flexDirection={"column"} gap={2}>
             <Text color="lsGreen">{adventurer.vit} VIT</Text>
             <Text color="lsGreen">{adventurer.cha} CHA</Text>
+          </Flex>
+          <Flex flexDirection={"column"} gap={2}>
             <Text color="lsGreen">{adventurer.str} STR</Text>
             <Text color="lsGreen">{adventurer.int} INT</Text>
+          </Flex>
+          <Flex flexDirection={"column"} gap={2}>
             <Text color="lsGreen">{adventurer.wis} WIS</Text>
             <Text color="lsGreen">{adventurer.luck} LUCK</Text>
-          </Grid>
+          </Flex>
         </Flex>
       </Flex>
       <Divider borderColor="white" orientation="vertical" />
