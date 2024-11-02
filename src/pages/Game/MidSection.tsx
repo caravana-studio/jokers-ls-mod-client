@@ -111,7 +111,7 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
                 >
                   <AttackAnimation
                     ref={attackAnimRef}
-                    duration={1000}
+                    duration={400}
                     damagePoints={attackAnimation}
                     image={`/beasts/${beast_id}.png`}
                     onEnd={() => setAttackAnimation(0)}

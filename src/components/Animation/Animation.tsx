@@ -3,20 +3,28 @@ import React, {
   useEffect,
   useImperativeHandle,
   forwardRef,
+  useRef,
 } from "react";
 
 type AnimationProps = {
   gifSrc: string;
   duration: number;
   onEnd?: () => void;
+  sfxSrc: string;
 };
 
 const Animation = forwardRef(
-  ({ gifSrc, duration, onEnd }: AnimationProps, ref) => {
+  ({ gifSrc, duration, onEnd, sfxSrc }: AnimationProps, ref) => {
     const [animKey, setAnimKey] = useState<number>(0);
     const [isRunning, setIsRunning] = useState<boolean>(false);
+    const audioRef = useRef<HTMLAudioElement | null>(null);
 
     const runAnim = () => {
+      if (audioRef.current) {
+        audioRef.current.currentTime = 0;
+        audioRef.current.play();
+      }
+
       setAnimKey((prevKey) => prevKey + 1);
       setIsRunning(true);
     };
@@ -38,6 +46,7 @@ const Animation = forwardRef(
 
     return (
       <div style={{ width: "100%", height: "100%", position: "relative" }}>
+        <audio ref={audioRef} src={sfxSrc} preload="auto" />
         {isRunning && (
           <img
             key={animKey}
@@ -45,7 +54,7 @@ const Animation = forwardRef(
             style={{
               width: "100%",
               height: "100%",
-              objectFit: "cover",
+              objectFit: "contain",
               position: "absolute",
               top: 0,
               left: 0,

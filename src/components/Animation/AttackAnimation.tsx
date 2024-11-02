@@ -21,10 +21,18 @@ const AttackAnimation = forwardRef(
     const animationRef = useRef<{ runAnim: () => void }>(null);
     const [showDamage, setShowDamage] = useState(false);
     const [shake, setShake] = useState(false);
-    const attackParticle = "/animations/attack_anim.gif";
+    const attackParticle = "/animations/attack_anim_02.gif";
+    const attackParticleAudio = "/music/attack.mp3";
 
     const runAnim = () => {
       animationRef.current?.runAnim();
+    };
+
+    useImperativeHandle(ref, () => ({
+      runAnim,
+    }));
+
+    const handleOnParticleEnd = () => {
       setShake(true);
       setShowDamage(true);
 
@@ -35,10 +43,6 @@ const AttackAnimation = forwardRef(
         if (onEnd) onEnd();
       }, 600);
     };
-
-    useImperativeHandle(ref, () => ({
-      runAnim,
-    }));
 
     return (
       <div
@@ -72,7 +76,9 @@ const AttackAnimation = forwardRef(
           <Animation
             ref={animationRef}
             gifSrc={attackParticle}
+            sfxSrc={attackParticleAudio}
             duration={duration}
+            onEnd={handleOnParticleEnd}
           />
         </Box>
 
