@@ -604,7 +604,14 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     setLockRedirection(true);
     setLockedSpecialCards(specialCards);
     setLockedCash(cash);
-    play(gameId, preSelectedCards, preSelectedModifiers)
+
+    const newModifiers = [
+      ...preSelectedModifiers,
+      ...Array(preSelectedCards.length - preSelectedModifiers.length).fill(100),
+    ];
+
+    console.log(preSelectedModifiers);
+    play(gameId, preSelectedCards, newModifiers)
       .then((response) => {
         if (response) {
           animatePlay(response);
