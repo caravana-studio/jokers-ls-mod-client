@@ -32,6 +32,54 @@ export async function setupWorld(provider: DojoProvider) {
       }
     };
 
+    // Call the `create_reward` system with the specified Account and calldata
+    const create_reward = async (props: {
+      account: Account;
+      game_id: number;
+      reward_index: number;
+    }) => {
+      try {
+        return await provider.execute(
+          props.account,
+          {
+            contractName: contract_name,
+            entrypoint: "create_reward",
+            calldata: [props.game_id, props.reward_index],
+          },
+          "jokers_of_neon"
+        );
+      } catch (error) {
+        console.error("Error executing create_reward:", error);
+        throw error;
+      }
+    };
+
+    // Call the `select_reward` system with the specified Account and calldata
+    const select_reward = async (props: {
+      account: Account;
+      game_id: number;
+      cards_index: number[];
+    }) => {
+      try {
+        return await provider.execute(
+          props.account,
+          {
+            contractName: contract_name,
+            entrypoint: "select_reward",
+            calldata: [
+              props.game_id,
+              props.cards_index.length,
+              ...props.cards_index,
+            ],
+          },
+          "jokers_of_neon"
+        );
+      } catch (error) {
+        console.error("Error executing select_reward:", error);
+        throw error;
+      }
+    };
+
     // Call the `create_level` system with the specified Account and calldata
     const create_level = async (props: {
       account: Account;
@@ -286,6 +334,8 @@ export async function setupWorld(provider: DojoProvider) {
     return {
       create_game,
       create_level,
+      create_reward,
+      select_reward,
       select_deck,
       select_special_cards,
       select_modifier_cards,

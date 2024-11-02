@@ -84,6 +84,8 @@ interface IGameContext {
   attackAnimation: number;
   setAttackAnimation: (point: number) => void;
   togglePreselectedModifier: (cardIndex: number) => void;
+  createNewReward: (rewardId: number, mode: string) => Promise<any>;
+  selectNewRewards: (cardIndex: number[]) => Promise<any>;
 }
 
 const GameContext = createContext<IGameContext>({
@@ -139,6 +141,9 @@ const GameContext = createContext<IGameContext>({
   attackAnimation: 0,
   setAttackAnimation: () => {},
   togglePreselectedModifier: (_) => {},
+  createNewReward: (rewardId: number, mode: string) =>
+    new Promise((resolve) => resolve(undefined)),
+  selectNewRewards: (_) => new Promise((resolve) => resolve(undefined)),
 });
 export const useGameContext = () => useContext(GameContext);
 
@@ -166,6 +171,8 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     selectSpecials,
     selectModifiers,
     createLevel,
+    createReward,
+    selectRewards,
   } = useGameActions();
 
   const { discards, discard: stateDiscard, rollbackDiscard } = useDiscards();
@@ -284,6 +291,35 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
       }
     });
     return nextLevelPromise;
+  };
+
+  const createNewReward = async (rewardId: number, mode: string) => {
+    const createNewRewardPromise = createReward(gameId, rewardId);
+
+    createNewRewardPromise.then(async (response) => {
+      if (response?.healed) {
+        createNewLevel();
+      } else {
+        navigate(`/rewards/${mode}`);
+      }
+    });
+  };
+
+  const selectNewRewards = async (cardIndex: number[]) => {
+    const createRewardPromise = selectRewards(gameId, cardIndex);
+
+    createRewardPromise.then((response) => {
+      response?.cards && replaceCards(response.cards);
+      if (response?.isBeast && response?.beast) {
+        setBeast({ ...response.beast, game_id: gameId });
+        navigate("/game/beast");
+      } else if (response?.isObstacle && response?.obstacles) {
+        setObstacles(response?.obstacles);
+        navigate("/game/obstacle");
+      }
+    });
+
+    return createRewardPromise;
   };
 
   const executeCreateGame = async () => {
@@ -790,25 +826,27 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     if (!lockRedirection) {
       if (game?.state === "FINISHED") {
         navigate(`/gameover/${gameId}`);
-      } else if (game?.state === "SELECT_DECK") {
-        console.log("redirecting to SELECT_DECK");
-        navigate("/choose-class");
-      } else if (game?.state === "SELECT_SPECIAL_CARDS") {
-        console.log("redirecting to SELECT_SPECIAL_CARDS");
-        navigate("/choose-specials");
-      } else if (game?.state === "SELECT_MODIFIER_CARDS") {
-        console.log("redirecting to SELECT_MODIFIER_CARDS");
-        navigate("/choose-modifiers");
-      } else if (game?.state === "IN_GAME") {
-        console.log("redirecting to IN_GAME");
-        if (game.substate === "OBSTACLE") {
+      } else {
+        if (game?.substate === "SELECT_DECK") {
+          console.log("redirecting to SELECT_DECK");
+          navigate("/choose-class");
+        } else if (game?.substate === "SELECT_SPECIAL_CARDS") {
+          console.log("redirecting to SELECT_SPECIAL_CARDS");
+          navigate("/choose-specials");
+        } else if (game?.substate === "SELECT_MODIFIER_CARDS") {
+          console.log("redirecting to SELECT_MODIFIER_CARDS");
+          navigate("/choose-modifiers");
+        } else if (game?.substate === "OBSTACLE") {
           navigate("/game/obstacle");
-        } else if (game.substate === "BEAST") {
+        } else if (game?.substate === "BEAST") {
           navigate("/game/beast");
+        } else if (game?.substate === "CREATE_REWARD") {
+          navigate("/rewards");
+        } else if (game?.substate === "REWARD_CARDS_PACK") {
+          navigate("/rewards/pack");
+        } else if (game?.substate === "REWARD_SPECIALS") {
+          navigate("/rewards/specials");
         }
-      } else if (game?.state === "OPEN_BLISTER_PACK") {
-        console.log("redirecting to OPEN_BLISTER_PACK");
-        navigate("/open-pack");
       }
     }
   };
@@ -839,6 +877,8 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     selectSpecialCards,
     selectModifierCards,
     createNewLevel,
+    createNewReward,
+    selectNewRewards,
   };
 
   return (

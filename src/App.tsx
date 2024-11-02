@@ -16,6 +16,7 @@ import customTheme from "./theme/theme";
 import { GameOver } from "./pages/GameOver";
 import { PlaysLayout } from "./pages/Plays/PlaysLayout";
 import { RewardsPage } from "./pages/RewardsPage";
+import { RewardsSelection } from "./pages/RewardsSelection";
 
 function App() {
   const theme = extendTheme(customTheme);
@@ -37,6 +38,7 @@ function App() {
               <Route path="/plays" element={<PlaysLayout />} />
               <Route path="/gameover/:gameId" element={<>Game Over</>} />
               <Route path="/rewards" element={<RewardsPage />} />
+              <Route path="/rewards/:mode" element={<RewardsSelection />} />
             </Routes>
           </AudioPlayerProvider>
         </GameProvider>

@@ -11,6 +11,7 @@ import {
 } from "../utils/transactionNotifications";
 import { useDojo } from "./useDojo";
 import { getModifiersForContract } from "./utils/getModifiersForContract";
+import { getCreateRewardsEvents } from "../utils/getCreateRewardsEvent";
 
 const createGameEmptyResponse = {
   gameId: 0,
@@ -172,10 +173,74 @@ export const useGameActions = () => {
     }
   };
 
+  const createReward = async (gameId: number, rewardId: number) => {
+    try {
+      showTransactionToast();
+      const { transaction_hash } = await client.game_system.create_reward({
+        account,
+        game_id: gameId,
+        reward_index: rewardId,
+      });
+
+      showTransactionToast(transaction_hash);
+
+      const tx = await account.waitForTransaction(transaction_hash, {
+        retryInterval: 100,
+      });
+
+      updateTransactionToast(transaction_hash, tx.isSuccess());
+
+      if (tx.isSuccess()) {
+        const events = tx.events;
+        console.log("Success at createReward:", tx);
+        return getCreateRewardsEvents(events);
+      } else {
+        console.error("Error at createReward:", tx);
+        return undefined;
+      }
+    } catch (e) {
+      failedTransactionToast();
+      console.log(e);
+      return undefined;
+    }
+  };
+
+  const selectRewards = async (gameId: number, cardsIndex: number[]) => {
+    try {
+      showTransactionToast();
+      const { transaction_hash } = await client.game_system.select_reward({
+        account,
+        game_id: gameId,
+        cards_index: cardsIndex,
+      });
+
+      showTransactionToast(transaction_hash);
+
+      const tx = await account.waitForTransaction(transaction_hash, {
+        retryInterval: 100,
+      });
+
+      updateTransactionToast(transaction_hash, tx.isSuccess());
+
+      if (tx.isSuccess()) {
+        const events = tx.events;
+        console.log("Success at selectRewards:", tx);
+        return getCreateLevelEvents(events);
+      } else {
+        console.error("Error at selectRewards:", tx);
+        return undefined;
+      }
+    } catch (e) {
+      failedTransactionToast();
+      console.log(e);
+      return undefined;
+    }
+  };
+
   const discard = async (
     gameId: number,
     cards: number[],
-    modifiers: number[] 
+    modifiers: number[]
   ) => {
     try {
       showTransactionToast();
@@ -275,11 +340,7 @@ export const useGameActions = () => {
     }
   };
 
-  const play = async (
-    gameId: number,
-    cards: number[],
-    modifiers: number[]
-  ) => {
+  const play = async (gameId: number, cards: number[], modifiers: number[]) => {
     try {
       showTransactionToast();
       const { transaction_hash } = await client.game_system.play({
@@ -317,5 +378,7 @@ export const useGameActions = () => {
     selectSpecials,
     selectModifiers,
     createLevel,
+    createReward,
+    selectRewards,
   };
 };
