@@ -19,7 +19,7 @@ export const Home = () => {
   const onPlayClick = () => {
     //TODO: Remove this when integrating the controller
     window.localStorage.setItem(LOGGED_USER, "nicon44");
-    navigate("/choose-class");
+    navigate("/adventurers");
   };
 
   return (

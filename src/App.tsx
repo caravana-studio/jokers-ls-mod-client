@@ -17,6 +17,7 @@ import { GameOver } from "./pages/GameOver";
 import { PlaysLayout } from "./pages/Plays/PlaysLayout";
 import { RewardsPage } from "./pages/RewardsPage";
 import { AdventurersPage } from "./pages/Adventurers/AdventurersPage";
+import { ChooseAdventurerCards } from "./pages/ChooseAdventurerCards";
 
 function App() {
   const theme = extendTheme(customTheme);
@@ -34,6 +35,7 @@ function App() {
                 element={<ChooseModifiersPage />}
               />
               <Route path="/choose-specials" element={<ChooseSpecialsPage />} />
+              <Route path="/choose-adventurer-cards" element={<ChooseAdventurerCards />} />
               <Route path="/gameover/:gameId" element={<GameOver />} />
               <Route path="/plays" element={<PlaysLayout />} />
               <Route path="/gameover/:gameId" element={<>Game Over</>} />

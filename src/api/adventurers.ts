@@ -80,13 +80,6 @@ export const getAdventurers = async (owner: string): Promise<Adventurer[]> => {
 };
 
 export const getAdventurerDetails = async (tokenId: number) => {
-  let storedDetails = JSON.parse(
-    localStorage.getItem("adventurerDetails") ?? "{}"
-  );
-  if (storedDetails[tokenId]) {
-    return storedDetails[tokenId];
-  }
-
   try {
     const adventurer_response = await fetch(BLAST_URL, {
       method: "POST",

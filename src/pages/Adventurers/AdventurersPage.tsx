@@ -1,9 +1,14 @@
 import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAdventurers } from "../../api/useAdventurers";
 import { Background } from "../../components/Background";
 import { PositionedGameMenu } from "../../components/GameMenu";
 import { Loading } from "../../components/Loading";
+import { useGame } from "../../dojo/queries/useGame";
+import { useDojo } from "../../dojo/useDojo";
+import { useGameActions } from "../../dojo/useGameActions";
+import { useGameContext } from "../../providers/GameProvider";
 import { Adventurer } from "../../types/Adventurer";
 import { Collab } from "../Game/Collab";
 import { AdventurerBox } from "./AdventurerBox";
@@ -19,6 +24,36 @@ export const AdventurersPage = () => {
       prev === adventurer ? undefined : adventurer
     );
   };
+  const {
+    setup: { masterAccount },
+    account: { account },
+  } = useDojo();
+
+  const navigate = useNavigate();
+
+  const {
+    checkOrCreateGame,
+    selectDeckType,
+    gameLoading,
+    error,
+    gameId,
+    redirectBasedOnGameState,
+    lockRedirection,
+  } = useGameContext();
+
+  const { useAdventurer, skipAdventurer } = useGameActions();
+
+  const game = useGame();
+
+  useEffect(() => {
+    if (account !== masterAccount) {
+      checkOrCreateGame();
+    }
+  }, [account, masterAccount]);
+
+  useEffect(() => {
+    redirectBasedOnGameState();
+  }, [game?.state, lockRedirection]);
 
   return (
     <Background bgDecoration type="skulls">
@@ -81,10 +116,33 @@ export const AdventurersPage = () => {
           )}
         </Flex>
         <Flex justifyContent={"center"} my={4} gap={12}>
-          <Button width="300px" onClick={() => {}} variant="secondarySolid">
+          <Button
+            width="300px"
+            onClick={() => {
+              skipAdventurer(gameId ?? 0).then((response) => {
+                if (response) {
+                  navigate("/choose-class");
+                }
+              });
+            }}
+            variant="secondarySolid"
+          >
             Skip
           </Button>
-          <Button width="300px" onClick={() => {}} isDisabled={selectedAdventurer === undefined}>
+          <Button
+            width="300px"
+            onClick={() => {
+              selectedAdventurer &&
+                useAdventurer(gameId ?? 0, selectedAdventurer.id).then(
+                  (response) => {
+                    if (response) {
+                      navigate("/choose-adventurer-cards");
+                    }
+                  }
+                );
+            }}
+            isDisabled={selectedAdventurer === undefined}
+          >
             Continue
           </Button>
         </Flex>

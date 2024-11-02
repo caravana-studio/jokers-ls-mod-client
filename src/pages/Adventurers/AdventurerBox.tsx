@@ -41,6 +41,7 @@ export const AdventurerBox = ({
     <Flex
       onClick={onClick}
       width="30%"
+      minWidth={'400px'}
       bg="black"
       borderRadius="30px"
       border="1px solid white"
@@ -49,7 +50,7 @@ export const AdventurerBox = ({
       boxShadow={isSelected ? `0px 0px 15px 5px ${LS_GREEN}` : "none"}
       opacity={otherIsSelected ? 0.5 : 1}
     >
-      <Flex width="60%" flexDirection="column" justifyContent="center" px={8}>
+      <Flex width="65%" flexDirection="column" justifyContent="center" px={8}>
         <Flex gap={6} w="100%">
           <CachedImage
             src="/logos/skull.png"
@@ -96,7 +97,7 @@ export const AdventurerBox = ({
       </Flex>
       <Divider borderColor="white" orientation="vertical" />
       <Flex
-        width="40%"
+        width="35%"
         direction="column"
         align="center"
         p={4}
@@ -104,7 +105,7 @@ export const AdventurerBox = ({
         justifyContent="center"
       >
         <Heading size="xl" color="white">
-          +{level} HP
+          +{level * 2} HP
         </Heading>
         <Heading size="m" color="white" textAlign="center">
           Select {amountOfCardsToPick} cards from a total of{" "}
