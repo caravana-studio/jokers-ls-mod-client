@@ -20,18 +20,8 @@ interface MidSectionProps {
 }
 
 export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
-  const {
-    preSelectedCards,
-    hand,
-    getModifiers,
-    togglePreselected,
-    discardAnimation,
-    playAnimation,
-    beast,
-    refetchBeast,
-    attackAnimation,
-    setAttackAnimation,
-  } = useGameContext();
+  const { beast, refetchBeast, attackAnimation, setAttackAnimation } =
+    useGameContext();
 
   const tier = beast?.tier ?? 0;
   const level = beast?.level ?? 0;
@@ -41,6 +31,7 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
   const lifeLeft = beast?.current_health ?? 0;
 
   const attackAnimRef = useRef<{ runAnim: () => void }>(null);
+  const [lifeLeftValue, setLifeLeftValue] = useState(lifeLeft);
   const [hpBarValue, setHpBarValue] = useState(
     (lifeLeft.valueOf() / maxHealth.valueOf()) * 100
   );
@@ -50,8 +41,10 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
       refetchBeast();
     }
 
-    if (lifeLeft !== 0 && maxHealth !== 0)
+    if (!hpBarValue) {
       setHpBarValue((lifeLeft.valueOf() / maxHealth.valueOf()) * 100);
+      setLifeLeftValue(lifeLeft);
+    }
   }, [beast]);
 
   useEffect(() => {
@@ -63,7 +56,6 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
   const { setNodeRef } = useDroppable({
     id: PRESELECTED_CARD_SECTION_ID,
   });
-  const { cardScale } = useResponsiveValues();
 
   const { mode } = useParams();
 
@@ -124,6 +116,7 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
                       setHpBarValue(
                         (lifeLeft.valueOf() / maxHealth.valueOf()) * 100
                       );
+                      setLifeLeftValue(lifeLeft);
                       setAttackAnimation(0);
                     }}
                   />
@@ -146,7 +139,7 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
                     </Text>
                   </Box>
                   <Text lineHeight={1} size="l">
-                    {lifeLeft.toString()}
+                    {lifeLeftValue.toString()}
                   </Text>
                 </Flex>
                 <Box width="100%">
