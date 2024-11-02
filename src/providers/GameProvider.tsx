@@ -585,7 +585,11 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
             navigate(`/gameover/${gameId}`);
             setLockRedirection(false);
           }, 1000);
-        } else if (playEvents.levelPassed || playEvents.obstacleDefeated) {
+        } else if (
+          playEvents.levelPassed ||
+          playEvents.obstacleDefeated ||
+          playEvents.playWinGameEvent
+        ) {
           setTimeout(() => {
             navigate("/rewards");
           }, 1000);

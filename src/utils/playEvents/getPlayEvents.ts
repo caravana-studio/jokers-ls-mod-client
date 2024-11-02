@@ -14,6 +14,7 @@ import { getLevelPassedEvent } from "./getLevelPassedEvent";
 import { getModifierSuitEvents } from "./getModifierSuitEvents";
 import { getMultiPointEvents } from "./getMultiPointEvents";
 import { getNeonPlayEvent } from "./getNeonPlayEvent";
+import { getPlayerWinGameEvent } from "./getPlayWinGameEvent";
 import { getScoreEvent } from "./getScoreEvent";
 import { getSpecialLevelEvent } from "./getSpecialLevelEvent";
 import { getSpecialSuitEvents } from "./getSpecialSuitEvents";
@@ -28,6 +29,7 @@ export const getPlayEvents = (events: DojoEvent[]): PlayEvents => {
     obstacleDefeated: !!events.find(
       (event) => event.keys[0] === CHALLENGE_COMPLETED_EVENT
     ),
+    playWinGameEvent: getPlayerWinGameEvent(events),
     itemChallengeCompleted: getItemChallengeCompletedEvent(events),
     levelPassed: getLevelPassedEvent(events),
     detailEarned: getDetailEarnedEvent(events),
