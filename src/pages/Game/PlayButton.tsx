@@ -18,9 +18,7 @@ export const PlayButton = ({ highlight = false }: PlayButtonProps) => {
   const { preSelectedCards, play, preSelectionLocked } = useGameContext();
   const { mode } = useParams();
   const game = useGame();
-
-  //TODO: draw all the skulls and make the skulls used darker
-  //game?.max_hands;
+  const maxPlays = game?.max_hands ?? 0;
 
   const challengePlayer = useChallengePlayer();
   const handsLeft = challengePlayer?.plays ?? 0;
@@ -69,8 +67,8 @@ export const PlayButton = ({ highlight = false }: PlayButtonProps) => {
       </Button>
       {mode !== "beast" && (
         <Flex direction="row" align="center" gap={8}>
-          {Array.from({ length: handsLeft }).map((_, index) => (
-            <SkullIcon key={index} color={LS_GREEN} />
+          {Array.from({ length: maxPlays }).map((_, index) => (
+            <SkullIcon key={index} color={LS_GREEN} used={index >= handsLeft} />
           ))}
         </Flex>
       )}
