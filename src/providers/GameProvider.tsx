@@ -570,7 +570,9 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
 
       setTimeout(() => {
         setPlayAnimation(true);
-      }, ALL_CARDS_DURATION);
+        if (playEvents.playerAttack)
+          setAttackAnimation(playEvents.playerAttack.valueOf());
+      }, ALL_CARDS_DURATION + 500);
 
       setTimeout(() => {
         setAnimatedCard(undefined);
@@ -580,6 +582,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
         setPreSelectionLocked(false);
         setPlayIsNeon(false);
         setLockedSpecialCards([]);
+
         if (playEvents.itemChallengeCompleted) {
           playEvents.itemChallengeCompleted.forEach((id) => {
             setObstacleCompleted(id);
@@ -606,7 +609,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
           setRoundRewards(undefined);
           setLockRedirection(false);
         }
-      }, ALL_CARDS_DURATION + 500);
+      }, ALL_CARDS_DURATION + 1000);
     }
   };
 
@@ -619,8 +622,6 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
       .then((response) => {
         if (response) {
           animatePlay(response);
-          if (response.playerAttack)
-            setAttackAnimation(response.playerAttack.valueOf());
         } else {
           setPreSelectionLocked(false);
           clearPreSelection();
