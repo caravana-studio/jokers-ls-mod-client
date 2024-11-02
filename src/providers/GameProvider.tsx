@@ -83,7 +83,7 @@ interface IGameContext {
   refetchBeast: () => void;
   togglePreselectedModifier: (cardIndex: number) => void;
   createNewReward: (rewardId: number, mode: string) => Promise<any>;
-  selectNewRewards: (cardIndex: number[]) => Promise<number | undefined>;
+  selectNewRewards: (cardIndex: number[]) => Promise<any>;
 }
 
 const GameContext = createContext<IGameContext>({
@@ -302,8 +302,15 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
   const selectNewRewards = async (cardIndex: number[]) => {
     const createRewardPromise = selectRewards(gameId, cardIndex);
 
-    createRewardPromise.then(() => {
-      navigate("/game/obstacle");
+    createRewardPromise.then((response) => {
+      response?.cards && replaceCards(response.cards);
+      if (response?.isBeast && response?.beast) {
+        setBeast({ ...response.beast, game_id: gameId });
+        navigate("/game/beast");
+      } else if (response?.isObstacle && response?.obstacles) {
+        setObstacles(response?.obstacles);
+        navigate("/game/obstacle");
+      }
     });
 
     return createRewardPromise;

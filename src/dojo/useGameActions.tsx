@@ -223,9 +223,12 @@ export const useGameActions = () => {
       updateTransactionToast(transaction_hash, tx.isSuccess());
 
       if (tx.isSuccess()) {
+        const events = tx.events;
         console.log("Success at selectRewards:", tx);
+        return getCreateLevelEvents(events);
       } else {
         console.error("Error at selectRewards:", tx);
+        return undefined;
       }
     } catch (e) {
       failedTransactionToast();
