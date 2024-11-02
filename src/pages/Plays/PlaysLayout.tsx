@@ -6,27 +6,29 @@ import { PositionedDiscordLink } from "../../components/DiscordLink";
 import { PositionedGameMenu } from "../../components/GameMenu";
 import { PlaysAvailableTable } from "./PlaysAvailableTable";
 import { useResponsiveValues } from "../../theme/responsiveSettings";
+import { useGameContext } from "../../providers/GameProvider";
 
 export const PlaysLayout = () => {
   const navigate = useNavigate();
   const { t } = useTranslation(["game"]);
   const { isSmallScreen } = useResponsiveValues();
 
+  const { redirectBasedOnGameState } = useGameContext();
+
   return (
-    <Background type="game" dark bgDecoration>
+    <Background type="home" dark bgDecoration>
       <PositionedGameMenu decoratedPage />
       <Flex
         py={2}
         px={8}
         flexDirection={"column"}
-        justifyContent={"center"}
+        justifyContent={"flex-start"}
         width={{ base: "100%", sm: "75%", md: "50%" }}
         margin={"0 auto"}
         height={"100vh"}
       >
         <Heading
-          mt={{ base: 0, sm: 20, md: 20 }}
-          size={{ base: "sm", sm: "md" }}
+          size={{ base: "sm", sm: "lg" }}
           variant="italic"
           color="white"
           textAlign={"center"}
@@ -42,9 +44,7 @@ export const PlaysLayout = () => {
           w="100%"
           size="md"
           variant="solid"
-          onClick={() =>
-            navigate("/demo", { state: { skipRageAnimation: true } })
-          }
+          onClick={() => redirectBasedOnGameState()}
         >
           {t("game.plays.go-back-btn")}
         </Button>
