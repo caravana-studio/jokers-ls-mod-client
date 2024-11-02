@@ -11,7 +11,7 @@ import { useResponsiveValues } from "../theme/responsiveSettings";
 import { Card } from "../types/Card";
 import { getCardUniqueId } from "../utils/getCardUniqueId";
 import { FullScreenCardContainer } from "./FullScreenCardContainer";
-import { Collab } from "./Game/Collab";
+import { Collab } from "./Game/collab.tsx";
 
 export const ChooseModifiersPage = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -47,13 +47,13 @@ export const ChooseModifiersPage = () => {
     <Background bgDecoration type="skulls">
       <Flex
         height="100%"
-        width='100%'
+        width="100%"
         flexDirection="column"
         justifyContent="space-between"
         alignItems="center"
       >
         <PositionedGameMenu decoratedPage />
-        <Box w='100%'>
+        <Box w="100%">
           <Heading size={"xxl"} textAlign={"center"} variant="neonGreen">
             - Modifier cards -
           </Heading>

@@ -1,4 +1,4 @@
-import { Button, Center, Flex } from "@chakra-ui/react";
+import { Box, Button, Center, Flex } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Background } from "../components/Background";
@@ -8,6 +8,7 @@ import { useGameContext } from "../providers/GameProvider";
 import { runConfettiAnimation } from "../utils/runConfettiAnimation";
 import { TopSection } from "./Game/TopSection";
 import { FullScreenCardContainer } from "./FullScreenCardContainer";
+import RewardsSection from "./RewardsSection";
 
 export const RewardsPage = () => {
   const { roundRewards, createNewLevel } = useGameContext();
@@ -26,14 +27,17 @@ export const RewardsPage = () => {
       <PositionedGameMenu decoratedPage />
       <Flex direction={"column"}>
         <TopSection inRewardsPag />
-        <FullScreenCardContainer></FullScreenCardContainer>
-        <Button
+        <FullScreenCardContainer>
+          <RewardsSection />
+        </FullScreenCardContainer>
+        {/* <Button
           width={"30%"}
+          mt={8}
           alignSelf={"center"}
           onClick={() => createNewLevel()}
         >
           Continue
-        </Button>
+        </Button> */}
         <PositionedDiscordLink />
       </Flex>
     </Background>

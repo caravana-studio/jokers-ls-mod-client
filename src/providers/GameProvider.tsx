@@ -774,22 +774,19 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     if (!lockRedirection) {
       if (game?.state === "FINISHED") {
         navigate(`/gameover/${gameId}`);
-      } else if (game?.state === "SELECT_DECK") {
+      } else if (game?.substate === "SELECT_DECK") {
         console.log("redirecting to SELECT_DECK");
         navigate("/choose-class");
-      } else if (game?.state === "SELECT_SPECIAL_CARDS") {
+      } else if (game?.substate === "SELECT_SPECIAL_CARDS") {
         console.log("redirecting to SELECT_SPECIAL_CARDS");
         navigate("/choose-specials");
-      } else if (game?.state === "SELECT_MODIFIER_CARDS") {
+      } else if (game?.substate === "SELECT_MODIFIER_CARDS") {
         console.log("redirecting to SELECT_MODIFIER_CARDS");
         navigate("/choose-modifiers");
-      } else if (game?.state === "IN_GAME") {
-        console.log("redirecting to IN_GAME");
-        if (game.substate === "OBSTACLE") {
-          navigate("/game/obstacle");
-        } else if (game.substate === "BEAST") {
-          navigate("/game/beast");
-        }
+      } else if (game?.substate === "OBSTACLE") {
+        navigate("/game/obstacle");
+      } else if (game?.substate === "BEAST") {
+        navigate("/game/beast");
       } else if (game?.state === "OPEN_BLISTER_PACK") {
         console.log("redirecting to OPEN_BLISTER_PACK");
         navigate("/open-pack");
