@@ -22,7 +22,6 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
   const {
     preSelectedCards,
     hand,
-    getModifiers,
     togglePreselected,
     discardAnimation,
     playAnimation,
