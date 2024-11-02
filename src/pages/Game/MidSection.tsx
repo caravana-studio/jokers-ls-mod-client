@@ -114,12 +114,19 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
                     zIndex={1}
                     src={`/beasts/${beast_id}.png`}
                   />
-                  <Animation
-                    ref={attackAnimRef}
-                    gifSrc="/animations/attack_anim.gif"
-                    duration={1000}
-                    onEnd={() => setAttackAnimation(0)}
-                  />
+                  <Box
+                    position={"absolute"}
+                    top={0}
+                    left={"50%"}
+                    width={"240px"}
+                  >
+                    <Animation
+                      ref={attackAnimRef}
+                      gifSrc="/animations/attack_anim.gif"
+                      duration={1000}
+                      onEnd={() => setAttackAnimation(0)}
+                    />
+                  </Box>
                 </Flex>
                 <Flex
                   width="100%"
