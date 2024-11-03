@@ -97,7 +97,7 @@ const defaultGreenOutlineGlow = defineStyle({
   backgroundColor: "transparent",
   border: `2px solid ${LS_GREEN} !important`,
   borderRadius: 1,
-  color: "green",
+  color: "lsGreen",
   boxShadow: `0px 0px 20px 3px ${LS_GREEN}, inset 0px 0px 25px 0px ${LS_GREEN}`,
   _hover: {
     borderColor: "lsGreen",
