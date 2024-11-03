@@ -48,13 +48,12 @@ export const ConfirmationModal = ({
           </Flex>
         </ModalBody>
         <ModalFooter>
-          <Button variant="defaultOutline" size="sm" onClick={close}>
+          <Button onClick={close} variant="defaultOutlineLoot">
             {t("confirmation-modal.close")}
           </Button>
           <Button
-            variant="secondarySolid"
+            variant="defaultGreenOutlineGlow"
             boxShadow={`0px 0px 10px 6px ${LS_GREEN}`}
-            size="sm"
             onClick={onConfirm}
             ml={3}
           >
