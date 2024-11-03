@@ -304,14 +304,19 @@ export const useGameActions = () => {
       updateTransactionToast(transaction_hash, tx.isSuccess());
 
       if (tx.isSuccess()) {
-        console.log("Success at endTurn:", tx);
+        return {
+          success: true,
+          gameOver: !!tx.events.find(
+            (event) => event.keys[0] === GAME_OVER_EVENT
+          ),
+        };
       } else {
         console.error("Error at endTurn:", tx);
       }
     } catch (e) {
       failedTransactionToast();
       console.log(e);
-      return 0;
+      return undefined;
     }
   };
 

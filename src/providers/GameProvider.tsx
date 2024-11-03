@@ -315,6 +315,17 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
 
   const executeEndTurn = async () => {
     const endTurnPromise = endTurn(gameId);
+
+    endTurnPromise.then((response) => {
+      if (response && response.success) {
+        if (response.gameOver) {
+          setTimeout(() => {
+            navigate(`/gameover/${gameId}`);
+          }, 1000);
+        }
+      }
+    });
+
     return endTurnPromise;
   };
 
