@@ -10,8 +10,8 @@ import { useGame } from "../../dojo/queries/useGame";
 import { useGameActions } from "../../dojo/useGameActions";
 import { useGameContext } from "../../providers/GameProvider";
 import { Adventurer } from "../../types/Adventurer";
-import { AdventurerBox } from "./AdventurerBox";
 import { Lsxjon } from "../Game/Lsxjon";
+import { AdventurerBox } from "./AdventurerBox";
 
 export const AdventurersPage = () => {
   const [selectedAdventurer, setSelectedAdventurer] = useState<
@@ -93,21 +93,34 @@ export const AdventurersPage = () => {
           {isLoading ? (
             <Loading />
           ) : (
-            adventurers.map((adventurer) => {
-              return (
-                <AdventurerBox
-                  key={adventurer.id}
-                  onClick={() => toggleSelectedAdventurer(adventurer)}
-                  otherIsSelected={
-                    selectedAdventurer &&
-                    selectedAdventurer.id !== adventurer.id
-                  }
-                  isSelected={selectedAdventurer?.id === adventurer.id}
-                  adventurer={adventurer}
-                  consumed={consumedAdventurers?.includes(adventurer.id)}
-                />
-              );
-            })
+            adventurers
+              .sort((a, b) => {
+                const aConsumed = consumedAdventurers?.includes(a.id);
+                const bConsumed = consumedAdventurers?.includes(b.id);
+
+                if (aConsumed && !bConsumed) {
+                  return 1;
+                } else if (!aConsumed && bConsumed) {
+                  return -1;
+                }
+
+                return b.id - a.id;
+              })
+              .map((adventurer) => {
+                return (
+                  <AdventurerBox
+                    key={adventurer.id}
+                    onClick={() => toggleSelectedAdventurer(adventurer)}
+                    otherIsSelected={
+                      selectedAdventurer &&
+                      selectedAdventurer.id !== adventurer.id
+                    }
+                    isSelected={selectedAdventurer?.id === adventurer.id}
+                    adventurer={adventurer}
+                    consumed={consumedAdventurers?.includes(adventurer.id)}
+                  />
+                );
+              })
           )}
         </Flex>
         <Flex justifyContent={"center"} my={4} gap={12}>

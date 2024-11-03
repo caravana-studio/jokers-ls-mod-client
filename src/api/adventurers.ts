@@ -75,7 +75,7 @@ export const getAdventurers = async (owner: string): Promise<Adventurer[]> => {
       // only dead adventurers
       .filter((adventurer) => adventurer.health === 0)
       // sort by level
-      .sort((a, b) => b.level - a.level)
+      .sort((a, b) => a.level - b.level)
   );
 };
 
