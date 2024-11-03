@@ -96,10 +96,13 @@ export const GameContent = () => {
       SKIP_TUTORIAL_MODIFIERS
     );
 
+    const showTutorial = !localStorage.getItem(SKIP_TUTORIAL_GAME);
+
     if (
       showSpecialCardTutorial &&
       game?.len_current_special_cards != undefined &&
-      game?.len_current_special_cards > 0
+      game?.len_current_special_cards > 0 &&
+      !showTutorial
     ) {
       setRunSpecial(true);
     } else if (specialTutorialCompleted || !showSpecialCardTutorial) {
@@ -110,7 +113,7 @@ export const GameContent = () => {
         }
       }
     }
-  }, [game, hand, specialTutorialCompleted]);
+  }, [game, hand, specialTutorialCompleted, run]);
 
   if (error) {
     return (
@@ -160,7 +163,6 @@ export const GameContent = () => {
           run={run}
           continuous
           showSkipButton
-          showProgress
           callback={handleJoyrideCallback}
           styles={TUTORIAL_STYLE}
           locale={JOYRIDE_LOCALES}
@@ -171,7 +173,6 @@ export const GameContent = () => {
           run={runSpecial}
           continuous
           showSkipButton
-          showProgress
           callback={handleSpecialJoyrideCallback}
           styles={TUTORIAL_STYLE}
           locale={JOYRIDE_LOCALES}
@@ -182,7 +183,6 @@ export const GameContent = () => {
           run={runTutorialModifiers}
           continuous
           showSkipButton
-          showProgress
           callback={handleModifiersJoyrideCallback}
           styles={TUTORIAL_STYLE}
           locale={JOYRIDE_LOCALES}
