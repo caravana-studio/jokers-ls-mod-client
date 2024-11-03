@@ -880,6 +880,8 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
         } else if (game?.substate === "SELECT_MODIFIER_CARDS") {
           console.log("redirecting to SELECT_MODIFIER_CARDS");
           return navigate("/choose-modifiers");
+        } else if (game?.substate === "DRAFT_ADVENTURER") {
+          return navigate("/adventurers");
         } else if (game?.substate === "OBSTACLE") {
           return navigate("/game/obstacle");
         } else if (game?.substate === "BEAST") {
