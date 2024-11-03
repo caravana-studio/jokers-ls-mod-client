@@ -36,6 +36,7 @@ export const ChooseAdventurerCards = () => {
   const confirmSelectCards = () => {
     setIsLoading(true);
     selectAdventurerCards(cardsToKeep.map((c) => c.idx)).finally(() => {
+      setCardsToKeep([]);
       setIsLoading(false);
     });
     setBlisterPackResult([]);

@@ -328,7 +328,8 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     createNewRewardPromise.then(async (response) => {
       if (response?.healed) {
         createNewLevel();
-      } else {
+      } else if (response?.blisterPackResult) {
+        setBlisterPackResult(response.blisterPackResult);
         navigate(`/rewards/${mode}`);
       }
     });

@@ -1,4 +1,4 @@
-import { Box, Button, Flex } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Background } from "../components/Background";
@@ -53,7 +53,13 @@ export const RewardsSelection = () => {
   return (
     <Background type="skulls" dark bgDecoration>
       <PositionedGameMenu decoratedPage />
-      <Flex direction={"column"}>
+      <Flex height='100%' justifyContent={'center'} direction={"column"}>
+        <Heading size={"xxl"} mb={4} textAlign={"center"} variant="neonGreen">
+          - Select your rewards -
+          </Heading>
+          <Heading size={"xl"} textAlign={"center"} variant="neonGreen" my={4}>
+            {maxCards === 1 ? "Choose 1 card" : `Choose up to ${maxCards} cards` } 
+          </Heading>
         <FullScreenCardContainer>
           {blisterPackResult?.map((card, index) => {
             return (
