@@ -3,9 +3,7 @@ import { useEffect, useState } from "react";
 import { Background } from "../components/Background";
 import CachedImage from "../components/CachedImage";
 import { PositionedGameMenu } from "../components/GameMenu";
-import { Loading } from "../components/Loading";
 import { useGame } from "../dojo/queries/useGame";
-import { useDojo } from "../dojo/useDojo";
 import { useGameContext } from "../providers/GameProvider";
 import { LS_GREEN } from "../theme/colors";
 
@@ -33,13 +31,8 @@ const CLASSES = [
 export const ChooseClassPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedClass, setSelectedClass] = useState<number | undefined>();
-  const {
-    setup: { masterAccount },
-    account: { account },
-  } = useDojo();
 
   const {
-    checkOrCreateGame,
     selectDeckType,
     gameLoading,
     error,
@@ -50,19 +43,13 @@ export const ChooseClassPage = () => {
   const game = useGame();
 
   useEffect(() => {
-    if (account !== masterAccount) {
-      checkOrCreateGame();
-    }
-  }, [account, masterAccount]);
-
-  useEffect(() => {
     redirectBasedOnGameState();
   }, [game?.state, lockRedirection]);
 
-  if (gameLoading || error) {
+  if (error) {
     return (
       <Background bgDecoration type="skulls">
-        {gameLoading ? <Loading /> : <Heading size="xxl">ERROR</Heading>}
+        <Heading size="xxl">ERROR</Heading>
       </Background>
     );
   }

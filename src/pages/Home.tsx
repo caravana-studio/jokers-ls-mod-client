@@ -1,25 +1,26 @@
 import { Box, Button, Flex, Heading, Img, Text } from "@chakra-ui/react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
 import AudioPlayer from "../components/AudioPlayer";
 import { Background } from "../components/Background";
 import { DiscordLink } from "../components/DiscordLink";
 import { Leaderboard } from "../components/Leaderboard";
 import { PoweredBy } from "../components/PoweredBy";
 import { LOGGED_USER } from "../constants/localStorage";
+import { useGameContext } from "../providers/GameProvider";
 import { LS_GREEN } from "../theme/colors";
 
 export const Home = () => {
   const [leaderboardOpen, setLeaderboardOpen] = useState(false);
 
   const { t } = useTranslation(["home"]);
-  const navigate = useNavigate();
+
+  const { checkOrCreateGame } = useGameContext();
 
   const onPlayClick = () => {
     //TODO: Remove this when integrating the controller
     window.localStorage.setItem(LOGGED_USER, "nicon44");
-    navigate("/choose-class");
+    checkOrCreateGame();
   };
 
   return (

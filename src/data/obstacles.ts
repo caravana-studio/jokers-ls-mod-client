@@ -1,37 +1,37 @@
 import { ObstacleMap } from "../types/Obstacle";
 export const OBSTACLES: ObstacleMap = {
   1: {
-    description: "Complete a Royal Flush.",
+    description: "Play a Royal Flush.",
   },
   2: {
-    description: "Complete a Straight Flush.",
+    description: "Play a Straight Flush.",
   },
   3: {
-    description: "Complete Five of a Kind.",
+    description: "Play Five of a Kind.",
   },
   4: {
-    description: "Complete Four of a Kind.",
+    description: "Play Four of a Kind.",
   },
   5: {
-    description: "Complete a Full House.",
+    description: "Play a Full House.",
   },
   6: {
-    description: "Complete a Flush.",
+    description: "Play a Flush.",
   },
   7: {
-    description: "Complete a Straight.",
+    description: "Play a Straight.",
   },
   8: {
-    description: "Complete Three of a Kind.",
+    description: "Play Three of a Kind.",
   },
   9: {
-    description: "Complete a Double Pair.",
+    description: "Play a Double Pair.",
   },
   10: {
-    description: "Complete a Pair.",
+    description: "Play a Pair.",
   },
   11: {
-    description: "Win with a High Card.",
+    description: "Play a High Card.",
   },
   12: {
     description: "Play a Heart suited card.",
@@ -46,57 +46,57 @@ export const OBSTACLES: ObstacleMap = {
     description: "Play a Spade suited card.",
   },
   16: {
-    description: "Play a hand featuring the card Two.",
+    description: "Play a hand using the card Two.",
   },
   17: {
-    description: "Play a hand featuring the card Three.",
+    description: "Play a hand using the card Three.",
   },
   18: {
-    description: "Play a hand featuring the card Four.",
+    description: "Play a hand using the card Four.",
   },
   19: {
-    description: "Play a hand featuring the card Five.",
+    description: "Play a hand using the card Five.",
   },
   20: {
-    description: "Play a hand featuring the card Six.",
+    description: "Play a hand using the card Six.",
   },
   21: {
-    description: "Play a hand featuring the card Seven.",
+    description: "Play a hand using the card Seven.",
   },
   22: {
-    description: "Play a hand featuring the card Eight.",
+    description: "Play a hand using the card Eight.",
   },
   23: {
-    description: "Play a hand featuring the card Nine.",
+    description: "Play a hand using the card Nine.",
   },
   24: {
-    description: "Play a hand featuring the card Ten.",
+    description: "Play a hand using the card Ten.",
   },
   25: {
-    description: "Play a hand featuring the card Jack.",
+    description: "Play a hand using the card Jack.",
   },
   26: {
-    description: "Play a hand featuring the card Queen.",
+    description: "Play a hand using the card Queen.",
   },
   27: {
-    description: "Play a hand featuring the card King.",
+    description: "Play a hand using the card King.",
   },
   28: {
-    description: "Play a hand featuring the card Ace.",
+    description: "Play a hand using the card Ace.",
   },
   29: {
-    description: "Play a hand featuring a Joker.",
+    description: "Play a hand using a Joker.",
   },
   30: {
-    description: "Score a total of 500 points.",
+    description: "Score 500 points in one hand.",
   },
   31: {
-    description: "Score a total of 1000 points.",
+    description: "Score 1000 points in one hand.",
   },
   32: {
-    description: "Score a total of 2000 points.",
+    description: "Score 2000 points in one hand.",
   },
   33: {
-    description: "Score a total of 5000 points.",
+    description: "Score 5000 points in one hand.",
   },
 };

@@ -6,6 +6,7 @@ import { Card } from "../../types/Card";
 import { useDojo } from "../useDojo";
 import { getCardFromCardId } from "../utils/getCardFromCardId";
 import { useGame } from "./useGame";
+import { getLSGameId } from "../utils/getLSGameId";
 
 const sort = (a: Card, b: Card) => {
   return (a.card_id ?? 0) - (b.card_id ?? 0);
@@ -24,8 +25,7 @@ export const useBlisterPackResult = () => {
     },
   } = useDojo();
 
-  const game = useGame();
-  const gameId = game?.id ?? 0;
+  const gameId = getLSGameId();
 
   const entityId = getEntityIdFromKeys([BigInt(gameId)]) as Entity;
 

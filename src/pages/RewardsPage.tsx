@@ -1,13 +1,10 @@
-import { Box, Button, Center, Flex } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { Background } from "../components/Background";
 import { PositionedDiscordLink } from "../components/DiscordLink";
 import { PositionedGameMenu } from "../components/GameMenu";
-import { useGameContext } from "../providers/GameProvider";
 import { runConfettiAnimation } from "../utils/runConfettiAnimation";
 import { TopSection } from "./Game/TopSection";
-import { FullScreenCardContainer } from "./FullScreenCardContainer";
 import RewardsSection from "./RewardsSection";
 
 export const RewardsPage = () => {
@@ -20,9 +17,11 @@ export const RewardsPage = () => {
       <PositionedGameMenu decoratedPage />
       <Flex direction={"column"}>
         <TopSection inRewardsPag />
-        <FullScreenCardContainer>
+          <Box mt={16}>
+
           <RewardsSection />
-        </FullScreenCardContainer>
+          </Box>
+          
         {/* <Button
           width={"30%"}
           mt={8}

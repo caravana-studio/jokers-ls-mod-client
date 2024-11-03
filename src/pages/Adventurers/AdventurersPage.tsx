@@ -7,7 +7,6 @@ import { PositionedGameMenu } from "../../components/GameMenu";
 import { Loading } from "../../components/Loading";
 import { useConsumedAdventurers } from "../../dojo/queries/useConsumedAdventurers";
 import { useGame } from "../../dojo/queries/useGame";
-import { useDojo } from "../../dojo/useDojo";
 import { useGameActions } from "../../dojo/useGameActions";
 import { useGameContext } from "../../providers/GameProvider";
 import { Adventurer } from "../../types/Adventurer";
@@ -25,10 +24,6 @@ export const AdventurersPage = () => {
       prev === adventurer ? undefined : adventurer
     );
   };
-  const {
-    setup: { masterAccount },
-    account: { account },
-  } = useDojo();
 
   const navigate = useNavigate();
 
@@ -41,6 +36,7 @@ export const AdventurersPage = () => {
     redirectBasedOnGameState,
     lockRedirection,
     createNewLevel,
+    setBlisterPackResult,
   } = useGameContext();
 
   const { useAdventurer, skipAdventurer } = useGameActions();
@@ -48,12 +44,6 @@ export const AdventurersPage = () => {
   const consumedAdventurers = useConsumedAdventurers();
 
   const game = useGame();
-
-  useEffect(() => {
-    if (account !== masterAccount) {
-      checkOrCreateGame();
-    }
-  }, [account, masterAccount]);
 
   useEffect(() => {
     redirectBasedOnGameState();
@@ -140,7 +130,8 @@ export const AdventurersPage = () => {
               selectedAdventurer &&
                 useAdventurer(gameId ?? 0, selectedAdventurer.id).then(
                   (response) => {
-                    if (response) {
+                    if (response.length > 0) {
+                      setBlisterPackResult(response);
                       navigate("/choose-adventurer-cards");
                     }
                   }

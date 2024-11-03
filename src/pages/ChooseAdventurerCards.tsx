@@ -1,10 +1,8 @@
-import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { Background } from "../components/Background";
 import { PositionedGameMenu } from "../components/GameMenu";
 import { TiltCard } from "../components/TiltCard";
-import { useBlisterPackResult } from "../dojo/queries/useBlisterPackResult";
-import { useGame } from "../dojo/queries/useGame";
 import { useGameContext } from "../providers/GameProvider";
 import { LS_GREEN } from "../theme/colors";
 import { useResponsiveValues } from "../theme/responsiveSettings";
@@ -15,32 +13,33 @@ import { Lsxjon } from "./Game/Lsxjon";
 
 export const ChooseAdventurerCards = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [cards, setCards] = useState<Card[]>();
   const [cardsToKeep, setCardsToKeep] = useState<Card[]>([]);
   const { isSmallScreen, cardScale } = useResponsiveValues();
   const adjustedCardScale = cardScale * 1.5;
   const maxCards = 2;
 
-  const { selectAdventurerCards, redirectBasedOnGameState, lockRedirection } =
-    useGameContext();
-  const game = useGame();
-  const blisterPackResult = useBlisterPackResult();
+  const {
+    selectAdventurerCards,
+    redirectBasedOnGameState,
+    lockRedirection,
+    blisterPackResult,
+    setBlisterPackResult,
+    refetchBlisterPackResult,
+  } = useGameContext();
 
   useEffect(() => {
-    if (blisterPackResult?.cardsPicked) {
-      setCards([]);
-    } else {
-      if (blisterPackResult.cards.length > 0)
-        setCards(blisterPackResult?.cards);
+    if (blisterPackResult.length === 0) {
+      refetchBlisterPackResult();
     }
   }, [blisterPackResult]);
 
   const confirmSelectCards = () => {
     setIsLoading(true);
     selectAdventurerCards(cardsToKeep.map((c) => c.idx)).finally(() => {
+      setCardsToKeep([]);
       setIsLoading(false);
     });
-    setCards([]);
+    setBlisterPackResult([]);
   };
 
   return (

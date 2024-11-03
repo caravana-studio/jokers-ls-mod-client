@@ -11,6 +11,8 @@ import {
   updateTransactionToast,
 } from "../utils/transactionNotifications";
 import { useDojo } from "./useDojo";
+import { getResultBlisterPackEvent } from "../utils/getResultBlisterPackEvent";
+import { Card } from "../types/Card";
 
 const createGameEmptyResponse = {
   gameId: 0,
@@ -23,7 +25,7 @@ export const useGameActions = () => {
     account: { account },
   } = useDojo();
 
-  const selectDeck = async (gameId: number, deckId: number) => {
+  const selectDeck = async (gameId: number, deckId: number): Promise<Card[]> => {
     try {
       showTransactionToast();
       const { transaction_hash } = await client.game_system.select_deck({
@@ -41,17 +43,19 @@ export const useGameActions = () => {
       updateTransactionToast(transaction_hash, tx.isSuccess());
       if (tx.isSuccess()) {
         console.log("Success at select deck:", tx);
+         return getResultBlisterPackEvent(tx.events);
       } else {
         console.error("Error at select deck:", tx);
       }
+      return [];
     } catch (e) {
       failedTransactionToast();
       console.log(e);
-      return 0;
+      return [];
     }
   };
 
-  const selectSpecials = async (gameId: number, cardsIndex: number[]) => {
+  const selectSpecials = async (gameId: number, cardsIndex: number[]): Promise<Card[]> => {
     try {
       showTransactionToast();
       const { transaction_hash } =
@@ -70,13 +74,15 @@ export const useGameActions = () => {
       updateTransactionToast(transaction_hash, tx.isSuccess());
       if (tx.isSuccess()) {
         console.log("Success at select specialCards:", tx);
+        return getResultBlisterPackEvent(tx.events);
       } else {
         console.error("Error at select specialCards:", tx);
       }
+      return [];
     } catch (e) {
       failedTransactionToast();
       console.log(e);
-      return 0;
+      return [];
     }
   };
 
@@ -102,10 +108,11 @@ export const useGameActions = () => {
       } else {
         console.error("Error at select modifiers:", tx);
       }
+      return tx.isSuccess();
     } catch (e) {
       failedTransactionToast();
       console.log(e);
-      return 0;
+      return false;
     }
   };
 
@@ -396,7 +403,7 @@ export const useGameActions = () => {
     }
   };
 
-  const useAdventurer = async(gameId: number, adventurerId: number) => {
+  const useAdventurer = async(gameId: number, adventurerId: number): Promise<Card[]> => {
     try {
       showTransactionToast();
       const { transaction_hash } = await client.game_system.use_adventurer({
@@ -414,14 +421,15 @@ export const useGameActions = () => {
       updateTransactionToast(transaction_hash, tx.isSuccess());
       if (tx.isSuccess()) {
         console.log("Success at use adventurer:", tx);
+        return getResultBlisterPackEvent(tx.events);
       } else {
         console.error("Error at use adventurer:", tx);
       }
-      return tx.isSuccess();
+      return [];
     } catch (e) {
       failedTransactionToast();
       console.log(e);
-      return undefined;
+      return [];
     }
   };
 

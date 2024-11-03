@@ -72,9 +72,9 @@ interface IGameContext {
   discards: number;
   preSelectCard: (cardIndex: number) => void;
   unPreSelectCard: (cardIndex: number) => void;
-  selectDeckType: (deckType: number) => Promise<number | undefined>;
-  selectSpecialCards: (cardIndex: number[]) => Promise<number | undefined>;
-  selectModifierCards: (cardIndex: number[]) => Promise<number | undefined>;
+  selectDeckType: (deckType: number) => Promise<Card[]>;
+  selectSpecialCards: (cardIndex: number[]) => Promise<Card[]>;
+  selectModifierCards: (cardIndex: number[]) => Promise<boolean>;
   selectAdventurerCards: (cardIndex: number[]) => Promise<number | undefined>;
   redirectBasedOnGameState: () => void;
   createNewLevel: () => Promise<any>;
@@ -87,6 +87,9 @@ interface IGameContext {
   togglePreselectedModifier: (cardIndex: number) => void;
   createNewReward: (rewardId: number, mode: string) => Promise<any>;
   selectNewRewards: (cardIndex: number[]) => Promise<any>;
+  blisterPackResult: Card[];
+  setBlisterPackResult: (cards: Card[]) => void;
+  refetchBlisterPackResult: () => void;
 }
 
 const GameContext = createContext<IGameContext>({
@@ -130,9 +133,9 @@ const GameContext = createContext<IGameContext>({
   discards: 0,
   preSelectCard: (_) => {},
   unPreSelectCard: (_) => {},
-  selectDeckType: (_) => new Promise((resolve) => resolve(undefined)),
-  selectSpecialCards: (_) => new Promise((resolve) => resolve(undefined)),
-  selectModifierCards: (_) => new Promise((resolve) => resolve(undefined)),
+  selectDeckType: (_) => new Promise((resolve) => resolve([])),
+  selectSpecialCards: (_) => new Promise((resolve) => resolve([])),
+  selectModifierCards: (_) => new Promise((resolve) => resolve(false)),
   selectAdventurerCards: (_) => new Promise((resolve) => resolve(undefined)),
   redirectBasedOnGameState: () => {},
   createNewLevel: () => new Promise((resolve) => resolve(undefined)),
@@ -146,6 +149,9 @@ const GameContext = createContext<IGameContext>({
   createNewReward: (rewardId: number, mode: string) =>
     new Promise((resolve) => resolve(undefined)),
   selectNewRewards: (_) => new Promise((resolve) => resolve(undefined)),
+  blisterPackResult: [],
+  setBlisterPackResult: () => {},
+  refetchBlisterPackResult: () => {},
 });
 export const useGameContext = () => useContext(GameContext);
 
@@ -233,6 +239,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     setObstacles,
     refetchObstacles,
     refetchBeast,
+    setBlisterPackResult,
   } = state;
 
   const resetLevel = () => {
@@ -253,9 +260,12 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
 
   const selectDeckType = async (deckType: number) => {
     const selectDeckPromise = selectDeck(gameId, deckType);
-    selectDeckPromise.then(() => {
-      setLockRedirection(true);
-      navigate("/choose-specials");
+    selectDeckPromise.then((response) => {
+      if (response.length > 0) {
+        setLockRedirection(true);
+        setBlisterPackResult(response);
+        navigate("/choose-specials");
+      }
     });
     return selectDeckPromise;
   };
@@ -263,9 +273,12 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
   const selectSpecialCards = async (cardIndex: number[]) => {
     const specialPromise = selectSpecials(gameId, cardIndex);
 
-    specialPromise.then(() => {
-      setLockRedirection(true);
-      navigate("/choose-modifiers");
+    specialPromise.then((response) => {
+      if (response.length > 0) {
+        setLockRedirection(true);
+        setBlisterPackResult(response);
+        navigate("/choose-modifiers");
+      }
     });
 
     return specialPromise;
@@ -274,7 +287,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
   const selectAdventurerCards = async (cardIndex: number[]) => {
     const promise = selectAdventurerCs(gameId, cardIndex);
 
-    promise.then(() => {
+    promise.then((response) => {
       setLockRedirection(true);
       createNewLevel();
     });
@@ -284,10 +297,11 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
 
   const selectModifierCards = async (cardIndex: number[]) => {
     const modifiersPromise = selectModifiers(gameId, cardIndex);
-
-    modifiersPromise.then(async () => {
-      setLockRedirection(true);
-      navigate('/adventurers');
+    modifiersPromise.then(async (response) => {
+      if (response) {
+        setLockRedirection(true);
+        navigate("/adventurers");
+      }
     });
 
     return modifiersPromise;
@@ -298,7 +312,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     nextLevelPromise.then((response) => {
       response?.cards && replaceCards(response.cards);
       if (response?.isBeast && response?.beast) {
-        setBeast({ ...response.beast, game_id: gameId});
+        setBeast({ ...response.beast, game_id: gameId });
         navigate("/game/beast");
       } else if (response?.isObstacle && response?.obstacles) {
         setObstacles(response?.obstacles);
@@ -314,7 +328,8 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     createNewRewardPromise.then(async (response) => {
       if (response?.healed) {
         createNewLevel();
-      } else {
+      } else if (response?.blisterPackResult) {
+        setBlisterPackResult(response.blisterPackResult);
         navigate(`/rewards/${mode}`);
       }
     });
@@ -828,6 +843,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
       }, 2000);
     } else {
       setGameLoading(false);
+      redirectBasedOnGameState();
       console.log("Game found, no need to create a new one");
     }
   };

@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { Background } from "../components/Background";
 import { PositionedGameMenu } from "../components/GameMenu";
 import { TiltCard } from "../components/TiltCard";
-import { useBlisterPackResult } from "../dojo/queries/useBlisterPackResult";
 import { useGame } from "../dojo/queries/useGame";
 import { useGameContext } from "../providers/GameProvider";
 import { LS_GREEN } from "../theme/colors";
@@ -15,23 +14,24 @@ import { Lsxjon } from "./Game/Lsxjon";
 
 export const ChooseModifiersPage = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [cards, setCards] = useState<Card[]>();
   const [cardsToKeep, setCardsToKeep] = useState<Card[]>([]);
   const { isSmallScreen, cardScale } = useResponsiveValues();
   const adjustedCardScale = cardScale * 0.75;
   const maxCards = 5;
 
-  const { selectModifierCards, redirectBasedOnGameState, lockRedirection } =
-    useGameContext();
+  const {
+    selectModifierCards,
+    redirectBasedOnGameState,
+    lockRedirection,
+    blisterPackResult,
+    setBlisterPackResult,
+    refetchBlisterPackResult,
+  } = useGameContext();
   const game = useGame();
-  const blisterPackResult = useBlisterPackResult();
 
   useEffect(() => {
-    if (blisterPackResult?.cardsPicked) {
-      setCards([]);
-    } else {
-      if (blisterPackResult.cards.length > 0)
-        setCards(blisterPackResult?.cards);
+    if (blisterPackResult.length === 0) {
+      refetchBlisterPackResult();
     }
   }, [blisterPackResult]);
 
@@ -39,8 +39,9 @@ export const ChooseModifiersPage = () => {
     setIsLoading(true);
     selectModifierCards(cardsToKeep.map((c) => c.idx)).finally(() => {
       setIsLoading(false);
+      setCardsToKeep([]);
     });
-    setCards([]);
+    setBlisterPackResult([]);
   };
 
   return (
@@ -75,7 +76,7 @@ export const ChooseModifiersPage = () => {
         <FullScreenCardContainer
           sx={{ width: isSmallScreen ? "100%" : "60%", margin: "0 auto" }}
         >
-          {cards?.map((card, index) => {
+          {blisterPackResult?.map((card, index) => {
             return (
               <Flex
                 key={`${card.card_id ?? ""}-${index}`}

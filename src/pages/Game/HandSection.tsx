@@ -76,7 +76,7 @@ export const HandSection = () => {
         alignItems={"end"}
         position={"relative"}
       >
-        <Box mb={"20px"} mr="10px">
+        <Box mr="10px">
           <SortBy />
         </Box>
         <SimpleGrid
@@ -184,7 +184,7 @@ export const HandSection = () => {
             );
           })}
         </SimpleGrid>
-        <Box mb={"20px"} ml="40px">
+        <Box ml="40px">
           <ShowPlays />
         </Box>
       </Box>

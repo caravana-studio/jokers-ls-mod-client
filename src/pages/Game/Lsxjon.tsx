@@ -1,5 +1,5 @@
+import { Flex, Image, Text } from "@chakra-ui/react";
 import React from "react";
-import { Flex, Text, Image, Box } from "@chakra-ui/react";
 import CachedImage from "../../components/CachedImage";
 
 export const Lsxjon: React.FC = () => {

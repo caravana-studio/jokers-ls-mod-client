@@ -1,7 +1,7 @@
-import { PLAYER_HEALED, BLISTER_PACK_RESULT } from "../constants/dojoEventKeys";
+import { BLISTER_PACK_RESULT, PLAYER_HEALED } from "../constants/dojoEventKeys";
 import { DojoEvent } from "../types/DojoEvent";
-import { getCardsFromEvents } from "./getCardsFromEvents";
 import { getNumberValueFromEvent } from "./getNumberValueFromEvent";
+import { getResultBlisterPackEvent } from "./getResultBlisterPackEvent";
 
 export const getCreateRewardsEvents = (events: DojoEvent[]) => {
   console.log(events);
@@ -12,8 +12,6 @@ export const getCreateRewardsEvents = (events: DojoEvent[]) => {
     (event) => event.keys[0] === BLISTER_PACK_RESULT
   );
 
-  const cards = getCardsFromEvents(events);
-
   if (playerHealedEvent) {
     const game_id = getNumberValueFromEvent(playerHealedEvent, 0) ?? 0;
     const potion_heal = getNumberValueFromEvent(playerHealedEvent, 1) ?? 0;
@@ -21,11 +19,7 @@ export const getCreateRewardsEvents = (events: DojoEvent[]) => {
 
     return { healed: true, game_id, potion_heal, current_hp };
   } else if (blisterEvent) {
-    console.log(blisterEvent);
-    console.log(cards);
-    return {
-      cards,
-    };
+    return { blisterPackResult: getResultBlisterPackEvent(events) };
   }
   return undefined;
 };
