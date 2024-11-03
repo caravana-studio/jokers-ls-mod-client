@@ -11,8 +11,8 @@ import { useDojo } from "../../dojo/useDojo";
 import { useGameActions } from "../../dojo/useGameActions";
 import { useGameContext } from "../../providers/GameProvider";
 import { Adventurer } from "../../types/Adventurer";
-import { Collab } from "../Game/Collab";
 import { AdventurerBox } from "./AdventurerBox";
+import { Lsxjon } from "../Game/Lsxjon";
 
 export const AdventurersPage = () => {
   const [selectedAdventurer, setSelectedAdventurer] = useState<
@@ -152,7 +152,7 @@ export const AdventurersPage = () => {
           </Button>
         </Flex>
         <Box position={"fixed"} left={"80px"} top={12}>
-          <Collab />
+          <Lsxjon />
         </Box>
       </Flex>
     </Background>
