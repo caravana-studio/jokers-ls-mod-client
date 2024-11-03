@@ -110,26 +110,29 @@ export const SpecialCardsRow = ({ cards }: SpecialCardsRowProps) => {
                       bottom="5px"
                       left="5px"
                       borderRadius={"10px"}
-                      background={"violet"}
                     >
                       {hoveredCard === card.idx && (
                         <Button
                           height={8}
-                          fontSize="8px"
-                          px={"16px"}
-                          size={"md"}
-                          borderRadius={"10px"}
-                          variant={"discardSecondarySolid"}
+                          px={"8px"}
                           display="flex"
                           gap={4}
+                          py={0}
+                          backgroundColor='black'
+                          border='1px solid white'
                           onMouseEnter={() => setHoveredButton(card.idx)}
                           onClick={() => {
                             setCardToDiscard(card.idx);
                           }}
+                          sx={{
+                            _hover: {
+                              backgroundColor: 'black',
+                            }
+                          }}
                         >
-                          <Text fontSize="10px">X</Text>
+                          <Text fontSize="15px">X</Text>
                           {hoveredButton === card.idx && (
-                            <Text fontSize="10px">
+                            <Text fontSize="15px">
                               {t(
                                 "game.special-cards.remove-special-cards-label"
                               )}

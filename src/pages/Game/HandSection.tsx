@@ -128,15 +128,19 @@ export const HandSection = () => {
                     {hoveredCard === card.idx && (
                       <Button
                         height={8}
-                        fontSize="8px"
-                        px={"16px"}
-                        borderRadius={"10px"}
-                        size={isSmallScreen ? "xs" : "md"}
-                        variant={"discardSecondarySolid"}
-                        onMouseEnter={() => setHoveredButton(card.idx)}
+                        px={"8px"}
                         display="flex"
                         gap={4}
+                        py={0}
+                        backgroundColor="black"
+                        border="1px solid white"
+                        onMouseEnter={() => setHoveredButton(card.idx)}
                         isDisabled={discarding}
+                        sx={{
+                          _hover: {
+                            backgroundColor: 'black',
+                          }
+                        }}
                         onClick={(e) => {
                           setDiscarding(true);
                           e.stopPropagation();
@@ -147,9 +151,9 @@ export const HandSection = () => {
                           onClose();
                         }}
                       >
-                        <Text fontSize="10px">X</Text>
+                        <Text fontSize="15px">X</Text>
                         {hoveredButton === card.idx && (
-                          <Text fontSize="10px">
+                          <Text fontSize="15px">
                             {t("game.hand-section.modifier-change")}
                           </Text>
                         )}
@@ -157,29 +161,36 @@ export const HandSection = () => {
                     )}
                   </Flex>
                 )}
-                <AnimatedCard idx={card.idx} discarded={card.discarded}>
-                  <Box
-                    sx={{
-                      borderRadius: "8px",
-                      transform: isPreselected
-                        ? `translateY(-40px)`
-                        : "translateY(0px)",
-                      transition: "transform 0.3s ease, box-shadow 0.5s ease",
-                      boxShadow: isPreselected ? "0px 0px 10px 6px white" : "",
-                    }}
-                  >
-                    <TiltCard
-                      card={card}
-                      scale={cardScale}
-                      cursor={"pointer"}
-                      onClick={() => {
-                        card.isModifier
-                          ? togglePreselectedModifier(card.idx)
-                          : togglePreselected(card.idx);
+                <Box
+                  sx={{
+                    transform: isPreselected
+                      ? `translateY(-40px)`
+                      : "translateY(0px)",
+                    transition: "transform 0.3s ease, box-shadow 0.5s ease",
+                  }}
+                >
+                  <AnimatedCard idx={card.idx} discarded={card.discarded}>
+                    <Box
+                      sx={{
+                        borderRadius: "8px",
+                        boxShadow: isPreselected
+                          ? "0px 0px 10px 6px white"
+                          : "",
                       }}
-                    />
-                  </Box>
-                </AnimatedCard>
+                    >
+                      <TiltCard
+                        card={card}
+                        scale={cardScale}
+                        cursor={"pointer"}
+                        onClick={() => {
+                          card.isModifier
+                            ? togglePreselectedModifier(card.idx)
+                            : togglePreselected(card.idx);
+                        }}
+                      />
+                    </Box>
+                  </AnimatedCard>
+                </Box>
               </GridItem>
             );
           })}
