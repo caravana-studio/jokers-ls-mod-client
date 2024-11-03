@@ -26,6 +26,7 @@ export const ChooseSpecialsPage = () => {
     blisterPackResult,
     setBlisterPackResult,
     refetchBlisterPackResult,
+    addSpecialCard,
   } = useGameContext();
   const game = useGame();
 
@@ -37,10 +38,18 @@ export const ChooseSpecialsPage = () => {
 
   const confirmSelectCards = () => {
     setIsLoading(true);
-    selectSpecialCards(cardsToKeep.map((c) => c.idx)).finally(() => {
-      setIsLoading(false);
-      setCardsToKeep([]);
-    });
+    selectSpecialCards(cardsToKeep.map((c) => c.idx))
+      .then((response) => {
+        if (response.length > 0) {
+          cardsToKeep.forEach((card) => {
+            addSpecialCard(card);
+          });
+        }
+      })
+      .finally(() => {
+        setIsLoading(false);
+        setCardsToKeep([]);
+      });
     setBlisterPackResult([]);
   };
 

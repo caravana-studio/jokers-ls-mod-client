@@ -21,6 +21,7 @@ export const RewardsSelection = () => {
     blisterPackResult,
     setBlisterPackResult,
     refetchBlisterPackResult,
+    addSpecialCard,
   } = useGameContext();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -40,26 +41,32 @@ export const RewardsSelection = () => {
 
   const confirmSelectCards = () => {
     setIsLoading(true);
-    selectNewRewards(cardsToKeep.map((c) => c.idx)).finally(() => {
-      setIsLoading(false);
-    });
+    selectNewRewards(cardsToKeep.map((c) => c.idx))
+      .then((response) => {
+        if (response) {
+          cardsToKeep.forEach((card) => {
+            if (card.isSpecial) {
+              addSpecialCard(card);
+            }
+          });
+        }
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
     setBlisterPackResult([]);
   };
-
-  // if (!roundRewards) {
-  //   navigate("/redirect/store");
-  // }
 
   return (
     <Background type="skulls" dark bgDecoration>
       <PositionedGameMenu decoratedPage />
-      <Flex height='100%' justifyContent={'center'} direction={"column"}>
+      <Flex height="100%" justifyContent={"center"} direction={"column"}>
         <Heading size={"xxl"} mb={4} textAlign={"center"} variant="neonGreen">
           - Select your rewards -
-          </Heading>
-          <Heading size={"xl"} textAlign={"center"} variant="neonGreen" my={4}>
-            {maxCards === 1 ? "Choose 1 card" : `Choose up to ${maxCards} cards` } 
-          </Heading>
+        </Heading>
+        <Heading size={"xl"} textAlign={"center"} variant="neonGreen" my={4}>
+          {maxCards === 1 ? "Choose 1 card" : `Choose up to ${maxCards} cards`}
+        </Heading>
         <FullScreenCardContainer>
           {blisterPackResult?.map((card, index) => {
             return (

@@ -4,6 +4,10 @@ import { Card } from "../types/Card";
 import { DojoEvent } from "../types/DojoEvent";
 import { getNumberValueFromEvent } from "./getNumberValueFromEvent";
 
+const sort = (a: Card, b: Card) => {
+  return (a.card_id ?? 0) - (b.card_id ?? 0);
+};
+
 export const getResultBlisterPackEvent = (events: DojoEvent[]): Card[] => {
   const blisterPackResultEvent = events.find(
     (event) => event.keys[0] === BLISTER_PACK_RESULT
@@ -21,5 +25,5 @@ export const getResultBlisterPackEvent = (events: DojoEvent[]): Card[] => {
       packResult.push(card);
     }
   }
-  return packResult;
+  return packResult.sort(sort);
 };

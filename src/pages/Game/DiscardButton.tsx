@@ -31,7 +31,7 @@ export const DiscardButton = ({ highlight = false }: DiscardButtonProps) => {
   const beastPlayer = useBeastPlayer();
   const energyLeft = beastPlayer?.energy ?? 0;
 
-  const hasDiscards = discards > 0 || energyLeft > 0;
+  const hasDiscards = mode === "beast" ? energyLeft > 0 : discards > 0;
 
   const cantDiscard =
     !highlight &&

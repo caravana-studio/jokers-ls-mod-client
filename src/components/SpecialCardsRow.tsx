@@ -1,5 +1,5 @@
 import { Box, Button, Flex, Text } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { CARD_HEIGHT, CARD_WIDTH } from "../constants/visualProps.ts";
 import { useGame } from "../dojo/queries/useGame.tsx";
@@ -17,8 +17,7 @@ interface SpecialCardsRowProps {
 }
 
 export const SpecialCardsRow = ({ cards }: SpecialCardsRowProps) => {
-  const [discardedCards, setDiscardedCards] = useState<string[]>([]);
-  const { discardSpecialCard, roundRewards } = useGameContext();
+  const { discardSpecialCard, removeSpecialCard } = useGameContext();
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const [hoveredButton, setHoveredButton] = useState<number | null>(null);
   const [cardToDiscard, setCardToDiscard] = useState<number | null>(null);
@@ -35,24 +34,13 @@ export const SpecialCardsRow = ({ cards }: SpecialCardsRowProps) => {
   const maxLength = 5;
   const emptySlots = maxLength - cards.length;
 
-  useEffect(() => {
-    if (roundRewards) {
-      setDiscardedCards((prev) => [
-        ...prev,
-        ...cards
-          .filter((card) => card.temporary && card.remaining === 1)
-          .map((card) => card.id),
-      ]);
-    }
-  }, [roundRewards, cards]);
-
   const handleDiscard = () => {
     const card = cards.find((c) => c.idx === cardToDiscard);
     if (card) {
       setHoveredButton(null);
       discardSpecialCard(cardToDiscard!).then((response) => {
         if (response) {
-          setDiscardedCards((prev) => [...prev, card.id]);
+          card.card_id && removeSpecialCard(card.card_id);
         }
       });
       setCardToDiscard(null);
@@ -74,7 +62,6 @@ export const SpecialCardsRow = ({ cards }: SpecialCardsRowProps) => {
         p={2}
       >
         {cards.map((card) => {
-          const isDiscarded = discardedCards.includes(card.id);
           return (
             <Flex
               className="special-cards-step-1"
@@ -90,64 +77,63 @@ export const SpecialCardsRow = ({ cards }: SpecialCardsRowProps) => {
                 setHoveredButton(null);
               }}
             >
-              {!isDiscarded && (
-                <AnimatedCard
-                  idx={card.idx}
-                  isSpecial={!!card.isSpecial}
-                  scale={scale}
+              <AnimatedCard
+                idx={card.idx}
+                isSpecial={!!card.isSpecial}
+                scale={scale}
+              >
+                <Box
+                  position={"relative"}
+                  width={`${cardWidth - cardWidth * 0.1}`}
+                  height={"auto"}
+                  minWidth={`${cardWidth - cardWidth * 0.1}`}
+                  border={"1.5px solid white"}
+                  borderRadius={"5px"}
                 >
-                  <Box
-                    position={"relative"}
-                    width={`${cardWidth - cardWidth * 0.1}`}
-                    height={"auto"}
-                    minWidth={`${cardWidth - cardWidth * 0.1}`}
-                    border={"1.5px solid white"}
-                    borderRadius={"5px"}
+                  <Flex
+                    position={"absolute"}
+                    zIndex={7}
+                    bottom="5px"
+                    left="5px"
+                    borderRadius={"10px"}
                   >
-                    <Flex
-                      position={"absolute"}
-                      zIndex={7}
-                      bottom="5px"
-                      left="5px"
-                      borderRadius={"10px"}
-                      background={"violet"}
-                    >
-                      {hoveredCard === card.idx && (
-                        <Button
-                          height={8}
-                          fontSize="8px"
-                          px={"16px"}
-                          size={"md"}
-                          borderRadius={"10px"}
-                          variant={"discardSecondarySolid"}
-                          display="flex"
-                          gap={4}
-                          onMouseEnter={() => setHoveredButton(card.idx)}
-                          onClick={() => {
-                            setCardToDiscard(card.idx);
-                          }}
-                        >
-                          <Text fontSize="10px">X</Text>
-                          {hoveredButton === card.idx && (
-                            <Text fontSize="10px">
-                              {t(
-                                "game.special-cards.remove-special-cards-label"
-                              )}
-                            </Text>
-                          )}
-                        </Button>
-                      )}
-                    </Flex>
-                    <TiltCard
-                      onClick={() => {
-                        isSmallScreen && highlightCard(card);
-                      }}
-                      card={card}
-                      scale={scale}
-                    />
-                  </Box>
-                </AnimatedCard>
-              )}
+                    {hoveredCard === card.idx && (
+                      <Button
+                        height={8}
+                        px={"8px"}
+                        display="flex"
+                        gap={4}
+                        py={0}
+                        backgroundColor="black"
+                        border="1px solid white"
+                        onMouseEnter={() => setHoveredButton(card.idx)}
+                        onClick={() => {
+                          setCardToDiscard(card.idx);
+                        }}
+                        sx={{
+                          _hover: {
+                            backgroundColor: "black",
+                          },
+                        }}
+                      >
+                        <Text fontSize="15px">X</Text>
+                        {hoveredButton === card.idx && (
+                          <Text fontSize="15px">
+                            {t("game.special-cards.remove-special-cards-label")}
+                          </Text>
+                        )}
+                      </Button>
+                    )}
+                  </Flex>
+                  <TiltCard
+                    onClick={() => {
+                      isSmallScreen && highlightCard(card);
+                    }}
+                    card={card}
+                    scale={scale}
+                  />
+                </Box>
+              </AnimatedCard>
             </Flex>
           );
         })}

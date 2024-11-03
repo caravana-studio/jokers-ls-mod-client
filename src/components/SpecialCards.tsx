@@ -1,31 +1,38 @@
-import { Box, Button, Flex, Text, useTheme } from "@chakra-ui/react";
-import { useState } from "react";
+import { Box, Button, Flex, Text } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useGame } from "../dojo/queries/useGame";
 import { useGameContext } from "../providers/GameProvider.tsx";
 import { Card } from "../types/Card.ts";
 import { ConfirmationModal } from "./ConfirmationModal.tsx";
-import { useResponsiveValues } from "../theme/responsiveSettings.tsx";
 import { SpecialCardsRow } from "./SpecialCardsRow.tsx";
-import { LS_GREEN } from "../theme/colors.tsx";
 
 interface SpecialCardsProps {
   inStore?: boolean;
 }
 
 export const SpecialCards = ({ inStore = false }: SpecialCardsProps) => {
-  const { colors } = useTheme();
   const game = useGame();
-  const maxLength = game?.len_max_current_special_cards ?? 5;
   const { t } = useTranslation(["game"]);
 
-  const { discardSpecialCard, specialCards, isRageRound, rageCards } =
-    useGameContext();
-  const [discardedCards, setDiscardedCards] = useState<Card[]>([]);
+  const {
+    discardSpecialCard,
+    specialCards,
+    refetchSpecialCards,
+    removeSpecialCard,
+  } = useGameContext();
   const [preselectedCard, setPreselectedCard] = useState<Card | undefined>();
   const [confirmationModalOpen, setConfirmationModalOpen] = useState(false);
 
-  const { cardScale } = useResponsiveValues();
+  useEffect(() => {
+    if (
+      game?.len_current_special_cards &&
+      game?.len_current_special_cards > 0 &&
+      specialCards.length === 0
+    ) {
+      refetchSpecialCards();
+    }
+  }, [game]);
 
   return (
     <Box className="special-cards-step-3">
@@ -35,7 +42,6 @@ export const SpecialCards = ({ inStore = false }: SpecialCardsProps) => {
           {!inStore && (
             <Text fontSize={"1.3rem"}>
               Special cards ({specialCards.length}/5)
-              {/* {t("game.special-cards.special-cards-label")} */}
             </Text>
           )}
         </Box>
@@ -50,7 +56,8 @@ export const SpecialCards = ({ inStore = false }: SpecialCardsProps) => {
             preselectedCard &&
               discardSpecialCard(preselectedCard.idx).then((response) => {
                 if (response) {
-                  setDiscardedCards((prev) => [...prev, preselectedCard]);
+                  preselectedCard?.card_id &&
+                    removeSpecialCard(preselectedCard.card_id);
                   setPreselectedCard(undefined);
                 }
               });

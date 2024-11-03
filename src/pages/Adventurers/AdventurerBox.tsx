@@ -43,10 +43,12 @@ export const AdventurerBox = ({
       onClick={() => !consumed && onClick()}
       width="30%"
       minWidth={"400px"}
+      maxWidth={'600px'}
       bg="black"
       borderRadius="30px"
       border="1px solid white"
       m={4}
+      height='200px'
       cursor={consumed ? "not-allowed" : "pointer"}
       boxShadow={isSelected ? `0px 0px 15px 5px ${LS_GREEN}` : "none"}
       opacity={otherIsSelected || consumed ? 0.5 : 1}

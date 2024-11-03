@@ -127,7 +127,10 @@ export const useGameActions = () => {
     }
   };
 
-  const selectAdventurerCs = async (gameId: number, cardsIndex: number[]) => {
+  const selectAdventurerCs = async (
+    gameId: number,
+    cardsIndex: number[]
+  ): Promise<boolean> => {
     try {
       showTransactionToast();
       const { transaction_hash } =
@@ -149,10 +152,11 @@ export const useGameActions = () => {
       } else {
         console.error("Error at select adventurer cards:", tx);
       }
+      return tx.isSuccess();
     } catch (e) {
       failedTransactionToast();
       console.log(e);
-      return 0;
+      return false;
     }
   };
 

@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { LOGGED_USER, SORT_BY_SUIT } from "../constants/localStorage";
 import { PLAYS_DATA } from "../constants/plays";
+import { useBeast } from "../dojo/queries/useBeast";
+import { useBlisterPackResult } from "../dojo/queries/useBlisterPackResult";
 import { useChallenge } from "../dojo/queries/useChallenge";
 import { useCurrentHand } from "../dojo/queries/useCurrentHand";
 import { useCurrentSpecialCards } from "../dojo/queries/useCurrentSpecialCards";
@@ -13,8 +15,6 @@ import { Card } from "../types/Card";
 import { RoundRewards } from "../types/RoundRewards";
 import { checkHand } from "../utils/checkHand";
 import { sortCards } from "../utils/sortCards";
-import { useBeast } from "../dojo/queries/useBeast";
-import { useBlisterPackResult } from "../dojo/queries/useBlisterPackResult";
 
 export const useGameState = () => {
   const [gameId, setGameId] = useState<number>(getLSGameId());
@@ -38,13 +38,14 @@ export const useGameState = () => {
   const [sortBySuit, setSortBySuit] = useState(
     !!localStorage.getItem(SORT_BY_SUIT)
   );
-  const [lockedSpecialCards, setLockedSpecialCards] = useState<Card[]>([]);
   const [isRageRound, setIsRageRound] = useState(false);
   const [rageCards, setRageCards] = useState<Card[]>([]);
   const [beast, setBeast] = useState<Beast | undefined>(undefined);
   const [obstacles, setObstacles] = useState<
     { id: number; completed: boolean }[]
   >([]);
+
+  const [specialCards, setSpecialCards] = useState<Card[]>([]);
 
   const [blisterPackResult, setBlisterPackResult] = useState<Card[]>([]);
 
@@ -66,10 +67,29 @@ export const useGameState = () => {
 
   const dojoSpecialCards = useCurrentSpecialCards();
 
-  const beastFetchData = useBeast();
+  const refetchSpecialCards = () => {
+    setSpecialCards(dojoSpecialCards);
+  };
 
-  const specialCards =
-    lockedSpecialCards.length > 0 ? lockedSpecialCards : dojoSpecialCards;
+  const addSpecialCard = (card: Card) => {
+    setSpecialCards((prev) => [...prev, { ...card, idx: prev.length }]);
+  };
+
+  const removeSpecialCard = (cardId: number) => {
+    setSpecialCards((prev) => {
+      return prev
+        .filter((card) => card.card_id !== cardId)
+        .map((card, index) => {
+          return { ...card, idx: index };
+        });
+    });
+  };
+
+  const resetSpecialCards = () => {
+    setSpecialCards([]);
+  };
+
+  const beastFetchData = useBeast();
 
   const lsUser = localStorage.getItem(LOGGED_USER);
   const username = lsUser;
@@ -162,7 +182,9 @@ export const useGameState = () => {
     playIsNeon,
     setPlayIsNeon,
     specialCards,
-    setLockedSpecialCards,
+    refetchSpecialCards,
+    addSpecialCard,
+    removeSpecialCard,
     isRageRound,
     setIsRageRound,
     rageCards,
@@ -176,5 +198,6 @@ export const useGameState = () => {
     blisterPackResult,
     setBlisterPackResult,
     refetchBlisterPackResult,
+    resetSpecialCards,
   };
 };

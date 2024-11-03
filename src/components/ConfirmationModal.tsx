@@ -12,7 +12,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
-import { NEON_PINK } from "../theme/colors";
+import { LS_GREEN } from "../theme/colors";
 
 interface ConfirmationModalProps {
   close: () => void;
@@ -30,10 +30,14 @@ export const ConfirmationModal = ({
   const { t } = useTranslation(["game"]);
   return (
     <Modal isOpen={true} onClose={close}>
-      <ModalOverlay />
+      <ModalOverlay
+        bg="blackAlpha.400"
+        backdropFilter="auto"
+        backdropBlur="5px"
+      />
       <ModalContent>
         <ModalHeader>
-          <Heading size="m" variant="neonWhite">
+          <Heading size="l" variant="lsGreen">
             {title}
           </Heading>
         </ModalHeader>
@@ -44,13 +48,12 @@ export const ConfirmationModal = ({
           </Flex>
         </ModalBody>
         <ModalFooter>
-          <Button variant="defaultOutline" size="sm" onClick={close}>
+          <Button onClick={close} variant="defaultOutlineLoot">
             {t("confirmation-modal.close")}
           </Button>
           <Button
-            variant="secondarySolid"
-            boxShadow={`0px 0px 10px 6px ${NEON_PINK}`}
-            size="sm"
+            variant="defaultGreenOutlineGlow"
+            boxShadow={`0px 0px 10px 6px ${LS_GREEN}`}
             onClick={onConfirm}
             ml={3}
           >
