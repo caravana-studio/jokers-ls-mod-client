@@ -292,9 +292,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     nextLevelPromise.then((response) => {
       response?.cards && replaceCards(response.cards);
       if (response?.isBeast && response?.beast) {
-
-        //TODO: dehardcode type_beast
-        setBeast({ ...response.beast, game_id: gameId, type_beast: {type: 'LOOT_SURVIVOR'} });
+        setBeast({ ...response.beast, game_id: gameId});
         navigate("/game/beast");
       } else if (response?.isObstacle && response?.obstacles) {
         setObstacles(response?.obstacles);
