@@ -66,7 +66,7 @@
   "specialCardsTutorial": {
     "specialCards": {
       "title": "Special Cards",
-      "content": "Special cards activate immediately after you purchase them in the store. They apply their effects after your hand is played."
+      "content": "They apply their effects after your hand is played."
     },
     "discardingCards": {
       "title": "Discarding special cards",
@@ -77,12 +77,30 @@
   "modifiersTutorial": {
     "modifierCard": {
       "title": "Modifier Card",
-      "content": "Modifier cards enhance or alter a specific card. Drag and drop a modifier onto a preselected card to activate its effect."
+      "content": "Modifier cards enhance or change the abilities of specific cards. Click to add them to your selected hand and activate their effects."
     },
     "discard": {
       "title": "Discard",
       "content": "Click the discard button that will pop up over the card to discard it without losing any discard chances.",
       "content-mobile": "Drag the modifier and drop it onto the discard button to discard it without losing any discard chances."
+    }
+  },
+  "beastTutorial": {
+    "beast": {
+      "title": "Beast Mode",
+      "content": "Face off against a powerful beast! To advance to the next level, reduce its HP to zero."
+    },
+    "attack": {
+      "title": "Attack",
+      "content": "The points you earn from poker hands will damage the beast."
+    },
+    "energy": {
+      "title": "Energy",
+      "content": "Each action uses energy. You start with 3 energy points. Once they’re depleted, it’s the beast’s turn to strike."
+    },
+    "gameOver": {
+      "title": "Game Over",
+      "content": "You lose if your HP reaches zero."
     }
   },
   "joyride": {

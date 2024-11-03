@@ -1,6 +1,7 @@
 import { isMobile } from "react-device-detect";
 import i18n from "i18next";
 import { Step } from "react-joyride";
+import { LS_GREEN } from "../theme/colors";
 
 const COMMON_SETTINGS: Partial<Step> = {
   disableBeacon: true,
@@ -16,27 +17,29 @@ export const SPECIAL_CARDS_TUTORIAL_STEPS: Step[] = [];
 
 export const MODIFIERS_TUTORIAL_STEPS: Step[] = [];
 
+export const BEAST_TUTORIAL_STEPS: Step[] = [];
+
 export const JOYRIDE_LOCALES = {};
 
 export const TUTORIAL_STYLE = {
   options: {
-    arrowColor: "#DAA1E8",
+    arrowColor: `${LS_GREEN}`,
     backgroundColor: "#1A1A1A",
     overlayColor: "rgba(0, 0, 0, 0.7)",
-    primaryColor: "#DAA1E8",
+    primaryColor: `${LS_GREEN}`,
     textColor: "#FFFFFF",
     width: 350,
     zIndex: 1000,
   },
   buttonClose: {
-    color: "#DAA1E8",
+    color: `${LS_GREEN}`,
   },
   buttonNext: {
-    backgroundColor: "#DAA1E8",
+    backgroundColor: `${LS_GREEN}`,
     color: "#000000",
   },
   buttonBack: {
-    color: "#DAA1E8",
+    color: `${LS_GREEN}`,
   },
   tooltip: {
     borderRadius: "12px",
@@ -215,6 +218,43 @@ const loadTutorialTranslations = async () => {
             ns: "tutorials",
           })
         : i18n.t("modifiersTutorial.discard.content", { ns: "tutorials" }),
+      ...COMMON_SETTINGS,
+    },
+  ]);
+
+  Object.assign(BEAST_TUTORIAL_STEPS, [
+    {
+      target: ".tutorial-beast",
+      title: i18n.t("beastTutorial.beast.title", {
+        ns: "tutorials",
+      }),
+      content: i18n.t("beastTutorial.beast.content", {
+        ns: "tutorials",
+      }),
+      ...COMMON_SETTINGS,
+    },
+    {
+      target: ".tutorial-beast-attack",
+      title: i18n.t("beastTutorial.attack.title", { ns: "tutorials" }),
+      content: i18n.t("beastTutorial.attack.content", {
+        ns: "tutorials",
+      }),
+      ...COMMON_SETTINGS,
+    },
+    {
+      target: ".tutorial-beast-energy",
+      title: i18n.t("beastTutorial.energy.title", { ns: "tutorials" }),
+      content: i18n.t("beastTutorial.energy.content", {
+        ns: "tutorials",
+      }),
+      ...COMMON_SETTINGS,
+    },
+    {
+      target: ".tutorial-beast-game-over",
+      title: i18n.t("beastTutorial.gameOver.title", { ns: "tutorials" }),
+      content: i18n.t("beastTutorial.gameOver.content", {
+        ns: "tutorials",
+      }),
       ...COMMON_SETTINGS,
     },
   ]);
