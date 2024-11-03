@@ -14,7 +14,6 @@ export const AdventurersPage = () => {
   const { redirectBasedOnGameState, lockRedirection } = useGameContext();
   const game = useGame();
   const { adventurers, isLoading } = useAdventurers();
-  const adventurersCountMock = 0;
 
   useEffect(() => {
     redirectBasedOnGameState();
@@ -32,7 +31,7 @@ export const AdventurersPage = () => {
         <PositionedGameMenu decoratedPage />
         {isLoading ? (
           <Loading />
-        ) : adventurersCountMock > 0 ? (
+        ) : adventurers.length > 0 ? (
           <Adventurers />
         ) : (
           <NoAdventurers />
