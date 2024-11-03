@@ -1,26 +1,26 @@
 import { tableAnatomy } from "@chakra-ui/anatomy";
 import { createMultiStyleConfigHelpers } from "@chakra-ui/react";
-import { VIOLET_LIGHT } from "./colors.tsx";
+import { LS_GREEN } from "./colors.tsx";
 
 const { definePartsStyle, defineMultiStyleConfig } =
   createMultiStyleConfigHelpers(tableAnatomy.keys);
 
 const leaderboard = definePartsStyle({
   td: {
-    color: "white",
+    color: LS_GREEN,
     fontFamily: "VT323",
     textAlign: "center",
-    fontSize: ["9px", "md", "lg", "xl"],
+    fontSize: ["9px", "1.3rem", "1.3rem", "2rem"],
   },
   thead: {
     tr: {
       borderBottomWidth: 0,
     },
     td: {
-      color: "white",
+      color: LS_GREEN,
       borderBottomWidth: 0,
       px: [1, 2, 2, 4],
-      py: [0,2,2,2]
+      py: [0, 2, 2, 2],
     },
   },
   tbody: {
@@ -30,8 +30,8 @@ const leaderboard = definePartsStyle({
           borderBottomWidth: 0,
         },
         td: {
-          color: 'white',
-          fontSize: ["9px", "md", "lg", "xl"],
+          color: "white",
+          fontSize: ["9px", "1rem", "1rem", "1.3rem"],
           px: [1, 1, 4],
           py: [1, 2, 2, 2],
         },
@@ -41,8 +41,8 @@ const leaderboard = definePartsStyle({
           borderBottomWidth: 0,
         },
         td: {
-          color: 'white',
-          fontSize: ["9px", "md", "lg", "xl"],
+          color: "white",
+          fontSize: ["9px", "1rem", "1rem", "1.3rem"],
           px: [1, 1, 4],
           py: [1, 2, 2, 2],
         },
