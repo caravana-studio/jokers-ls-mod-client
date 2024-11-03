@@ -56,7 +56,7 @@ export const LoadingScreen = ({ error = false }: LoadingScreenProps) => {
       ) : (
         <>
           <img
-            src="logos/caravana-isologo.png"
+            src="logos/caravana-loot.png"
             alt="loader"
             width="300px"
             style={{
