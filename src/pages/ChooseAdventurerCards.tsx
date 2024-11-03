@@ -9,7 +9,7 @@ import { useResponsiveValues } from "../theme/responsiveSettings";
 import { Card } from "../types/Card";
 import { getCardUniqueId } from "../utils/getCardUniqueId";
 import { FullScreenCardContainer } from "./FullScreenCardContainer";
-import { Collaboration } from "./Game/Collaboration";
+import { Lsxjon } from "./Game/Lsxjon";
 
 export const ChooseAdventurerCards = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -75,7 +75,7 @@ export const ChooseAdventurerCards = () => {
           <FullScreenCardContainer
             sx={{ width: isSmallScreen ? "100%" : "80%", margin: "0 auto" }}
           >
-            {blisterPackResult?.map((card, index) => {
+            {cards?.map((card, index) => {
               return (
                 <Flex
                   key={`${card.card_id ?? ""}-${index}`}
@@ -135,7 +135,7 @@ export const ChooseAdventurerCards = () => {
         </Flex>
         {!isSmallScreen && (
           <Box position={"fixed"} left={"80px"} top={12}>
-            <Collaboration />
+            <Lsxjon />
           </Box>
         )}
       </Flex>
