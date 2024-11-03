@@ -27,7 +27,7 @@ export const RewardsSelection = () => {
 
   const { isSmallScreen, cardScale } = useResponsiveValues();
   const adjustedCardScale = cardScale * 1.5;
-  const maxCards = mode === "specials" ? 1 : 3;
+  const maxCards = mode === "special" ? 1 : 3;
 
   useEffect(() => {
     if (blisterPackResult?.cardsPicked) {
