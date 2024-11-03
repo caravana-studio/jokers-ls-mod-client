@@ -82,6 +82,8 @@ interface IGameContext {
   refetchObstacles: () => void;
   beast: Beast | undefined;
   refetchBeast: () => void;
+  attackAnimation: number;
+  setAttackAnimation: (point: number) => void;
   togglePreselectedModifier: (cardIndex: number) => void;
   createNewReward: (rewardId: number, mode: string) => Promise<any>;
   selectNewRewards: (cardIndex: number[]) => Promise<any>;
@@ -138,6 +140,8 @@ const GameContext = createContext<IGameContext>({
   refetchObstacles: () => {},
   beast: undefined,
   refetchBeast: () => {},
+  attackAnimation: 0,
+  setAttackAnimation: () => {},
   togglePreselectedModifier: (_) => {},
   createNewReward: (rewardId: number, mode: string) =>
     new Promise((resolve) => resolve(undefined)),
@@ -191,6 +195,8 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
   );
 
   const { setAnimatedCard } = useCardAnimations();
+
+  const [attackAnimation, setAttackAnimation] = useState(0);
 
   const {
     gameId,
@@ -611,7 +617,9 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
 
       setTimeout(() => {
         setPlayAnimation(true);
-      }, ALL_CARDS_DURATION);
+        if (playEvents.playerAttack)
+          setAttackAnimation(playEvents.playerAttack.valueOf());
+      }, ALL_CARDS_DURATION + 500);
 
       setTimeout(() => {
         setAnimatedCard(undefined);
@@ -621,6 +629,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
         setPreSelectionLocked(false);
         setPlayIsNeon(false);
         setLockedSpecialCards([]);
+
         if (playEvents.itemChallengeCompleted) {
           playEvents.itemChallengeCompleted.forEach((id) => {
             setObstacleCompleted(id);
@@ -631,7 +640,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
           setTimeout(() => {
             navigate(`/gameover/${gameId}`);
             setLockRedirection(false);
-          }, 1000);
+          }, 2000);
         } else if (
           playEvents.levelPassed ||
           playEvents.obstacleDefeated ||
@@ -639,14 +648,14 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
         ) {
           setTimeout(() => {
             navigate("/rewards");
-          }, 1000);
+          }, 2000);
         } else {
           setLockedCash(undefined);
           playEvents.cards && replaceCards(playEvents.cards);
           setRoundRewards(undefined);
           setLockRedirection(false);
         }
-      }, ALL_CARDS_DURATION + 500);
+      }, ALL_CARDS_DURATION + 1000);
     }
   };
 
@@ -896,6 +905,8 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
         lockRedirection,
         discards,
         redirectBasedOnGameState,
+        attackAnimation,
+        setAttackAnimation,
       }}
     >
       {children}

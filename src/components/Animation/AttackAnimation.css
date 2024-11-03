@@ -1,0 +1,45 @@
+@keyframes horizontal-shake {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-5px);
+    }
+    50% {
+      transform: translateX(5px);
+    }
+    75% {
+      transform: translateX(-5px);
+    }
+  }
+  
+  .shake {
+    animation: horizontal-shake 0.3s infinite;
+  }
+
+  @keyframes jump-fade {
+    0% {
+      transform: scale(1);
+      opacity: 0;
+    }
+    25% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    50% {
+      transform: scale(1.6);
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: scale(1.5);
+    }
+  }
+  
+  .damage-text {
+    color: red;
+    font-size: 48px;
+    font-weight: 800;
+    animation: jump-fade 1s forwards;
+  }
+  

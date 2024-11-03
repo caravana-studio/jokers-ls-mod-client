@@ -18,6 +18,7 @@ export interface PlayEvents {
   cashEvents?: CashEvent[];
   obstacleDefeated: boolean;
   itemChallengeCompleted?: number[];
+  playerAttack?: number;
   playWinGameEvent?: PlayWinGameEvent;
 }
 
@@ -80,3 +81,4 @@ export interface CashEvent {
   idx: number;
   special_idx: number;
 }
+

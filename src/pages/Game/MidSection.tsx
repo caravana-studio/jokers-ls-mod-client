@@ -1,7 +1,6 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
 import { useDroppable } from "@dnd-kit/core";
 import { useParams } from "react-router-dom";
-import CachedImage from "../../components/CachedImage.tsx";
 import { ProgressBar } from "../../components/CompactRoundData/ProgressBar.tsx";
 import { CurrentPlay } from "../../components/CurrentPlay.tsx";
 import { MultiPoints } from "../../components/MultiPoints.tsx";
@@ -12,7 +11,8 @@ import { useResponsiveValues } from "../../theme/responsiveSettings.tsx";
 import { DiscardButton } from "./DiscardButton.tsx";
 import { Obstacle } from "./Obstacle.tsx";
 import { PlayButton } from "./PlayButton.tsx";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
+import AttackAnimation from "../../components/Animation/AttackAnimation.tsx";
 
 interface MidSectionProps {
   isTutorialRunning?: boolean;
@@ -27,6 +27,8 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
     playAnimation,
     beast,
     refetchBeast,
+    attackAnimation,
+    setAttackAnimation,
   } = useGameContext();
 
   useEffect(() => {
@@ -38,7 +40,6 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
   const { setNodeRef } = useDroppable({
     id: PRESELECTED_CARD_SECTION_ID,
   });
-  const { cardScale } = useResponsiveValues();
 
   const { mode } = useParams();
 
@@ -48,6 +49,29 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
   const beast_id = beast?.beast_id ?? 0;
   const maxHealth = beast?.health ?? 0;
   const lifeLeft = beast?.current_health ?? 0;
+
+  const attackAnimRef = useRef<{ runAnim: () => void }>(null);
+  const [lifeLeftValue, setLifeLeftValue] = useState(lifeLeft);
+  const [hpBarValue, setHpBarValue] = useState(
+    (lifeLeft.valueOf() / maxHealth.valueOf()) * 100
+  );
+
+  useEffect(() => {
+    if (!beast) {
+      refetchBeast();
+    }
+
+    if (!hpBarValue) {
+      setHpBarValue((lifeLeft.valueOf() / maxHealth.valueOf()) * 100);
+      setLifeLeftValue(lifeLeft);
+    }
+  }, [beast]);
+
+  useEffect(() => {
+    if (attackAnimation > 0) {
+      attackAnimRef.current?.runAnim();
+    }
+  }, [attackAnimation]);
 
   return (
     <Flex
@@ -97,10 +121,18 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
                   alignItems="center"
                   textAlign="center"
                 >
-                  <CachedImage
-                    maxHeight="45vh"
-                    zIndex={1}
-                    src={`/beasts/${beast_id}.png`}
+                  <AttackAnimation
+                    ref={attackAnimRef}
+                    duration={400}
+                    damagePoints={attackAnimation}
+                    image={`/beasts/${beast_id}.png`}
+                    onEnd={() => {
+                      setHpBarValue(
+                        (lifeLeft.valueOf() / maxHealth.valueOf()) * 100
+                      );
+                      setLifeLeftValue(lifeLeft);
+                      setAttackAnimation(0);
+                    }}
                   />
                 </Flex>
                 <Flex
@@ -121,12 +153,12 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
                     </Text>
                   </Box>
                   <Text lineHeight={1} size="l">
-                    {lifeLeft.toString()}
+                    {lifeLeftValue.toString()}
                   </Text>
                 </Flex>
                 <Box width="100%">
                   <ProgressBar
-                    progress={(lifeLeft.valueOf() / maxHealth.valueOf()) * 100}
+                    progress={hpBarValue}
                     color={BEAST_RED}
                     borderColor={BEAST_RED}
                   />

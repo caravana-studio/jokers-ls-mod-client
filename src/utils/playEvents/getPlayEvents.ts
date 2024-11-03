@@ -1,6 +1,7 @@
 import {
   CHALLENGE_COMPLETED_EVENT,
   GAME_OVER_EVENT,
+  PLAYER_ATTACK,
 } from "../../constants/dojoEventKeys";
 import { DojoEvent } from "../../types/DojoEvent";
 import { PlayEvents } from "../../types/ScoreData";
@@ -14,6 +15,7 @@ import { getLevelPassedEvent } from "./getLevelPassedEvent";
 import { getModifierSuitEvents } from "./getModifierSuitEvents";
 import { getMultiPointEvents } from "./getMultiPointEvents";
 import { getNeonPlayEvent } from "./getNeonPlayEvent";
+import { getPlayerAttackEvent } from "./getPlayerAttackEvent";
 import { getPlayerWinGameEvent } from "./getPlayWinGameEvent";
 import { getScoreEvent } from "./getScoreEvent";
 import { getSpecialLevelEvent } from "./getSpecialLevelEvent";
@@ -41,6 +43,7 @@ export const getPlayEvents = (events: DojoEvent[]): PlayEvents => {
     cards: getCardsFromEvents(events),
     score: getScoreEvent(events),
     cashEvents: getCashEvents(events),
+    playerAttack: getPlayerAttackEvent(events),
   };
 
   return playEvents;
