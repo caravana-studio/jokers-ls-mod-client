@@ -29,7 +29,6 @@ import { Card } from "../types/Card";
 import { RoundRewards } from "../types/RoundRewards.ts";
 import { PlayEvents } from "../types/ScoreData";
 import { changeCardSuit } from "../utils/changeCardSuit";
-import { set } from "mobx";
 
 interface IGameContext {
   gameId: number;
@@ -93,6 +92,18 @@ interface IGameContext {
   setBlisterPackResult: (cards: Card[]) => void;
   refetchBlisterPackResult: () => void;
   executeEndTurn: () => Promise<any>;
+  playsLeft: number;
+  consumePlay: () => void;
+  discardsLeft: number;
+  energyLeft: number;
+  consumeDiscard: () => void;
+  consumeEnergyPlay: () => void;
+  consumeEnergyDiscard: () => void;
+  refetchPlaysAndDiscards: () => void;
+  beastAttack: number;
+  setBeastAttack: (beastAttack: number) => void;
+  gameOver: boolean;
+  setGameOver: (gameOver: boolean) => void;
 }
 
 const GameContext = createContext<IGameContext>({
@@ -157,6 +168,18 @@ const GameContext = createContext<IGameContext>({
   setBlisterPackResult: () => {},
   refetchBlisterPackResult: () => {},
   executeEndTurn: () => new Promise((resolve) => resolve(undefined)),
+  playsLeft: -1,
+  consumePlay: () => {},
+  discardsLeft: -1,
+  energyLeft: -1,
+  consumeDiscard: () => {},
+  consumeEnergyPlay: () => {},
+  consumeEnergyDiscard: () => {},
+  refetchPlaysAndDiscards: () => {},
+  beastAttack: 0,
+  setBeastAttack: () => {},
+  gameOver: false,
+  setGameOver: () => {},
 });
 export const useGameContext = () => useContext(GameContext);
 
@@ -243,6 +266,13 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     refetchBeast,
     setBlisterPackResult,
     resetSpecialCards,
+    consumePlay,
+    consumeDiscard,
+    consumeEnergyPlay,
+    consumeEnergyDiscard,
+    resetPlaysAndDiscards,
+    setBeastAttack,
+    setGameOver,
   } = state;
 
   const resetLevel = () => {
@@ -250,6 +280,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     setPreSelectionLocked(false);
     setIsRageRound(false);
     resetSpecialCards();
+    resetPlaysAndDiscards();
   };
 
   const toggleSortBy = () => {
@@ -314,18 +345,19 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
   };
 
   const executeEndTurn = async () => {
-    const endTurnPromise = endTurn(gameId);
-
-    endTurnPromise.then((response) => {
-      if (response && response.success) {
+    const endTurnPromise = endTurn(gameId).then((response) => {
+      if (response?.success) {
+        response.beastAttack && setBeastAttack(response.beastAttack);
         if (response.gameOver) {
+          setGameOver(true);
           setTimeout(() => {
             navigate(`/gameover/${gameId}`);
           }, 1000);
+        } else {
+          resetPlaysAndDiscards();
         }
       }
     });
-
     return endTurnPromise;
   };
 
@@ -333,6 +365,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     const nextLevelPromise = createLevel(gameId);
     nextLevelPromise.then((response) => {
       response?.cards && replaceCards(response.cards);
+      resetPlaysAndDiscards();
       if (response?.isBeast && response?.beast) {
         setBeast({ ...response.beast, game_id: gameId });
         navigate("/game/beast");
@@ -362,6 +395,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
 
     createRewardPromise.then((response) => {
       response?.cards && replaceCards(response.cards);
+      resetPlaysAndDiscards();
       if (response?.isBeast && response?.beast) {
         setBeast({ ...response.beast, game_id: gameId });
         navigate("/game/beast");
@@ -666,10 +700,19 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
         setPreSelectionLocked(false);
         setPlayIsNeon(false);
 
+        consumeEnergyPlay();
+        consumePlay();
+
+        if (playEvents.beastAttack) {
+          setBeastAttack(playEvents.beastAttack);
+          resetPlaysAndDiscards();
+        }
+
         if (playEvents.itemChallengeCompleted) {
           setObstaclesCompleted(playEvents.itemChallengeCompleted);
         }
         if (playEvents.gameOver) {
+          setGameOver(true);
           console.log("GAME OVER");
           setTimeout(() => {
             navigate(`/gameover/${gameId}`);
@@ -704,7 +747,6 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
       ...Array(preSelectedCards.length - preSelectedModifiers.length).fill(100),
     ];
 
-    console.log(preSelectedModifiers);
     play(gameId, preSelectedCards, newModifiers)
       .then((response) => {
         if (response) {
@@ -782,7 +824,16 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     stateDiscard();
     discard(gameId, preSelectedCards, preSelectedModifiers).then((response) => {
       if (response.success) {
+        consumeEnergyDiscard();
+        consumeDiscard();
+
+        if (response.beastAttack) {
+          setBeastAttack(response.beastAttack);
+          resetPlaysAndDiscards();
+        }
+
         if (response.gameOver) {
+          setGameOver(true);
           setTimeout(() => {
             navigate(`/gameover/${gameId}`);
           }, 1000);

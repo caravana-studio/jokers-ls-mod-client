@@ -1,12 +1,6 @@
 import { confetti } from "tsparticles-confetti";
 import {
-    BLUE,
-    BLUE_LIGHT,
-    NEON_GREEN,
-    NEON_PINK,
-    PASTEL_PINK,
-    VIOLET,
-    VIOLET_LIGHT,
+  LS_GREEN
 } from "../theme/colors";
 
 const duration = 2000,
@@ -15,16 +9,7 @@ const duration = 2000,
     spread: 360,
     ticks: 60,
     zIndex: 0,
-    colors: [
-      BLUE,
-      BLUE_LIGHT,
-      VIOLET,
-      VIOLET_LIGHT,
-      PASTEL_PINK,
-      NEON_GREEN,
-      "#FFF",
-      NEON_PINK,
-    ],
+    colors: [LS_GREEN, "#FFF"],
   };
 
 function randomInRange(min: number, max: number) {
