@@ -76,13 +76,13 @@ export const useGameState = () => {
   };
 
   const removeSpecialCard = (cardId: number) => {
-    setSpecialCards((prev) =>
-      prev
+    setSpecialCards((prev) => {
+      return prev
         .filter((card) => card.card_id !== cardId)
         .map((card, index) => {
           return { ...card, idx: index };
-        })
-    );
+        });
+    });
   };
 
   const resetSpecialCards = () => {

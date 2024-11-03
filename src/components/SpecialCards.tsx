@@ -32,7 +32,7 @@ export const SpecialCards = ({ inStore = false }: SpecialCardsProps) => {
     ) {
       refetchSpecialCards();
     }
-  }, [game, specialCards]);
+  }, [game]);
 
   return (
     <Box className="special-cards-step-3">
