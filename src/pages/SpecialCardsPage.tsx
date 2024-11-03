@@ -149,7 +149,7 @@ export const SpecialCardsPage = () => {
             <Button
               isDisabled={!preselectedCard}
               variant={!preselectedCard ? "defaultOutline" : "secondarySolid"}
-              fontSize={12}
+              fontSize={16}
               onClick={() => {
                 setConfirmationModalOpen(true);
               }}

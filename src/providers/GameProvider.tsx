@@ -755,7 +755,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
         setPreSelectedModifiers(
           preSelectedModifiers.filter((idx) => idx !== cardIndex)
         );
-      } else {
+      } else if (preSelectedModifiers.length < 2) {
         setPreSelectedModifiers([...preSelectedModifiers, cardIndex]);
       }
     }
