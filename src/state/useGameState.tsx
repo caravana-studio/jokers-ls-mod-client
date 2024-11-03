@@ -38,7 +38,6 @@ export const useGameState = () => {
   const [sortBySuit, setSortBySuit] = useState(
     !!localStorage.getItem(SORT_BY_SUIT)
   );
-  const [lockedCash, setLockedCash] = useState<number | undefined>(undefined);
   const [lockedSpecialCards, setLockedSpecialCards] = useState<Card[]>([]);
   const [isRageRound, setIsRageRound] = useState(false);
   const [rageCards, setRageCards] = useState<Card[]>([]);
@@ -74,11 +73,6 @@ export const useGameState = () => {
 
   const lsUser = localStorage.getItem(LOGGED_USER);
   const username = lsUser;
-
-  const dojoScore = 0;
-  const dojoCash = game?.cash ?? 0;
-
-  const cash = lockedCash || lockedCash === 0 ? lockedCash : dojoCash;
 
   const resetMultiPoints = () => {
     setPoints(0);
@@ -171,8 +165,6 @@ export const useGameState = () => {
     setLockedSpecialCards,
     isRageRound,
     setIsRageRound,
-    cash,
-    setLockedCash,
     rageCards,
     setRageCards,
     beast,

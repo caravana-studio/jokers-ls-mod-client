@@ -6,7 +6,7 @@ import {
   useState,
 } from "react";
 import { useNavigate } from "react-router-dom";
-import { GAME_ID, SORT_BY_SUIT } from "../constants/localStorage";
+import { GAME_ID, LOGGED_USER, SORT_BY_SUIT } from "../constants/localStorage";
 import {
   discardSfx,
   multiSfx,
@@ -65,8 +65,6 @@ interface IGameContext {
   playIsNeon: boolean;
   isRageRound: boolean;
   setIsRageRound: (isRageRound: boolean) => void;
-  cash: number;
-  setLockedCash: (cash: number | undefined) => void;
   rageCards: Card[];
   setRageCards: (rageCards: Card[]) => void;
   discards: number;
@@ -126,8 +124,6 @@ const GameContext = createContext<IGameContext>({
   playIsNeon: false,
   isRageRound: false,
   setIsRageRound: (_) => {},
-  cash: 0,
-  setLockedCash: (_) => {},
   rageCards: [],
   setRageCards: (_) => {},
   discards: 0,
@@ -230,8 +226,6 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     setPlayIsNeon,
     setLockedSpecialCards,
     specialCards,
-    cash,
-    setLockedCash,
     setIsRageRound,
     beast,
     setBeast,
@@ -353,9 +347,11 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
   };
 
   const executeCreateGame = async () => {
+    const username = localStorage.getItem(LOGGED_USER);
     setError(false);
     setGameLoading(true);
     setIsRageRound(false);
+    console.log("executing create game for username ", username);
     if (username) {
       console.log("Creating game...");
       createGame(username).then(async (response) => {
@@ -665,7 +661,6 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
             navigate("/rewards");
           }, 2000);
         } else {
-          setLockedCash(undefined);
           playEvents.cards && replaceCards(playEvents.cards);
           setRoundRewards(undefined);
           setLockRedirection(false);
@@ -678,7 +673,6 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     setPreSelectionLocked(true);
     setLockRedirection(true);
     setLockedSpecialCards(specialCards);
-    setLockedCash(cash);
 
     const newModifiers = [
       ...preSelectedModifiers,
@@ -832,12 +826,19 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
 
   const checkOrCreateGame = () => {
     console.log("checking game exists", gameId);
-    if (!gameId || gameId === 0 || !gameExists(Game, gameId)) {
+    if (!gameId || gameId === 0) {
+      console.log("no game id, creating new game");
+      return executeCreateGame();
+    } else if (!gameExists(Game, gameId)) {
+      console.log("game doesn't exist (first try)");
       setTimeout(() => {
         if (!gameExists(Game, gameId)) {
+          console.log("game still doesn't exist - creating new game");
           executeCreateGame();
         } else {
           setGameLoading(false);
+          setLockRedirection(false);
+          redirectBasedOnGameState();
           console.log("Game found (2), no need to create a new one");
         }
       }, 2000);

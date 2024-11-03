@@ -12,12 +12,14 @@ import { LS_GREEN } from "../theme/colors";
 
 export const Home = () => {
   const [leaderboardOpen, setLeaderboardOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const { t } = useTranslation(["home"]);
 
   const { checkOrCreateGame } = useGameContext();
 
   const onPlayClick = () => {
+    setLoading(true);
     //TODO: Remove this when integrating the controller
     window.localStorage.setItem(LOGGED_USER, "nicon44");
     checkOrCreateGame();
@@ -82,8 +84,8 @@ export const Home = () => {
               >
                 leaderboard
               </Button>
-              <Button onClick={onPlayClick} width="350px">
-                play
+              <Button isDisabled={loading} onClick={onPlayClick} width="350px">
+                {loading ? "Loading..." : "Play"}
               </Button>
             </Flex>
           </Flex>
