@@ -25,6 +25,7 @@ export const ChooseAdventurerCards = () => {
     blisterPackResult,
     setBlisterPackResult,
     refetchBlisterPackResult,
+    addSpecialCard,
   } = useGameContext();
 
   useEffect(() => {
@@ -35,10 +36,20 @@ export const ChooseAdventurerCards = () => {
 
   const confirmSelectCards = () => {
     setIsLoading(true);
-    selectAdventurerCards(cardsToKeep.map((c) => c.idx)).finally(() => {
-      setCardsToKeep([]);
-      setIsLoading(false);
-    });
+    selectAdventurerCards(cardsToKeep.map((c) => c.idx))
+      .then((response) => {
+        if (response) {
+          cardsToKeep.forEach((card) => {
+            if (card.isSpecial) {
+              addSpecialCard(card);
+            }
+          });
+        }
+      })
+      .finally(() => {
+        setCardsToKeep([]);
+        setIsLoading(false);
+      });
     setBlisterPackResult([]);
   };
 
@@ -74,7 +85,8 @@ export const ChooseAdventurerCards = () => {
           </Heading>
           <FullScreenCardContainer
             sx={{ width: isSmallScreen ? "100%" : "80%", margin: "0 auto" }}
-          >z
+          >
+            z
             {blisterPackResult?.map((card, index) => {
               return (
                 <Flex
