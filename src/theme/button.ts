@@ -93,6 +93,24 @@ const defaultOutlineGlowLoot = defineStyle({
   },
 });
 
+const outlineWhiteGreenGlowLoot = defineStyle({
+  backgroundColor: "transparent",
+  borderRadius: 0,
+  fontSize: "40px",
+  px: "60px",
+  py: "25px",
+  border: `4px solid white`,
+  color: "white",
+  boxShadow: `0px 0px 10px 0px ${LS_GREEN}, inset 0px 0px 15px 0px ${LS_GREEN}`,
+  _hover: {
+    borderColor: "white",
+    boxShadow: {
+      base: `0px 0px 20px 2px ${LS_GREEN}, inset 0px 0px 20px 0px ${LS_GREEN}`,
+      md: `0px 0px 30px 2px ${LS_GREEN}, inset 0px 0px 30px 0px ${LS_GREEN}`,
+    },
+  },
+});
+
 const defaultGreenOutlineGlow = defineStyle({
   backgroundColor: "transparent",
   border: `2px solid ${LS_GREEN} !important`,
@@ -187,6 +205,7 @@ export const buttonTheme = defineStyleConfig({
     defaultOutlineLoot,
     defaultOutlineGlowLoot,
     defaultGreenOutlineGlow,
+    outlineWhiteGreenGlowLoot
   },
   sizes: {
     sm: {

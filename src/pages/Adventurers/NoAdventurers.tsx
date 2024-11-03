@@ -38,7 +38,9 @@ export const NoAdventurers = () => {
           <Heading my={14} color={"white"} size={"l"}>
             Do you want to play to die?
           </Heading>
-          <Button variant="secondarySolid">Play Loot Survivor</Button>
+          <Button variant="outlineWhiteGreenGlowLoot">
+            Play Loot Survivor
+          </Button>
         </HStack>
       </Flex>
       <Flex justifyContent={"center"} my={4} gap={12}>
@@ -51,7 +53,7 @@ export const NoAdventurers = () => {
               }
             });
           }}
-          variant="secondarySolid"
+          variant="outlineWhiteGreenGlowLoot"
         >
           Skip
         </Button>
