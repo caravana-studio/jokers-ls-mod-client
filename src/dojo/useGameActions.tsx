@@ -25,7 +25,10 @@ export const useGameActions = () => {
     account: { account },
   } = useDojo();
 
-  const selectDeck = async (gameId: number, deckId: number): Promise<Card[]> => {
+  const selectDeck = async (
+    gameId: number,
+    deckId: number
+  ): Promise<Card[]> => {
     try {
       showTransactionToast();
       const { transaction_hash } = await client.game_system.select_deck({
@@ -43,7 +46,7 @@ export const useGameActions = () => {
       updateTransactionToast(transaction_hash, tx.isSuccess());
       if (tx.isSuccess()) {
         console.log("Success at select deck:", tx);
-         return getResultBlisterPackEvent(tx.events);
+        return getResultBlisterPackEvent(tx.events);
       } else {
         console.error("Error at select deck:", tx);
       }
@@ -55,14 +58,17 @@ export const useGameActions = () => {
     }
   };
 
-  const selectSpecials = async (gameId: number, cardsIndex: number[]): Promise<Card[]> => {
+  const selectSpecials = async (
+    gameId: number,
+    cardsIndex: number[]
+  ): Promise<Card[]> => {
     try {
       showTransactionToast();
-      console.log('paylaod', {
+      console.log("paylaod", {
         account,
         game_id: gameId,
         cards_index: cardsIndex,
-      })
+      });
       const { transaction_hash } =
         await client.game_system.select_special_cards({
           account,
@@ -277,6 +283,34 @@ export const useGameActions = () => {
     }
   };
 
+  const endTurn = async (gameId: number) => {
+    try {
+      showTransactionToast();
+      const { transaction_hash } = await client.game_system.end_turn({
+        account,
+        game_id: gameId,
+      });
+
+      showTransactionToast(transaction_hash);
+
+      const tx = await account.waitForTransaction(transaction_hash, {
+        retryInterval: 100,
+      });
+
+      updateTransactionToast(transaction_hash, tx.isSuccess());
+
+      if (tx.isSuccess()) {
+        console.log("Success at endTurn:", tx);
+      } else {
+        console.error("Error at endTurn:", tx);
+      }
+    } catch (e) {
+      failedTransactionToast();
+      console.log(e);
+      return 0;
+    }
+  };
+
   const discard = async (
     gameId: number,
     cards: number[],
@@ -408,7 +442,10 @@ export const useGameActions = () => {
     }
   };
 
-  const useAdventurer = async(gameId: number, adventurerId: number): Promise<Card[]> => {
+  const useAdventurer = async (
+    gameId: number,
+    adventurerId: number
+  ): Promise<Card[]> => {
     try {
       showTransactionToast();
       const { transaction_hash } = await client.game_system.use_adventurer({
@@ -438,7 +475,7 @@ export const useGameActions = () => {
     }
   };
 
-  const skipAdventurer = async(gameId: number) => {
+  const skipAdventurer = async (gameId: number) => {
     try {
       showTransactionToast();
       const { transaction_hash } = await client.game_system.skip_adventurer({
@@ -481,5 +518,6 @@ export const useGameActions = () => {
     selectAdventurerCs,
     createReward,
     selectRewards,
+    endTurn,
   };
 };

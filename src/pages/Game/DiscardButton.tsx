@@ -14,7 +14,8 @@ interface DiscardButtonProps {
 }
 
 export const DiscardButton = ({ highlight = false }: DiscardButtonProps) => {
-  const { preSelectedCards, discard, preSelectionLocked } = useGameContext();
+  const { preSelectedCards, discard, preSelectionLocked, executeEndTurn } =
+    useGameContext();
 
   const { mode } = useParams();
 
@@ -70,7 +71,7 @@ export const DiscardButton = ({ highlight = false }: DiscardButtonProps) => {
           mt={2}
           width={["48%", "48%", "180px"]}
           onClick={() => {
-            alert("not implemented yet");
+            executeEndTurn();
           }}
           variant="defaultOutlineGlowLoot"
           boxShadow="none"
