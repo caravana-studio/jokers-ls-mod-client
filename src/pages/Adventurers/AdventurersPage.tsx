@@ -5,6 +5,7 @@ import { useAdventurers } from "../../api/useAdventurers";
 import { Background } from "../../components/Background";
 import { PositionedGameMenu } from "../../components/GameMenu";
 import { Loading } from "../../components/Loading";
+import { useConsumedAdventurers } from "../../dojo/queries/useConsumedAdventurers";
 import { useGame } from "../../dojo/queries/useGame";
 import { useDojo } from "../../dojo/useDojo";
 import { useGameActions } from "../../dojo/useGameActions";
@@ -39,9 +40,12 @@ export const AdventurersPage = () => {
     gameId,
     redirectBasedOnGameState,
     lockRedirection,
+    createNewLevel,
   } = useGameContext();
 
   const { useAdventurer, skipAdventurer } = useGameActions();
+
+  const consumedAdventurers = useConsumedAdventurers();
 
   const game = useGame();
 
@@ -110,6 +114,7 @@ export const AdventurersPage = () => {
                   }
                   isSelected={selectedAdventurer?.id === adventurer.id}
                   adventurer={adventurer}
+                  consumed={consumedAdventurers?.includes(adventurer.id)}
                 />
               );
             })
@@ -121,7 +126,7 @@ export const AdventurersPage = () => {
             onClick={() => {
               skipAdventurer(gameId ?? 0).then((response) => {
                 if (response) {
-                  navigate("/choose-class");
+                  createNewLevel();
                 }
               });
             }}

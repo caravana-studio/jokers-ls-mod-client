@@ -114,6 +114,7 @@ export const useGameState = () => {
   }, [preSelectedCards]);
 
   const challenges = useChallenge();
+  console.log(challenges);
 
   const beastData = useBeast();
 

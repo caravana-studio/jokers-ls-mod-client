@@ -270,7 +270,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
 
     promise.then(() => {
       setLockRedirection(true);
-      navigate("/choose-class");
+      createNewLevel();
     });
 
     return promise;
@@ -280,7 +280,8 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     const modifiersPromise = selectModifiers(gameId, cardIndex);
 
     modifiersPromise.then(async () => {
-      createNewLevel();
+      setLockRedirection(true);
+      navigate('/adventurers');
     });
 
     return modifiersPromise;
@@ -343,7 +344,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
         if (newGameId) {
           resetLevel();
           setLockRedirection(true);
-          navigate("/adventurers");
+          navigate("/choose-class");
           setHand(hand);
           setGameId(newGameId);
           clearPreSelection();

@@ -5,6 +5,7 @@ import CachedImage from "../components/CachedImage";
 import { PositionedGameMenu } from "../components/GameMenu";
 import { Loading } from "../components/Loading";
 import { useGame } from "../dojo/queries/useGame";
+import { useDojo } from "../dojo/useDojo";
 import { useGameContext } from "../providers/GameProvider";
 import { LS_GREEN } from "../theme/colors";
 
@@ -32,6 +33,10 @@ const CLASSES = [
 export const ChooseClassPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedClass, setSelectedClass] = useState<number | undefined>();
+  const {
+    setup: { masterAccount },
+    account: { account },
+  } = useDojo();
 
   const {
     checkOrCreateGame,
@@ -43,6 +48,12 @@ export const ChooseClassPage = () => {
   } = useGameContext();
 
   const game = useGame();
+
+  useEffect(() => {
+    if (account !== masterAccount) {
+      checkOrCreateGame();
+    }
+  }, [account, masterAccount]);
 
   useEffect(() => {
     redirectBasedOnGameState();

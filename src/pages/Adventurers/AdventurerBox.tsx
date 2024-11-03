@@ -11,6 +11,7 @@ interface AdventurerBoxProps {
   onClick: () => void;
   isSelected: boolean;
   otherIsSelected?: boolean;
+  consumed?: boolean;
 }
 
 export const AdventurerBox = ({
@@ -18,6 +19,7 @@ export const AdventurerBox = ({
   onClick,
   isSelected,
   otherIsSelected,
+  consumed,
 }: AdventurerBoxProps) => {
   const { data, error, isLoading } = useContractRead({
     abi,
@@ -28,7 +30,6 @@ export const AdventurerBox = ({
   });
 
   if (isLoading) return <Loading />;
-  if (error) return <div>Error loading adventurer</div>;
 
   const level = Number((data as any)?.level ?? 1);
 
@@ -39,16 +40,16 @@ export const AdventurerBox = ({
   );
   return (
     <Flex
-      onClick={onClick}
+      onClick={() => !consumed && onClick()}
       width="30%"
-      minWidth={'400px'}
+      minWidth={"400px"}
       bg="black"
       borderRadius="30px"
       border="1px solid white"
       m={4}
-      cursor={"pointer"}
+      cursor={consumed ? "not-allowed" : "pointer"}
       boxShadow={isSelected ? `0px 0px 15px 5px ${LS_GREEN}` : "none"}
-      opacity={otherIsSelected ? 0.5 : 1}
+      opacity={otherIsSelected || consumed ? 0.5 : 1}
     >
       <Flex width="65%" flexDirection="column" justifyContent="center" px={8}>
         <Flex gap={6} w="100%">
@@ -104,13 +105,21 @@ export const AdventurerBox = ({
         gap={4}
         justifyContent="center"
       >
-        <Heading size="xl" color="white">
-          +{level * 2} HP
-        </Heading>
-        <Heading size="m" color="white" textAlign="center">
-          Select {amountOfCardsToPick} cards from a total of{" "}
-          {amountOfCardsToSelectFrom} available
-        </Heading>
+        {consumed ? (
+          <Heading size="xl" color="white">
+            CONSUMED
+          </Heading>
+        ) : (
+          <>
+            <Heading size="xl" color="white">
+              +{level * 2} HP
+            </Heading>
+            <Heading size="m" color="white" textAlign="center">
+              Select {amountOfCardsToPick} cards from a total of{" "}
+              {amountOfCardsToSelectFrom} available
+            </Heading>
+          </>
+        )}
       </Flex>
     </Flex>
   );
