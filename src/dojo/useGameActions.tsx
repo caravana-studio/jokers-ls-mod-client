@@ -2,6 +2,7 @@ import { shortString } from "starknet";
 import { GAME_ID_EVENT, GAME_OVER_EVENT } from "../constants/dojoEventKeys";
 import { getCardsFromEvents } from "../utils/getCardsFromEvents";
 import { getCreateLevelEvents } from "../utils/getCreateLevelEvents";
+import { getCreateRewardsEvents } from "../utils/getCreateRewardsEvent";
 import { getNumberValueFromEvents } from "../utils/getNumberValueFromEvent";
 import { getPlayEvents } from "../utils/playEvents/getPlayEvents";
 import {
@@ -10,8 +11,6 @@ import {
   updateTransactionToast,
 } from "../utils/transactionNotifications";
 import { useDojo } from "./useDojo";
-import { getModifiersForContract } from "./utils/getModifiersForContract";
-import { getCreateRewardsEvents } from "../utils/getCreateRewardsEvent";
 
 const createGameEmptyResponse = {
   gameId: 0,
@@ -102,6 +101,35 @@ export const useGameActions = () => {
         console.log("Success at select modifiers:", tx);
       } else {
         console.error("Error at select modifiers:", tx);
+      }
+    } catch (e) {
+      failedTransactionToast();
+      console.log(e);
+      return 0;
+    }
+  };
+
+  const selectAdventurerCs = async (gameId: number, cardsIndex: number[]) => {
+    try {
+      showTransactionToast();
+      const { transaction_hash } =
+        await client.game_system.select_aventurer_cards({
+          account,
+          game_id: gameId,
+          cards_index: cardsIndex,
+        });
+
+      showTransactionToast(transaction_hash);
+
+      const tx = await account.waitForTransaction(transaction_hash, {
+        retryInterval: 100,
+      });
+
+      updateTransactionToast(transaction_hash, tx.isSuccess());
+      if (tx.isSuccess()) {
+        console.log("Success at select adventurer cards:", tx);
+      } else {
+        console.error("Error at select adventurer cards:", tx);
       }
     } catch (e) {
       failedTransactionToast();
@@ -368,6 +396,63 @@ export const useGameActions = () => {
     }
   };
 
+  const useAdventurer = async(gameId: number, adventurerId: number) => {
+    try {
+      showTransactionToast();
+      const { transaction_hash } = await client.game_system.use_adventurer({
+        account,
+        game_id: gameId,
+        adventurer_id: adventurerId,
+      });
+
+      showTransactionToast(transaction_hash);
+
+      const tx = await account.waitForTransaction(transaction_hash, {
+        retryInterval: 100,
+      });
+
+      updateTransactionToast(transaction_hash, tx.isSuccess());
+      if (tx.isSuccess()) {
+        console.log("Success at use adventurer:", tx);
+      } else {
+        console.error("Error at use adventurer:", tx);
+      }
+      return tx.isSuccess();
+    } catch (e) {
+      failedTransactionToast();
+      console.log(e);
+      return undefined;
+    }
+  };
+
+  const skipAdventurer = async(gameId: number) => {
+    try {
+      showTransactionToast();
+      const { transaction_hash } = await client.game_system.skip_adventurer({
+        account,
+        game_id: gameId,
+      });
+
+      showTransactionToast(transaction_hash);
+
+      const tx = await account.waitForTransaction(transaction_hash, {
+        retryInterval: 100,
+      });
+
+      updateTransactionToast(transaction_hash, tx.isSuccess());
+      if (tx.isSuccess()) {
+        console.log("Success at skip adventurer:", tx);
+      } else {
+        console.error("Error at skip adventurer:", tx);
+      }
+      return tx.isSuccess();
+    } catch (e) {
+      failedTransactionToast();
+      console.log(e);
+      return undefined;
+    }
+  };
+
   return {
     createGame,
     discard,
@@ -378,6 +463,9 @@ export const useGameActions = () => {
     selectSpecials,
     selectModifiers,
     createLevel,
+    useAdventurer,
+    skipAdventurer,
+    selectAdventurerCs,
     createReward,
     selectRewards,
   };

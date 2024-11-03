@@ -4,19 +4,21 @@ import "./App.scss";
 
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
+import { AdventurersPage } from "./pages/Adventurers/AdventurersPage";
+import { ChooseAdventurerCards } from "./pages/ChooseAdventurerCards";
 import { ChooseClassPage } from "./pages/ChooseClassPage";
 import { ChooseModifiersPage } from "./pages/ChooseModifiersPage";
 import { ChooseSpecialsPage } from "./pages/ChooseSpecialsPage";
 import { GamePage } from "./pages/Game/GamePage";
+import { GameOver } from "./pages/GameOver";
 import { Home } from "./pages/Home";
+import { PlaysLayout } from "./pages/Plays/PlaysLayout";
+import { RewardsPage } from "./pages/RewardsPage";
+import { RewardsSelection } from "./pages/RewardsSelection";
 import { AudioPlayerProvider } from "./providers/AudioPlayerProvider";
 import { CardAnimationsProvider } from "./providers/CardAnimationsProvider";
 import { GameProvider } from "./providers/GameProvider";
 import customTheme from "./theme/theme";
-import { GameOver } from "./pages/GameOver";
-import { PlaysLayout } from "./pages/Plays/PlaysLayout";
-import { RewardsPage } from "./pages/RewardsPage";
-import { RewardsSelection } from "./pages/RewardsSelection";
 
 function App() {
   const theme = extendTheme(customTheme);
@@ -34,10 +36,15 @@ function App() {
                 element={<ChooseModifiersPage />}
               />
               <Route path="/choose-specials" element={<ChooseSpecialsPage />} />
+              <Route
+                path="/choose-adventurer-cards"
+                element={<ChooseAdventurerCards />}
+              />
               <Route path="/gameover/:gameId" element={<GameOver />} />
               <Route path="/plays" element={<PlaysLayout />} />
               <Route path="/gameover/:gameId" element={<>Game Over</>} />
               <Route path="/rewards" element={<RewardsPage />} />
+              <Route path="/adventurers" element={<AdventurersPage />} />
               <Route path="/rewards/:mode" element={<RewardsSelection />} />
             </Routes>
           </AudioPlayerProvider>
