@@ -21,6 +21,7 @@ export const Energy = () => {
       borderRadius="15px"
       width="max-content"
       mt={3}
+      className="tutorial-beast-energy"
     >
       {Array.from({ length: maxEnergy }).map((_, index) => (
         <SkullIcon

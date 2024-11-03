@@ -6,6 +6,7 @@ import Joyride, { CallBackProps } from "react-joyride";
 import { useParams } from "react-router-dom";
 import { PositionedGameMenu } from "../../components/GameMenu.tsx";
 import {
+  BEAST_TUTORIAL_STEPS,
   GAME_TUTORIAL_STEPS,
   JOYRIDE_LOCALES,
   MODIFIERS_TUTORIAL_STEPS,
@@ -16,6 +17,7 @@ import {
   SKIP_TUTORIAL_GAME,
   SKIP_TUTORIAL_MODIFIERS,
   SKIP_TUTORIAL_SPECIAL_CARDS,
+  SKIP_TUTORIAL_BEAST,
 } from "../../constants/localStorage.ts";
 import { useGame } from "../../dojo/queries/useGame.tsx";
 import { useGameContext } from "../../providers/GameProvider.tsx";
@@ -47,6 +49,7 @@ export const GameContent = () => {
   const [run, setRun] = useState(false);
   const [runSpecial, setRunSpecial] = useState(false);
   const [runTutorialModifiers, setRunTutorialModifiers] = useState(false);
+  const [runTutorialBeast, setRunTutorialBeast] = useState(false);
   const [specialTutorialCompleted, setSpecialTutorialCompleted] =
     useState(false);
   const { t } = useTranslation(["game"]);
@@ -86,6 +89,11 @@ export const GameContent = () => {
     setRunTutorialModifiers
   );
 
+  const handleBeastJoyrideCallback = handleJoyrideCallbackFactory(
+    SKIP_TUTORIAL_BEAST,
+    setRunTutorialModifiers
+  );
+
   const game = useGame();
 
   useEffect(() => {
@@ -95,11 +103,18 @@ export const GameContent = () => {
     const showModifiersTutorial = !localStorage.getItem(
       SKIP_TUTORIAL_MODIFIERS
     );
+    const showBeastTutorial = !localStorage.getItem(SKIP_TUTORIAL_BEAST);
+    const showTutorial = !localStorage.getItem(SKIP_TUTORIAL_GAME);
+
+    if (showBeastTutorial && game?.substate === "BEAST") {
+      setRunTutorialBeast(true);
+    }
 
     if (
       showSpecialCardTutorial &&
       game?.len_current_special_cards != undefined &&
-      game?.len_current_special_cards > 0
+      game?.len_current_special_cards > 0 &&
+      !showTutorial
     ) {
       setRunSpecial(true);
     } else if (specialTutorialCompleted || !showSpecialCardTutorial) {
@@ -110,7 +125,7 @@ export const GameContent = () => {
         }
       }
     }
-  }, [game, hand, specialTutorialCompleted]);
+  }, [game, hand, specialTutorialCompleted, run]);
 
   if (error) {
     return (
@@ -160,7 +175,6 @@ export const GameContent = () => {
           run={run}
           continuous
           showSkipButton
-          showProgress
           callback={handleJoyrideCallback}
           styles={TUTORIAL_STYLE}
           locale={JOYRIDE_LOCALES}
@@ -171,7 +185,6 @@ export const GameContent = () => {
           run={runSpecial}
           continuous
           showSkipButton
-          showProgress
           callback={handleSpecialJoyrideCallback}
           styles={TUTORIAL_STYLE}
           locale={JOYRIDE_LOCALES}
@@ -182,8 +195,17 @@ export const GameContent = () => {
           run={runTutorialModifiers}
           continuous
           showSkipButton
-          showProgress
           callback={handleModifiersJoyrideCallback}
+          styles={TUTORIAL_STYLE}
+          locale={JOYRIDE_LOCALES}
+        />
+
+        <Joyride
+          steps={BEAST_TUTORIAL_STEPS}
+          run={runTutorialBeast}
+          continuous
+          showSkipButton
+          callback={handleBeastJoyrideCallback}
           styles={TUTORIAL_STYLE}
           locale={JOYRIDE_LOCALES}
         />

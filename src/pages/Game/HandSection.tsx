@@ -69,7 +69,7 @@ export const HandSection = () => {
       <Box
         pt={16}
         px={2}
-        className="game-tutorial-step-2 tutorial-modifiers-step-1"
+        className="game-tutorial-step-2 tutorial-modifiers-step-1 tutorial-beast-attack"
         ref={setNodeRef}
         height={isSmallScreen ? cardHeight : "100%"}
         display={"flex"}
@@ -138,8 +138,8 @@ export const HandSection = () => {
                         isDisabled={discarding}
                         sx={{
                           _hover: {
-                            backgroundColor: 'black',
-                          }
+                            backgroundColor: "black",
+                          },
                         }}
                         onClick={(e) => {
                           setDiscarding(true);

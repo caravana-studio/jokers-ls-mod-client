@@ -46,6 +46,7 @@ export const TopSection = ({ inRewardsPag = false }: TopSectionProps) => {
             fontSize="70px"
             textAlign="center"
             textShadow="0 0 10px black"
+            className="game-tutorial-intro"
           >
             {mode}
           </Heading>
