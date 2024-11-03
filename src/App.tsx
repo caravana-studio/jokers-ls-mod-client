@@ -19,6 +19,7 @@ import { AudioPlayerProvider } from "./providers/AudioPlayerProvider";
 import { CardAnimationsProvider } from "./providers/CardAnimationsProvider";
 import { GameProvider } from "./providers/GameProvider";
 import customTheme from "./theme/theme";
+import { DesktopOnlyNotice } from "./pages/DesktopOnlyNotice";
 
 function App() {
   const theme = extendTheme(customTheme);
@@ -46,6 +47,10 @@ function App() {
               <Route path="/rewards" element={<RewardsPage />} />
               <Route path="/adventurers" element={<AdventurersPage />} />
               <Route path="/rewards/:mode" element={<RewardsSelection />} />
+              <Route
+                path="/desktop-only-notice"
+                element={<DesktopOnlyNotice />}
+              />
             </Routes>
           </AudioPlayerProvider>
         </GameProvider>
