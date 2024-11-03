@@ -1,5 +1,5 @@
 import { ChakraBaseProvider, extendTheme } from "@chakra-ui/react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import "./App.scss";
 
 import { Analytics } from "@vercel/analytics/react";
@@ -20,9 +20,20 @@ import { CardAnimationsProvider } from "./providers/CardAnimationsProvider";
 import { GameProvider } from "./providers/GameProvider";
 import customTheme from "./theme/theme";
 import { DesktopOnlyNotice } from "./pages/DesktopOnlyNotice";
+import { useEffect } from "react";
+import { isMobile } from "react-device-detect";
 
 function App() {
   const theme = extendTheme(customTheme);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isMobile) {
+      navigate("/desktop-only-notice");
+    }
+  }, [navigate, isMobile]);
+
   return (
     <ChakraBaseProvider theme={theme}>
       <CardAnimationsProvider>
