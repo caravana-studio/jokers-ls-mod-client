@@ -1,10 +1,12 @@
 import { Box, Button, Flex, HStack, Heading, Text } from "@chakra-ui/react";
 import { useGameContext } from "../../providers/GameProvider";
 import { useGameActions } from "../../dojo/useGameActions";
+import { useNavigate } from "react-router-dom";
 
 export const NoAdventurers = () => {
   const { gameId, createNewLevel } = useGameContext();
   const { skipAdventurer } = useGameActions();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -38,7 +40,10 @@ export const NoAdventurers = () => {
           <Heading my={14} color={"white"} size={"l"}>
             Do you want to play to die?
           </Heading>
-          <Button variant="outlineWhiteGreenGlowLoot">
+          <Button
+            variant="outlineWhiteGreenGlowLoot"
+            onClick={() => window.open("https://lootsurvivor.io/", "_blank")}
+          >
             Play Loot Survivor
           </Button>
         </HStack>
