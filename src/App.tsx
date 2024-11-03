@@ -21,7 +21,6 @@ import { GameProvider } from "./providers/GameProvider";
 import customTheme from "./theme/theme";
 import { DesktopOnlyNotice } from "./pages/DesktopOnlyNotice";
 import { useEffect } from "react";
-import { isMobile } from "react-device-detect";
 
 function App() {
   const theme = extendTheme(customTheme);
@@ -29,10 +28,10 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isMobile) {
+    if (window.innerWidth < 1280) {
       navigate("/desktop-only-notice");
     }
-  }, [navigate, isMobile]);
+  }, [navigate]);
 
   return (
     <ChakraBaseProvider theme={theme}>

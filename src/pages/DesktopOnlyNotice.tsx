@@ -2,7 +2,6 @@ import { Box, Button, Flex, Heading, Img, Text } from "@chakra-ui/react";
 import { Background } from "../components/Background";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { isMobile } from "react-device-detect";
 import { DiscordLink } from "../components/DiscordLink";
 import { PoweredBy } from "../components/PoweredBy";
 import { Leaderboard } from "../components/Leaderboard";
@@ -16,10 +15,10 @@ export const DesktopOnlyNotice = () => {
   const { t } = useTranslation(["home"]);
 
   useEffect(() => {
-    if (!isMobile) {
+    if (window.innerWidth >= 1280) {
       navigate("/");
     }
-  }, [navigate, isMobile]);
+  }, [navigate]);
   return (
     <Background bgDecoration type="home">
       <AudioPlayer />
@@ -48,23 +47,21 @@ export const DesktopOnlyNotice = () => {
             </Button>
           </Box>
         ) : (
-          <Flex flexDirection="column" alignItems="center">
+          <Flex flexDirection="column" alignItems="center" px={4}>
             <Img
-              width={{ base: "85%", sm: "75%", md: "70%" }}
+              width={{ base: "100%", sm: "75%", md: "70%" }}
               src="/logos/logo.png"
               alt="logo"
             />
             <Text
-              fontSize="50px"
+              fontSize={["24px", "50px"]}
               lineHeight="1"
-              mb="60px"
-              mt="-40px"
               color="lsGreen"
               textShadow={`0px 0px 10px ${LS_GREEN}`}
             >
               LOOT SURVIVOR MOD
             </Text>
-            <Heading size="lg">
+            <Heading size={["sm", "lg"]} py={4}>
               Sorry, this game is available only on desktop. Please visit us on
               a desktop computer.
             </Heading>
@@ -79,7 +76,7 @@ export const DesktopOnlyNotice = () => {
                 onClick={() => {
                   setLeaderboardOpen(true);
                 }}
-                width="350px"
+                width={"350px"}
               >
                 leaderboard
               </Button>
