@@ -651,15 +651,18 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
           setTimeout(() => {
             navigate(`/gameover/${gameId}`);
             setLockRedirection(false);
-          }, 2000);
+          }, 1500);
         } else if (
           playEvents.levelPassed ||
           playEvents.obstacleDefeated ||
           playEvents.playWinGameEvent
         ) {
-          setTimeout(() => {
-            navigate("/rewards");
-          }, 2000);
+          setTimeout(
+            () => {
+              navigate("/rewards");
+            },
+            playEvents.playWinGameEvent ? 2000 : 1000
+          );
         } else {
           playEvents.cards && replaceCards(playEvents.cards);
           setRoundRewards(undefined);
