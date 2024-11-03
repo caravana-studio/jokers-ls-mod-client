@@ -75,7 +75,7 @@ export const ChooseAdventurerCards = () => {
           <FullScreenCardContainer
             sx={{ width: isSmallScreen ? "100%" : "80%", margin: "0 auto" }}
           >
-            {cards?.map((card, index) => {
+            {blisterPackResult?.map((card, index) => {
               return (
                 <Flex
                   key={`${card.card_id ?? ""}-${index}`}
