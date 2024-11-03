@@ -65,75 +65,6 @@ export const SpecialCardsRow = ({ cards }: SpecialCardsRowProps) => {
       alignItems={"center"}
       justifyContent={"space-between"}
     >
-      {cards.map((card) => {
-        const isDiscarded = discardedCards.includes(card.id);
-        return (
-          <Flex
-            className="special-cards-step-1"
-            key={card.idx}
-            justifyContent="center"
-            width={`100%`}
-            maxWidth={`${cardWidth + 7}px`}
-            position="relative"
-            zIndex={1}
-            onMouseEnter={() => setHoveredCard(card.idx)}
-            onMouseLeave={() => {
-              setHoveredCard(null);
-              setHoveredButton(null);
-            }}
-          >
-            {!isDiscarded && (
-              <AnimatedCard
-                idx={card.idx}
-                isSpecial={!!card.isSpecial}
-                scale={scale}
-              >
-                <Box position="relative">
-                  <Flex
-                    position={"absolute"}
-                    zIndex={7}
-                    bottom="5px"
-                    left="5px"
-                    borderRadius={"10px"}
-                    background={"violet"}
-                  >
-                    {hoveredCard === card.idx && (
-                      <Button
-                        height={8}
-                        fontSize="8px"
-                        px={"16px"}
-                        size={"md"}
-                        borderRadius={"10px"}
-                        variant={"discardSecondarySolid"}
-                        display="flex"
-                        gap={4}
-                        onMouseEnter={() => setHoveredButton(card.idx)}
-                        onClick={() => {
-                          setCardToDiscard(card.idx);
-                        }}
-                      >
-                        <Text fontSize="10px">X</Text>
-                        {hoveredButton === card.idx && (
-                          <Text fontSize="10px">
-                            {t("game.special-cards.remove-special-cards-label")}
-                          </Text>
-                        )}
-                      </Button>
-                    )}
-                  </Flex>
-                  <TiltCard
-                    onClick={() => {
-                      isSmallScreen && highlightCard(card);
-                    }}
-                    card={card}
-                    scale={scale}
-                  />
-                </Box>
-              </AnimatedCard>
-            )}
-          </Flex>
-        );
-      })}
       <Flex
         style={{
           boxShadow: `0px 0px 10px 3px ${LS_GREEN_OPACTITY}`,
@@ -142,11 +73,94 @@ export const SpecialCardsRow = ({ cards }: SpecialCardsRowProps) => {
         gap={2}
         p={2}
       >
+        {cards.map((card) => {
+          const isDiscarded = discardedCards.includes(card.id);
+          return (
+            <Flex
+              className="special-cards-step-1"
+              key={card.idx}
+              justifyContent="center"
+              width={`100%`}
+              maxWidth={`${cardWidth + 7}px`}
+              position="relative"
+              zIndex={1}
+              onMouseEnter={() => setHoveredCard(card.idx)}
+              onMouseLeave={() => {
+                setHoveredCard(null);
+                setHoveredButton(null);
+              }}
+            >
+              {!isDiscarded && (
+                <AnimatedCard
+                  idx={card.idx}
+                  isSpecial={!!card.isSpecial}
+                  scale={scale}
+                >
+                  <Box
+                    position={"relative"}
+                    width={`${cardWidth - cardWidth * 0.1}`}
+                    height={"auto"}
+                    minWidth={`${cardWidth - cardWidth * 0.1}`}
+                    border={"1.5px solid white"}
+                    borderRadius={"5px"}
+                  >
+                    <Flex
+                      position={"absolute"}
+                      zIndex={7}
+                      bottom="5px"
+                      left="5px"
+                      borderRadius={"10px"}
+                      background={"violet"}
+                    >
+                      {hoveredCard === card.idx && (
+                        <Button
+                          height={8}
+                          fontSize="8px"
+                          px={"16px"}
+                          size={"md"}
+                          borderRadius={"10px"}
+                          variant={"discardSecondarySolid"}
+                          display="flex"
+                          gap={4}
+                          onMouseEnter={() => setHoveredButton(card.idx)}
+                          onClick={() => {
+                            setCardToDiscard(card.idx);
+                          }}
+                        >
+                          <Text fontSize="10px">X</Text>
+                          {hoveredButton === card.idx && (
+                            <Text fontSize="10px">
+                              {t(
+                                "game.special-cards.remove-special-cards-label"
+                              )}
+                            </Text>
+                          )}
+                        </Button>
+                      )}
+                    </Flex>
+                    <TiltCard
+                      onClick={() => {
+                        isSmallScreen && highlightCard(card);
+                      }}
+                      card={card}
+                      scale={scale}
+                    />
+                  </Box>
+                </AnimatedCard>
+              )}
+            </Flex>
+          );
+        })}
         {Array.from({ length: emptySlots }).map((_, index) => (
-          <Flex key={`slot-${index}`} maxWidth={`100%`}>
+          <Flex
+            key={`slot-${index}`}
+            maxWidth={`100%`}
+            justifyContent="center"
+            alignItems={"center"}
+          >
             <Box
               width={`${cardWidth - cardWidth * 0.1}`}
-              height={`${cardHeight - cardHeight * 0.1}`}
+              height={`${cardHeight}`}
               minWidth={`${cardWidth - cardWidth * 0.1}`}
               border={"1.5px solid white"}
               borderRadius={"5px"}
