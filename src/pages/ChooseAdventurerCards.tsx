@@ -9,7 +9,7 @@ import { useResponsiveValues } from "../theme/responsiveSettings";
 import { Card } from "../types/Card";
 import { getCardUniqueId } from "../utils/getCardUniqueId";
 import { FullScreenCardContainer } from "./FullScreenCardContainer";
-import { Collab } from "./Game/Collab";
+import { Collaboration } from "./Game/Collaboration";
 
 export const ChooseAdventurerCards = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -134,7 +134,7 @@ export const ChooseAdventurerCards = () => {
         </Flex>
         {!isSmallScreen && (
           <Box position={"fixed"} left={"80px"} top={12}>
-            <Collab />
+            <Collaboration />
           </Box>
         )}
       </Flex>

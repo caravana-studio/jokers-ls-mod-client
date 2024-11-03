@@ -10,7 +10,7 @@ import { useResponsiveValues } from "../theme/responsiveSettings";
 import { Card } from "../types/Card";
 import { getCardUniqueId } from "../utils/getCardUniqueId";
 import { FullScreenCardContainer } from "./FullScreenCardContainer";
-import { Collab } from "./Game/collab.tsx";
+import { Collaboration } from "./Game/Collaboration.tsx";
 
 export const ChooseSpecialsPage = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -137,7 +137,7 @@ export const ChooseSpecialsPage = () => {
         </Flex>
         {!isSmallScreen && (
           <Box position={"fixed"} left={"80px"} top={12}>
-            <Collab />
+            <Collaboration />
           </Box>
         )}
       </Flex>

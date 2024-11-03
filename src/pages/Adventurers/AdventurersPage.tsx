@@ -10,7 +10,7 @@ import { useGame } from "../../dojo/queries/useGame";
 import { useGameActions } from "../../dojo/useGameActions";
 import { useGameContext } from "../../providers/GameProvider";
 import { Adventurer } from "../../types/Adventurer";
-import { Collab } from "../Game/Collab";
+import { Collaboration } from "../Game/Collaboration";
 import { AdventurerBox } from "./AdventurerBox";
 
 export const AdventurersPage = () => {
@@ -143,7 +143,7 @@ export const AdventurersPage = () => {
           </Button>
         </Flex>
         <Box position={"fixed"} left={"80px"} top={12}>
-          <Collab />
+          <Collaboration />
         </Box>
       </Flex>
     </Background>
