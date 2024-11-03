@@ -81,7 +81,7 @@ export const GameOver = () => {
               variant="solid"
               onClick={() => {
                 window.open(
-                  `https://twitter.com/intent/tweet?text=%F0%9F%83%8F%20I%20just%20finished%20a%20game%20in%20Jokers%20of%20Neon%20%E2%80%94%20check%20out%20my%20results%3A%0A%F0%9F%8F%85%20Rank%3A%20${currentLeader?.position}%0A%F0%9F%94%A5%20Level%3A%20${currentLeader?.level}%0A%0AThink%20you%20can%20top%20that%3F%20The%20demo%20is%20live%20for%20a%20limited%20time!%20%E2%8F%B3%0A%0AGive%20it%20a%20try%20at%20${GAME_URL}%2F%20%F0%9F%83%8F%E2%9C%A8`,
+                  `https://twitter.com/intent/tweet?text=%F0%9F%83%8F%20I%20just%20survived%20a%20round%20in%20Jokers%20of%20Neon%20%E2%80%94%20here%20are%20my%20results%3A%0A%F0%9F%8F%85%20Rank%3A%20${currentLeader?.position}%0A%F0%9F%94%A5%20Level%3A%20${currentLeader?.level}%0A%0AHow%20long%20can%20you%20survive%2C%20warrior%3F%20%E2%9A%94%EF%B8%8F%20The%20beasts%20are%20waiting%2C%20and%20the%20haunted%20demo%20is%20live%20for%20a%20limited%20time!%20%F0%9F%8E%83%F0%9F%91%BB%0A%0AFace%20the%20darkness%20at%20${GAME_URL}%2F%20%F0%9F%95%B8%EF%B8%8F%F0%9F%83%8F%E2%9C%A8`,
                   "_blank"
                 );
               }}
