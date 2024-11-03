@@ -640,7 +640,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
           setTimeout(() => {
             navigate(`/gameover/${gameId}`);
             setLockRedirection(false);
-          }, 1000);
+          }, 2000);
         } else if (
           playEvents.levelPassed ||
           playEvents.obstacleDefeated ||
@@ -648,7 +648,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
         ) {
           setTimeout(() => {
             navigate("/rewards");
-          }, 1000);
+          }, 2000);
         } else {
           setLockedCash(undefined);
           playEvents.cards && replaceCards(playEvents.cards);
