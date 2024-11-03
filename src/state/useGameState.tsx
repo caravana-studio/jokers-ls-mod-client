@@ -89,7 +89,7 @@ export const useGameState = () => {
       beastFetchData &&
       beastFetchData?.current_health != beast?.current_health
     )
-      setBeast(beastFetchData);
+      setBeast(beastFetchData as unknown as Beast);
   }, [beastFetchData]);
 
   const setMultiAndPoints = (play: Plays) => {
@@ -114,6 +114,7 @@ export const useGameState = () => {
   }, [preSelectedCards]);
 
   const challenges = useChallenge();
+  console.log(challenges);
 
   const beastData = useBeast();
 
@@ -122,7 +123,7 @@ export const useGameState = () => {
   };
 
   const refetchBeast = () => {
-    setBeast(beastData);
+    setBeast(beastFetchData as unknown as Beast);
   };
 
   return {

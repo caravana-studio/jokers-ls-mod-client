@@ -1,4 +1,5 @@
 import { BEAST_EVENT, OBSTACLE_EVENT } from "../constants/dojoEventKeys";
+import { BEAST_TYPE_MAP } from "../enums/BeastType";
 import { DojoEvent } from "../types/DojoEvent";
 import { getCardsFromEvents } from "./getCardsFromEvents";
 import { getNumberValueFromEvent } from "./getNumberValueFromEvent";
@@ -20,16 +21,15 @@ export const getCreateLevelEvents = (events: DojoEvent[]) => {
     }
     return { isObstacle: true, obstacles, cards };
   } else if (beastEvent) {
-    console.log(beastEvent);
     const beast_id = getNumberValueFromEvent(beastEvent, 0) ?? 0;
     const tier = getNumberValueFromEvent(beastEvent, 1) ?? 0;
     const level = getNumberValueFromEvent(beastEvent, 2) ?? 0;
     const health = getNumberValueFromEvent(beastEvent, 3) ?? 0;
     const current_health = getNumberValueFromEvent(beastEvent, 4) ?? 0;
     const attack = getNumberValueFromEvent(beastEvent, 5) ?? 0;
-    const type_beast = getNumberValueFromEvent(beastEvent, 6) ?? 0;
 
-    console.log(type_beast);
+    const type_beast =
+      BEAST_TYPE_MAP[getNumberValueFromEvent(beastEvent, 6) ?? 0];
 
     return {
       isBeast: true,

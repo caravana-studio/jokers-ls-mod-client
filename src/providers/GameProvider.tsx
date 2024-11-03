@@ -75,6 +75,7 @@ interface IGameContext {
   selectDeckType: (deckType: number) => Promise<number | undefined>;
   selectSpecialCards: (cardIndex: number[]) => Promise<number | undefined>;
   selectModifierCards: (cardIndex: number[]) => Promise<number | undefined>;
+  selectAdventurerCards: (cardIndex: number[]) => Promise<number | undefined>;
   redirectBasedOnGameState: () => void;
   createNewLevel: () => Promise<any>;
   obstacles: { id: number; completed: boolean }[];
@@ -132,6 +133,7 @@ const GameContext = createContext<IGameContext>({
   selectDeckType: (_) => new Promise((resolve) => resolve(undefined)),
   selectSpecialCards: (_) => new Promise((resolve) => resolve(undefined)),
   selectModifierCards: (_) => new Promise((resolve) => resolve(undefined)),
+  selectAdventurerCards: (_) => new Promise((resolve) => resolve(undefined)),
   redirectBasedOnGameState: () => {},
   createNewLevel: () => new Promise((resolve) => resolve(undefined)),
   obstacles: [],
@@ -171,6 +173,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     selectSpecials,
     selectModifiers,
     createLevel,
+    selectAdventurerCs,
     createReward,
     selectRewards,
   } = useGameActions();
@@ -268,11 +271,23 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     return specialPromise;
   };
 
+  const selectAdventurerCards = async (cardIndex: number[]) => {
+    const promise = selectAdventurerCs(gameId, cardIndex);
+
+    promise.then(() => {
+      setLockRedirection(true);
+      createNewLevel();
+    });
+
+    return promise;
+  };
+
   const selectModifierCards = async (cardIndex: number[]) => {
     const modifiersPromise = selectModifiers(gameId, cardIndex);
 
     modifiersPromise.then(async () => {
-      createNewLevel();
+      setLockRedirection(true);
+      navigate('/adventurers');
     });
 
     return modifiersPromise;
@@ -283,7 +298,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     nextLevelPromise.then((response) => {
       response?.cards && replaceCards(response.cards);
       if (response?.isBeast && response?.beast) {
-        setBeast({ ...response.beast, game_id: gameId });
+        setBeast({ ...response.beast, game_id: gameId});
         navigate("/game/beast");
       } else if (response?.isObstacle && response?.obstacles) {
         setObstacles(response?.obstacles);
@@ -877,6 +892,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     selectSpecialCards,
     selectModifierCards,
     createNewLevel,
+    selectAdventurerCards,
     createNewReward,
     selectNewRewards,
   };
