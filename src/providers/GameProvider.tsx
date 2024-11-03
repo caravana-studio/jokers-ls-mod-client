@@ -88,6 +88,7 @@ interface IGameContext {
   blisterPackResult: Card[];
   setBlisterPackResult: (cards: Card[]) => void;
   refetchBlisterPackResult: () => void;
+  executeEndTurn: () => Promise<any>;
 }
 
 const GameContext = createContext<IGameContext>({
@@ -148,6 +149,7 @@ const GameContext = createContext<IGameContext>({
   blisterPackResult: [],
   setBlisterPackResult: () => {},
   refetchBlisterPackResult: () => {},
+  executeEndTurn: () => new Promise((resolve) => resolve(undefined)),
 });
 export const useGameContext = () => useContext(GameContext);
 
@@ -178,6 +180,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     selectAdventurerCs,
     createReward,
     selectRewards,
+    endTurn,
   } = useGameActions();
 
   const { discards, discard: stateDiscard, rollbackDiscard } = useDiscards();
@@ -299,6 +302,11 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     });
 
     return modifiersPromise;
+  };
+
+  const executeEndTurn = async () => {
+    const endTurnPromise = endTurn(gameId);
+    return endTurnPromise;
   };
 
   const createNewLevel = async () => {
@@ -918,6 +926,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     selectAdventurerCards,
     createNewReward,
     selectNewRewards,
+    executeEndTurn,
   };
 
   return (
