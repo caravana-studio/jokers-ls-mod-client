@@ -1,40 +1,36 @@
-import { Box, Button, Center, Flex } from "@chakra-ui/react";
+import { Box, Button, Flex } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Background } from "../components/Background";
 import { PositionedDiscordLink } from "../components/DiscordLink";
 import { PositionedGameMenu } from "../components/GameMenu";
+import { TiltCard } from "../components/TiltCard";
 import { useGameContext } from "../providers/GameProvider";
-import { runConfettiAnimation } from "../utils/runConfettiAnimation";
-import { TopSection } from "./Game/TopSection";
-import { FullScreenCardContainer } from "./FullScreenCardContainer";
-import RewardsSection from "./RewardsSection";
-import { useBlisterPackResult } from "../dojo/queries/useBlisterPackResult";
+import { LS_GREEN } from "../theme/colors";
+import { useResponsiveValues } from "../theme/responsiveSettings";
 import { Card } from "../types/Card";
 import { getCardUniqueId } from "../utils/getCardUniqueId";
-import { useResponsiveValues } from "../theme/responsiveSettings";
-import { LS_GREEN } from "../theme/colors";
-import { TiltCard } from "../components/TiltCard";
+import { runConfettiAnimation } from "../utils/runConfettiAnimation";
+import { FullScreenCardContainer } from "./FullScreenCardContainer";
 
 export const RewardsSelection = () => {
   const { mode } = useParams();
-  const [cards, setCards] = useState<Card[]>();
   const [cardsToKeep, setCardsToKeep] = useState<Card[]>([]);
-  const { selectNewRewards } = useGameContext();
+  const {
+    selectNewRewards,
+    blisterPackResult,
+    setBlisterPackResult,
+    refetchBlisterPackResult,
+  } = useGameContext();
   const [isLoading, setIsLoading] = useState(false);
-  const blisterPackResult = useBlisterPackResult();
-  console.log(blisterPackResult);
 
   const { isSmallScreen, cardScale } = useResponsiveValues();
   const adjustedCardScale = cardScale * 1.5;
   const maxCards = mode === "special" ? 1 : 3;
 
   useEffect(() => {
-    if (blisterPackResult?.cardsPicked) {
-      setCards([]);
-    } else {
-      if (blisterPackResult.cards.length > 0)
-        setCards(blisterPackResult?.cards);
+    if (blisterPackResult.length === 0) {
+      refetchBlisterPackResult();
     }
   }, [blisterPackResult]);
 
@@ -47,7 +43,7 @@ export const RewardsSelection = () => {
     selectNewRewards(cardsToKeep.map((c) => c.idx)).finally(() => {
       setIsLoading(false);
     });
-    setCards([]);
+    setBlisterPackResult([]);
   };
 
   // if (!roundRewards) {
@@ -59,7 +55,7 @@ export const RewardsSelection = () => {
       <PositionedGameMenu decoratedPage />
       <Flex direction={"column"}>
         <FullScreenCardContainer>
-          {cards?.map((card, index) => {
+          {blisterPackResult?.map((card, index) => {
             return (
               <Flex
                 key={`${card.card_id ?? ""}-${index}`}

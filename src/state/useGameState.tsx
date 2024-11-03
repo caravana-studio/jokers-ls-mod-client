@@ -14,6 +14,7 @@ import { RoundRewards } from "../types/RoundRewards";
 import { checkHand } from "../utils/checkHand";
 import { sortCards } from "../utils/sortCards";
 import { useBeast } from "../dojo/queries/useBeast";
+import { useBlisterPackResult } from "../dojo/queries/useBlisterPackResult";
 
 export const useGameState = () => {
   const [gameId, setGameId] = useState<number>(getLSGameId());
@@ -45,6 +46,14 @@ export const useGameState = () => {
   const [obstacles, setObstacles] = useState<
     { id: number; completed: boolean }[]
   >([]);
+
+  const [blisterPackResult, setBlisterPackResult] = useState<Card[]>([]);
+
+  const dojoBlisterPackResult = useBlisterPackResult();
+
+  const refetchBlisterPackResult = () => {
+    setBlisterPackResult(dojoBlisterPackResult.cards);
+  };
 
   const sortBy: SortBy = useMemo(
     () => (sortBySuit ? SortBy.SUIT : SortBy.RANK),
@@ -114,9 +123,6 @@ export const useGameState = () => {
   }, [preSelectedCards]);
 
   const challenges = useChallenge();
-  console.log(challenges);
-
-  const beastData = useBeast();
 
   const refetchObstacles = () => {
     setObstacles(challenges);
@@ -175,5 +181,8 @@ export const useGameState = () => {
     setObstacles,
     refetchObstacles,
     refetchBeast,
+    blisterPackResult,
+    setBlisterPackResult,
+    refetchBlisterPackResult,
   };
 };

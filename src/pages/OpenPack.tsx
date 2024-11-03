@@ -1,20 +1,20 @@
 import { Box, Button, Checkbox, Flex, Text, Tooltip } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { Background } from "../components/Background";
 import { ConfirmationModal } from "../components/ConfirmationModal";
-import { Loading } from "../components/Loading";
-import { TiltCard } from "../components/TiltCard";
-import { BLUE, BLUE_LIGHT } from "../theme/colors";
-import { Card } from "../types/Card";
-import { getCardUniqueId } from "../utils/getCardUniqueId";
-import { useTranslation } from "react-i18next";
 import { PositionedDiscordLink } from "../components/DiscordLink";
 import { PositionedGameMenu } from "../components/GameMenu";
-import { useBlisterPackResult } from "../dojo/queries/useBlisterPackResult";
+import { Loading } from "../components/Loading";
+import { TiltCard } from "../components/TiltCard";
 import { useCurrentSpecialCards } from "../dojo/queries/useCurrentSpecialCards";
 import { useGame } from "../dojo/queries/useGame";
+import { useGameContext } from "../providers/GameProvider";
+import { BLUE, BLUE_LIGHT } from "../theme/colors";
 import { useResponsiveValues } from "../theme/responsiveSettings";
+import { Card } from "../types/Card";
+import { getCardUniqueId } from "../utils/getCardUniqueId";
 import { FullScreenCardContainer } from "./FullScreenCardContainer";
 
 /* const WhiteOverlay = styled.div<{ $visible: boolean }>`
@@ -45,8 +45,6 @@ export const OpenPack = () => {
   const game = useGame();
   const maxSpecialCards = game?.len_max_current_special_cards ?? 0;
 
-  const blisterPackResult = useBlisterPackResult();
-  const [cards, setCards] = useState<Card[]>([]);
   const [cardsToKeep, setCardsToKeep] = useState<Card[]>([]);
   const [confirmationModalOpen, setConfirmationModalOpen] = useState(false);
   const currentSpecialCards = useCurrentSpecialCards();
@@ -58,6 +56,9 @@ export const OpenPack = () => {
   const { isSmallScreen, cardScale } = useResponsiveValues();
   const adjustedCardScale = cardScale * 1.2;
 
+  const { blisterPackResult, setBlisterPackResult, refetchBlisterPackResult } =
+    useGameContext();
+
   useEffect(() => {
     if (game?.state === "IN_STORE") {
       navigate("/redirect/store");
@@ -65,20 +66,16 @@ export const OpenPack = () => {
   }, [game?.state]);
 
   useEffect(() => {
-    if (blisterPackResult?.cardsPicked) {
-      setCards([]);
-    } else {
-      setCards(blisterPackResult?.cards ?? []);
-      setCardsToKeep(blisterPackResult?.cards ?? []);
+    if (blisterPackResult.length === 0) {
+      refetchBlisterPackResult();
     }
   }, [blisterPackResult]);
 
-  const allSelected = cardsToKeep.length === cards.length;
-
+  const allSelected = cardsToKeep.length === blisterPackResult.length;
 
   const confirmSelectCards = () => {
     // selectCardsFromPack(cardsToKeep.map((c) => c.idx));
-    setCards([]);
+    setBlisterPackResult([]);
     navigate("/redirect/store");
   };
 
@@ -104,7 +101,7 @@ export const OpenPack = () => {
     <Background type="home" dark bgDecoration>
       <PositionedGameMenu decoratedPage />
       {/* <WhiteOverlay $visible={overlayVisible} /> */}
-      {cards.length > 0 ? (
+      {blisterPackResult.length > 0 ? (
         <Flex
           height={"100%"}
           justifyContent="center"
@@ -122,14 +119,16 @@ export const OpenPack = () => {
               color="white"
               isChecked={!!allSelected}
               onChange={(e) => {
-                !e.target.checked ? setCardsToKeep([]) : setCardsToKeep(cards);
+                !e.target.checked
+                  ? setCardsToKeep([])
+                  : setCardsToKeep(blisterPackResult);
               }}
             >
               {t("store.packs.select-all-lbl").toUpperCase()}
             </Checkbox>
           </Flex>
           <FullScreenCardContainer>
-            {cards.map((card, index) => {
+            {blisterPackResult.map((card, index) => {
               return (
                 <Flex
                   key={`${card.card_id ?? ""}-${index}`}
