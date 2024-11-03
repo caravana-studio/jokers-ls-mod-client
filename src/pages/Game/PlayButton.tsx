@@ -25,18 +25,15 @@ export const PlayButton = ({ highlight = false }: PlayButtonProps) => {
 
   const beastPlayer = useBeastPlayer();
   const energyLeft = beastPlayer?.energy ?? 0;
+  const beastGameMode = useGameModeBeast();
 
-  const hasHands = handsLeft > 0 || energyLeft > 0;
+  const playCost = beastGameMode?.cost_play ?? 2;
+
+  const hasHands = mode === "beast" ? energyLeft >= playCost : handsLeft > 0;
 
   const cantPlay =
     !highlight &&
     (preSelectionLocked || preSelectedCards?.length === 0 || !hasHands);
-
-  const { t } = useTranslation(["game"]);
-  const { isSmallScreen } = useResponsiveValues();
-
-  const beastGameMode = useGameModeBeast();
-  const playCost = beastGameMode?.cost_play ?? 2;
 
   return (
     <ButtonContainer>
