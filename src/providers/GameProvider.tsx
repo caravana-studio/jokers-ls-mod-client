@@ -399,14 +399,12 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     setHand(newHand);
   };
 
-  const setObstacleCompleted = (id: number) => {
+  const setObstaclesCompleted = (ids: number[]) => {
     setObstacles(
-      obstacles.map((obstacle) => {
-        if (obstacle.id === id) {
-          return { ...obstacle, completed: true };
-        }
-        return obstacle;
-      })
+      obstacles.map((obstacle) => ({
+        ...obstacle,
+        completed: ids.includes(obstacle.id) ? true : obstacle.completed,
+      }))
     );
   };
 
@@ -650,9 +648,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
         setLockedSpecialCards([]);
 
         if (playEvents.itemChallengeCompleted) {
-          playEvents.itemChallengeCompleted.forEach((id) => {
-            setObstacleCompleted(id);
-          });
+          setObstaclesCompleted(playEvents.itemChallengeCompleted);
         }
         if (playEvents.gameOver) {
           console.log("GAME OVER");
