@@ -1,5 +1,5 @@
 import { ChakraBaseProvider, extendTheme } from "@chakra-ui/react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import "./App.scss";
 
 import { Analytics } from "@vercel/analytics/react";
@@ -19,9 +19,20 @@ import { AudioPlayerProvider } from "./providers/AudioPlayerProvider";
 import { CardAnimationsProvider } from "./providers/CardAnimationsProvider";
 import { GameProvider } from "./providers/GameProvider";
 import customTheme from "./theme/theme";
+import { DesktopOnlyNotice } from "./pages/DesktopOnlyNotice";
+import { useEffect } from "react";
 
 function App() {
   const theme = extendTheme(customTheme);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (window.innerWidth < 1280) {
+      navigate("/desktop-only-notice");
+    }
+  }, [navigate]);
+
   return (
     <ChakraBaseProvider theme={theme}>
       <CardAnimationsProvider>
@@ -46,6 +57,10 @@ function App() {
               <Route path="/rewards" element={<RewardsPage />} />
               <Route path="/adventurers" element={<AdventurersPage />} />
               <Route path="/rewards/:mode" element={<RewardsSelection />} />
+              <Route
+                path="/desktop-only-notice"
+                element={<DesktopOnlyNotice />}
+              />
             </Routes>
           </AudioPlayerProvider>
         </GameProvider>

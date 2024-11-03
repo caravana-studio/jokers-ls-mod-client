@@ -20,7 +20,11 @@ export const Obstacle: React.FC = () => {
   }, [missions]);
 
   return (
-    <Flex width="100%" justifyContent="center">
+    <Flex
+      width="100%"
+      justifyContent="center"
+      className="game-tutorial-obstacle"
+    >
       <Flex direction="column" alignItems="start" gap={4}>
         {missions.map((mission, index) => (
           <Flex alignItems="center" key={index}>

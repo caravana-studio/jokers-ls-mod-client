@@ -113,6 +113,7 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
                 justifyContent={"flex-end"}
                 height={"100%"}
                 gap={2}
+                className="tutorial-beast"
               >
                 <Flex
                   position="relative"
