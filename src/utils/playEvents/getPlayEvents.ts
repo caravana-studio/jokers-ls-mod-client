@@ -6,6 +6,7 @@ import {
 import { DojoEvent } from "../../types/DojoEvent";
 import { PlayEvents } from "../../types/ScoreData";
 import { getCardsFromEvents } from "../getCardsFromEvents";
+import { getBeastAttackEvent } from "./getBeastAttackEvent";
 import { getCashEvents } from "./getCashEvents";
 import { getDetailEarnedEvent } from "./getDetailEarnedEvent";
 import { getGlobalEvents } from "./getGlobalEvents";
@@ -44,6 +45,7 @@ export const getPlayEvents = (events: DojoEvent[]): PlayEvents => {
     score: getScoreEvent(events),
     cashEvents: getCashEvents(events),
     playerAttack: getPlayerAttackEvent(events),
+    beastAttack: getBeastAttackEvent(events),
   };
 
   return playEvents;

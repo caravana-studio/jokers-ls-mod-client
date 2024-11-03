@@ -1,5 +1,4 @@
 import { Box, Button, Flex, Heading, Image } from "@chakra-ui/react";
-import { PointerSensor, useSensor, useSensors } from "@dnd-kit/core";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Joyride, { CallBackProps } from "react-joyride";
@@ -22,6 +21,7 @@ import { useGameContext } from "../../providers/GameProvider.tsx";
 import { HandSection } from "./HandSection.tsx";
 import { MidSection } from "./MidSection.tsx";
 import { TopSection } from "./TopSection.tsx";
+import { BeastTurnAnimation } from "./BeastTurnAnimation.tsx";
 
 export const GameContent = () => {
   const {
@@ -30,17 +30,17 @@ export const GameContent = () => {
     gameLoading,
     error,
     executeCreateGame,
-    preSelectCard,
-    unPreSelectCard,
+    playsLeft,
+    energyLeft,
+    discardsLeft,
+    refetchPlaysAndDiscards,
   } = useGameContext();
 
-  const sensors = useSensors(
-    useSensor(PointerSensor, {
-      activationConstraint: {
-        distance: 8,
-      },
-    })
-  );
+  useEffect(() => {
+    if (playsLeft < 0 || energyLeft < 0 || discardsLeft < 0) {
+      refetchPlaysAndDiscards();
+    }
+  }, [playsLeft, energyLeft, discardsLeft]);
 
   const { mode } = useParams();
 
@@ -149,6 +149,7 @@ export const GameContent = () => {
         width: "100%",
       }}
     >
+      {mode === "beast" && <BeastTurnAnimation />}
       <Box
         sx={{
           height: "100%",

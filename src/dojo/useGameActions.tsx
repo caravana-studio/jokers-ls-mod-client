@@ -13,6 +13,7 @@ import {
   updateTransactionToast,
 } from "../utils/transactionNotifications";
 import { useDojo } from "./useDojo";
+import { getBeastAttackEvent } from "../utils/playEvents/getBeastAttackEvent";
 
 const createGameEmptyResponse = {
   gameId: 0,
@@ -305,13 +306,19 @@ export const useGameActions = () => {
 
       if (tx.isSuccess()) {
         console.log("Success at endTurn:", tx);
+        return {
+          success: true,
+          gameOver: !!tx.events.find((event) => event.keys[0] === GAME_OVER_EVENT),
+          beastAttack: getBeastAttackEvent(tx.events),
+        }
       } else {
         console.error("Error at endTurn:", tx);
       }
+      return {success: false};
     } catch (e) {
       failedTransactionToast();
       console.log(e);
-      return 0;
+      return {success: false};
     }
   };
 
@@ -337,12 +344,14 @@ export const useGameActions = () => {
       updateTransactionToast(transaction_hash, tx.isSuccess());
       if (tx.isSuccess()) {
         const cards = getCardsFromEvents(tx.events);
+        const beastAttack = getBeastAttackEvent(tx.events);
         return {
           success: true,
           cards: cards,
           gameOver: !!tx.events.find(
             (event) => event.keys[0] === GAME_OVER_EVENT
           ),
+          beastAttack,
         };
       } else {
         return {

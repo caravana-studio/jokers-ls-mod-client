@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 import { LOGGED_USER, SORT_BY_SUIT } from "../constants/localStorage";
 import { PLAYS_DATA } from "../constants/plays";
-import { useBeast } from "../dojo/queries/useBeast";
+import { useBeast, useBeastPlayer, useGameModeBeast } from "../dojo/queries/useBeast";
 import { useBlisterPackResult } from "../dojo/queries/useBlisterPackResult";
-import { useChallenge } from "../dojo/queries/useChallenge";
+import { useChallenge, useChallengePlayer } from "../dojo/queries/useChallenge";
 import { useCurrentHand } from "../dojo/queries/useCurrentHand";
 import { useCurrentSpecialCards } from "../dojo/queries/useCurrentSpecialCards";
 import { useGame } from "../dojo/queries/useGame";
@@ -44,6 +44,48 @@ export const useGameState = () => {
   const [obstacles, setObstacles] = useState<
     { id: number; completed: boolean }[]
   >([]);
+
+  const [playsLeft, setPlaysLeft] = useState(-1);
+  const [discardsLeft, setDiscardsLeft] = useState(-1);
+  const [energyLeft, setEnergyLeft] = useState(-1);
+
+  const [beastAttack, setBeastAttack] = useState(0);
+
+  const [gameOver, setGameOver] = useState(false);
+
+  const consumePlay = () => {
+    setPlaysLeft((prev) => prev - 1);
+  };
+  const consumeDiscard = () => {
+    setDiscardsLeft((prev) => prev - 1);
+  };
+  const consumeEnergyPlay = () => {
+    setEnergyLeft((prev) => prev - 2);
+  };
+  const consumeEnergyDiscard = () => {
+    setEnergyLeft((prev) => prev - 1);
+  };
+
+  const challengePlayer = useChallengePlayer();
+  const beastPlayer = useBeastPlayer();
+
+  const refetchPlaysAndDiscards = () => {
+    setDiscardsLeft(challengePlayer?.discards ?? 0);
+    setPlaysLeft(challengePlayer?.plays ?? 0);
+    setEnergyLeft(beastPlayer?.energy ?? 0);
+  };
+
+  const resetPlaysAndDiscards = () => {
+    const hasIncreasePlaysAndDiscardsSpecialCard = !!specialCards.find(
+      (card) => card.card_id === 315
+    );
+    const maxDiscards = hasIncreasePlaysAndDiscardsSpecialCard ? 6 : 5;
+    const maxPlays = hasIncreasePlaysAndDiscardsSpecialCard ? 6 : 5;
+    const maxEnergy = hasIncreasePlaysAndDiscardsSpecialCard ? 4 : 3;
+    setPlaysLeft(maxPlays);
+    setDiscardsLeft(maxDiscards);
+    setEnergyLeft(maxEnergy);
+  };
 
   const [specialCards, setSpecialCards] = useState<Card[]>([]);
 
@@ -199,5 +241,18 @@ export const useGameState = () => {
     setBlisterPackResult,
     refetchBlisterPackResult,
     resetSpecialCards,
+    playsLeft,
+    consumePlay,
+    discardsLeft,
+    energyLeft,
+    consumeDiscard,
+    consumeEnergyPlay,
+    consumeEnergyDiscard,
+    resetPlaysAndDiscards,
+    refetchPlaysAndDiscards,
+    beastAttack,
+    setBeastAttack,
+    gameOver,
+    setGameOver,
   };
 };

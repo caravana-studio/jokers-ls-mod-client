@@ -1,35 +1,33 @@
 import { Button, Flex, Text } from "@chakra-ui/react";
-import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import { useGameContext } from "../../providers/GameProvider";
 import { LS_GREEN } from "../../theme/colors";
-import { useResponsiveValues } from "../../theme/responsiveSettings";
 import { ButtonContainer } from "./ButtonContainer";
 import { SkullIcon } from "./Skullcon";
-import { useChallengePlayer } from "../../dojo/queries/useChallenge";
-import { useGame } from "../../dojo/queries/useGame";
-import { useBeastPlayer, useGameModeBeast } from "../../dojo/queries/useBeast";
 
 interface PlayButtonProps {
   highlight?: boolean;
 }
 
 export const PlayButton = ({ highlight = false }: PlayButtonProps) => {
-  const { preSelectedCards, play, preSelectionLocked } = useGameContext();
+  const {
+    preSelectedCards,
+    play,
+    preSelectionLocked,
+    playsLeft,
+    specialCards,
+    energyLeft,
+  } = useGameContext();
   const { mode } = useParams();
-  const game = useGame();
-  const maxPlays = game?.max_hands ?? 0;
 
-  const challengePlayer = useChallengePlayer();
-  const handsLeft = challengePlayer?.plays ?? 0;
+  const hasIncreasePlaysAndDiscardsSpecialCard = !!specialCards.find(
+    (card) => card.card_id === 315
+  );
+  const maxPlays = hasIncreasePlaysAndDiscardsSpecialCard ? 6 : 5;
 
-  const beastPlayer = useBeastPlayer();
-  const energyLeft = beastPlayer?.energy ?? 0;
-  const beastGameMode = useGameModeBeast();
+  const playCost = 2;
 
-  const playCost = beastGameMode?.cost_play ?? 2;
-
-  const hasHands = mode === "beast" ? energyLeft >= playCost : handsLeft > 0;
+  const hasHands = mode === "beast" ? energyLeft >= 2 : playsLeft > 0;
 
   const cantPlay =
     !highlight &&
@@ -65,7 +63,7 @@ export const PlayButton = ({ highlight = false }: PlayButtonProps) => {
       {mode !== "beast" && (
         <Flex direction="row" align="center" gap={8}>
           {Array.from({ length: maxPlays }).map((_, index) => (
-            <SkullIcon key={index} color={LS_GREEN} used={index >= handsLeft} />
+            <SkullIcon key={index} color={LS_GREEN} used={index >= playsLeft} />
           ))}
         </Flex>
       )}

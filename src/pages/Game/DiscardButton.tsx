@@ -14,31 +14,21 @@ interface DiscardButtonProps {
 }
 
 export const DiscardButton = ({ highlight = false }: DiscardButtonProps) => {
-  const { preSelectedCards, discard, preSelectionLocked, executeEndTurn } =
+  const { preSelectedCards, discard, preSelectionLocked, executeEndTurn, specialCards, energyLeft, discardsLeft } =
     useGameContext();
 
   const { mode } = useParams();
 
-  const game = useGame();
-  const maxDiscard = game?.max_discard ?? 0;
+  const hasIncreasePlaysAndDiscardsSpecialCard = !!specialCards.find((card) => card.card_id === 315)
+  const maxDiscards = hasIncreasePlaysAndDiscardsSpecialCard ? 6 : 5;
 
-  const challengePlayer = useChallengePlayer();
-  const discards = challengePlayer?.discards ?? 0;
+  const discardCost = 1;
 
-  const beastGameMode = useGameModeBeast();
-  const cost_discard = beastGameMode?.cost_discard ?? 1;
-
-  const beastPlayer = useBeastPlayer();
-  const energyLeft = beastPlayer?.energy ?? 0;
-
-  const hasDiscards = mode === "beast" ? energyLeft > 0 : discards > 0;
+  const hasDiscards = mode === "beast" ? energyLeft > 0 : discardsLeft > 0;
 
   const cantDiscard =
     !highlight &&
     (preSelectionLocked || preSelectedCards?.length === 0 || !hasDiscards);
-
-  const { t } = useTranslation(["game"]);
-  const { isSmallScreen } = useResponsiveValues();
 
   return (
     <ButtonContainer>
@@ -56,7 +46,7 @@ export const DiscardButton = ({ highlight = false }: DiscardButtonProps) => {
             <Text fontFamily="Jersey" fontSize={"1.5rem"}>
               DISCARD
             </Text>
-            {Array.from({ length: cost_discard }).map((_, index) => (
+            {Array.from({ length: discardCost }).map((_, index) => (
               <SkullIcon key={index} />
             ))}
           </Flex>
@@ -82,8 +72,8 @@ export const DiscardButton = ({ highlight = false }: DiscardButtonProps) => {
         </Button>
       ) : (
         <Flex direction="row" align="center" gap={8}>
-          {Array.from({ length: maxDiscard }).map((_, index) => (
-            <SkullIcon key={index} used={index >= discards} />
+          {Array.from({ length: maxDiscards }).map((_, index) => (
+            <SkullIcon key={index} used={index >= discardsLeft} />
           ))}
         </Flex>
       )}
