@@ -34,7 +34,7 @@ export const SpecialCards = ({ inStore = false }: SpecialCardsProps) => {
         <Box mt={2}>
           {!inStore && (
             <Text fontSize={"1.3rem"}>
-              Special cards (0/5)
+              Special cards ({specialCards.length}/5)
               {/* {t("game.special-cards.special-cards-label")} */}
             </Text>
           )}
