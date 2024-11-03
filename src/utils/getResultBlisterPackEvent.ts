@@ -17,7 +17,7 @@ export const getResultBlisterPackEvent = (events: DojoEvent[]): Card[] => {
   for (let i = 2; i < packLength + 2; i++) {
     const cardId = getNumberValueFromEvent(blisterPackResultEvent, i);
     if (cardId) {
-      const card = getCardFromCardId(cardId, i);
+      const card = getCardFromCardId(cardId, i - 2);
       packResult.push(card);
     }
   }

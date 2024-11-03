@@ -843,6 +843,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
       }, 2000);
     } else {
       setGameLoading(false);
+      setLockRedirection(false);
       redirectBasedOnGameState();
       console.log("Game found, no need to create a new one");
     }
@@ -856,29 +857,31 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
   const redirectBasedOnGameState = () => {
     if (!lockRedirection) {
       if (game?.state === "FINISHED") {
-        navigate(`/gameover/${gameId}`);
+        return navigate(`/gameover/${gameId}`);
       } else {
         if (game?.substate === "SELECT_DECK") {
           console.log("redirecting to SELECT_DECK");
-          navigate("/choose-class");
+          return navigate("/choose-class");
         } else if (game?.substate === "SELECT_SPECIAL_CARDS") {
           console.log("redirecting to SELECT_SPECIAL_CARDS");
-          navigate("/choose-specials");
+          return navigate("/choose-specials");
         } else if (game?.substate === "SELECT_MODIFIER_CARDS") {
           console.log("redirecting to SELECT_MODIFIER_CARDS");
-          navigate("/choose-modifiers");
+          return navigate("/choose-modifiers");
         } else if (game?.substate === "OBSTACLE") {
-          navigate("/game/obstacle");
+          return navigate("/game/obstacle");
         } else if (game?.substate === "BEAST") {
-          navigate("/game/beast");
+          return navigate("/game/beast");
         } else if (game?.substate === "CREATE_REWARD") {
-          navigate("/rewards");
+          return navigate("/rewards");
         } else if (game?.substate === "REWARD_CARDS_PACK") {
-          navigate("/rewards/pack");
+          return navigate("/rewards/pack");
         } else if (game?.substate === "REWARD_SPECIALS") {
-          navigate("/rewards/specials");
+          return navigate("/rewards/specials");
         }
       }
+      console.log("default redirect to select deck");
+      return navigate("/choose-class");
     }
   };
 

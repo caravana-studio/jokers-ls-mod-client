@@ -74,7 +74,7 @@ export const ChooseAdventurerCards = () => {
           </Heading>
           <FullScreenCardContainer
             sx={{ width: isSmallScreen ? "100%" : "80%", margin: "0 auto" }}
-          >
+          >z
             {blisterPackResult?.map((card, index) => {
               return (
                 <Flex

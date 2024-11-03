@@ -1,9 +1,11 @@
 import { shortString } from "starknet";
 import { GAME_ID_EVENT, GAME_OVER_EVENT } from "../constants/dojoEventKeys";
+import { Card } from "../types/Card";
 import { getCardsFromEvents } from "../utils/getCardsFromEvents";
 import { getCreateLevelEvents } from "../utils/getCreateLevelEvents";
 import { getCreateRewardsEvents } from "../utils/getCreateRewardsEvent";
 import { getNumberValueFromEvents } from "../utils/getNumberValueFromEvent";
+import { getResultBlisterPackEvent } from "../utils/getResultBlisterPackEvent";
 import { getPlayEvents } from "../utils/playEvents/getPlayEvents";
 import {
   failedTransactionToast,
@@ -11,8 +13,6 @@ import {
   updateTransactionToast,
 } from "../utils/transactionNotifications";
 import { useDojo } from "./useDojo";
-import { getResultBlisterPackEvent } from "../utils/getResultBlisterPackEvent";
-import { Card } from "../types/Card";
 
 const createGameEmptyResponse = {
   gameId: 0,
@@ -58,6 +58,11 @@ export const useGameActions = () => {
   const selectSpecials = async (gameId: number, cardsIndex: number[]): Promise<Card[]> => {
     try {
       showTransactionToast();
+      console.log('paylaod', {
+        account,
+        game_id: gameId,
+        cards_index: cardsIndex,
+      })
       const { transaction_hash } =
         await client.game_system.select_special_cards({
           account,
