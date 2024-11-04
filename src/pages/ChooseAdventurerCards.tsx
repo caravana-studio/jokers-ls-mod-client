@@ -10,6 +10,8 @@ import { Card } from "../types/Card";
 import { getCardUniqueId } from "../utils/getCardUniqueId";
 import { FullScreenCardContainer } from "./FullScreenCardContainer";
 import { Lsxjon } from "./Game/Lsxjon";
+import { useAudio } from "../hooks/useAudio";
+import { beep } from "../constants/sfx";
 
 export const ChooseAdventurerCards = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -17,6 +19,7 @@ export const ChooseAdventurerCards = () => {
   const { isSmallScreen, cardScale } = useResponsiveValues();
   const adjustedCardScale = cardScale * 1.5;
   const maxCards = 2;
+  const { play: beepSound } = useAudio(beep);
 
   const {
     selectAdventurerCards,
@@ -35,6 +38,7 @@ export const ChooseAdventurerCards = () => {
   }, [blisterPackResult]);
 
   const confirmSelectCards = () => {
+    beepSound();
     setIsLoading(true);
     selectAdventurerCards(cardsToKeep.map((c) => c.idx))
       .then((response) => {
@@ -122,6 +126,7 @@ export const ChooseAdventurerCards = () => {
                       card={card}
                       key={index}
                       onClick={() => {
+                        beepSound();
                         if (
                           cardsToKeep.map((card) => card.idx).includes(card.idx)
                         ) {

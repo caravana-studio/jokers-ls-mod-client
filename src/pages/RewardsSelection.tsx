@@ -12,6 +12,8 @@ import { Card } from "../types/Card";
 import { getCardUniqueId } from "../utils/getCardUniqueId";
 import { runConfettiAnimation } from "../utils/runConfettiAnimation";
 import { FullScreenCardContainer } from "./FullScreenCardContainer";
+import { useAudio } from "../hooks/useAudio";
+import { beep } from "../constants/sfx";
 
 export const RewardsSelection = () => {
   const { mode } = useParams();
@@ -28,6 +30,7 @@ export const RewardsSelection = () => {
   const { isSmallScreen, cardScale } = useResponsiveValues();
   const adjustedCardScale = cardScale * 1.5;
   const maxCards = mode === "special" ? 1 : 3;
+  const { play: beepSound } = useAudio(beep);
 
   useEffect(() => {
     if (blisterPackResult.length === 0) {
@@ -40,6 +43,7 @@ export const RewardsSelection = () => {
   }, []);
 
   const confirmSelectCards = () => {
+    beepSound();
     setIsLoading(true);
     selectNewRewards(cardsToKeep.map((c) => c.idx))
       .then((response) => {
@@ -102,6 +106,7 @@ export const RewardsSelection = () => {
                     card={card}
                     key={index}
                     onClick={() => {
+                      beepSound();
                       if (
                         cardsToKeep.map((card) => card.idx).includes(card.idx)
                       ) {

@@ -8,6 +8,8 @@ import { useConsumedAdventurers } from "../../dojo/queries/useConsumedAdventurer
 import { useGameContext } from "../../providers/GameProvider";
 import { AdventurerBox } from "./AdventurerBox";
 import { Loading } from "../../components/Loading";
+import { useAudio } from "../../hooks/useAudio";
+import { beep } from "../../constants/sfx";
 
 export const Adventurers = () => {
   const { gameId, createNewLevel, setBlisterPackResult } = useGameContext();
@@ -16,8 +18,10 @@ export const Adventurers = () => {
     Adventurer | undefined
   >();
   const { adventurers, isLoading } = useAdventurers();
+  const { play: beepSound } = useAudio(beep);
 
   const toggleSelectedAdventurer = (adventurer: Adventurer) => {
+    beepSound();
     setSelectedAdventurer((prev) =>
       prev === adventurer ? undefined : adventurer
     );
@@ -97,6 +101,7 @@ export const Adventurers = () => {
         <Button
           width="300px"
           onClick={() => {
+            beepSound();
             skipAdventurer(gameId ?? 0).then((response) => {
               if (response) {
                 createNewLevel();
@@ -110,6 +115,7 @@ export const Adventurers = () => {
         <Button
           width="300px"
           onClick={() => {
+            beepSound();
             selectedAdventurer &&
               useAdventurer(gameId ?? 0, selectedAdventurer.id).then(
                 (response) => {

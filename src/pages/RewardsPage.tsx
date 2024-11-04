@@ -17,11 +17,10 @@ export const RewardsPage = () => {
       <PositionedGameMenu decoratedPage />
       <Flex direction={"column"}>
         <TopSection inRewardsPag />
-          <Box mt={16}>
-
+        <Box mt={16}>
           <RewardsSection />
-          </Box>
-          
+        </Box>
+
         {/* <Button
           width={"30%"}
           mt={8}

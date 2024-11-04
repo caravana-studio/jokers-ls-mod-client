@@ -11,6 +11,8 @@ import { Card } from "../types/Card";
 import { getCardUniqueId } from "../utils/getCardUniqueId";
 import { FullScreenCardContainer } from "./FullScreenCardContainer";
 import { Lsxjon } from "./Game/Lsxjon";
+import { useAudio } from "../hooks/useAudio";
+import { beep } from "../constants/sfx";
 
 export const ChooseSpecialsPage = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -18,6 +20,7 @@ export const ChooseSpecialsPage = () => {
   const { isSmallScreen, cardScale } = useResponsiveValues();
   const adjustedCardScale = cardScale * 1.5;
   const maxCards = 2;
+  const { play: beepSound } = useAudio(beep);
 
   const {
     selectSpecialCards,
@@ -37,6 +40,7 @@ export const ChooseSpecialsPage = () => {
   }, [blisterPackResult]);
 
   const confirmSelectCards = () => {
+    beepSound();
     setIsLoading(true);
     selectSpecialCards(cardsToKeep.map((c) => c.idx))
       .then((response) => {
@@ -121,6 +125,7 @@ export const ChooseSpecialsPage = () => {
                       card={card}
                       key={index}
                       onClick={() => {
+                        beepSound();
                         if (
                           cardsToKeep.map((card) => card.idx).includes(card.idx)
                         ) {
