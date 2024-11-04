@@ -16,7 +16,7 @@ export const LayoutDefinition = {
     value: RecsType.String
 };
         
-// Type definition for `jokers_of_neon::models::data::adventurer::AdventurerConsumed` struct
+// Type definition for `jokers_ls_mod::models::data::adventurer::AdventurerConsumed` struct
 export interface AdventurerConsumed {
     adventurer_id: Number;
     owner: BigInt;
@@ -57,7 +57,7 @@ export const FieldLayoutDefinition = {
 };
 
 
-// Type definition for `jokers_of_neon::models::data::beast::TypeBeast` enum
+// Type definition for `jokers_ls_mod::models::data::beast::TypeBeast` enum
 export type TypeBeast = { type: 'LOOT_SURVIVOR'; } | { type: 'JOKERS_OF_NEON'; };
 
 export const TypeBeastDefinition = {
@@ -65,7 +65,7 @@ export const TypeBeastDefinition = {
     value: RecsType.String
 };
         
-// Type definition for `jokers_of_neon::models::data::beast::Beast` struct
+// Type definition for `jokers_ls_mod::models::data::beast::Beast` struct
 export interface Beast {
     game_id: Number;
     beast_id: Number;
@@ -90,7 +90,7 @@ export const BeastDefinition = {
 };
 
 
-// Type definition for `jokers_of_neon::models::data::events::BeastAttack` struct
+// Type definition for `jokers_ls_mod::models::data::events::BeastAttack` struct
 export interface BeastAttack {
     player: BigInt;
     attack: Number;
@@ -103,7 +103,7 @@ export const BeastAttackDefinition = {
 };
 
 
-// Type definition for `jokers_of_neon::models::status::shop::shop::BlisterPackItem` struct
+// Type definition for `jokers_ls_mod::models::status::shop::shop::BlisterPackItem` struct
 export interface BlisterPackItem {
     game_id: Number;
     idx: Number;
@@ -122,7 +122,7 @@ export const BlisterPackItemDefinition = {
 };
 
 
-// Type definition for `jokers_of_neon::models::status::shop::shop::BlisterPackResult` struct
+// Type definition for `jokers_ls_mod::models::status::shop::shop::BlisterPackResult` struct
 export interface BlisterPackResult {
     game_id: Number;
     cards_picked: Boolean;
@@ -137,7 +137,7 @@ export const BlisterPackResultDefinition = {
 };
 
 
-// Type definition for `jokers_of_neon::models::data::events::BuyBlisterPackEvent` struct
+// Type definition for `jokers_ls_mod::models::data::events::BuyBlisterPackEvent` struct
 export interface BuyBlisterPackEvent {
     game_id: Number;
     level: Number;
@@ -154,7 +154,7 @@ export const BuyBlisterPackEventDefinition = {
 };
 
 
-// Type definition for `jokers_of_neon::models::status::shop::shop::CardItemType` enum
+// Type definition for `jokers_ls_mod::models::status::shop::shop::CardItemType` enum
 export type CardItemType = { type: 'None'; } | { type: 'Common'; } | { type: 'Modifier'; } | { type: 'Special'; };
 
 export const CardItemTypeDefinition = {
@@ -162,7 +162,7 @@ export const CardItemTypeDefinition = {
     value: RecsType.String
 };
         
-// Type definition for `jokers_of_neon::models::data::events::BuyCardEvent` struct
+// Type definition for `jokers_ls_mod::models::data::events::BuyCardEvent` struct
 export interface BuyCardEvent {
     game_id: Number;
     level: Number;
@@ -183,7 +183,7 @@ export const BuyCardEventDefinition = {
 };
 
 
-// Type definition for `jokers_of_neon::models::data::poker_hand::PokerHand` enum
+// Type definition for `jokers_ls_mod::models::data::poker_hand::PokerHand` enum
 export type PokerHand = { type: 'None'; } | { type: 'RoyalFlush'; } | { type: 'StraightFlush'; } | { type: 'FiveOfAKind'; } | { type: 'FourOfAKind'; } | { type: 'FullHouse'; } | { type: 'Straight'; } | { type: 'Flush'; } | { type: 'ThreeOfAKind'; } | { type: 'TwoPair'; } | { type: 'OnePair'; } | { type: 'HighCard'; };
 
 export const PokerHandDefinition = {
@@ -191,7 +191,7 @@ export const PokerHandDefinition = {
     value: RecsType.String
 };
         
-// Type definition for `jokers_of_neon::models::data::events::BuyPokerHandEvent` struct
+// Type definition for `jokers_ls_mod::models::data::events::BuyPokerHandEvent` struct
 export interface BuyPokerHandEvent {
     game_id: Number;
     level: Number;
@@ -210,7 +210,7 @@ export const BuyPokerHandEventDefinition = {
 };
 
 
-// Type definition for `jokers_of_neon::models::data::events::BuyRerollEvent` struct
+// Type definition for `jokers_ls_mod::models::data::events::BuyRerollEvent` struct
 export interface BuyRerollEvent {
     game_id: Number;
     level: Number;
@@ -227,7 +227,7 @@ export const BuyRerollEventDefinition = {
 };
 
 
-// Type definition for `jokers_of_neon::models::status::shop::shop::CardItem` struct
+// Type definition for `jokers_ls_mod::models::status::shop::shop::CardItem` struct
 export interface CardItem {
     game_id: Number;
     idx: Number;
@@ -250,7 +250,7 @@ export const CardItemDefinition = {
 };
 
 
-// Type definition for `jokers_of_neon::models::data::events::CardScoreEvent` struct
+// Type definition for `jokers_ls_mod::models::data::events::CardScoreEvent` struct
 export interface CardScoreEvent {
     player: BigInt;
     index: Number;
@@ -267,7 +267,7 @@ export const CardScoreEventDefinition = {
 };
 
 
-// Type definition for `jokers_of_neon::models::data::challenge::Challenge` struct
+// Type definition for `jokers_ls_mod::models::data::challenge::Challenge` struct
 export interface Challenge {
     game_id: Number;
     active_ids: String[];
@@ -280,7 +280,7 @@ export const ChallengeDefinition = {
 };
 
 
-// Type definition for `jokers_of_neon::models::data::events::ChallengeCompleted` struct
+// Type definition for `jokers_ls_mod::models::data::events::ChallengeCompleted` struct
 export interface ChallengeCompleted {
     player: BigInt;
     player_name: BigInt;
@@ -295,7 +295,7 @@ export const ChallengeCompletedDefinition = {
 };
 
 
-// Type definition for `jokers_of_neon::models::data::challenge::ChallengePlayer` struct
+// Type definition for `jokers_ls_mod::models::data::challenge::ChallengePlayer` struct
 export interface ChallengePlayer {
     game_id: Number;
     discards: Number;
@@ -310,7 +310,7 @@ export const ChallengePlayerDefinition = {
 };
 
 
-// Type definition for `jokers_of_neon::models::data::events::CreateGameEvent` struct
+// Type definition for `jokers_ls_mod::models::data::events::CreateGameEvent` struct
 export interface CreateGameEvent {
     player: BigInt;
     game_id: Number;
@@ -323,7 +323,7 @@ export const CreateGameEventDefinition = {
 };
 
 
-// Type definition for `jokers_of_neon::models::status::round::current_hand_card::CurrentHandCard` struct
+// Type definition for `jokers_ls_mod::models::status::round::current_hand_card::CurrentHandCard` struct
 export interface CurrentHandCard {
     game_id: Number;
     idx: Number;
@@ -338,7 +338,7 @@ export const CurrentHandCardDefinition = {
 };
 
 
-// Type definition for `jokers_of_neon::models::status::game::game::CurrentSpecialCards` struct
+// Type definition for `jokers_ls_mod::models::status::game::game::CurrentSpecialCards` struct
 export interface CurrentSpecialCards {
     game_id: Number;
     idx: Number;
@@ -357,7 +357,7 @@ export const CurrentSpecialCardsDefinition = {
 };
 
 
-// Type definition for `jokers_of_neon::models::data::game_deck::DeckCard` struct
+// Type definition for `jokers_ls_mod::models::data::game_deck::DeckCard` struct
 export interface DeckCard {
     game_id: Number;
     index: Number;
@@ -372,7 +372,7 @@ export const DeckCardDefinition = {
 };
 
 
-// Type definition for `jokers_of_neon::models::data::events::DetailEarnedEvent` struct
+// Type definition for `jokers_ls_mod::models::data::events::DetailEarnedEvent` struct
 export interface DetailEarnedEvent {
     player: BigInt;
     game_id: Number;
@@ -403,7 +403,7 @@ export const DetailEarnedEventDefinition = {
 };
 
 
-// Type definition for `jokers_of_neon::models::status::game::game::GameState` enum
+// Type definition for `jokers_ls_mod::models::status::game::game::GameState` enum
 export type GameState = { type: 'IN_GAME'; } | { type: 'FINISHED'; };
 
 export const GameStateDefinition = {
@@ -411,7 +411,7 @@ export const GameStateDefinition = {
     value: RecsType.String
 };
         
-// Type definition for `jokers_of_neon::models::status::game::game::GameSubState` enum
+// Type definition for `jokers_ls_mod::models::status::game::game::GameSubState` enum
 export type GameSubState = { type: 'BEAST'; } | { type: 'OBSTACLE'; } | { type: 'CREATE_LEVEL'; } | { type: 'CREATE_REWARD'; } | { type: 'REWARD_SPECIALS'; } | { type: 'REWARD_CARDS_PACK'; } | { type: 'DRAFT_MODIFIERS'; } | { type: 'DRAFT_SPECIALS'; } | { type: 'DRAFT_DECK'; } | { type: 'DRAFT_ADVENTURER'; } | { type: 'DRAFT_ADVENTURER_CARDS'; };
 
 export const GameSubStateDefinition = {
@@ -419,7 +419,7 @@ export const GameSubStateDefinition = {
     value: RecsType.String
 };
         
-// Type definition for `jokers_of_neon::models::status::game::game::Game` struct
+// Type definition for `jokers_ls_mod::models::status::game::game::Game` struct
 export interface Game {
     id: Number;
     owner: BigInt;
@@ -466,7 +466,7 @@ export const GameDefinition = {
 };
 
 
-// Type definition for `jokers_of_neon::models::data::game_deck::GameDeck` struct
+// Type definition for `jokers_ls_mod::models::data::game_deck::GameDeck` struct
 export interface GameDeck {
     game_id: Number;
     len: Number;
@@ -481,7 +481,7 @@ export const GameDeckDefinition = {
 };
 
 
-// Type definition for `jokers_of_neon::models::data::beast::GameModeBeast` struct
+// Type definition for `jokers_ls_mod::models::data::beast::GameModeBeast` struct
 export interface GameModeBeast {
     game_id: Number;
     cost_discard: Number;
@@ -498,7 +498,7 @@ export const GameModeBeastDefinition = {
 };
 
 
-// Type definition for `jokers_of_neon::models::data::events::ItemChallengeCompleted` struct
+// Type definition for `jokers_ls_mod::models::data::events::ItemChallengeCompleted` struct
 export interface ItemChallengeCompleted {
     game_id: Number;
     challenge_id: Number;
@@ -511,7 +511,7 @@ export const ItemChallengeCompletedDefinition = {
 };
 
 
-// Type definition for `jokers_of_neon::models::data::last_beast_level::LastBeastLevel` struct
+// Type definition for `jokers_ls_mod::models::data::last_beast_level::LastBeastLevel` struct
 export interface LastBeastLevel {
     game_id: Number;
     current_probability: Number;
@@ -526,7 +526,7 @@ export const LastBeastLevelDefinition = {
 };
 
 
-// Type definition for `jokers_of_neon::models::data::card::Suit` enum
+// Type definition for `jokers_ls_mod::models::data::card::Suit` enum
 export type Suit = { type: 'None'; } | { type: 'Clubs'; } | { type: 'Diamonds'; } | { type: 'Hearts'; } | { type: 'Spades'; } | { type: 'Joker'; };
 
 export const SuitDefinition = {
@@ -534,7 +534,7 @@ export const SuitDefinition = {
     value: RecsType.String
 };
         
-// Type definition for `jokers_of_neon::models::data::events::ModifierCardSuitEvent` struct
+// Type definition for `jokers_ls_mod::models::data::events::ModifierCardSuitEvent` struct
 export interface ModifierCardSuitEvent {
     player: BigInt;
     game_id: Number;
@@ -553,7 +553,7 @@ export const ModifierCardSuitEventDefinition = {
 };
 
 
-// Type definition for `jokers_of_neon::models::data::events::NeonPokerHandEvent` struct
+// Type definition for `jokers_ls_mod::models::data::events::NeonPokerHandEvent` struct
 export interface NeonPokerHandEvent {
     player: BigInt;
     game_id: Number;
@@ -572,7 +572,7 @@ export const NeonPokerHandEventDefinition = {
 };
 
 
-// Type definition for `jokers_of_neon::models::data::events::PlayGameOverEvent` struct
+// Type definition for `jokers_ls_mod::models::data::events::PlayGameOverEvent` struct
 export interface PlayGameOverEvent {
     player: BigInt;
     game_id: Number;
@@ -585,7 +585,7 @@ export const PlayGameOverEventDefinition = {
 };
 
 
-// Type definition for `jokers_of_neon::models::data::events::PlayPokerHandEvent` struct
+// Type definition for `jokers_ls_mod::models::data::events::PlayPokerHandEvent` struct
 export interface PlayPokerHandEvent {
     game_id: Number;
     level: Number;
@@ -602,7 +602,7 @@ export const PlayPokerHandEventDefinition = {
 };
 
 
-// Type definition for `jokers_of_neon::models::data::events::PlayWinGameEvent` struct
+// Type definition for `jokers_ls_mod::models::data::events::PlayWinGameEvent` struct
 export interface PlayWinGameEvent {
     player: BigInt;
     game_id: Number;
@@ -619,7 +619,7 @@ export const PlayWinGameEventDefinition = {
 };
 
 
-// Type definition for `jokers_of_neon::models::data::events::PlayerAttack` struct
+// Type definition for `jokers_ls_mod::models::data::events::PlayerAttack` struct
 export interface PlayerAttack {
     player: BigInt;
     attack: Number;
@@ -632,7 +632,7 @@ export const PlayerAttackDefinition = {
 };
 
 
-// Type definition for `jokers_of_neon::models::data::beast::PlayerBeast` struct
+// Type definition for `jokers_ls_mod::models::data::beast::PlayerBeast` struct
 export interface PlayerBeast {
     game_id: Number;
     energy: Number;
@@ -645,7 +645,7 @@ export const PlayerBeastDefinition = {
 };
 
 
-// Type definition for `jokers_of_neon::models::data::events::PlayerHealed` struct
+// Type definition for `jokers_ls_mod::models::data::events::PlayerHealed` struct
 export interface PlayerHealed {
     game_id: Number;
     potion_heal: Number;
@@ -660,7 +660,7 @@ export const PlayerHealedDefinition = {
 };
 
 
-// Type definition for `jokers_of_neon::models::data::events::PokerHandEvent` struct
+// Type definition for `jokers_ls_mod::models::data::events::PokerHandEvent` struct
 export interface PokerHandEvent {
     player: BigInt;
     poker_hand: Number;
@@ -677,7 +677,7 @@ export const PokerHandEventDefinition = {
 };
 
 
-// Type definition for `jokers_of_neon::models::status::game::rage::RageRound` struct
+// Type definition for `jokers_ls_mod::models::status::game::rage::RageRound` struct
 export interface RageRound {
     game_id: Number;
     is_active: Boolean;
@@ -696,7 +696,7 @@ export const RageRoundDefinition = {
 };
 
 
-// Type definition for `jokers_of_neon::models::data::reward::Reward` struct
+// Type definition for `jokers_ls_mod::models::data::reward::Reward` struct
 export interface Reward {
     game_id: Number;
     rewards_ids: Number[];
@@ -709,7 +709,7 @@ export const RewardDefinition = {
 };
 
 
-// Type definition for `jokers_of_neon::models::data::events::RoundScoreEvent` struct
+// Type definition for `jokers_ls_mod::models::data::events::RoundScoreEvent` struct
 export interface RoundScoreEvent {
     player: BigInt;
     game_id: Number;
@@ -724,7 +724,7 @@ export const RoundScoreEventDefinition = {
 };
 
 
-// Type definition for `jokers_of_neon::models::data::events::SpecialCashEvent` struct
+// Type definition for `jokers_ls_mod::models::data::events::SpecialCashEvent` struct
 export interface SpecialCashEvent {
     player: BigInt;
     cash: Number;
@@ -741,7 +741,7 @@ export const SpecialCashEventDefinition = {
 };
 
 
-// Type definition for `jokers_of_neon::models::data::events::SpecialGlobalEvent` struct
+// Type definition for `jokers_ls_mod::models::data::events::SpecialGlobalEvent` struct
 export interface SpecialGlobalEvent {
     player: BigInt;
     game_id: Number;
@@ -760,7 +760,7 @@ export const SpecialGlobalEventDefinition = {
 };
 
 
-// Type definition for `jokers_of_neon::models::data::events::SpecialModifierMultiEvent` struct
+// Type definition for `jokers_ls_mod::models::data::events::SpecialModifierMultiEvent` struct
 export interface SpecialModifierMultiEvent {
     player: BigInt;
     game_id: Number;
@@ -779,7 +779,7 @@ export const SpecialModifierMultiEventDefinition = {
 };
 
 
-// Type definition for `jokers_of_neon::models::data::events::SpecialModifierPointsEvent` struct
+// Type definition for `jokers_ls_mod::models::data::events::SpecialModifierPointsEvent` struct
 export interface SpecialModifierPointsEvent {
     player: BigInt;
     game_id: Number;
@@ -798,7 +798,7 @@ export const SpecialModifierPointsEventDefinition = {
 };
 
 
-// Type definition for `jokers_of_neon::models::data::events::SpecialModifierSuitEvent` struct
+// Type definition for `jokers_ls_mod::models::data::events::SpecialModifierSuitEvent` struct
 export interface SpecialModifierSuitEvent {
     player: BigInt;
     game_id: Number;
@@ -817,7 +817,7 @@ export const SpecialModifierSuitEventDefinition = {
 };
 
 
-// Type definition for `jokers_of_neon::models::data::events::SpecialPokerHandEvent` struct
+// Type definition for `jokers_ls_mod::models::data::events::SpecialPokerHandEvent` struct
 export interface SpecialPokerHandEvent {
     player: BigInt;
     game_id: Number;
@@ -839,7 +839,7 @@ export const SpecialPokerHandEventDefinition = {
 export function defineContractComponents(world: World) {
     return {
 
-        // Model definition for `jokers_of_neon::models::data::adventurer::AdventurerConsumed` model
+        // Model definition for `jokers_ls_mod::models::data::adventurer::AdventurerConsumed` model
         AdventurerConsumed: (() => {
             return defineComponent(
                 world,
@@ -850,7 +850,7 @@ export function defineContractComponents(world: World) {
                 },
                 {
                     metadata: {
-                        namespace: "jokers_of_neon",
+                        namespace: "jokers_ls_mod",
                         name: "AdventurerConsumed",
                         types: ["u32", "ContractAddress", "bool"],
                         customTypes: [],
@@ -859,7 +859,7 @@ export function defineContractComponents(world: World) {
             );
         })(),
 
-        // Model definition for `jokers_of_neon::models::data::beast::Beast` model
+        // Model definition for `jokers_ls_mod::models::data::beast::Beast` model
         Beast: (() => {
             return defineComponent(
                 world,
@@ -875,7 +875,7 @@ export function defineContractComponents(world: World) {
                 },
                 {
                     metadata: {
-                        namespace: "jokers_of_neon",
+                        namespace: "jokers_ls_mod",
                         name: "Beast",
                         types: ["u32", "u32", "u8", "u8", "u32", "u32", "u32", "TypeBeast"],
                         customTypes: [],
@@ -884,7 +884,7 @@ export function defineContractComponents(world: World) {
             );
         })(),
 
-        // Model definition for `jokers_of_neon::models::data::events::BeastAttack` model
+        // Model definition for `jokers_ls_mod::models::data::events::BeastAttack` model
         BeastAttack: (() => {
             return defineComponent(
                 world,
@@ -894,7 +894,7 @@ export function defineContractComponents(world: World) {
                 },
                 {
                     metadata: {
-                        namespace: "jokers_of_neon",
+                        namespace: "jokers_ls_mod",
                         name: "BeastAttack",
                         types: ["ContractAddress", "u32"],
                         customTypes: [],
@@ -903,7 +903,7 @@ export function defineContractComponents(world: World) {
             );
         })(),
 
-        // Model definition for `jokers_of_neon::models::status::shop::shop::BlisterPackItem` model
+        // Model definition for `jokers_ls_mod::models::status::shop::shop::BlisterPackItem` model
         BlisterPackItem: (() => {
             return defineComponent(
                 world,
@@ -916,7 +916,7 @@ export function defineContractComponents(world: World) {
                 },
                 {
                     metadata: {
-                        namespace: "jokers_of_neon",
+                        namespace: "jokers_ls_mod",
                         name: "BlisterPackItem",
                         types: ["u32", "u32", "u32", "u32", "bool"],
                         customTypes: [],
@@ -925,7 +925,7 @@ export function defineContractComponents(world: World) {
             );
         })(),
 
-        // Model definition for `jokers_of_neon::models::status::shop::shop::BlisterPackResult` model
+        // Model definition for `jokers_ls_mod::models::status::shop::shop::BlisterPackResult` model
         BlisterPackResult: (() => {
             return defineComponent(
                 world,
@@ -936,7 +936,7 @@ export function defineContractComponents(world: World) {
                 },
                 {
                     metadata: {
-                        namespace: "jokers_of_neon",
+                        namespace: "jokers_ls_mod",
                         name: "BlisterPackResult",
                         types: ["u32", "bool", "array"],
                         customTypes: [],
@@ -945,7 +945,7 @@ export function defineContractComponents(world: World) {
             );
         })(),
 
-        // Model definition for `jokers_of_neon::models::data::events::BuyBlisterPackEvent` model
+        // Model definition for `jokers_ls_mod::models::data::events::BuyBlisterPackEvent` model
         BuyBlisterPackEvent: (() => {
             return defineComponent(
                 world,
@@ -957,7 +957,7 @@ export function defineContractComponents(world: World) {
                 },
                 {
                     metadata: {
-                        namespace: "jokers_of_neon",
+                        namespace: "jokers_ls_mod",
                         name: "BuyBlisterPackEvent",
                         types: ["u32", "u32", "u32", "u32"],
                         customTypes: [],
@@ -966,7 +966,7 @@ export function defineContractComponents(world: World) {
             );
         })(),
 
-        // Model definition for `jokers_of_neon::models::data::events::BuyCardEvent` model
+        // Model definition for `jokers_ls_mod::models::data::events::BuyCardEvent` model
         BuyCardEvent: (() => {
             return defineComponent(
                 world,
@@ -980,7 +980,7 @@ export function defineContractComponents(world: World) {
                 },
                 {
                     metadata: {
-                        namespace: "jokers_of_neon",
+                        namespace: "jokers_ls_mod",
                         name: "BuyCardEvent",
                         types: ["u32", "u32", "u32", "CardItemType", "u32", "bool"],
                         customTypes: [],
@@ -989,7 +989,7 @@ export function defineContractComponents(world: World) {
             );
         })(),
 
-        // Model definition for `jokers_of_neon::models::data::events::BuyPokerHandEvent` model
+        // Model definition for `jokers_ls_mod::models::data::events::BuyPokerHandEvent` model
         BuyPokerHandEvent: (() => {
             return defineComponent(
                 world,
@@ -1002,7 +1002,7 @@ export function defineContractComponents(world: World) {
                 },
                 {
                     metadata: {
-                        namespace: "jokers_of_neon",
+                        namespace: "jokers_ls_mod",
                         name: "BuyPokerHandEvent",
                         types: ["u32", "u32", "u32", "PokerHand", "u8"],
                         customTypes: [],
@@ -1011,7 +1011,7 @@ export function defineContractComponents(world: World) {
             );
         })(),
 
-        // Model definition for `jokers_of_neon::models::data::events::BuyRerollEvent` model
+        // Model definition for `jokers_ls_mod::models::data::events::BuyRerollEvent` model
         BuyRerollEvent: (() => {
             return defineComponent(
                 world,
@@ -1023,7 +1023,7 @@ export function defineContractComponents(world: World) {
                 },
                 {
                     metadata: {
-                        namespace: "jokers_of_neon",
+                        namespace: "jokers_ls_mod",
                         name: "BuyRerollEvent",
                         types: ["u32", "u32", "u32", "bool"],
                         customTypes: [],
@@ -1032,7 +1032,7 @@ export function defineContractComponents(world: World) {
             );
         })(),
 
-        // Model definition for `jokers_of_neon::models::status::shop::shop::CardItem` model
+        // Model definition for `jokers_ls_mod::models::status::shop::shop::CardItem` model
         CardItem: (() => {
             return defineComponent(
                 world,
@@ -1047,7 +1047,7 @@ export function defineContractComponents(world: World) {
                 },
                 {
                     metadata: {
-                        namespace: "jokers_of_neon",
+                        namespace: "jokers_ls_mod",
                         name: "CardItem",
                         types: ["u32", "u32", "CardItemType", "u32", "u32", "bool", "bool"],
                         customTypes: [],
@@ -1056,7 +1056,7 @@ export function defineContractComponents(world: World) {
             );
         })(),
 
-        // Model definition for `jokers_of_neon::models::data::events::CardScoreEvent` model
+        // Model definition for `jokers_ls_mod::models::data::events::CardScoreEvent` model
         CardScoreEvent: (() => {
             return defineComponent(
                 world,
@@ -1068,7 +1068,7 @@ export function defineContractComponents(world: World) {
                 },
                 {
                     metadata: {
-                        namespace: "jokers_of_neon",
+                        namespace: "jokers_ls_mod",
                         name: "CardScoreEvent",
                         types: ["ContractAddress", "u32", "u32", "u32"],
                         customTypes: [],
@@ -1077,7 +1077,7 @@ export function defineContractComponents(world: World) {
             );
         })(),
 
-        // Model definition for `jokers_of_neon::models::data::challenge::Challenge` model
+        // Model definition for `jokers_ls_mod::models::data::challenge::Challenge` model
         Challenge: (() => {
             return defineComponent(
                 world,
@@ -1087,7 +1087,7 @@ export function defineContractComponents(world: World) {
                 },
                 {
                     metadata: {
-                        namespace: "jokers_of_neon",
+                        namespace: "jokers_ls_mod",
                         name: "Challenge",
                         types: ["u32", "array"],
                         customTypes: [],
@@ -1096,7 +1096,7 @@ export function defineContractComponents(world: World) {
             );
         })(),
 
-        // Model definition for `jokers_of_neon::models::data::events::ChallengeCompleted` model
+        // Model definition for `jokers_ls_mod::models::data::events::ChallengeCompleted` model
         ChallengeCompleted: (() => {
             return defineComponent(
                 world,
@@ -1107,7 +1107,7 @@ export function defineContractComponents(world: World) {
                 },
                 {
                     metadata: {
-                        namespace: "jokers_of_neon",
+                        namespace: "jokers_ls_mod",
                         name: "ChallengeCompleted",
                         types: ["ContractAddress", "felt252", "u32"],
                         customTypes: [],
@@ -1116,7 +1116,7 @@ export function defineContractComponents(world: World) {
             );
         })(),
 
-        // Model definition for `jokers_of_neon::models::data::challenge::ChallengePlayer` model
+        // Model definition for `jokers_ls_mod::models::data::challenge::ChallengePlayer` model
         ChallengePlayer: (() => {
             return defineComponent(
                 world,
@@ -1127,7 +1127,7 @@ export function defineContractComponents(world: World) {
                 },
                 {
                     metadata: {
-                        namespace: "jokers_of_neon",
+                        namespace: "jokers_ls_mod",
                         name: "ChallengePlayer",
                         types: ["u32", "u8", "u8"],
                         customTypes: [],
@@ -1136,7 +1136,7 @@ export function defineContractComponents(world: World) {
             );
         })(),
 
-        // Model definition for `jokers_of_neon::models::data::events::CreateGameEvent` model
+        // Model definition for `jokers_ls_mod::models::data::events::CreateGameEvent` model
         CreateGameEvent: (() => {
             return defineComponent(
                 world,
@@ -1146,7 +1146,7 @@ export function defineContractComponents(world: World) {
                 },
                 {
                     metadata: {
-                        namespace: "jokers_of_neon",
+                        namespace: "jokers_ls_mod",
                         name: "CreateGameEvent",
                         types: ["ContractAddress", "u32"],
                         customTypes: [],
@@ -1155,7 +1155,7 @@ export function defineContractComponents(world: World) {
             );
         })(),
 
-        // Model definition for `jokers_of_neon::models::status::round::current_hand_card::CurrentHandCard` model
+        // Model definition for `jokers_ls_mod::models::status::round::current_hand_card::CurrentHandCard` model
         CurrentHandCard: (() => {
             return defineComponent(
                 world,
@@ -1166,7 +1166,7 @@ export function defineContractComponents(world: World) {
                 },
                 {
                     metadata: {
-                        namespace: "jokers_of_neon",
+                        namespace: "jokers_ls_mod",
                         name: "CurrentHandCard",
                         types: ["u32", "u32", "u32"],
                         customTypes: [],
@@ -1175,7 +1175,7 @@ export function defineContractComponents(world: World) {
             );
         })(),
 
-        // Model definition for `jokers_of_neon::models::status::game::game::CurrentSpecialCards` model
+        // Model definition for `jokers_ls_mod::models::status::game::game::CurrentSpecialCards` model
         CurrentSpecialCards: (() => {
             return defineComponent(
                 world,
@@ -1188,7 +1188,7 @@ export function defineContractComponents(world: World) {
                 },
                 {
                     metadata: {
-                        namespace: "jokers_of_neon",
+                        namespace: "jokers_ls_mod",
                         name: "CurrentSpecialCards",
                         types: ["u32", "u32", "u32", "bool", "u32"],
                         customTypes: [],
@@ -1197,7 +1197,7 @@ export function defineContractComponents(world: World) {
             );
         })(),
 
-        // Model definition for `jokers_of_neon::models::data::game_deck::DeckCard` model
+        // Model definition for `jokers_ls_mod::models::data::game_deck::DeckCard` model
         DeckCard: (() => {
             return defineComponent(
                 world,
@@ -1208,7 +1208,7 @@ export function defineContractComponents(world: World) {
                 },
                 {
                     metadata: {
-                        namespace: "jokers_of_neon",
+                        namespace: "jokers_ls_mod",
                         name: "DeckCard",
                         types: ["u32", "u32", "u32"],
                         customTypes: [],
@@ -1217,7 +1217,7 @@ export function defineContractComponents(world: World) {
             );
         })(),
 
-        // Model definition for `jokers_of_neon::models::data::events::DetailEarnedEvent` model
+        // Model definition for `jokers_ls_mod::models::data::events::DetailEarnedEvent` model
         DetailEarnedEvent: (() => {
             return defineComponent(
                 world,
@@ -1236,7 +1236,7 @@ export function defineContractComponents(world: World) {
                 },
                 {
                     metadata: {
-                        namespace: "jokers_of_neon",
+                        namespace: "jokers_ls_mod",
                         name: "DetailEarnedEvent",
                         types: ["ContractAddress", "u32", "u32", "u32", "u32", "u32", "u32", "u32", "u32", "u32", "u32"],
                         customTypes: [],
@@ -1245,7 +1245,7 @@ export function defineContractComponents(world: World) {
             );
         })(),
 
-        // Model definition for `jokers_of_neon::models::status::game::game::Game` model
+        // Model definition for `jokers_ls_mod::models::status::game::game::Game` model
         Game: (() => {
             return defineComponent(
                 world,
@@ -1272,7 +1272,7 @@ export function defineContractComponents(world: World) {
                 },
                 {
                     metadata: {
-                        namespace: "jokers_of_neon",
+                        namespace: "jokers_ls_mod",
                         name: "Game",
                         types: ["u32", "ContractAddress", "felt252", "u32", "u32", "u32", "u32", "u32", "u32", "u8", "u8", "u8", "u32", "u32", "u32", "u32", "u8", "GameState", "GameSubState"],
                         customTypes: [],
@@ -1281,7 +1281,7 @@ export function defineContractComponents(world: World) {
             );
         })(),
 
-        // Model definition for `jokers_of_neon::models::data::game_deck::GameDeck` model
+        // Model definition for `jokers_ls_mod::models::data::game_deck::GameDeck` model
         GameDeck: (() => {
             return defineComponent(
                 world,
@@ -1292,7 +1292,7 @@ export function defineContractComponents(world: World) {
                 },
                 {
                     metadata: {
-                        namespace: "jokers_of_neon",
+                        namespace: "jokers_ls_mod",
                         name: "GameDeck",
                         types: ["u32", "u32", "u32"],
                         customTypes: [],
@@ -1301,7 +1301,7 @@ export function defineContractComponents(world: World) {
             );
         })(),
 
-        // Model definition for `jokers_of_neon::models::data::beast::GameModeBeast` model
+        // Model definition for `jokers_ls_mod::models::data::beast::GameModeBeast` model
         GameModeBeast: (() => {
             return defineComponent(
                 world,
@@ -1313,7 +1313,7 @@ export function defineContractComponents(world: World) {
                 },
                 {
                     metadata: {
-                        namespace: "jokers_of_neon",
+                        namespace: "jokers_ls_mod",
                         name: "GameModeBeast",
                         types: ["u32", "u8", "u8", "u8"],
                         customTypes: [],
@@ -1322,7 +1322,7 @@ export function defineContractComponents(world: World) {
             );
         })(),
 
-        // Model definition for `jokers_of_neon::models::data::events::ItemChallengeCompleted` model
+        // Model definition for `jokers_ls_mod::models::data::events::ItemChallengeCompleted` model
         ItemChallengeCompleted: (() => {
             return defineComponent(
                 world,
@@ -1332,7 +1332,7 @@ export function defineContractComponents(world: World) {
                 },
                 {
                     metadata: {
-                        namespace: "jokers_of_neon",
+                        namespace: "jokers_ls_mod",
                         name: "ItemChallengeCompleted",
                         types: ["u32", "u32"],
                         customTypes: [],
@@ -1341,7 +1341,7 @@ export function defineContractComponents(world: World) {
             );
         })(),
 
-        // Model definition for `jokers_of_neon::models::data::last_beast_level::LastBeastLevel` model
+        // Model definition for `jokers_ls_mod::models::data::last_beast_level::LastBeastLevel` model
         LastBeastLevel: (() => {
             return defineComponent(
                 world,
@@ -1352,7 +1352,7 @@ export function defineContractComponents(world: World) {
                 },
                 {
                     metadata: {
-                        namespace: "jokers_of_neon",
+                        namespace: "jokers_ls_mod",
                         name: "LastBeastLevel",
                         types: ["u32", "u16", "u8"],
                         customTypes: [],
@@ -1361,7 +1361,7 @@ export function defineContractComponents(world: World) {
             );
         })(),
 
-        // Model definition for `jokers_of_neon::models::data::events::ModifierCardSuitEvent` model
+        // Model definition for `jokers_ls_mod::models::data::events::ModifierCardSuitEvent` model
         ModifierCardSuitEvent: (() => {
             return defineComponent(
                 world,
@@ -1374,7 +1374,7 @@ export function defineContractComponents(world: World) {
                 },
                 {
                     metadata: {
-                        namespace: "jokers_of_neon",
+                        namespace: "jokers_ls_mod",
                         name: "ModifierCardSuitEvent",
                         types: ["ContractAddress", "u32", "u32", "u32", "Suit"],
                         customTypes: [],
@@ -1383,7 +1383,7 @@ export function defineContractComponents(world: World) {
             );
         })(),
 
-        // Model definition for `jokers_of_neon::models::data::events::NeonPokerHandEvent` model
+        // Model definition for `jokers_ls_mod::models::data::events::NeonPokerHandEvent` model
         NeonPokerHandEvent: (() => {
             return defineComponent(
                 world,
@@ -1396,7 +1396,7 @@ export function defineContractComponents(world: World) {
                 },
                 {
                     metadata: {
-                        namespace: "jokers_of_neon",
+                        namespace: "jokers_ls_mod",
                         name: "NeonPokerHandEvent",
                         types: ["ContractAddress", "u32", "array", "u32", "u32"],
                         customTypes: [],
@@ -1405,7 +1405,7 @@ export function defineContractComponents(world: World) {
             );
         })(),
 
-        // Model definition for `jokers_of_neon::models::data::events::PlayGameOverEvent` model
+        // Model definition for `jokers_ls_mod::models::data::events::PlayGameOverEvent` model
         PlayGameOverEvent: (() => {
             return defineComponent(
                 world,
@@ -1415,7 +1415,7 @@ export function defineContractComponents(world: World) {
                 },
                 {
                     metadata: {
-                        namespace: "jokers_of_neon",
+                        namespace: "jokers_ls_mod",
                         name: "PlayGameOverEvent",
                         types: ["ContractAddress", "u32"],
                         customTypes: [],
@@ -1424,7 +1424,7 @@ export function defineContractComponents(world: World) {
             );
         })(),
 
-        // Model definition for `jokers_of_neon::models::data::events::PlayPokerHandEvent` model
+        // Model definition for `jokers_ls_mod::models::data::events::PlayPokerHandEvent` model
         PlayPokerHandEvent: (() => {
             return defineComponent(
                 world,
@@ -1436,7 +1436,7 @@ export function defineContractComponents(world: World) {
                 },
                 {
                     metadata: {
-                        namespace: "jokers_of_neon",
+                        namespace: "jokers_ls_mod",
                         name: "PlayPokerHandEvent",
                         types: ["u32", "u32", "u8", "PokerHand"],
                         customTypes: [],
@@ -1445,7 +1445,7 @@ export function defineContractComponents(world: World) {
             );
         })(),
 
-        // Model definition for `jokers_of_neon::models::data::events::PlayWinGameEvent` model
+        // Model definition for `jokers_ls_mod::models::data::events::PlayWinGameEvent` model
         PlayWinGameEvent: (() => {
             return defineComponent(
                 world,
@@ -1457,7 +1457,7 @@ export function defineContractComponents(world: World) {
                 },
                 {
                     metadata: {
-                        namespace: "jokers_of_neon",
+                        namespace: "jokers_ls_mod",
                         name: "PlayWinGameEvent",
                         types: ["ContractAddress", "u32", "u32", "u32"],
                         customTypes: [],
@@ -1466,7 +1466,7 @@ export function defineContractComponents(world: World) {
             );
         })(),
 
-        // Model definition for `jokers_of_neon::models::data::events::PlayerAttack` model
+        // Model definition for `jokers_ls_mod::models::data::events::PlayerAttack` model
         PlayerAttack: (() => {
             return defineComponent(
                 world,
@@ -1476,7 +1476,7 @@ export function defineContractComponents(world: World) {
                 },
                 {
                     metadata: {
-                        namespace: "jokers_of_neon",
+                        namespace: "jokers_ls_mod",
                         name: "PlayerAttack",
                         types: ["ContractAddress", "u32"],
                         customTypes: [],
@@ -1485,7 +1485,7 @@ export function defineContractComponents(world: World) {
             );
         })(),
 
-        // Model definition for `jokers_of_neon::models::data::beast::PlayerBeast` model
+        // Model definition for `jokers_ls_mod::models::data::beast::PlayerBeast` model
         PlayerBeast: (() => {
             return defineComponent(
                 world,
@@ -1495,7 +1495,7 @@ export function defineContractComponents(world: World) {
                 },
                 {
                     metadata: {
-                        namespace: "jokers_of_neon",
+                        namespace: "jokers_ls_mod",
                         name: "PlayerBeast",
                         types: ["u32", "u8"],
                         customTypes: [],
@@ -1504,7 +1504,7 @@ export function defineContractComponents(world: World) {
             );
         })(),
 
-        // Model definition for `jokers_of_neon::models::data::events::PlayerHealed` model
+        // Model definition for `jokers_ls_mod::models::data::events::PlayerHealed` model
         PlayerHealed: (() => {
             return defineComponent(
                 world,
@@ -1515,7 +1515,7 @@ export function defineContractComponents(world: World) {
                 },
                 {
                     metadata: {
-                        namespace: "jokers_of_neon",
+                        namespace: "jokers_ls_mod",
                         name: "PlayerHealed",
                         types: ["u32", "u32", "u32"],
                         customTypes: [],
@@ -1524,7 +1524,7 @@ export function defineContractComponents(world: World) {
             );
         })(),
 
-        // Model definition for `jokers_of_neon::models::data::events::PokerHandEvent` model
+        // Model definition for `jokers_ls_mod::models::data::events::PokerHandEvent` model
         PokerHandEvent: (() => {
             return defineComponent(
                 world,
@@ -1536,7 +1536,7 @@ export function defineContractComponents(world: World) {
                 },
                 {
                     metadata: {
-                        namespace: "jokers_of_neon",
+                        namespace: "jokers_ls_mod",
                         name: "PokerHandEvent",
                         types: ["ContractAddress", "u8", "u32", "u32"],
                         customTypes: [],
@@ -1545,7 +1545,7 @@ export function defineContractComponents(world: World) {
             );
         })(),
 
-        // Model definition for `jokers_of_neon::models::status::game::rage::RageRound` model
+        // Model definition for `jokers_ls_mod::models::status::game::rage::RageRound` model
         RageRound: (() => {
             return defineComponent(
                 world,
@@ -1558,7 +1558,7 @@ export function defineContractComponents(world: World) {
                 },
                 {
                     metadata: {
-                        namespace: "jokers_of_neon",
+                        namespace: "jokers_ls_mod",
                         name: "RageRound",
                         types: ["u32", "bool", "u16", "array", "u8"],
                         customTypes: [],
@@ -1567,7 +1567,7 @@ export function defineContractComponents(world: World) {
             );
         })(),
 
-        // Model definition for `jokers_of_neon::models::data::reward::Reward` model
+        // Model definition for `jokers_ls_mod::models::data::reward::Reward` model
         Reward: (() => {
             return defineComponent(
                 world,
@@ -1577,7 +1577,7 @@ export function defineContractComponents(world: World) {
                 },
                 {
                     metadata: {
-                        namespace: "jokers_of_neon",
+                        namespace: "jokers_ls_mod",
                         name: "Reward",
                         types: ["u32", "array"],
                         customTypes: [],
@@ -1586,7 +1586,7 @@ export function defineContractComponents(world: World) {
             );
         })(),
 
-        // Model definition for `jokers_of_neon::models::data::events::RoundScoreEvent` model
+        // Model definition for `jokers_ls_mod::models::data::events::RoundScoreEvent` model
         RoundScoreEvent: (() => {
             return defineComponent(
                 world,
@@ -1597,7 +1597,7 @@ export function defineContractComponents(world: World) {
                 },
                 {
                     metadata: {
-                        namespace: "jokers_of_neon",
+                        namespace: "jokers_ls_mod",
                         name: "RoundScoreEvent",
                         types: ["ContractAddress", "u32", "u32"],
                         customTypes: [],
@@ -1606,7 +1606,7 @@ export function defineContractComponents(world: World) {
             );
         })(),
 
-        // Model definition for `jokers_of_neon::models::data::events::SpecialCashEvent` model
+        // Model definition for `jokers_ls_mod::models::data::events::SpecialCashEvent` model
         SpecialCashEvent: (() => {
             return defineComponent(
                 world,
@@ -1618,7 +1618,7 @@ export function defineContractComponents(world: World) {
                 },
                 {
                     metadata: {
-                        namespace: "jokers_of_neon",
+                        namespace: "jokers_ls_mod",
                         name: "SpecialCashEvent",
                         types: ["ContractAddress", "u32", "u32", "u32"],
                         customTypes: [],
@@ -1627,7 +1627,7 @@ export function defineContractComponents(world: World) {
             );
         })(),
 
-        // Model definition for `jokers_of_neon::models::data::events::SpecialGlobalEvent` model
+        // Model definition for `jokers_ls_mod::models::data::events::SpecialGlobalEvent` model
         SpecialGlobalEvent: (() => {
             return defineComponent(
                 world,
@@ -1640,7 +1640,7 @@ export function defineContractComponents(world: World) {
                 },
                 {
                     metadata: {
-                        namespace: "jokers_of_neon",
+                        namespace: "jokers_ls_mod",
                         name: "SpecialGlobalEvent",
                         types: ["ContractAddress", "u32", "u32", "u32", "u32"],
                         customTypes: [],
@@ -1649,7 +1649,7 @@ export function defineContractComponents(world: World) {
             );
         })(),
 
-        // Model definition for `jokers_of_neon::models::data::events::SpecialModifierMultiEvent` model
+        // Model definition for `jokers_ls_mod::models::data::events::SpecialModifierMultiEvent` model
         SpecialModifierMultiEvent: (() => {
             return defineComponent(
                 world,
@@ -1662,7 +1662,7 @@ export function defineContractComponents(world: World) {
                 },
                 {
                     metadata: {
-                        namespace: "jokers_of_neon",
+                        namespace: "jokers_ls_mod",
                         name: "SpecialModifierMultiEvent",
                         types: ["ContractAddress", "u32", "u32", "u32", "u32"],
                         customTypes: [],
@@ -1671,7 +1671,7 @@ export function defineContractComponents(world: World) {
             );
         })(),
 
-        // Model definition for `jokers_of_neon::models::data::events::SpecialModifierPointsEvent` model
+        // Model definition for `jokers_ls_mod::models::data::events::SpecialModifierPointsEvent` model
         SpecialModifierPointsEvent: (() => {
             return defineComponent(
                 world,
@@ -1684,7 +1684,7 @@ export function defineContractComponents(world: World) {
                 },
                 {
                     metadata: {
-                        namespace: "jokers_of_neon",
+                        namespace: "jokers_ls_mod",
                         name: "SpecialModifierPointsEvent",
                         types: ["ContractAddress", "u32", "u32", "u32", "u32"],
                         customTypes: [],
@@ -1693,7 +1693,7 @@ export function defineContractComponents(world: World) {
             );
         })(),
 
-        // Model definition for `jokers_of_neon::models::data::events::SpecialModifierSuitEvent` model
+        // Model definition for `jokers_ls_mod::models::data::events::SpecialModifierSuitEvent` model
         SpecialModifierSuitEvent: (() => {
             return defineComponent(
                 world,
@@ -1706,7 +1706,7 @@ export function defineContractComponents(world: World) {
                 },
                 {
                     metadata: {
-                        namespace: "jokers_of_neon",
+                        namespace: "jokers_ls_mod",
                         name: "SpecialModifierSuitEvent",
                         types: ["ContractAddress", "u32", "u32", "u32", "Suit"],
                         customTypes: [],
@@ -1715,7 +1715,7 @@ export function defineContractComponents(world: World) {
             );
         })(),
 
-        // Model definition for `jokers_of_neon::models::data::events::SpecialPokerHandEvent` model
+        // Model definition for `jokers_ls_mod::models::data::events::SpecialPokerHandEvent` model
         SpecialPokerHandEvent: (() => {
             return defineComponent(
                 world,
@@ -1728,7 +1728,7 @@ export function defineContractComponents(world: World) {
                 },
                 {
                     metadata: {
-                        namespace: "jokers_of_neon",
+                        namespace: "jokers_ls_mod",
                         name: "SpecialPokerHandEvent",
                         types: ["ContractAddress", "u32", "u32", "u32", "u32"],
                         customTypes: [],
