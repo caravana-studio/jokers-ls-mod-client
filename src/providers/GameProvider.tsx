@@ -1,3 +1,5 @@
+import CartridgeConnector from "@cartridge/connector";
+import { useAccount, useConnect } from '@starknet-react/core';
 import {
   PropsWithChildren,
   createContext,
@@ -6,7 +8,8 @@ import {
   useState,
 } from "react";
 import { useNavigate } from "react-router-dom";
-import { GAME_ID, LOGGED_USER, SORT_BY_SUIT } from "../constants/localStorage";
+import cartridgeConnector from "../cartridgeConnector.tsx";
+import { GAME_ID, SORT_BY_SUIT } from "../constants/localStorage";
 import {
   discardSfx,
   multiSfx,
@@ -29,8 +32,6 @@ import { Card } from "../types/Card";
 import { RoundRewards } from "../types/RoundRewards.ts";
 import { PlayEvents } from "../types/ScoreData";
 import { changeCardSuit } from "../utils/changeCardSuit";
-import cartridgeConnector from "../cartridgeConnector.tsx";
-import CartridgeConnector from "@cartridge/connector";
 
 interface IGameContext {
   gameId: number;
@@ -188,6 +189,20 @@ export const useGameContext = () => useContext(GameContext);
 export const GameProvider = ({ children }: PropsWithChildren) => {
   const state = useGameState();
   const [lockRedirection, setLockRedirection] = useState(false);
+
+  const { account: controllerAccount } = useAccount()
+  const { connect, connectors } = useConnect()
+
+  const reconnectController = () => {
+    if (!controllerAccount) {
+      connect({ connector: connectors[0] })
+      return
+    }
+  }
+
+  useEffect(() => {
+    reconnectController()
+  }, [])
 
   const navigate = useNavigate();
   const {
