@@ -1,5 +1,5 @@
 "use client";
-import { mainnet, sepolia } from "@starknet-react/chains";
+import { mainnet } from "@starknet-react/chains";
 import { StarknetConfig, jsonRpcProvider, voyager } from "@starknet-react/core";
 import React from "react";
 
@@ -22,7 +22,7 @@ export function StarknetProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <StarknetConfig
-      chains={[mainnet, sepolia]}
+      chains={[mainnet]}
       provider={provider}
       connectors={connectors}
       explorer={voyager}
