@@ -13,3 +13,15 @@ export const useUsername = () => {
 
   return username
 }
+
+export const useControllerAddress = () => {
+  const [address, setAddress] = useState<string | null>(null)
+
+  useEffect(() => {
+    (cartridgeConnector as CartridgeConnector).account()?.then((acc) => {
+      setAddress(acc.address)
+    })
+  }, [cartridgeConnector])
+
+  return address
+}
