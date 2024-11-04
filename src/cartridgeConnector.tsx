@@ -24,6 +24,19 @@ const rage_system_contract_address = getContractByName(
 
 const cartridgeConnector = new CartridgeConnector({
   theme: "jokers-of-neon",
+  config: {
+    presets: {
+      "jokers-of-neon": {
+        id: "jokers-of-neon",
+        name: "Jokers of Neon - Loot Survivor MOD",
+        icon: "/whitelabel/jokers-of-neon/icon.png",
+        cover: "/whitelabel/jokers-of-neon/cover.png",
+        colors: {
+          primary: "#33ff33",
+        },
+      },
+    },
+  },
   rpc: import.meta.env.VITE_RPC_URL,
   policies: [
     {

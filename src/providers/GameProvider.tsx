@@ -103,6 +103,7 @@ interface IGameContext {
   consumeEnergyPlay: () => void;
   consumeEnergyDiscard: () => void;
   refetchPlaysAndDiscards: () => void;
+  refetchEnergy: () => void;
   beastAttack: number;
   setBeastAttack: (beastAttack: number) => void;
   gameOver: boolean;
@@ -179,6 +180,7 @@ const GameContext = createContext<IGameContext>({
   consumeEnergyPlay: () => {},
   consumeEnergyDiscard: () => {},
   refetchPlaysAndDiscards: () => {},
+  refetchEnergy: () => {},
   beastAttack: 0,
   setBeastAttack: () => {},
   gameOver: false,

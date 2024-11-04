@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
-import { LOGGED_USER, SORT_BY_SUIT } from "../constants/localStorage";
+import { SORT_BY_SUIT } from "../constants/localStorage";
 import { PLAYS_DATA } from "../constants/plays";
-import { useBeast, useBeastPlayer, useGameModeBeast } from "../dojo/queries/useBeast";
+import { useBeast, useBeastPlayer } from "../dojo/queries/useBeast";
 import { useBlisterPackResult } from "../dojo/queries/useBlisterPackResult";
 import { useChallenge, useChallengePlayer } from "../dojo/queries/useChallenge";
 import { useCurrentHand } from "../dojo/queries/useCurrentHand";
@@ -9,13 +9,13 @@ import { useCurrentSpecialCards } from "../dojo/queries/useCurrentSpecialCards";
 import { useGame } from "../dojo/queries/useGame";
 import { Beast } from "../dojo/typescript/models.gen";
 import { getLSGameId } from "../dojo/utils/getLSGameId";
+import { useUsername } from "../dojo/utils/useUsername";
 import { Plays } from "../enums/plays";
 import { SortBy } from "../enums/sortBy";
 import { Card } from "../types/Card";
 import { RoundRewards } from "../types/RoundRewards";
 import { checkHand } from "../utils/checkHand";
 import { sortCards } from "../utils/sortCards";
-import { useUsername } from "../dojo/utils/useUsername";
 
 export const useGameState = () => {
   const [gameId, setGameId] = useState<number>(getLSGameId());
@@ -58,7 +58,9 @@ export const useGameState = () => {
     setPlaysLeft((prev) => prev - 1);
   };
   const consumeDiscard = () => {
-    setDiscardsLeft((prev) => prev - 1);
+    setDiscardsLeft((prev) => {
+      return prev - 1;
+    });
   };
   const consumeEnergyPlay = () => {
     setEnergyLeft((prev) => prev - 2);
@@ -73,6 +75,8 @@ export const useGameState = () => {
   const refetchPlaysAndDiscards = () => {
     setDiscardsLeft(challengePlayer?.discards ?? 0);
     setPlaysLeft(challengePlayer?.plays ?? 0);
+  };
+  const refetchEnergy = () => {
     setEnergyLeft(beastPlayer?.energy ?? 0);
   };
 
@@ -250,6 +254,7 @@ export const useGameState = () => {
     consumeEnergyDiscard,
     resetPlaysAndDiscards,
     refetchPlaysAndDiscards,
+    refetchEnergy,
     beastAttack,
     setBeastAttack,
     gameOver,
