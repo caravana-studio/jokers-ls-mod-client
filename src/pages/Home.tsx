@@ -9,16 +9,20 @@ import { PoweredBy } from "../components/PoweredBy";
 import { LOGGED_USER } from "../constants/localStorage";
 import { useGameContext } from "../providers/GameProvider";
 import { LS_GREEN } from "../theme/colors";
+import { useAudio } from "../hooks/useAudio";
+import { beep } from "../constants/sfx";
 
 export const Home = () => {
   const [leaderboardOpen, setLeaderboardOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const { play: beepSound } = useAudio(beep);
 
   const { t } = useTranslation(["home"]);
 
   const { checkOrCreateGame } = useGameContext();
 
   const onPlayClick = () => {
+    beepSound();
     setLoading(true);
     //TODO: Remove this when integrating the controller
     window.localStorage.setItem(LOGGED_USER, "nicon44");
@@ -46,6 +50,7 @@ export const Home = () => {
               mt={8}
               width="100%"
               onClick={() => {
+                beepSound();
                 setLeaderboardOpen(false);
               }}
             >
@@ -78,6 +83,7 @@ export const Home = () => {
               <Button
                 variant="secondarySolid"
                 onClick={() => {
+                  beepSound();
                   setLeaderboardOpen(true);
                 }}
                 width="350px"

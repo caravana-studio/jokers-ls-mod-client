@@ -3,6 +3,8 @@ import { Box, Text, Flex, Button } from "@chakra-ui/react";
 import { LS_GREEN } from "../theme/colors";
 import { useGameContext } from "../providers/GameProvider";
 import { useGame } from "../dojo/queries/useGame";
+import { useAudio } from "../hooks/useAudio";
+import { beep } from "../constants/sfx";
 
 interface RewardCardProps {
   index: number;
@@ -81,6 +83,7 @@ const RewardsSection = () => {
   const { redirectBasedOnGameState } = useGameContext();
   const { createNewReward } = useGameContext();
   const game = useGame();
+  const { play: beepSound } = useAudio(beep);
 
   if (game?.substate != "CREATE_REWARD") {
     redirectBasedOnGameState();
@@ -112,6 +115,7 @@ const RewardsSection = () => {
           {...reward}
           index={index}
           onSelect={() => {
+            beepSound();
             createNewReward(reward.id, reward.type);
           }}
         />

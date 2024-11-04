@@ -6,6 +6,8 @@ import { PositionedGameMenu } from "../components/GameMenu";
 import { useGame } from "../dojo/queries/useGame";
 import { useGameContext } from "../providers/GameProvider";
 import { LS_GREEN } from "../theme/colors";
+import { useAudio } from "../hooks/useAudio";
+import { beep } from "../constants/sfx";
 
 const CLASSES = [
   {
@@ -31,6 +33,7 @@ const CLASSES = [
 export const ChooseClassPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedClass, setSelectedClass] = useState<number | undefined>();
+  const { play: beepSound } = useAudio(beep);
 
   const {
     selectDeckType,
@@ -79,6 +82,7 @@ export const ChooseClassPage = () => {
               key={classBox.id}
               {...classBox}
               onClick={() => {
+                beepSound();
                 setSelectedClass(classBox.id);
               }}
               selected={selectedClass === classBox.id}
@@ -92,6 +96,7 @@ export const ChooseClassPage = () => {
             isDisabled={selectedClass === undefined || isLoading}
             onClick={() => {
               if (selectedClass !== undefined) {
+                beepSound();
                 setIsLoading(true);
                 selectDeckType(selectedClass).finally(() => {
                   setIsLoading(false);
