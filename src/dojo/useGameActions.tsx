@@ -1,3 +1,4 @@
+import { useAccount, useConnect } from '@starknet-react/core';
 import { shortString } from "starknet";
 import { CREATE_GAME_EVENT, PLAY_GAME_OVER_EVENT } from "../constants/dojoEventKeys";
 import { Card } from "../types/Card";
@@ -6,6 +7,7 @@ import { getCreateLevelEvents } from "../utils/getCreateLevelEvents";
 import { getCreateRewardsEvents } from "../utils/getCreateRewardsEvent";
 import { getNumberValueFromEvents } from "../utils/getNumberValueFromEvent";
 import { getResultBlisterPackEvent } from "../utils/getResultBlisterPackEvent";
+import { getBeastAttackEvent } from "../utils/playEvents/getBeastAttackEvent";
 import { getPlayEvents } from "../utils/playEvents/getPlayEvents";
 import {
   failedTransactionToast,
@@ -13,7 +15,6 @@ import {
   updateTransactionToast,
 } from "../utils/transactionNotifications";
 import { useDojo } from "./useDojo";
-import { getBeastAttackEvent } from "../utils/playEvents/getBeastAttackEvent";
 
 const createGameEmptyResponse = {
   gameId: 0,
@@ -26,10 +27,21 @@ export const useGameActions = () => {
     account,
   } = useDojo();
 
+  const { account: controllerAccount } = useAccount()
+  const { connect, connectors } = useConnect()
+
+  const reconnectController = () => {
+    if (!controllerAccount) {
+      connect({ connector: connectors[0] })
+      return
+    }
+  }
+
   const selectDeck = async (
     gameId: number,
     deckId: number
   ): Promise<Card[]> => {
+    reconnectController()
     try {
       showTransactionToast();
       const { transaction_hash } = await client.game_system.select_deck({
@@ -63,6 +75,7 @@ export const useGameActions = () => {
     gameId: number,
     cardsIndex: number[]
   ): Promise<Card[]> => {
+    reconnectController()
     try {
       showTransactionToast();
       console.log("paylaod", {
@@ -99,6 +112,7 @@ export const useGameActions = () => {
   };
 
   const selectModifiers = async (gameId: number, cardsIndex: number[]) => {
+    reconnectController()
     try {
       showTransactionToast();
       const { transaction_hash } =
@@ -132,6 +146,7 @@ export const useGameActions = () => {
     gameId: number,
     cardsIndex: number[]
   ): Promise<boolean> => {
+    reconnectController()
     try {
       showTransactionToast();
       const { transaction_hash } =
@@ -162,6 +177,7 @@ export const useGameActions = () => {
   };
 
   const createLevel = async (gameId: number) => {
+    reconnectController()
     try {
       showTransactionToast();
       const { transaction_hash } = await client.game_system.create_level({
@@ -192,6 +208,7 @@ export const useGameActions = () => {
   };
 
   const createGame = async (username: string) => {
+    reconnectController()
     try {
       showTransactionToast();
       const { transaction_hash } = await client.game_system.create_game({
@@ -225,6 +242,7 @@ export const useGameActions = () => {
   };
 
   const createReward = async (gameId: number, rewardId: number) => {
+    reconnectController()
     try {
       showTransactionToast();
       const { transaction_hash } = await client.game_system.create_reward({
@@ -257,6 +275,7 @@ export const useGameActions = () => {
   };
 
   const selectRewards = async (gameId: number, cardsIndex: number[]) => {
+    reconnectController()
     try {
       showTransactionToast();
       const { transaction_hash } = await client.game_system.select_reward({
@@ -289,6 +308,7 @@ export const useGameActions = () => {
   };
 
   const endTurn = async (gameId: number) => {
+    reconnectController()
     try {
       showTransactionToast();
       const { transaction_hash } = await client.game_system.end_turn({
@@ -327,6 +347,7 @@ export const useGameActions = () => {
     cards: number[],
     modifiers: number[]
   ) => {
+    reconnectController()
     try {
       showTransactionToast();
       const { transaction_hash } = await client.game_system.discard({
@@ -370,6 +391,7 @@ export const useGameActions = () => {
   };
 
   const discardEffectCard = async (gameId: number, card: number) => {
+    reconnectController()
     try {
       showTransactionToast();
       const { transaction_hash } = await client.game_system.discard_effect_card(
@@ -408,6 +430,7 @@ export const useGameActions = () => {
   };
 
   const discardSpecialCard = async (gameId: number, card: number) => {
+    reconnectController()
     try {
       const { transaction_hash } =
         await client.game_system.discard_special_card({
@@ -428,6 +451,7 @@ export const useGameActions = () => {
   };
 
   const play = async (gameId: number, cards: number[], modifiers: number[]) => {
+    reconnectController()
     try {
       showTransactionToast();
       const { transaction_hash } = await client.game_system.play({
@@ -459,6 +483,7 @@ export const useGameActions = () => {
     gameId: number,
     adventurerId: number
   ): Promise<Card[]> => {
+    reconnectController()
     try {
       showTransactionToast();
       const { transaction_hash } = await client.game_system.use_adventurer({
@@ -489,6 +514,7 @@ export const useGameActions = () => {
   };
 
   const skipAdventurer = async (gameId: number) => {
+    reconnectController()
     try {
       showTransactionToast();
       const { transaction_hash } = await client.game_system.skip_adventurer({
