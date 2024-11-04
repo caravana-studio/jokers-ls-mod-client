@@ -13,6 +13,7 @@ import { looseSfx } from "../constants/sfx";
 import { useAudio } from "../hooks/useAudio";
 import { useGameContext } from "../providers/GameProvider";
 import { useGetLeaderboard } from "../queries/useGetLeaderboard";
+import { runConfettiAnimation } from "../utils/runConfettiAnimation";
 
 const GAME_URL = "https://ls.jokersofneon.com/";
 
@@ -50,6 +51,12 @@ export const GameOver = () => {
     setIsRageRound(false);
   }, []);
 
+  useEffect(() => {
+    if (position <= 10) {
+      runConfettiAnimation(position <= 3 ? 300 : 100);
+    }
+  }, [position]);
+
   return (
     <Background type="home" bgDecoration>
       <PositionedGameMenu decoratedPage />
@@ -65,13 +72,9 @@ export const GameOver = () => {
             {t("game-over.gameOver-msj")}
           </Heading>
           <Text size={"md"} textAlign={"center"} mb={10} mx={6}>
-            {t(
-              "It seems that your adventure has come to an end. \nDarkness envelops you and, for an instant, your soul feels absolute peace, as if it will finally rest for eternity"
-            )}
+            {t("It seems that your adventure has come to an end. \nDarkness envelops you and, for an instant, your soul feels absolute peace, as if it will finally rest for eternity")}
             <br></br>
-            {t(
-              "Is this the final rest, or is there another path, one that has not yet been revealed?"
-            )}
+            {t("Is this the final rest, or is there another path, one that has not yet been revealed?")}
             <br></br>
 
             <br></br>

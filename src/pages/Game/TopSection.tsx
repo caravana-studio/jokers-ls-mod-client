@@ -21,6 +21,7 @@ export const TopSection = ({ inRewardsPag = false }: TopSectionProps) => {
 
   return (
     <Flex
+      height="100%"
       width="100%"
       justifyContent={"space-between"}
       alignItems={"flex-start"}
