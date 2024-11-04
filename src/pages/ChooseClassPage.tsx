@@ -12,21 +12,21 @@ import { beep } from "../constants/sfx";
 const CLASSES = [
   {
     id: 0,
-    title: "Scribe",
+    title: "Overlord",
     element: "book",
-    description: "- +4 Jokers",
+    description: "• 100 HP /n • +2 multi modifiers /n • +2 points modifiers",
   },
   {
     id: 1,
     title: "Warrior",
     element: "sword",
-    description: "- +1 Joker /n - +2 point modifiers /n - +2 multi modifiers",
+    description: "• 120 HP /n • +1 multi modifier",
   },
   {
     id: 2,
     title: "Wizard",
     element: "wand",
-    description: "- +1 special card /n - +2 Jokers",
+    description: "• 80 HP /n • +2 Jokers",
   },
 ];
 
@@ -143,6 +143,7 @@ const ClassBox = ({
       height="440px"
       p={"20px"}
       cursor="pointer"
+      opacity={0.8}
       border={`1px solid transparent`}
       _hover={HIGHLIGHT_STYLE}
       {...(selected && HIGHLIGHT_STYLE)}
@@ -154,6 +155,7 @@ const ClassBox = ({
         height="220px"
         width="220px"
         display="flex"
+        borderRadius="20px"
         justifyContent="center"
         backgroundColor="black"
       >

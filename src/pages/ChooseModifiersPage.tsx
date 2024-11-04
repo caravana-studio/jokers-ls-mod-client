@@ -18,8 +18,8 @@ export const ChooseModifiersPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [cardsToKeep, setCardsToKeep] = useState<Card[]>([]);
   const { isSmallScreen, cardScale } = useResponsiveValues();
-  const adjustedCardScale = cardScale * 0.75;
-  const maxCards = 5;
+  const adjustedCardScale = cardScale * 1;
+  const maxCards = 3;
   const { play: beepSound } = useAudio(beep);
 
   const {
@@ -75,7 +75,7 @@ export const ChooseModifiersPage = () => {
           </Text>
         </Box>
         <Heading size={"xl"} textAlign={"center"} variant="neonGreen" mt={2}>
-          Choose up to 5
+          Choose up to 3
         </Heading>
         <FullScreenCardContainer
           sx={{ width: isSmallScreen ? "100%" : "60%", margin: "0 auto" }}

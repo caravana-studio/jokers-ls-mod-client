@@ -11,6 +11,7 @@ import { useResponsiveValues } from "../../theme/responsiveSettings.tsx";
 import { DiscardButton } from "./DiscardButton.tsx";
 import { Obstacle } from "./Obstacle.tsx";
 import { PlayButton } from "./PlayButton.tsx";
+import { getNameBeast } from "../../utils/getNameBeast.ts";
 import { useEffect, useRef, useState } from "react";
 import AttackAnimation from "../../components/Animation/AttackAnimation.tsx";
 
@@ -45,8 +46,8 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
 
   const tier = beast?.tier ?? 0;
   const level = beast?.level ?? 0;
-  const name = "Nameless King";
   const beast_id = beast?.beast_id ?? 0;
+  const name = getNameBeast(beast_id);
   const maxHealth = beast?.health ?? 0;
   const lifeLeft = beast?.current_health ?? 0;
 
