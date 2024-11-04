@@ -37,7 +37,7 @@ function App() {
     <ChakraBaseProvider theme={theme}>
       <CardAnimationsProvider>
         <GameProvider>
-          <AudioPlayerProvider songPath={"/music/new-track.mp3"}>
+          <AudioPlayerProvider initialSongPath={"/music/OST_ 005.mp3"}>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/choose-class" element={<ChooseClassPage />} />
