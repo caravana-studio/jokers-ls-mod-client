@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { Box, Text, Flex, Button } from "@chakra-ui/react";
+import { Box, Text, Flex, Button, Img } from "@chakra-ui/react";
 import { LS_GREEN } from "../theme/colors";
 import { useGameContext } from "../providers/GameProvider";
 import { useGame } from "../dojo/queries/useGame";
+import { useAudio } from "../hooks/useAudio";
+import { beep } from "../constants/sfx";
 
 interface RewardCardProps {
   index: number;
@@ -23,7 +25,7 @@ const RewardCard = ({
   description,
   onSelect,
 }: RewardCardProps) => {
-  const icons = ["🧪", "🗝️", "📦"];
+  const icons = ["/logos/potion.png", "/logos/book.png", "/logos/special.png"];
 
   return (
     <Flex _hover={HIGHLIGHT_STYLE} p={5} border={`1px solid transparent`}>
@@ -35,6 +37,7 @@ const RewardCard = ({
         cursor={"pointer"}
         onClick={onSelect}
         transition="all 0.2s"
+        backgroundColor="black"
       >
         <Box
           position="absolute"
@@ -59,9 +62,7 @@ const RewardCard = ({
           >
             {type}
           </Text>
-          <Text fontSize="4xl" mb={4} bg="black">
-            {icons[index]}
-          </Text>
+          <Img width={"100px"} height={"auto"} src={icons[index]} alt="book" />
 
           <Text
             fontFamily="Jersey"
@@ -81,6 +82,7 @@ const RewardsSection = () => {
   const { redirectBasedOnGameState } = useGameContext();
   const { createNewReward } = useGameContext();
   const game = useGame();
+  const { play: beepSound } = useAudio(beep);
 
   if (game?.substate != "CREATE_REWARD") {
     redirectBasedOnGameState();
@@ -112,6 +114,7 @@ const RewardsSection = () => {
           {...reward}
           index={index}
           onSelect={() => {
+            beepSound();
             createNewReward(reward.id, reward.type);
           }}
         />

@@ -11,6 +11,8 @@ import { Card } from "../types/Card";
 import { getCardUniqueId } from "../utils/getCardUniqueId";
 import { FullScreenCardContainer } from "./FullScreenCardContainer";
 import { Lsxjon } from "./Game/Lsxjon";
+import { useAudio } from "../hooks/useAudio";
+import { beep } from "../constants/sfx";
 
 export const ChooseModifiersPage = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -18,6 +20,7 @@ export const ChooseModifiersPage = () => {
   const { isSmallScreen, cardScale } = useResponsiveValues();
   const adjustedCardScale = cardScale * 0.75;
   const maxCards = 5;
+  const { play: beepSound } = useAudio(beep);
 
   const {
     selectModifierCards,
@@ -36,6 +39,7 @@ export const ChooseModifiersPage = () => {
   }, [blisterPackResult]);
 
   const confirmSelectCards = () => {
+    beepSound();
     setIsLoading(true);
     selectModifierCards(cardsToKeep.map((c) => c.idx)).finally(() => {
       setIsLoading(false);
@@ -110,6 +114,7 @@ export const ChooseModifiersPage = () => {
                     card={card}
                     key={index}
                     onClick={() => {
+                      beepSound();
                       if (
                         cardsToKeep.map((card) => card.idx).includes(card.idx)
                       ) {

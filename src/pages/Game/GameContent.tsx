@@ -24,6 +24,7 @@ import { HandSection } from "./HandSection.tsx";
 import { MidSection } from "./MidSection.tsx";
 import { TopSection } from "./TopSection.tsx";
 import { BeastTurnAnimation } from "./BeastTurnAnimation.tsx";
+import { useAudioPlayer } from "../../providers/AudioPlayerProvider.tsx";
 
 export const GameContent = () => {
   const {
@@ -45,6 +46,7 @@ export const GameContent = () => {
   }, [playsLeft, energyLeft, discardsLeft]);
 
   const { mode } = useParams();
+  const { beastSound, changeSong } = useAudioPlayer();
 
   const [run, setRun] = useState(false);
   const [runSpecial, setRunSpecial] = useState(false);
@@ -126,6 +128,16 @@ export const GameContent = () => {
       }
     }
   }, [game, hand, specialTutorialCompleted, run]);
+
+  if (game?.substate === "BEAST") {
+    if (!beastSound) {
+      changeSong("/music/Conflict.mp3", true);
+    }
+  } else {
+    if (beastSound && mode === "obstacle") {
+      changeSong("/music/OST_ 005.mp3");
+    }
+  }
 
   if (error) {
     return (

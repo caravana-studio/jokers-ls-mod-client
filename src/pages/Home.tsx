@@ -10,6 +10,8 @@ import { PoweredBy } from "../components/PoweredBy";
 import { useDojo } from "../dojo/useDojo";
 import { useGameContext } from "../providers/GameProvider";
 import { LS_GREEN } from "../theme/colors";
+import { useAudio } from "../hooks/useAudio";
+import { beep } from "../constants/sfx";
 
 export const Home = () => {
   const [leaderboardOpen, setLeaderboardOpen] = useState(false);
@@ -17,6 +19,7 @@ export const Home = () => {
   const { connect, connectors } = useConnect();
   const { account } = useDojo();
   const [playButtonClicked, setPlayButtonClicked] = useState(false);
+  const { play: beepSound } = useAudio(beep);
   const { t } = useTranslation(["home"]);
 
   const { checkOrCreateGame } = useGameContext();
@@ -28,6 +31,7 @@ export const Home = () => {
   }, [account, playButtonClicked]);
 
   const onPlayClick = () => {
+    beepSound();
     setLoading(true);
     setPlayButtonClicked(true);
     connect({ connector: connectors[0] });
@@ -54,6 +58,7 @@ export const Home = () => {
               mt={8}
               width="100%"
               onClick={() => {
+                beepSound();
                 setLeaderboardOpen(false);
               }}
             >
@@ -86,6 +91,7 @@ export const Home = () => {
               <Button
                 variant="secondarySolid"
                 onClick={() => {
+                  beepSound();
                   setLeaderboardOpen(true);
                 }}
                 width="350px"

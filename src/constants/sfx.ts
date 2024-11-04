@@ -8,3 +8,4 @@ export const buySfx = "/music/buy-item.mp3";
 export const buyPackSfx = "/music/loot.mp3";
 export const rerollSfx = "/music/reroll-store.mp3";
 export const looseSfx = "music/loose.mp3";
+export const beep = "music/beep.wav";
