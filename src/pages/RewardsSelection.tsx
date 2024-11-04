@@ -132,7 +132,9 @@ export const RewardsSelection = () => {
         </FullScreenCardContainer>
 
         <Button
-          isDisabled={isSpecialsFull && cardsToKeep.length > 0}
+          isDisabled={
+            mode === "special" && isSpecialsFull && cardsToKeep.length > 0
+          }
           width={"30%"}
           mt={8}
           alignSelf={"center"}
