@@ -953,7 +953,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
   };
 
   const redirectBasedOnGameState = () => {
-    /* if (!lockRedirection) {
+    if (!lockRedirection) {
       if (game?.state === "FINISHED") {
         return navigate(`/gameover/${gameId}`);
       } else {
@@ -982,7 +982,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
       }
       console.log("default redirect to select deck");
       return navigate("/choose-class");
-    } */
+    }
   };
 
   useEffect(() => {
