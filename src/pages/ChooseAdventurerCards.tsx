@@ -81,7 +81,7 @@ export const ChooseAdventurerCards = () => {
         </Box>
         <Box width="100%">
           <Heading size={"xl"} textAlign={"center"} variant="neonGreen" my={4}>
-            Choose up to X
+            Choose up to 2
           </Heading>
           <FullScreenCardContainer
             sx={{ width: isSmallScreen ? "100%" : "80%", margin: "0 auto" }}
