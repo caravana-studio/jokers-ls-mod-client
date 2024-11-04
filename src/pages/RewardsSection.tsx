@@ -103,7 +103,7 @@ const RewardsSection = () => {
     {
       id: 2,
       type: "special",
-      description: "Select 1 from a total of 5 available",
+      description: "Select 1 from a total of 3 available",
     },
   ];
 
