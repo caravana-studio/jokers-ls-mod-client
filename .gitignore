@@ -425,8 +425,8 @@ yarn-error.log*
 .env.prod
 
 # certs
-localhost+2-cert.pem
-localhost+2-key.pem
+# localhost+2-cert.pem
+# localhost+2-key.pem
 
 # vite.config
 vite.config.ts
