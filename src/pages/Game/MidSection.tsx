@@ -47,7 +47,7 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
   const tier = beast?.tier ?? 0;
   const level = beast?.level ?? 0;
   const beast_id = beast?.beast_id ?? 0;
-  const name = getNameBeast(beast_id);
+  const name = getNameBeast(beast_id.valueOf());
   const maxHealth = beast?.health ?? 0;
   const lifeLeft = beast?.current_health ?? 0;
 
