@@ -72,6 +72,12 @@ export const GameOver = () => {
             {t("game-over.gameOver-msj")}
           </Heading>
           <Text size={"md"} textAlign={"center"} mb={10} mx={6}>
+            {t("It seems that your adventure has come to an end. \nDarkness envelops you and, for an instant, your soul feels absolute peace, as if it will finally rest for eternity")}
+            <br></br>
+            {t("Is this the final rest, or is there another path, one that has not yet been revealed?")}
+            <br></br>
+
+            <br></br>
             {congratulationsMsj}
           </Text>
           <Leaderboard gameId={gameId} lines={4} />

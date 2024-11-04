@@ -18,7 +18,7 @@ export const ChooseModifiersPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [cardsToKeep, setCardsToKeep] = useState<Card[]>([]);
   const { isSmallScreen, cardScale } = useResponsiveValues();
-  const adjustedCardScale = cardScale * 0.75;
+  const adjustedCardScale = cardScale * 1;
   const maxCards = 3;
   const { play: beepSound } = useAudio(beep);
 
