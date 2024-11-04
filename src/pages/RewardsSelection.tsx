@@ -14,10 +14,12 @@ import { runConfettiAnimation } from "../utils/runConfettiAnimation";
 import { FullScreenCardContainer } from "./FullScreenCardContainer";
 import { useAudio } from "../hooks/useAudio";
 import { beep } from "../constants/sfx";
+import { useGame } from "../dojo/queries/useGame";
 
 export const RewardsSelection = () => {
   const { mode } = useParams();
   const [cardsToKeep, setCardsToKeep] = useState<Card[]>([]);
+
   const {
     selectNewRewards,
     blisterPackResult,
@@ -30,6 +32,10 @@ export const RewardsSelection = () => {
   const { isSmallScreen, cardScale } = useResponsiveValues();
   const adjustedCardScale = cardScale * 1.5;
   const maxCards = mode === "special" ? 1 : 3;
+  const game = useGame();
+  const isSpecialsFull =
+    game?.len_current_special_cards === game?.len_max_current_special_cards;
+
   const { play: beepSound } = useAudio(beep);
 
   useEffect(() => {
@@ -126,6 +132,7 @@ export const RewardsSelection = () => {
         </FullScreenCardContainer>
 
         <Button
+          isDisabled={isSpecialsFull && cardsToKeep.length > 0}
           width={"30%"}
           mt={8}
           alignSelf={"center"}
