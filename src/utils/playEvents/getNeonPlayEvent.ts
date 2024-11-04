@@ -1,4 +1,4 @@
-import { NEON_PLAY_EVENT } from "../../constants/dojoEventKeys";
+import { NEON_POKER_HAND_EVENT } from "../../constants/dojoEventKeys";
 import { DojoEvent } from "../../types/DojoEvent";
 import { NeonPlayEvent } from "../../types/ScoreData";
 import { getArrayValueFromEvent } from "../getArrayValueFromEvent";
@@ -9,7 +9,7 @@ export const getNeonPlayEvent = (
 ): NeonPlayEvent | undefined => {
 
   const neonPlayEvent = events.find(
-    (event) => event.keys[0] === NEON_PLAY_EVENT
+    (event) => event.keys[0] === NEON_POKER_HAND_EVENT
   );
 
   const cardIndexes = getArrayValueFromEvent(neonPlayEvent, 1)

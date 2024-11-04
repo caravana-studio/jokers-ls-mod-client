@@ -1,5 +1,5 @@
 import {
-    LEVEL_PASSED_EVENT
+    PLAY_WIN_GAME_EVENT
 } from "../../constants/dojoEventKeys";
 import { DojoEvent } from "../../types/DojoEvent";
 import {
@@ -13,7 +13,7 @@ export const getLevelPassedEvent = (
   events: DojoEvent[]
 ): LevelPassedEvent | undefined => {
   const levelPassedEvent = events.find(
-    (event) => event.keys[0] === LEVEL_PASSED_EVENT
+    (event) => event.keys[0] === PLAY_WIN_GAME_EVENT
   );
   if (!levelPassedEvent) return undefined;
   const level = getNumberValueFromEvent(levelPassedEvent, 1) ?? 0;

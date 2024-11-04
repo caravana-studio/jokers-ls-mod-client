@@ -1,5 +1,5 @@
 import { shortString } from "starknet";
-import { GAME_ID_EVENT, GAME_OVER_EVENT } from "../constants/dojoEventKeys";
+import { CREATE_GAME_EVENT, PLAY_GAME_OVER_EVENT } from "../constants/dojoEventKeys";
 import { Card } from "../types/Card";
 import { getCardsFromEvents } from "../utils/getCardsFromEvents";
 import { getCreateLevelEvents } from "../utils/getCreateLevelEvents";
@@ -207,7 +207,7 @@ export const useGameActions = () => {
       updateTransactionToast(transaction_hash, tx.isSuccess());
       if (tx.isSuccess()) {
         const events = tx.events;
-        const gameId = getNumberValueFromEvents(events, GAME_ID_EVENT, 0);
+        const gameId = getNumberValueFromEvents(events, CREATE_GAME_EVENT, 0);
         console.log("Game " + gameId + " created");
         return {
           gameId,
@@ -308,7 +308,7 @@ export const useGameActions = () => {
         console.log("Success at endTurn:", tx);
         return {
           success: true,
-          gameOver: !!tx.events.find((event) => event.keys[0] === GAME_OVER_EVENT),
+          gameOver: !!tx.events.find((event) => event.keys[0] === PLAY_GAME_OVER_EVENT),
           beastAttack: getBeastAttackEvent(tx.events),
         }
       } else {
@@ -349,7 +349,7 @@ export const useGameActions = () => {
           success: true,
           cards: cards,
           gameOver: !!tx.events.find(
-            (event) => event.keys[0] === GAME_OVER_EVENT
+            (event) => event.keys[0] === PLAY_GAME_OVER_EVENT
           ),
           beastAttack,
         };
