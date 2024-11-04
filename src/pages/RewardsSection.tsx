@@ -33,7 +33,8 @@ const RewardCard = ({
         position="relative"
         width="250px"
         height="300px"
-        borderRadius="md"
+        borderRadius="20px"
+        opacity={0.7}
         cursor={"pointer"}
         onClick={onSelect}
         transition="all 0.2s"
@@ -92,7 +93,7 @@ const RewardsSection = () => {
     {
       id: 0,
       type: "potion",
-      description: "Recovers 50 HP",
+      description: " \n Recovers between 25 - 50 HP",
     },
     {
       id: 1,
