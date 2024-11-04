@@ -5,6 +5,8 @@ import { HealthBar } from "../../components/HealthBar.tsx";
 import { SpecialCards } from "../../components/SpecialCards.tsx";
 import { Energy } from "./Energy.tsx";
 import { useGame } from "../../dojo/queries/useGame.tsx";
+import { PointBox } from "../../components/MultiPoints.tsx";
+import { RollingNumber } from "../../components/RollingNumber.tsx";
 
 interface TopSectionProps {
   inRewardsPag?: boolean;
@@ -61,6 +63,21 @@ export const TopSection = ({ inRewardsPag = false }: TopSectionProps) => {
             width="280px"
           />
           <HealthBar />
+          <Flex>
+            <Box gap={3} sx={{ display: "flex", alignItems: "center" }}>
+              <PointBox type="points">
+                <Heading color="white" size={{ base: "s", md: "m" }}>
+                  Level <RollingNumber n={1} />
+                </Heading>
+              </PointBox>
+              <PointBox type="points">
+                <Heading color="white" size={{ base: "s", md: "m" }}>
+                  Points: <RollingNumber n={100} />
+                </Heading>
+              </PointBox>
+            </Box>
+          </Flex>
+
           {mode === "beast" && <Energy />}
         </Flex>
 
