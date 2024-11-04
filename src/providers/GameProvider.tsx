@@ -729,6 +729,8 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
             },
             playEvents.playWinGameEvent ? 2000 : 1000
           );
+        } else if (playEvents.obstacleAttack) {
+          console.log("obstacle event");
         } else {
           playEvents.cards && replaceCards(playEvents.cards);
           setRoundRewards(undefined);

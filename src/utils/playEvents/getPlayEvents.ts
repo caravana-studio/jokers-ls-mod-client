@@ -16,6 +16,7 @@ import { getLevelPassedEvent } from "./getLevelPassedEvent";
 import { getModifierSuitEvents } from "./getModifierSuitEvents";
 import { getMultiPointEvents } from "./getMultiPointEvents";
 import { getNeonPlayEvent } from "./getNeonPlayEvent";
+import { getObstacleAttackEvent } from "./getObstacleAttackEvent";
 import { getPlayerAttackEvent } from "./getPlayerAttackEvent";
 import { getPlayerWinGameEvent } from "./getPlayWinGameEvent";
 import { getScoreEvent } from "./getScoreEvent";
@@ -46,6 +47,7 @@ export const getPlayEvents = (events: DojoEvent[]): PlayEvents => {
     cashEvents: getCashEvents(events),
     playerAttack: getPlayerAttackEvent(events),
     beastAttack: getBeastAttackEvent(events),
+    obstacleAttack: getObstacleAttackEvent(events),
   };
 
   return playEvents;
