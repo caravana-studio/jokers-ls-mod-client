@@ -52,8 +52,6 @@ const loadTranslations = async () => {
     i18n.t("playsData.highCard.name", { ns: "plays" }),
   ]);
 
-  //TODO: update multi and points with real data
-
   Object.assign(PLAYS_DATA, [
     {
       name: i18n.t("playsData.royalFlush.name", { ns: "plays" }),

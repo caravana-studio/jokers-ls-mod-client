@@ -23,7 +23,7 @@ const createGameEmptyResponse = {
 export const useGameActions = () => {
   const {
     setup: { client },
-    account: { account },
+    account,
   } = useDojo();
 
   const selectDeck = async (

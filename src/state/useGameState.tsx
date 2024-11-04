@@ -15,6 +15,7 @@ import { Card } from "../types/Card";
 import { RoundRewards } from "../types/RoundRewards";
 import { checkHand } from "../utils/checkHand";
 import { sortCards } from "../utils/sortCards";
+import { useUsername } from "../dojo/utils/useUsername";
 
 export const useGameState = () => {
   const [gameId, setGameId] = useState<number>(getLSGameId());
@@ -133,8 +134,7 @@ export const useGameState = () => {
 
   const beastFetchData = useBeast();
 
-  const lsUser = localStorage.getItem(LOGGED_USER);
-  const username = lsUser;
+  const username = useUsername();
 
   const resetMultiPoints = () => {
     setPoints(0);

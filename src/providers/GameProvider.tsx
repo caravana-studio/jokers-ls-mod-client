@@ -29,6 +29,8 @@ import { Card } from "../types/Card";
 import { RoundRewards } from "../types/RoundRewards.ts";
 import { PlayEvents } from "../types/ScoreData";
 import { changeCardSuit } from "../utils/changeCardSuit";
+import cartridgeConnector from "../cartridgeConnector.tsx";
+import CartridgeConnector from "@cartridge/connector";
 
 interface IGameContext {
   gameId: number;
@@ -192,7 +194,6 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     setup: {
       clientComponents: { Game },
     },
-    account: { account },
     syncCall,
   } = useDojo();
 
@@ -409,7 +410,10 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
   };
 
   const executeCreateGame = async () => {
-    const username = localStorage.getItem(LOGGED_USER);
+    const username = await (
+      cartridgeConnector as CartridgeConnector
+    ).username();
+    console.log('username', username)    
     setError(false);
     setGameLoading(true);
     setIsRageRound(false);
