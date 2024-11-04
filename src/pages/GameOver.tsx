@@ -15,7 +15,7 @@ import { useGameContext } from "../providers/GameProvider";
 import { useGetLeaderboard } from "../queries/useGetLeaderboard";
 import { runConfettiAnimation } from "../utils/runConfettiAnimation";
 
-const GAME_URL = "https://jokersofneon.com";
+const GAME_URL = "https://ls.jokersofneon.com/";
 
 export const GameOver = () => {
   const navigate = useNavigate();
