@@ -75,8 +75,9 @@ const Lore: React.FC<LoreProps> = ({ onComplete, sequence }) => {
             size={"sm"}
             variant={"defaultGreenOutlineGlow"}
             onClick={() => setScreen(sequence.length)}
+            fontSize={"2rem"}
           >
-            [skip]
+            Skip
           </Button>
         </Flex>
       </Flex>
