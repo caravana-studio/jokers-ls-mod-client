@@ -13,7 +13,6 @@ import { looseSfx } from "../constants/sfx";
 import { useAudio } from "../hooks/useAudio";
 import { useGameContext } from "../providers/GameProvider";
 import { useGetLeaderboard } from "../queries/useGetLeaderboard";
-import { runConfettiAnimation } from "../utils/runConfettiAnimation";
 import { ending } from "../constants/lore";
 import Lore from "./LoreScreen/Lore";
 
@@ -53,12 +52,6 @@ export const GameOver = () => {
     localStorage.removeItem(GAME_ID);
     setIsRageRound(false);
   }, []);
-
-  useEffect(() => {
-    if (position <= 10) {
-      runConfettiAnimation(position <= 3 ? 300 : 100);
-    }
-  }, [position]);
 
   return (
     <Background type="home" bgDecoration>
