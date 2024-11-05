@@ -104,6 +104,7 @@ interface IGameContext {
   setBeastAttack: (beastAttack: number) => void;
   gameOver: boolean;
   setGameOver: (gameOver: boolean) => void;
+  skipFailedObstacle: () => Promise<any>;
 }
 
 const GameContext = createContext<IGameContext>({
@@ -180,6 +181,7 @@ const GameContext = createContext<IGameContext>({
   setBeastAttack: () => {},
   gameOver: false,
   setGameOver: () => {},
+  skipFailedObstacle: () => new Promise((resolve) => resolve(undefined)),
 });
 export const useGameContext = () => useContext(GameContext);
 
@@ -210,6 +212,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     createReward,
     selectRewards,
     endTurn,
+    skipFailedLevel,
   } = useGameActions();
 
   const { discards, discard: stateDiscard, rollbackDiscard } = useDiscards();
@@ -273,6 +276,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     resetPlaysAndDiscards,
     setBeastAttack,
     setGameOver,
+    setObstacleAttack,
   } = state;
 
   const resetLevel = () => {
@@ -363,6 +367,22 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
 
   const createNewLevel = async () => {
     const nextLevelPromise = createLevel(gameId);
+    nextLevelPromise.then((response) => {
+      response?.cards && replaceCards(response.cards);
+      resetPlaysAndDiscards();
+      if (response?.isBeast && response?.beast) {
+        setBeast({ ...response.beast, game_id: gameId });
+        navigate("/game/beast");
+      } else if (response?.isObstacle && response?.obstacles) {
+        setObstacles(response?.obstacles);
+        navigate("/game/obstacle");
+      }
+    });
+    return nextLevelPromise;
+  };
+
+  const skipFailedObstacle = async () => {
+    const nextLevelPromise = skipFailedLevel(gameId);
     nextLevelPromise.then((response) => {
       response?.cards && replaceCards(response.cards);
       resetPlaysAndDiscards();
@@ -730,7 +750,8 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
             playEvents.playWinGameEvent ? 2000 : 1000
           );
         } else if (playEvents.obstacleAttack) {
-          console.log("obstacle event");
+          navigate("/rewards");
+          setObstacleAttack(playEvents.obstacleAttack);
         } else {
           playEvents.cards && replaceCards(playEvents.cards);
           setRoundRewards(undefined);
@@ -953,7 +974,10 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
           return navigate("/game/obstacle");
         } else if (game?.substate === "BEAST") {
           return navigate("/game/beast");
-        } else if (game?.substate === "CREATE_REWARD") {
+        } else if (
+          game?.substate === "CREATE_REWARD" ||
+          game?.substate === "UNPASSED_OBSTACLE"
+        ) {
           return navigate("/rewards");
         } else if (game?.substate === "REWARD_CARDS_PACK") {
           return navigate("/rewards/pack");
@@ -996,6 +1020,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     createNewReward,
     selectNewRewards,
     executeEndTurn,
+    skipFailedObstacle,
   };
 
   return (

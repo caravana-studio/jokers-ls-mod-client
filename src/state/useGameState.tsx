@@ -1,7 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
 import { LOGGED_USER, SORT_BY_SUIT } from "../constants/localStorage";
 import { PLAYS_DATA } from "../constants/plays";
-import { useBeast, useBeastPlayer, useGameModeBeast } from "../dojo/queries/useBeast";
+import {
+  useBeast,
+  useBeastPlayer,
+  useGameModeBeast,
+} from "../dojo/queries/useBeast";
 import { useBlisterPackResult } from "../dojo/queries/useBlisterPackResult";
 import { useChallenge, useChallengePlayer } from "../dojo/queries/useChallenge";
 import { useCurrentHand } from "../dojo/queries/useCurrentHand";
@@ -50,6 +54,7 @@ export const useGameState = () => {
   const [energyLeft, setEnergyLeft] = useState(-1);
 
   const [beastAttack, setBeastAttack] = useState(0);
+  const [obstacletAttack, setObstacleAttack] = useState(0);
 
   const [gameOver, setGameOver] = useState(false);
 
@@ -254,5 +259,7 @@ export const useGameState = () => {
     setBeastAttack,
     gameOver,
     setGameOver,
+    obstacletAttack,
+    setObstacleAttack,
   };
 };

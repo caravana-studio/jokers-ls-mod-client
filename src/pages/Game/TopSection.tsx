@@ -11,9 +11,13 @@ import { useGameContext } from "../../providers/GameProvider.tsx";
 
 interface TopSectionProps {
   inRewardsPag?: boolean;
+  obstacleFailed?: boolean;
 }
 
-export const TopSection = ({ inRewardsPag = false }: TopSectionProps) => {
+export const TopSection = ({
+  inRewardsPag = false,
+  obstacleFailed = false,
+}: TopSectionProps) => {
   const { mode } = useParams();
   const game = useGame();
   const { points } = useGameContext();
@@ -37,10 +41,10 @@ export const TopSection = ({ inRewardsPag = false }: TopSectionProps) => {
               textAlign="center"
               textShadow="0 0 10px black"
             >
-              LEVEL COMPLETED!
+              {obstacleFailed ? "Obstacle failed" : "LEVEL COMPLETED!"}
             </Heading>
             <Text fontFamily="Jersey" fontSize={"2rem"}>
-              Choose your rewards wisely
+              {obstacleFailed ? "" : "Choose your rewards wisely"}
             </Text>
           </Flex>
         </Box>

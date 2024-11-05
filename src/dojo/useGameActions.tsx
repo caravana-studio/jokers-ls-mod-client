@@ -191,6 +191,37 @@ export const useGameActions = () => {
     }
   };
 
+  const skipFailedLevel = async (gameId: number) => {
+    try {
+      showTransactionToast();
+      const { transaction_hash } =
+        await client.game_system.skip_unpassed_obstacle({
+          account,
+          game_id: gameId,
+        });
+
+      showTransactionToast(transaction_hash);
+
+      const tx = await account.waitForTransaction(transaction_hash, {
+        retryInterval: 100,
+      });
+
+      updateTransactionToast(transaction_hash, tx.isSuccess());
+      if (tx.isSuccess()) {
+        const events = tx.events;
+        console.log("Success at skipFailedLevel:", tx);
+        return getCreateLevelEvents(events);
+      } else {
+        console.error("Error at skipFailedLevel:", tx);
+        return undefined;
+      }
+    } catch (e) {
+      failedTransactionToast();
+      console.log(e);
+      return undefined;
+    }
+  };
+
   const createGame = async (username: string) => {
     try {
       showTransactionToast();
@@ -308,17 +339,19 @@ export const useGameActions = () => {
         console.log("Success at endTurn:", tx);
         return {
           success: true,
-          gameOver: !!tx.events.find((event) => event.keys[0] === GAME_OVER_EVENT),
+          gameOver: !!tx.events.find(
+            (event) => event.keys[0] === GAME_OVER_EVENT
+          ),
           beastAttack: getBeastAttackEvent(tx.events),
-        }
+        };
       } else {
         console.error("Error at endTurn:", tx);
       }
-      return {success: false};
+      return { success: false };
     } catch (e) {
       failedTransactionToast();
       console.log(e);
-      return {success: false};
+      return { success: false };
     }
   };
 
@@ -532,5 +565,6 @@ export const useGameActions = () => {
     createReward,
     selectRewards,
     endTurn,
+    skipFailedLevel,
   };
 };
