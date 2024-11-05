@@ -1,12 +1,13 @@
 import { Box, Button, Flex, Heading, Img, Text } from "@chakra-ui/react";
-import { useState } from "react";
+import { useConnect } from "@starknet-react/core";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import AudioPlayer from "../components/AudioPlayer";
 import { Background } from "../components/Background";
 import { DiscordLink } from "../components/DiscordLink";
 import { Leaderboard } from "../components/Leaderboard";
 import { PoweredBy } from "../components/PoweredBy";
-import { LOGGED_USER } from "../constants/localStorage";
+import { useDojo } from "../dojo/useDojo";
 import { useGameContext } from "../providers/GameProvider";
 import { LS_GREEN } from "../theme/colors";
 import { useAudio } from "../hooks/useAudio";
@@ -15,18 +16,25 @@ import { beep } from "../constants/sfx";
 export const Home = () => {
   const [leaderboardOpen, setLeaderboardOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const { connect, connectors } = useConnect();
+  const { account } = useDojo();
+  const [playButtonClicked, setPlayButtonClicked] = useState(false);
   const { play: beepSound } = useAudio(beep);
-
   const { t } = useTranslation(["home"]);
 
   const { checkOrCreateGame } = useGameContext();
 
+  useEffect(() => {
+    if (account && playButtonClicked) {
+      checkOrCreateGame();
+    }
+  }, [account, playButtonClicked]);
+
   const onPlayClick = () => {
     beepSound();
     setLoading(true);
-    //TODO: Remove this when integrating the controller
-    window.localStorage.setItem(LOGGED_USER, "nicon44");
-    checkOrCreateGame();
+    setPlayButtonClicked(true);
+    connect({ connector: connectors[0] });
   };
 
   return (

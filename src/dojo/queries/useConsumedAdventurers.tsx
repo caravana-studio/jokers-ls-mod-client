@@ -6,7 +6,7 @@ export const CONSUMED_ADVENTURERS_QUERY_KEY = "consumedadventurers";
 
 export const CONSUMED_ADVENTURERS_QUERY = gql`
   query {
-    jokersOfNeonAdventurerConsumedModels(first: 1000) {
+    jokersLsModAdventurerConsumedModels(first: 1000) {
       edges {
         node {
           adventurer_id
@@ -25,7 +25,7 @@ interface ConsumedAdventurerEdge {
 }
 
 interface ConsumedAdventurersResponse {
-  jokersOfNeonAdventurerConsumedModels: {
+  jokersLsModAdventurerConsumedModels: {
     edges: ConsumedAdventurerEdge[];
   };
 }
@@ -41,7 +41,7 @@ export const useConsumedAdventurers = () => {
   );
   const { data } = queryResponse;
 
-  return data?.jokersOfNeonAdventurerConsumedModels.edges
+  return data?.jokersLsModAdventurerConsumedModels.edges
     .filter((edge) => {
       return edge.node.consumed;
     })

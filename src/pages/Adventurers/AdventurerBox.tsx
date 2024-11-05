@@ -117,8 +117,8 @@ export const AdventurerBox = ({
               +{level * 2} HP
             </Heading>
             <Heading size="m" color="white" textAlign="center">
-              Select {amountOfCardsToPick} cards from a total of{" "}
-              {amountOfCardsToSelectFrom} available
+              Select 2 cards from a total of{" "}
+              5 available
             </Heading>
           </>
         )}

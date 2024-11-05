@@ -1,4 +1,4 @@
-import { BEAST_EVENT, OBSTACLE_EVENT } from "../constants/dojoEventKeys";
+import { BEAST, CHALLENGE } from "../constants/dojoEventKeys";
 import { BEAST_TYPE_MAP } from "../enums/BeastType";
 import { DojoEvent } from "../types/DojoEvent";
 import { getCardsFromEvents } from "./getCardsFromEvents";
@@ -6,9 +6,9 @@ import { getNumberValueFromEvent } from "./getNumberValueFromEvent";
 
 export const getCreateLevelEvents = (events: DojoEvent[]) => {
   const obstacleEvent = events.find(
-    (event) => event.keys[0] === OBSTACLE_EVENT
+    (event) => event.keys[0] === CHALLENGE
   );
-  const beastEvent = events.find((event) => event.keys[0] === BEAST_EVENT);
+  const beastEvent = events.find((event) => event.keys[0] === BEAST);
 
   const cards = getCardsFromEvents(events);
 

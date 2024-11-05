@@ -37,13 +37,20 @@ export const GameContent = () => {
     energyLeft,
     discardsLeft,
     refetchPlaysAndDiscards,
+    refetchEnergy,
   } = useGameContext();
 
   useEffect(() => {
-    if (playsLeft < 0 || energyLeft < 0 || discardsLeft < 0) {
+    if (playsLeft < 0 || discardsLeft < 0) {
       refetchPlaysAndDiscards();
     }
-  }, [playsLeft, energyLeft, discardsLeft]);
+  }, [playsLeft, discardsLeft]);  
+  
+  useEffect(() => {
+    if (energyLeft < 0) {
+      refetchEnergy();
+    }
+  }, [energyLeft]);
 
   const { mode } = useParams();
   const { beastSound, changeSong } = useAudioPlayer();
