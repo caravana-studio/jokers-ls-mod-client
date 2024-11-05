@@ -33,6 +33,8 @@ export const HandSection = () => {
     discardEffectCard,
     preSelectedModifiers,
     roundRewards,
+    discardAnimation,
+    playAnimation,
   } = useGameContext();
 
   const [discarding, setDiscarding] = useState(false);
@@ -169,7 +171,13 @@ export const HandSection = () => {
                     transition: "transform 0.3s ease, box-shadow 0.5s ease",
                   }}
                 >
-                  <AnimatedCard idx={card.idx} discarded={card.discarded}>
+                  <AnimatedCard
+                    idx={card.idx}
+                    discarded={
+                      card.discarded || (isPreselected && discardAnimation)
+                    }
+                    played={isPreselected && playAnimation}
+                  >
                     <Box
                       sx={{
                         borderRadius: "8px",
