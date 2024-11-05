@@ -1,7 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
 import { LOGGED_USER, SORT_BY_SUIT } from "../constants/localStorage";
 import { PLAYS_DATA } from "../constants/plays";
-import { useBeast, useBeastPlayer, useGameModeBeast } from "../dojo/queries/useBeast";
+import {
+  useBeast,
+  useBeastPlayer,
+  useGameModeBeast,
+} from "../dojo/queries/useBeast";
 import { useBlisterPackResult } from "../dojo/queries/useBlisterPackResult";
 import { useChallenge, useChallengePlayer } from "../dojo/queries/useChallenge";
 import { useCurrentHand } from "../dojo/queries/useCurrentHand";
@@ -15,6 +19,7 @@ import { Card } from "../types/Card";
 import { RoundRewards } from "../types/RoundRewards";
 import { checkHand } from "../utils/checkHand";
 import { sortCards } from "../utils/sortCards";
+import { useGetRewards } from "../dojo/queries/useGetRewards";
 
 export const useGameState = () => {
   const [gameId, setGameId] = useState<number>(getLSGameId());
@@ -48,6 +53,7 @@ export const useGameState = () => {
   const [playsLeft, setPlaysLeft] = useState(-1);
   const [discardsLeft, setDiscardsLeft] = useState(-1);
   const [energyLeft, setEnergyLeft] = useState(-1);
+  const [rewardsIds, setRewardsIds] = useState<number[]>([]);
 
   const [beastAttack, setBeastAttack] = useState(0);
 
@@ -184,6 +190,12 @@ export const useGameState = () => {
     setObstacles(challenges);
   };
 
+  const rewards = useGetRewards();
+
+  const refetchRewardsId = () => {
+    setRewardsIds(rewards?.rewards_ids ?? [0]);
+  };
+
   const refetchBeast = () => {
     setBeast(beastFetchData as unknown as Beast);
   };
@@ -254,5 +266,8 @@ export const useGameState = () => {
     setBeastAttack,
     gameOver,
     setGameOver,
+    rewardsIds,
+    setRewardsIds,
+    refetchRewardsId,
   };
 };

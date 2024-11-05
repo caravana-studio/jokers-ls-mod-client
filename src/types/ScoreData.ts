@@ -21,6 +21,7 @@ export interface PlayEvents {
   playerAttack?: number;
   playWinGameEvent?: PlayWinGameEvent;
   beastAttack?: number;
+  rewards?: number[];
 }
 
 export interface PlayWinGameEvent {
@@ -82,4 +83,3 @@ export interface CashEvent {
   idx: number;
   special_idx: number;
 }
-

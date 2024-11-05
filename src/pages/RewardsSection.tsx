@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Text, Flex, Button, Img } from "@chakra-ui/react";
 import { LS_GREEN } from "../theme/colors";
 import { useGameContext } from "../providers/GameProvider";
 import { useGame } from "../dojo/queries/useGame";
 import { useAudio } from "../hooks/useAudio";
 import { beep } from "../constants/sfx";
+import { JSX } from "react/jsx-runtime";
+import { Type } from "@dojoengine/recs";
 
 interface RewardCardProps {
   index: number;
@@ -80,7 +82,8 @@ const RewardCard = ({
 };
 
 const RewardsSection = () => {
-  const { redirectBasedOnGameState } = useGameContext();
+  const { redirectBasedOnGameState, rewardsIds, refetchRewardsId } =
+    useGameContext();
   const { createNewReward } = useGameContext();
   const game = useGame();
   const { play: beepSound } = useAudio(beep);
@@ -89,23 +92,43 @@ const RewardsSection = () => {
     redirectBasedOnGameState();
   }
 
+  useEffect(() => {
+    if (!rewardsIds || rewardsIds.length === 0) {
+      refetchRewardsId();
+    }
+  }, [rewardsIds]);
+
   const rewards = [
     {
-      id: 0,
+      id: 1,
       type: "potion",
       description: " \n Recovers between 25 - 50 HP",
     },
     {
-      id: 1,
+      id: 2,
       type: "pack",
       description: "Open a pack of cards that can contain Jokers and modifiers",
     },
     {
-      id: 2,
+      id: 3,
       type: "special",
       description: "Select 1 from a total of 3 available",
     },
   ];
+
+  const filteredRewards: { id: number; type: string; description: string }[] =
+    [];
+  rewardsIds?.forEach((id) => {
+    console.log(typeof id.valueOf());
+    const match = rewards.find(
+      (reward) => (reward.id as Type.Number) == (id.valueOf() as number)
+    );
+    if (match) {
+      filteredRewards.push(match);
+    }
+  });
+
+  console.log(filteredRewards);
 
   return (
     <Flex gap={4} justify="center" align="center" wrap="wrap">

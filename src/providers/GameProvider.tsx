@@ -104,6 +104,8 @@ interface IGameContext {
   setBeastAttack: (beastAttack: number) => void;
   gameOver: boolean;
   setGameOver: (gameOver: boolean) => void;
+  rewardsIds: number[];
+  refetchRewardsId: () => void;
 }
 
 const GameContext = createContext<IGameContext>({
@@ -180,6 +182,8 @@ const GameContext = createContext<IGameContext>({
   setBeastAttack: () => {},
   gameOver: false,
   setGameOver: () => {},
+  rewardsIds: [0],
+  refetchRewardsId: () => {},
 });
 export const useGameContext = () => useContext(GameContext);
 
@@ -273,6 +277,9 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     resetPlaysAndDiscards,
     setBeastAttack,
     setGameOver,
+    rewardsIds,
+    setRewardsIds,
+    refetchRewardsId,
   } = state;
 
   const resetLevel = () => {
@@ -723,6 +730,10 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
           playEvents.obstacleDefeated ||
           playEvents.playWinGameEvent
         ) {
+          if (playEvents.rewards) {
+            const rewards = [playEvents.rewards[1], playEvents.rewards[2]];
+            setRewardsIds(rewards);
+          }
           setTimeout(
             () => {
               navigate("/rewards");
