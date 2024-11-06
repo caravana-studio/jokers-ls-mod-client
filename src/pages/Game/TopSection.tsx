@@ -16,7 +16,6 @@ interface TopSectionProps {
 export const TopSection = ({ inRewardsPag = false }: TopSectionProps) => {
   const { mode } = useParams();
   const game = useGame();
-  const { points } = useGameContext();
   const level = game?.level ?? 0;
 
   return (
@@ -72,11 +71,6 @@ export const TopSection = ({ inRewardsPag = false }: TopSectionProps) => {
                 <PointBox type="points">
                   <Heading color="white" size={{ base: "s", md: "m" }}>
                     Level <RollingNumber n={level} />
-                  </Heading>
-                </PointBox>
-                <PointBox type="points">
-                  <Heading color="white" size={{ base: "s", md: "m" }}>
-                    Points: <RollingNumber n={points ?? 0} />
                   </Heading>
                 </PointBox>
               </Box>
