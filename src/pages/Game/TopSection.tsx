@@ -8,6 +8,7 @@ import { useGame } from "../../dojo/queries/useGame.tsx";
 import { PointBox } from "../../components/MultiPoints.tsx";
 import { RollingNumber } from "../../components/RollingNumber.tsx";
 import { useGameContext } from "../../providers/GameProvider.tsx";
+import { useMemo } from "react";
 
 interface TopSectionProps {
   inRewardsPag?: boolean;
@@ -16,6 +17,7 @@ interface TopSectionProps {
 export const TopSection = ({ inRewardsPag = false }: TopSectionProps) => {
   const { mode } = useParams();
   const game = useGame();
+
   const level = game?.level ?? 0;
 
   return (

@@ -2,13 +2,16 @@ import { Box, Center, Heading } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import { useGame } from "../../dojo/queries/useGame";
 import { BLUE_LIGHT, VIOLET } from "../../theme/colors";
+import { useMemo } from "react";
 
 export const LevelBox = () => {
   const { t } = useTranslation("game", {
     keyPrefix: "game.compact-round-data",
   });
   const game = useGame();
-  const level = game?.level ?? 0;
+  const level = useMemo(() => {
+    return game?.level ?? 0;
+  }, [game]);
   return (
     <Center>
       <Box
