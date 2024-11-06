@@ -69,7 +69,7 @@ export const ChooseModifiersPage = () => {
             textAlign={"center"}
             lineHeight={1}
           >
-            Modifier cards add unique effects to individual cards when played.
+            Modifier cards add points or multi to your plays when played.
             Once added to your deck, they can be used whenever drawn, allowing
             for flexible and strategic play.
           </Text>

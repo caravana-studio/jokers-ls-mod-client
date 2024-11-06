@@ -1,25 +1,29 @@
 import { Button, Flex, Text } from "@chakra-ui/react";
-import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import { useGameContext } from "../../providers/GameProvider";
-import { useResponsiveValues } from "../../theme/responsiveSettings";
 import { ButtonContainer } from "./ButtonContainer";
 import { SkullIcon } from "./Skullcon";
-import { useChallengePlayer } from "../../dojo/queries/useChallenge";
-import { useGame } from "../../dojo/queries/useGame";
-import { useBeastPlayer, useGameModeBeast } from "../../dojo/queries/useBeast";
 
 interface DiscardButtonProps {
   highlight?: boolean;
 }
 
 export const DiscardButton = ({ highlight = false }: DiscardButtonProps) => {
-  const { preSelectedCards, discard, preSelectionLocked, executeEndTurn, specialCards, energyLeft, discardsLeft } =
-    useGameContext();
+  const {
+    preSelectedCards,
+    discard,
+    preSelectionLocked,
+    executeEndTurn,
+    specialCards,
+    energyLeft,
+    discardsLeft,
+  } = useGameContext();
 
   const { mode } = useParams();
 
-  const hasIncreasePlaysAndDiscardsSpecialCard = !!specialCards.find((card) => card.card_id === 315)
+  const hasIncreasePlaysAndDiscardsSpecialCard = !!specialCards.find(
+    (card) => card.card_id === 315
+  );
   const maxDiscards = hasIncreasePlaysAndDiscardsSpecialCard ? 6 : 5;
 
   const discardCost = 1;

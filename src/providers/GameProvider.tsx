@@ -1,3 +1,5 @@
+import CartridgeConnector from "@cartridge/connector";
+import { useAccount, useConnect } from '@starknet-react/core';
 import {
   PropsWithChildren,
   createContext,
@@ -6,7 +8,8 @@ import {
   useState,
 } from "react";
 import { useNavigate } from "react-router-dom";
-import { GAME_ID, LOGGED_USER, SORT_BY_SUIT } from "../constants/localStorage";
+import cartridgeConnector from "../cartridgeConnector.tsx";
+import { GAME_ID, SORT_BY_SUIT } from "../constants/localStorage";
 import {
   discardSfx,
   multiSfx,
@@ -100,6 +103,7 @@ interface IGameContext {
   consumeEnergyPlay: () => void;
   consumeEnergyDiscard: () => void;
   refetchPlaysAndDiscards: () => void;
+  refetchEnergy: () => void;
   beastAttack: number;
   setBeastAttack: (beastAttack: number) => void;
   gameOver: boolean;
@@ -178,6 +182,7 @@ const GameContext = createContext<IGameContext>({
   consumeEnergyPlay: () => {},
   consumeEnergyDiscard: () => {},
   refetchPlaysAndDiscards: () => {},
+  refetchEnergy: () => {},
   beastAttack: 0,
   setBeastAttack: () => {},
   gameOver: false,
@@ -191,12 +196,25 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
   const state = useGameState();
   const [lockRedirection, setLockRedirection] = useState(false);
 
+  const { account: controllerAccount } = useAccount()
+  const { connect, connectors } = useConnect()
+
+  const reconnectController = () => {
+    if (!controllerAccount) {
+      connect({ connector: connectors[0] })
+      return
+    }
+  }
+
+  useEffect(() => {
+    reconnectController()
+  }, [])
+
   const navigate = useNavigate();
   const {
     setup: {
       clientComponents: { Game },
     },
-    account: { account },
     syncCall,
   } = useDojo();
 
@@ -418,7 +436,10 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
   };
 
   const executeCreateGame = async () => {
-    const username = localStorage.getItem(LOGGED_USER);
+    const username = await (
+      cartridgeConnector as CartridgeConnector
+    ).username();
+    console.log('username', username)    
     setError(false);
     setGameLoading(true);
     setIsRageRound(false);
