@@ -1,10 +1,12 @@
-import { Box, Button, Flex, Heading } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Tooltip } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Background } from "../components/Background";
 import { PositionedDiscordLink } from "../components/DiscordLink";
 import { PositionedGameMenu } from "../components/GameMenu";
 import { TiltCard } from "../components/TiltCard";
+import { beep } from "../constants/sfx";
+import { useAudio } from "../hooks/useAudio";
 import { useGameContext } from "../providers/GameProvider";
 import { LS_GREEN } from "../theme/colors";
 import { useResponsiveValues } from "../theme/responsiveSettings";
@@ -12,9 +14,6 @@ import { Card } from "../types/Card";
 import { getCardUniqueId } from "../utils/getCardUniqueId";
 import { runConfettiAnimation } from "../utils/runConfettiAnimation";
 import { FullScreenCardContainer } from "./FullScreenCardContainer";
-import { useAudio } from "../hooks/useAudio";
-import { beep } from "../constants/sfx";
-import { useGame } from "../dojo/queries/useGame";
 
 export const RewardsSelection = () => {
   const { mode } = useParams();
@@ -26,15 +25,14 @@ export const RewardsSelection = () => {
     setBlisterPackResult,
     refetchBlisterPackResult,
     addSpecialCard,
+    specialCards,
   } = useGameContext();
   const [isLoading, setIsLoading] = useState(false);
 
   const { isSmallScreen, cardScale } = useResponsiveValues();
   const adjustedCardScale = cardScale * 1.5;
   const maxCards = mode === "special" ? 1 : 3;
-  const game = useGame();
-  const isSpecialsFull =
-    game?.len_current_special_cards === game?.len_max_current_special_cards;
+  const isSpecialsFull = specialCards.length === 5;
 
   const { play: beepSound } = useAudio(beep);
 
@@ -66,6 +64,21 @@ export const RewardsSelection = () => {
       });
     setBlisterPackResult([]);
   };
+
+  const continueButtonDisabled =
+    mode === "special" && isSpecialsFull && cardsToKeep.length > 0;
+
+  const continueButton = (
+    <Button
+      isDisabled={continueButtonDisabled}
+      width={"30%"}
+      mt={8}
+      alignSelf={"center"}
+      onClick={confirmSelectCards}
+    >
+      Continue
+    </Button>
+  );
 
   return (
     <Background type="skulls" dark bgDecoration>
@@ -131,17 +144,14 @@ export const RewardsSelection = () => {
           })}
         </FullScreenCardContainer>
 
-        <Button
-          isDisabled={
-            mode === "special" && isSpecialsFull && cardsToKeep.length > 0
-          }
-          width={"30%"}
-          mt={8}
-          alignSelf={"center"}
-          onClick={confirmSelectCards}
-        >
-          Continue
-        </Button>
+        {continueButtonDisabled ? (
+          <Tooltip label="You can't add more special cards">
+            {continueButton}
+          </Tooltip>
+        ) : (
+          continueButton
+        )}
+
         <PositionedDiscordLink />
       </Flex>
     </Background>

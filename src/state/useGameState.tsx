@@ -159,6 +159,7 @@ export const useGameState = () => {
 
   useEffect(() => {
     if (dojoHand?.length > 0 && hand.length === 0) {
+      console.log("replacing hand", dojoHand);
       setHand(dojoHand);
     }
   }, [dojoHand]);

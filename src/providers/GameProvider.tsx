@@ -1,5 +1,5 @@
 import CartridgeConnector from "@cartridge/connector";
-import { useAccount, useConnect } from '@starknet-react/core';
+import { useAccount, useConnect } from "@starknet-react/core";
 import {
   PropsWithChildren,
   createContext,
@@ -110,6 +110,7 @@ interface IGameContext {
   setGameOver: (gameOver: boolean) => void;
   rewardsIds: number[];
   refetchRewardsId: () => void;
+  levelScore: number;
 }
 
 const GameContext = createContext<IGameContext>({
@@ -189,6 +190,7 @@ const GameContext = createContext<IGameContext>({
   setGameOver: () => {},
   rewardsIds: [0],
   refetchRewardsId: () => {},
+  levelScore: 0,
 });
 export const useGameContext = () => useContext(GameContext);
 
@@ -196,19 +198,21 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
   const state = useGameState();
   const [lockRedirection, setLockRedirection] = useState(false);
 
-  const { account: controllerAccount } = useAccount()
-  const { connect, connectors } = useConnect()
+  const [levelScore, setLevelScore] = useState(0);
+
+  const { account: controllerAccount } = useAccount();
+  const { connect, connectors } = useConnect();
 
   const reconnectController = () => {
     if (!controllerAccount) {
-      connect({ connector: connectors[0] })
-      return
+      connect({ connector: connectors[0] });
+      return;
     }
-  }
+  };
 
   useEffect(() => {
-    reconnectController()
-  }, [])
+    reconnectController();
+  }, []);
 
   const navigate = useNavigate();
   const {
@@ -389,6 +393,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
   const createNewLevel = async () => {
     const nextLevelPromise = createLevel(gameId);
     nextLevelPromise.then((response) => {
+      console.log("createLevelEvents", response);
       response?.cards && replaceCards(response.cards);
       resetPlaysAndDiscards();
       if (response?.isBeast && response?.beast) {
@@ -439,7 +444,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     const username = await (
       cartridgeConnector as CartridgeConnector
     ).username();
-    console.log('username', username)    
+    console.log("username", username);
     setError(false);
     setGameLoading(true);
     setIsRageRound(false);
@@ -469,18 +474,20 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
   };
 
   const replaceCards = (cards: Card[]) => {
-    const newHand = hand
-      ?.map((card) => {
-        const newCard = cards.find((c) => c.idx === card.idx);
-        if (newCard) {
-          return newCard;
-        } else {
-          return card;
-        }
-      })
-      // filter out null cards (represented by card_id 9999)
-      .filter((card) => card.card_id !== 9999);
-    setHand(newHand);
+    if (hand.length === 0) {
+      setHand(cards);
+      return;
+    }
+
+    const filteredHand = hand.filter(
+      (card) => !cards.some((newCard) => newCard.idx === card.idx)
+    );
+
+    // Add the new cards to the filtered hand
+    const updatedHand = [...filteredHand, ...cards].filter(
+      (card) => card.card_id !== 9999 // Remove placeholder cards
+    );
+    setHand(updatedHand);
   };
 
   const setObstaclesCompleted = (ids: number[]) => {
@@ -718,8 +725,13 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
 
       setTimeout(() => {
         setPlayAnimation(true);
-        if (playEvents.playerAttack)
+        if (playEvents.playerAttack) {
           setAttackAnimation(playEvents.playerAttack.valueOf());
+        }
+        setLevelScore(points * multi);
+        setTimeout(() => {
+          setLevelScore(0);
+        }, 2500);
       }, ALL_CARDS_DURATION + 500);
 
       setTimeout(() => {
@@ -1040,6 +1052,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
         redirectBasedOnGameState,
         attackAnimation,
         setAttackAnimation,
+        levelScore,
       }}
     >
       {children}
