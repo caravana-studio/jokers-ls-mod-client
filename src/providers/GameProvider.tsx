@@ -386,6 +386,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
   const createNewLevel = async () => {
     const nextLevelPromise = createLevel(gameId);
     nextLevelPromise.then((response) => {
+      console.log("createLevelEvents", response);
       response?.cards && replaceCards(response.cards);
       resetPlaysAndDiscards();
       if (response?.isBeast && response?.beast) {
@@ -464,18 +465,20 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
   };
 
   const replaceCards = (cards: Card[]) => {
-    const newHand = hand
-      ?.map((card) => {
-        const newCard = cards.find((c) => c.idx === card.idx);
-        if (newCard) {
-          return newCard;
-        } else {
-          return card;
-        }
-      })
-      // filter out null cards (represented by card_id 9999)
-      .filter((card) => card.card_id !== 9999);
-    setHand(newHand);
+    if (hand.length === 0) {
+      setHand(cards);
+      return;
+    }
+    
+    const filteredHand = hand.filter(
+      (card) => !cards.some((newCard) => newCard.idx === card.idx)
+    );
+  
+    // Add the new cards to the filtered hand
+    const updatedHand = [...filteredHand, ...cards].filter(
+      (card) => card.card_id !== 9999 // Remove placeholder cards
+    );
+    setHand(updatedHand);
   };
 
   const setObstaclesCompleted = (ids: number[]) => {
