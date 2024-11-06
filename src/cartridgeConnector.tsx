@@ -2,7 +2,6 @@ import CartridgeConnector from "@cartridge/connector";
 import { getContractByName } from "@dojoengine/core";
 import { Connector } from "@starknet-react/core";
 import manifest from "./manifest.json";
-const paymaster: any = { caller: "0x414e595f43414c4c4552" };
 
 const game_system_contract_address = getContractByName(
   manifest,

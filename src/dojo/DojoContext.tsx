@@ -7,6 +7,7 @@ interface DojoContextType extends SetupResult {
   masterAccount: Account;
   account: BurnerAccount;
 }
+const useBurners = import.meta.env.VITE_USE_BURNER_ACCOUNTS || false;
 
 export const DojoContext = createContext<DojoContextType | null>(null);
 
@@ -23,6 +24,7 @@ export const DojoProvider = ({
   const {
     config: { rpcUrl, masterAddress, masterPrivateKey },
     burnerManager,
+    dojoProvider,
   } = value;
 
   const rpcProvider = useMemo(
@@ -30,14 +32,27 @@ export const DojoProvider = ({
       new RpcProvider({
         nodeUrl: rpcUrl,
       }),
-    [rpcUrl],
+    [rpcUrl]
   );
 
-  const masterAccount = useMemo(
-    () =>
-      new Account(rpcProvider, masterAddress, masterPrivateKey, "1"),
+  const controllerMasterAccount = useMemo(
+    () => new Account(rpcProvider, masterAddress, masterPrivateKey, "1"),
     [masterAddress, masterPrivateKey, rpcProvider]
   );
+
+  const burnerMasterAccount = useMemo(
+    () =>
+      new Account(dojoProvider.provider, masterAddress, masterPrivateKey, "1"),
+    [masterAddress, masterPrivateKey, dojoProvider]
+  );
+
+  const masterAccount = useMemo(() => {
+    if (useBurners) {
+      return burnerMasterAccount;
+    } else {
+      return controllerMasterAccount;
+    }
+  }, [burnerMasterAccount, controllerMasterAccount, useBurners]);
 
   const {
     create,

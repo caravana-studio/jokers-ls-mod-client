@@ -9,8 +9,6 @@ export const useAdventurers = () => {
   const [adventurers, setAdventurers] = useState<Adventurer[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // const { account } = useDojo();
-
   const account = useControllerAddress();
   console.log("account", account);
 

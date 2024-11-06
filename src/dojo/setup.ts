@@ -12,6 +12,7 @@ import { defineContractComponents } from "./typescript/models.gen";
 import { world } from "./world";
 
 export type SetupResult = Awaited<ReturnType<typeof setup>>;
+const useBurners = import.meta.env.VITE_USE_BURNER_ACCOUNTS || false;
 
 let sync: any;
 
@@ -119,7 +120,7 @@ export async function setup({ ...config }: DojoConfig) {
 
   // setup world
   const client = await setupWorld(dojoProvider);
-  const rpcProvider = new RpcProvider({
+  const rpcProvider = useBurners ? dojoProvider.provider : new RpcProvider({
     nodeUrl: config.rpcUrl,
   });
 
@@ -137,6 +138,9 @@ export async function setup({ ...config }: DojoConfig) {
 
   try {
     await burnerManager.init();
+    if (useBurners && burnerManager.list().length === 0) {
+      await burnerManager.create();
+    }
   } catch (e) {
     console.error(e);
   }

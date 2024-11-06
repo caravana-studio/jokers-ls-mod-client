@@ -1,5 +1,4 @@
-import CartridgeConnector from "@cartridge/connector";
-import { useAccount, useConnect } from '@starknet-react/core';
+import { useAccount, useConnect } from "@starknet-react/core";
 import {
   PropsWithChildren,
   createContext,
@@ -8,7 +7,6 @@ import {
   useState,
 } from "react";
 import { useNavigate } from "react-router-dom";
-import cartridgeConnector from "../cartridgeConnector.tsx";
 import { GAME_ID, SORT_BY_SUIT } from "../constants/localStorage";
 import {
   discardSfx,
@@ -22,6 +20,7 @@ import { useDojo } from "../dojo/useDojo.tsx";
 import { useGameActions } from "../dojo/useGameActions.tsx";
 import { gameExists } from "../dojo/utils/getGame.tsx";
 import { getLSGameId } from "../dojo/utils/getLSGameId.tsx";
+import { useUsername } from "../dojo/utils/useUsername.tsx";
 import { Plays } from "../enums/plays";
 import { SortBy } from "../enums/sortBy.ts";
 import { useAudio } from "../hooks/useAudio.tsx";
@@ -32,6 +31,8 @@ import { Card } from "../types/Card";
 import { RoundRewards } from "../types/RoundRewards.ts";
 import { PlayEvents } from "../types/ScoreData";
 import { changeCardSuit } from "../utils/changeCardSuit";
+
+const useBurners = import.meta.env.VITE_USE_BURNER_ACCOUNTS || false;
 
 interface IGameContext {
   gameId: number;
@@ -192,19 +193,19 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
   const state = useGameState();
   const [lockRedirection, setLockRedirection] = useState(false);
 
-  const { account: controllerAccount } = useAccount()
-  const { connect, connectors } = useConnect()
+  const { account: controllerAccount } = useAccount();
+  const { connect, connectors } = useConnect();
 
   const reconnectController = () => {
     if (!controllerAccount) {
-      connect({ connector: connectors[0] })
-      return
+      connect({ connector: connectors[0] });
+      return;
     }
-  }
+  };
 
   useEffect(() => {
-    reconnectController()
-  }, [])
+    !useBurners && reconnectController();
+  }, [useBurners]);
 
   const navigate = useNavigate();
   const {
@@ -272,7 +273,6 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     setError,
     sortBySuit,
     setSortBySuit,
-    username,
     setPlayIsNeon,
     specialCards,
     setIsRageRound,
@@ -426,11 +426,9 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     return createRewardPromise;
   };
 
+  const username = useUsername();
+
   const executeCreateGame = async () => {
-    const username = await (
-      cartridgeConnector as CartridgeConnector
-    ).username();
-    console.log('username', username)    
     setError(false);
     setGameLoading(true);
     setIsRageRound(false);

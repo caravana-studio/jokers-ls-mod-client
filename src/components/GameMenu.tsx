@@ -15,6 +15,8 @@ interface GameMenuProps {
   showTutorial?: () => void;
 }
 
+const useBurners = import.meta.env.VITE_USE_BURNER_ACCOUNTS || false;
+
 export const GameMenu = ({
   onlySound = false,
   showTutorial,
@@ -64,7 +66,7 @@ export const GameMenu = ({
                 localStorage.removeItem(GAME_ID);
                 localStorage.removeItem(LOGGED_USER);
                 restartGame();
-                disconnect();
+                !useBurners && disconnect();
                 navigate("/");
               }}
             >

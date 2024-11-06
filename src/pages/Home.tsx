@@ -7,13 +7,16 @@ import { Background } from "../components/Background";
 import { DiscordLink } from "../components/DiscordLink";
 import { Leaderboard } from "../components/Leaderboard";
 import { PoweredBy } from "../components/PoweredBy";
+import { intro } from "../constants/lore";
+import { beep } from "../constants/sfx";
 import { useDojo } from "../dojo/useDojo";
+import { useAudio } from "../hooks/useAudio";
 import { useGameContext } from "../providers/GameProvider";
 import { LS_GREEN } from "../theme/colors";
-import { useAudio } from "../hooks/useAudio";
-import { beep } from "../constants/sfx";
-import { intro } from "../constants/lore";
 import Lore from "./LoreScreen/Lore";
+import { LOGGED_USER } from "../constants/localStorage";
+
+const useBurners = import.meta.env.VITE_USE_BURNER_ACCOUNTS || false;
 
 export const Home = () => {
   const [leaderboardOpen, setLeaderboardOpen] = useState(false);
@@ -28,16 +31,21 @@ export const Home = () => {
   const { checkOrCreateGame } = useGameContext();
 
   useEffect(() => {
-    if (account && playButtonClicked) {
+    if (!useBurners && account && playButtonClicked) {
       checkOrCreateGame();
     }
-  }, [account, playButtonClicked]);
+  }, [account, playButtonClicked, useBurners]);
 
   const onPlayClick = () => {
     beepSound();
     setLoading(true);
     setPlayButtonClicked(true);
-    connect({ connector: connectors[0] });
+    if (useBurners) {
+      localStorage.setItem(LOGGED_USER, "testUser");
+      checkOrCreateGame();
+    } else {
+      connect({ connector: connectors[0] });
+    }
   };
 
   return (
