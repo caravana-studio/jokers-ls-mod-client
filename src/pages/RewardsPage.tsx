@@ -24,16 +24,15 @@ export const notificationAnimations = [
   { name: "slide", startFrame: 24, frameCount: 5 },
 ];
 
-const game = useGame();
-const { skipFailedObstacle } = useGameContext();
-const { obstacletAttack, setObstacleAttack } = useGameState();
-const obstacleFailed = game?.substate === "UNPASSED_OBSTACLE";
-
-if (obstacleFailed && obstacletAttack === 0) {
-  setObstacleAttack(5 * game.level);
-}
-
 export const RewardsPage = () => {
+  const game = useGame();
+  const { skipFailedObstacle } = useGameContext();
+  const { obstacletAttack, setObstacleAttack } = useGameState();
+  const obstacleFailed = game?.substate === "UNPASSED_OBSTACLE";
+  
+  if (obstacleFailed && obstacletAttack === 0) {
+    setObstacleAttack(5 * game.level);
+  }
   return (
     <Background type="skulls" dark bgDecoration>
       <PositionedGameMenu decoratedPage />
