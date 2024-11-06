@@ -22,6 +22,7 @@ export interface PlayEvents {
   playWinGameEvent?: PlayWinGameEvent;
   beastAttack?: number;
   obstacleAttack?: number;
+  rewards?: number[];
 }
 
 export interface PlayWinGameEvent {

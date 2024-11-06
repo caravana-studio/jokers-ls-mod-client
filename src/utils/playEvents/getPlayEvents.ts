@@ -6,6 +6,7 @@ import {
 import { DojoEvent } from "../../types/DojoEvent";
 import { PlayEvents } from "../../types/ScoreData";
 import { getCardsFromEvents } from "../getCardsFromEvents";
+import { getRewardsEvents } from "../getRewardEvents";
 import { getBeastAttackEvent } from "./getBeastAttackEvent";
 import { getCashEvents } from "./getCashEvents";
 import { getDetailEarnedEvent } from "./getDetailEarnedEvent";
@@ -48,6 +49,7 @@ export const getPlayEvents = (events: DojoEvent[]): PlayEvents => {
     playerAttack: getPlayerAttackEvent(events),
     beastAttack: getBeastAttackEvent(events),
     obstacleAttack: getObstacleAttackEvent(events),
+    rewards: getRewardsEvents(events),
   };
 
   return playEvents;

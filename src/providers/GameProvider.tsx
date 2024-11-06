@@ -109,6 +109,8 @@ interface IGameContext {
   gameOver: boolean;
   setGameOver: (gameOver: boolean) => void;
   skipFailedObstacle: () => Promise<any>;
+  rewardsIds: number[];
+  refetchRewardsId: () => void;
   levelScore: number;
 }
 
@@ -188,6 +190,8 @@ const GameContext = createContext<IGameContext>({
   gameOver: false,
   setGameOver: () => {},
   skipFailedObstacle: () => new Promise((resolve) => resolve(undefined)),
+  rewardsIds: [0],
+  refetchRewardsId: () => {},
   levelScore: 0,
 });
 export const useGameContext = () => useContext(GameContext);
@@ -299,6 +303,9 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     setBeastAttack,
     setGameOver,
     setObstacleAttack,
+    rewardsIds,
+    setRewardsIds,
+    refetchRewardsId,
   } = state;
 
   const resetLevel = () => {
@@ -421,6 +428,8 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
   };
 
   const createNewReward = async (rewardId: number, mode: string) => {
+    // console.log(rewardId);
+    // console.log(mode);
     const createNewRewardPromise = createReward(gameId, rewardId);
 
     createNewRewardPromise.then(async (response) => {
@@ -776,6 +785,10 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
           playEvents.obstacleDefeated ||
           playEvents.playWinGameEvent
         ) {
+          if (playEvents.rewards) {
+            const rewards = [playEvents.rewards[1], playEvents.rewards[2]];
+            setRewardsIds(rewards);
+          }
           setTimeout(
             () => {
               navigate("/rewards");
