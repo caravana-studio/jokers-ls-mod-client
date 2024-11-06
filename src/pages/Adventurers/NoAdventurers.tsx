@@ -1,7 +1,7 @@
-import { Box, Button, Flex, HStack, Heading, Text } from "@chakra-ui/react";
-import { useGameContext } from "../../providers/GameProvider";
-import { useGameActions } from "../../dojo/useGameActions";
+import { Button, Flex, HStack, Heading, Text } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import { useGameActions } from "../../dojo/useGameActions";
+import { useGameContext } from "../../providers/GameProvider";
 
 export const NoAdventurers = () => {
   const { gameId, createNewLevel } = useGameContext();
@@ -9,13 +9,13 @@ export const NoAdventurers = () => {
   const navigate = useNavigate();
 
   return (
-    <>
-      <Flex
-        w="100%"
-        flexDirection={"column"}
-        justifyContent={"center"}
-        alignItems={"center"}
-      >
+    <Flex
+      flexGrow={1}
+      flexDirection={"column"}
+      justifyContent={"space-between"}
+      alignItems={"center"}
+    >
+      <Flex flexDir={"column"} gap={8}>
         <Heading size={"xxl"} textAlign={"center"} variant="neonGreen">
           - Dead adventurers -
         </Heading>
@@ -25,7 +25,6 @@ export const NoAdventurers = () => {
           margin={"0 auto"}
           textAlign={"center"}
           lineHeight={1}
-          my={16}
         >
           Completed Loot Survivor games can give you a small boost in your
           current game, such as extra health points and card selection options.
@@ -33,6 +32,8 @@ export const NoAdventurers = () => {
           The higher level your fallen adventurer has, the more selection
           options you'll get.
         </Text>
+      </Flex>
+      <Flex flexDir={"column"} gap={8}>
         <Heading color={"white"} size={"l"}>
           We couldn't find any completed Loot Survivor games in your account.
         </Heading>
@@ -63,6 +64,6 @@ export const NoAdventurers = () => {
           Skip
         </Button>
       </Flex>
-    </>
+    </Flex>
   );
 };

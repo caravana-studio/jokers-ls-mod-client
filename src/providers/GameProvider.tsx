@@ -1,5 +1,5 @@
 import CartridgeConnector from "@cartridge/connector";
-import { useAccount, useConnect } from '@starknet-react/core';
+import { useAccount, useConnect } from "@starknet-react/core";
 import {
   PropsWithChildren,
   createContext,
@@ -108,6 +108,7 @@ interface IGameContext {
   setBeastAttack: (beastAttack: number) => void;
   gameOver: boolean;
   setGameOver: (gameOver: boolean) => void;
+  levelScore: number;
 }
 
 const GameContext = createContext<IGameContext>({
@@ -185,6 +186,7 @@ const GameContext = createContext<IGameContext>({
   setBeastAttack: () => {},
   gameOver: false,
   setGameOver: () => {},
+  levelScore: 0,
 });
 export const useGameContext = () => useContext(GameContext);
 
@@ -192,19 +194,21 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
   const state = useGameState();
   const [lockRedirection, setLockRedirection] = useState(false);
 
-  const { account: controllerAccount } = useAccount()
-  const { connect, connectors } = useConnect()
+  const [levelScore, setLevelScore] = useState(0);
+
+  const { account: controllerAccount } = useAccount();
+  const { connect, connectors } = useConnect();
 
   const reconnectController = () => {
     if (!controllerAccount) {
-      connect({ connector: connectors[0] })
-      return
+      connect({ connector: connectors[0] });
+      return;
     }
-  }
+  };
 
   useEffect(() => {
-    reconnectController()
-  }, [])
+    reconnectController();
+  }, []);
 
   const navigate = useNavigate();
   const {
@@ -430,7 +434,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     const username = await (
       cartridgeConnector as CartridgeConnector
     ).username();
-    console.log('username', username)    
+    console.log("username", username);
     setError(false);
     setGameLoading(true);
     setIsRageRound(false);
@@ -709,8 +713,13 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
 
       setTimeout(() => {
         setPlayAnimation(true);
-        if (playEvents.playerAttack)
+        if (playEvents.playerAttack) {
           setAttackAnimation(playEvents.playerAttack.valueOf());
+        }
+        setLevelScore(points * multi);
+        setTimeout(() => {
+          setLevelScore(0);
+        }, 2500);
       }, ALL_CARDS_DURATION + 500);
 
       setTimeout(() => {
@@ -1027,6 +1036,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
         redirectBasedOnGameState,
         attackAnimation,
         setAttackAnimation,
+        levelScore,
       }}
     >
       {children}
