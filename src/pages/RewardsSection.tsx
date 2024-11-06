@@ -148,7 +148,7 @@ const RewardsSection = () => {
             beepSound();
             console.log(reward.id);
             // createNewReward(reward.id - 1, reward.type);
-            createNewReward(reward.id, reward.type);
+            createNewReward(index, reward.type);
           }}
         />
       ))}
