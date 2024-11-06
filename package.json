@@ -13,6 +13,7 @@
     "test": "vitest"
   },
   "dependencies": {
+    "@cartridge/connector": "^0.3.40",
     "@chakra-ui/anatomy": "^2.1.1",
     "@chakra-ui/icons": "^2.1.1",
     "@chakra-ui/react": "^2.8.2",
@@ -63,6 +64,7 @@
     "react-router-dom": "^6.22.3",
     "react-spring": "^9.7.3",
     "react-tilt": "^1.0.2",
+    "react-type-animation": "^3.2.0",
     "rxjs": "^7.8.1",
     "sass": "^1.75.0",
     "screenfull": "^6.0.2",

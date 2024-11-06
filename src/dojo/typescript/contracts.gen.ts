@@ -8,7 +8,7 @@ import * as models from "./models.gen";
 export type IWorld = Awaited<ReturnType<typeof setupWorld>>;
 
 export async function setupWorld(provider: DojoProvider) {
-  // System definitions for `jokers_of_neon-game_system` contract
+  // System definitions for `jokers_ls_mod-game_system` contract
   function game_system() {
     const contract_name = "game_system";
 
@@ -22,7 +22,7 @@ export async function setupWorld(provider: DojoProvider) {
             entrypoint: "world",
             calldata: [],
           },
-          "jokers_of_neon"
+          "jokers_ls_mod"
         );
       } catch (error) {
         console.error("Error executing world:", error);
@@ -43,7 +43,7 @@ export async function setupWorld(provider: DojoProvider) {
             entrypoint: "create_game",
             calldata: [props.player_name],
           },
-          "jokers_of_neon"
+          "jokers_ls_mod"
         );
       } catch (error) {
         console.error("Error executing create_game:", error);
@@ -64,7 +64,7 @@ export async function setupWorld(provider: DojoProvider) {
             entrypoint: "create_level",
             calldata: [props.game_id],
           },
-          "jokers_of_neon"
+          "jokers_ls_mod"
         );
       } catch (error) {
         console.error("Error executing create_level:", error);
@@ -86,7 +86,7 @@ export async function setupWorld(provider: DojoProvider) {
             entrypoint: "create_reward",
             calldata: [props.game_id, props.reward_index],
           },
-          "jokers_of_neon"
+          "jokers_ls_mod"
         );
       } catch (error) {
         console.error("Error executing create_reward:", error);
@@ -112,7 +112,7 @@ export async function setupWorld(provider: DojoProvider) {
               ...props.cards_index,
             ],
           },
-          "jokers_of_neon"
+          "jokers_ls_mod"
         );
       } catch (error) {
         console.error("Error executing select_reward:", error);
@@ -134,7 +134,7 @@ export async function setupWorld(provider: DojoProvider) {
             entrypoint: "select_deck",
             calldata: [props.game_id, props.deck_id],
           },
-          "jokers_of_neon"
+          "jokers_ls_mod"
         );
       } catch (error) {
         console.error("Error executing select_deck:", error);
@@ -160,7 +160,7 @@ export async function setupWorld(provider: DojoProvider) {
               ...props.cards_index,
             ],
           },
-          "jokers_of_neon"
+          "jokers_ls_mod"
         );
       } catch (error) {
         console.error("Error executing select_special_cards:", error);
@@ -186,7 +186,7 @@ export async function setupWorld(provider: DojoProvider) {
               ...props.cards_index,
             ],
           },
-          "jokers_of_neon"
+          "jokers_ls_mod"
         );
       } catch (error) {
         console.error("Error executing select_modifier_cards:", error);
@@ -215,7 +215,7 @@ export async function setupWorld(provider: DojoProvider) {
               ...props.modifiers_index,
             ],
           },
-          "jokers_of_neon"
+          "jokers_ls_mod"
         );
       } catch (error) {
         console.error("Error executing play:", error);
@@ -244,7 +244,7 @@ export async function setupWorld(provider: DojoProvider) {
               ...props.modifiers_index,
             ],
           },
-          "jokers_of_neon"
+          "jokers_ls_mod"
         );
       } catch (error) {
         console.error("Error executing discard:", error);
@@ -262,7 +262,7 @@ export async function setupWorld(provider: DojoProvider) {
             entrypoint: "end_turn",
             calldata: [props.game_id],
           },
-          "jokers_of_neon"
+          "jokers_ls_mod"
         );
       } catch (error) {
         console.error("Error executing end_turn:", error);
@@ -284,7 +284,7 @@ export async function setupWorld(provider: DojoProvider) {
             entrypoint: "discard_effect_card",
             calldata: [props.game_id, props.card_index],
           },
-          "jokers_of_neon"
+          "jokers_ls_mod"
         );
       } catch (error) {
         console.error("Error executing discard_effect_card:", error);
@@ -306,7 +306,7 @@ export async function setupWorld(provider: DojoProvider) {
             entrypoint: "discard_special_card",
             calldata: [props.game_id, props.special_card_index],
           },
-          "jokers_of_neon"
+          "jokers_ls_mod"
         );
       } catch (error) {
         console.error("Error executing discard_special_card:", error);
@@ -328,7 +328,7 @@ export async function setupWorld(provider: DojoProvider) {
             entrypoint: "use_adventurer",
             calldata: [props.game_id, props.adventurer_id],
           },
-          "jokers_of_neon"
+          "jokers_ls_mod"
         );
       } catch (error) {
         console.error("Error executing use_adventurer:", error);
@@ -349,10 +349,36 @@ export async function setupWorld(provider: DojoProvider) {
             entrypoint: "skip_adventurer",
             calldata: [props.game_id],
           },
-          "jokers_of_neon"
+          "jokers_ls_mod"
         );
       } catch (error) {
         console.error("Error executing skip_adventurer:", error);
+        throw error;
+      }
+    };
+
+    // Call the `select_aventurer_cards` system with the specified Account and calldata
+    const select_aventurer_cards = async (props: {
+      account: Account;
+      game_id: number;
+      cards_index: number[];
+    }) => {
+      try {
+        return await provider.execute(
+          props.account,
+          {
+            contractName: contract_name,
+            entrypoint: "select_aventurer_cards",
+            calldata: [
+              props.game_id,
+              props.cards_index.length,
+              ...props.cards_index,
+            ],
+          },
+          "jokers_ls_mod"
+        );
+      } catch (error) {
+        console.error("Error executing select_aventurer_cards:", error);
         throw error;
       }
     };
@@ -378,32 +404,6 @@ export async function setupWorld(provider: DojoProvider) {
       }
     };
 
-    // Call the `select_aventurer_cards` system with the specified Account and calldata
-    const select_aventurer_cards = async (props: {
-      account: Account;
-      game_id: number;
-      cards_index: number[];
-    }) => {
-      try {
-        return await provider.execute(
-          props.account,
-          {
-            contractName: contract_name,
-            entrypoint: "select_aventurer_cards",
-            calldata: [
-              props.game_id,
-              props.cards_index.length,
-              ...props.cards_index,
-            ],
-          },
-          "jokers_of_neon"
-        );
-      } catch (error) {
-        console.error("Error executing select_aventurer_cards:", error);
-        throw error;
-      }
-    };
-
     // Call the `name` system with the specified Account and calldata
     const name = async (props: { account: Account }) => {
       try {
@@ -414,7 +414,7 @@ export async function setupWorld(provider: DojoProvider) {
             entrypoint: "name",
             calldata: [],
           },
-          "jokers_of_neon"
+          "jokers_ls_mod"
         );
       } catch (error) {
         console.error("Error executing name:", error);
@@ -444,7 +444,7 @@ export async function setupWorld(provider: DojoProvider) {
     };
   }
 
-  // System definitions for `jokers_of_neon-poker_hand_system` contract
+  // System definitions for `jokers_ls_mod-poker_hand_system` contract
   function poker_hand_system() {
     const contract_name = "poker_hand_system";
 
@@ -458,7 +458,7 @@ export async function setupWorld(provider: DojoProvider) {
             entrypoint: "world",
             calldata: [],
           },
-          "jokers_of_neon"
+          "jokers_ls_mod"
         );
       } catch (error) {
         console.error("Error executing world:", error);
@@ -479,7 +479,7 @@ export async function setupWorld(provider: DojoProvider) {
             entrypoint: "get_player_poker_hands",
             calldata: [props.game_id],
           },
-          "jokers_of_neon"
+          "jokers_ls_mod"
         );
       } catch (error) {
         console.error("Error executing get_player_poker_hands:", error);
@@ -497,7 +497,7 @@ export async function setupWorld(provider: DojoProvider) {
             entrypoint: "name",
             calldata: [],
           },
-          "jokers_of_neon"
+          "jokers_ls_mod"
         );
       } catch (error) {
         console.error("Error executing name:", error);
@@ -512,7 +512,7 @@ export async function setupWorld(provider: DojoProvider) {
     };
   }
 
-  // System definitions for `jokers_of_neon-rage_system` contract
+  // System definitions for `jokers_ls_mod-rage_system` contract
   function rage_system() {
     const contract_name = "rage_system";
 
@@ -526,7 +526,7 @@ export async function setupWorld(provider: DojoProvider) {
             entrypoint: "calculate",
             calldata: [props.game_id],
           },
-          "jokers_of_neon"
+          "jokers_ls_mod"
         );
       } catch (error) {
         console.error("Error executing calculate:", error);
@@ -544,7 +544,7 @@ export async function setupWorld(provider: DojoProvider) {
             entrypoint: "name",
             calldata: [],
           },
-          "jokers_of_neon"
+          "jokers_ls_mod"
         );
       } catch (error) {
         console.error("Error executing name:", error);
@@ -562,7 +562,7 @@ export async function setupWorld(provider: DojoProvider) {
             entrypoint: "world",
             calldata: [],
           },
-          "jokers_of_neon"
+          "jokers_ls_mod"
         );
       } catch (error) {
         console.error("Error executing world:", error);

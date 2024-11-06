@@ -3,7 +3,7 @@ import { BurnerManager } from "@dojoengine/create-burner";
 import { Component, Metadata, Schema } from "@dojoengine/recs";
 import { setEntities, syncEntities } from "@dojoengine/state";
 import * as torii from "@dojoengine/torii-client";
-import { Account, ArraySignatureType } from "starknet";
+import { Account, ArraySignatureType, RpcProvider } from "starknet";
 import { GAME_ID } from "../constants/localStorage";
 import { createClientComponents } from "./createClientComponents";
 import { createSystemCalls } from "./createSystemCalls";
@@ -58,7 +58,7 @@ export async function setup({ ...config }: DojoConfig) {
   const dojoProvider = new DojoProvider(config.manifest, config.rpcUrl);
 
   type ClientComponentsKeys = keyof typeof clientComponents;
-  const defaultNameSpace = "jokers_of_neon-";
+  const defaultNameSpace = "jokers_ls_mod-";
   const componentNames: string[] = [];
 
   (Object.keys(clientComponents) as ClientComponentsKeys[]).forEach((key) => {
@@ -79,13 +79,13 @@ export async function setup({ ...config }: DojoConfig) {
     const keysGame: torii.KeysClause = {
       keys: [gameID],
       pattern_matching: "FixedLen",
-      models: ["jokers_of_neon-Game"],
+      models: ["jokers_ls_mod-Game"],
     };
 
     const keysCard: torii.KeysClause = {
       keys: [gameID, undefined, undefined],
       pattern_matching: "FixedLen",
-      models: ["jokers_of_neon-Card"],
+      models: ["jokers_ls_mod-Card"],
     };
 
     const query: torii.Query = {
@@ -119,26 +119,24 @@ export async function setup({ ...config }: DojoConfig) {
 
   // setup world
   const client = await setupWorld(dojoProvider);
+  const rpcProvider = new RpcProvider({
+    nodeUrl: config.rpcUrl,
+  });
 
   // create burner manager
   const burnerManager = new BurnerManager({
     masterAccount: new Account(
-      {
-        nodeUrl: config.rpcUrl,
-      },
+      rpcProvider,
       config.masterAddress,
       config.masterPrivateKey
     ),
     accountClassHash: config.accountClassHash,
-    rpcProvider: dojoProvider.provider,
+    rpcProvider: rpcProvider,
     feeTokenAddress: config.feeTokenAddress,
   });
 
   try {
     await burnerManager.init();
-    if (burnerManager.list().length === 0) {
-      await burnerManager.create();
-    }
   } catch (e) {
     console.error(e);
   }
@@ -155,6 +153,7 @@ export async function setup({ ...config }: DojoConfig) {
     dojoProvider,
     burnerManager,
     toriiClient,
+    rpcProvider,
     sync,
     syncCallback: async () => await syncEntitiesForGameID(),
   };

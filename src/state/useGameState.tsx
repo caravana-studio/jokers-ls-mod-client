@@ -1,11 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
-import { LOGGED_USER, SORT_BY_SUIT } from "../constants/localStorage";
+import { SORT_BY_SUIT } from "../constants/localStorage";
 import { PLAYS_DATA } from "../constants/plays";
-import {
-  useBeast,
-  useBeastPlayer,
-  useGameModeBeast,
-} from "../dojo/queries/useBeast";
+import { useBeast, useBeastPlayer } from "../dojo/queries/useBeast";
 import { useBlisterPackResult } from "../dojo/queries/useBlisterPackResult";
 import { useChallenge, useChallengePlayer } from "../dojo/queries/useChallenge";
 import { useCurrentHand } from "../dojo/queries/useCurrentHand";
@@ -13,6 +9,7 @@ import { useCurrentSpecialCards } from "../dojo/queries/useCurrentSpecialCards";
 import { useGame } from "../dojo/queries/useGame";
 import { Beast } from "../dojo/typescript/models.gen";
 import { getLSGameId } from "../dojo/utils/getLSGameId";
+import { useUsername } from "../dojo/utils/useUsername";
 import { Plays } from "../enums/plays";
 import { SortBy } from "../enums/sortBy";
 import { Card } from "../types/Card";
@@ -62,7 +59,9 @@ export const useGameState = () => {
     setPlaysLeft((prev) => prev - 1);
   };
   const consumeDiscard = () => {
-    setDiscardsLeft((prev) => prev - 1);
+    setDiscardsLeft((prev) => {
+      return prev - 1;
+    });
   };
   const consumeEnergyPlay = () => {
     setEnergyLeft((prev) => prev - 2);
@@ -75,9 +74,15 @@ export const useGameState = () => {
   const beastPlayer = useBeastPlayer();
 
   const refetchPlaysAndDiscards = () => {
-    setDiscardsLeft(challengePlayer?.discards ?? 0);
-    setPlaysLeft(challengePlayer?.plays ?? 0);
-    setEnergyLeft(beastPlayer?.energy ?? 0);
+    if (challengePlayer) {
+      setDiscardsLeft(challengePlayer?.discards ?? 0);
+      setPlaysLeft(challengePlayer?.plays ?? 0);
+    }
+  };
+  const refetchEnergy = () => {
+    if (beastPlayer) {
+      setEnergyLeft(beastPlayer?.energy ?? 0);
+    }
   };
 
   const resetPlaysAndDiscards = () => {
@@ -99,7 +104,9 @@ export const useGameState = () => {
   const dojoBlisterPackResult = useBlisterPackResult();
 
   const refetchBlisterPackResult = () => {
-    setBlisterPackResult(dojoBlisterPackResult.cards);
+    if (dojoBlisterPackResult) {
+      setBlisterPackResult(dojoBlisterPackResult.cards);
+    }
   };
 
   const sortBy: SortBy = useMemo(
@@ -115,7 +122,9 @@ export const useGameState = () => {
   const dojoSpecialCards = useCurrentSpecialCards();
 
   const refetchSpecialCards = () => {
-    setSpecialCards(dojoSpecialCards);
+    if (dojoSpecialCards) {
+      setSpecialCards(dojoSpecialCards);
+    }
   };
 
   const addSpecialCard = (card: Card) => {
@@ -138,8 +147,7 @@ export const useGameState = () => {
 
   const beastFetchData = useBeast();
 
-  const lsUser = localStorage.getItem(LOGGED_USER);
-  const username = lsUser;
+  const username = useUsername();
 
   const resetMultiPoints = () => {
     setPoints(0);
@@ -150,6 +158,7 @@ export const useGameState = () => {
 
   useEffect(() => {
     if (dojoHand?.length > 0 && hand.length === 0) {
+      console.log("replacing hand", dojoHand);
       setHand(dojoHand);
     }
   }, [dojoHand]);
@@ -186,11 +195,15 @@ export const useGameState = () => {
   const challenges = useChallenge();
 
   const refetchObstacles = () => {
-    setObstacles(challenges);
+    if (challenges) {
+      setObstacles(challenges);
+    }
   };
 
   const refetchBeast = () => {
-    setBeast(beastFetchData as unknown as Beast);
+    if (beastFetchData) {
+      setBeast(beastFetchData as unknown as Beast);
+    }
   };
 
   return {
@@ -255,6 +268,7 @@ export const useGameState = () => {
     consumeEnergyDiscard,
     resetPlaysAndDiscards,
     refetchPlaysAndDiscards,
+    refetchEnergy,
     beastAttack,
     setBeastAttack,
     gameOver,

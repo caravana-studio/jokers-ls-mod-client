@@ -8,6 +8,7 @@ import { useGame } from "../../dojo/queries/useGame.tsx";
 import { PointBox } from "../../components/MultiPoints.tsx";
 import { RollingNumber } from "../../components/RollingNumber.tsx";
 import { useGameContext } from "../../providers/GameProvider.tsx";
+import { useMemo } from "react";
 
 interface TopSectionProps {
   inRewardsPag?: boolean;
@@ -20,12 +21,11 @@ export const TopSection = ({
 }: TopSectionProps) => {
   const { mode } = useParams();
   const game = useGame();
-  const { points } = useGameContext();
+
   const level = game?.level ?? 0;
 
   return (
     <Flex
-      height="100%"
       width="100%"
       justifyContent={"space-between"}
       alignItems={"flex-start"}
@@ -77,11 +77,6 @@ export const TopSection = ({
                 <PointBox type="points">
                   <Heading color="white" size={{ base: "s", md: "m" }}>
                     Level <RollingNumber n={level} />
-                  </Heading>
-                </PointBox>
-                <PointBox type="points">
-                  <Heading color="white" size={{ base: "s", md: "m" }}>
-                    Points: <RollingNumber n={points ?? 0} />
                   </Heading>
                 </PointBox>
               </Box>

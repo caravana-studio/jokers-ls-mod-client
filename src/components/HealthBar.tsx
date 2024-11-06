@@ -2,9 +2,10 @@ import { Box, Flex, Text } from "@chakra-ui/react";
 import { ProgressBar } from "./CompactRoundData/ProgressBar";
 import { LOGGED_USER } from "../constants/localStorage";
 import { useGame } from "../dojo/queries/useGame";
+import { useUsername } from "../dojo/utils/useUsername";
 
 export const HealthBar = () => {
-  const username = localStorage.getItem(LOGGED_USER);
+  const username = useUsername();
 
   const game = useGame();
   const maxHp = game?.player_hp ?? 0;

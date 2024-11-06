@@ -1,31 +1,60 @@
-import { Box, Heading, Text, useTheme } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text, useTheme } from "@chakra-ui/react";
 import { isMobile } from "react-device-detect";
+import { useTranslation } from "react-i18next";
 import { useGameContext } from "../providers/GameProvider";
 import { RollingNumber } from "./RollingNumber";
-import { useTranslation } from "react-i18next";
 
 export const MultiPoints = () => {
-  const { points, multi } = useGameContext();
+  const { points, multi, levelScore } = useGameContext();
   const { t } = useTranslation(["game"]);
-  
   return (
-    <Box
-      gap={3}
-      sx={{ display: "flex", alignItems: "center" }}
-      className="game-tutorial-step-6"
-    >
-      <PointBox type="points">
-        <Heading color="white" size={{ base: "s", md: "m" }}>
-          <RollingNumber n={points} />
-        </Heading>
-      </PointBox>
-      {!isMobile && <Text size="xl">x</Text>}
-      <PointBox type="multi">
-        <Heading color="white" size={{ base: "s", md: "m" }}>
-          <RollingNumber n={multi} />
-        </Heading>
-      </PointBox>
-    </Box>
+    <Flex flexDir="column" alignItems={"center"}>
+      <Box
+        gap={3}
+        sx={{ display: "flex", alignItems: "center" }}
+        className="game-tutorial-step-6"
+      >
+        <Box
+          sx={{
+            transform: `translateX(${levelScore ? 75 : 0}px)`,
+            opacity: levelScore ? 0 : 1,
+            transition: "all 0.3s ease",
+          }}
+        >
+          <PointBox type="points">
+            <Heading color="white" size={{ base: "s", md: "m" }}>
+              <RollingNumber n={points} />
+            </Heading>
+          </PointBox>
+        </Box>
+        {!isMobile && !levelScore && <Text size="xl">x</Text>}
+        <Box
+          sx={{
+            transform: `translateX(${levelScore ? -75 : 0}px)`,
+            opacity: levelScore ? 0 : 1,
+            transition: "all 0.3s ease",
+          }}
+        >
+          <PointBox type="multi">
+            <Heading color="white" size={{ base: "s", md: "m" }}>
+              <RollingNumber n={multi} />
+            </Heading>
+          </PointBox>
+        </Box>
+      </Box>
+
+      <Box
+        sx={{ opacity: levelScore ? 1 : 0, transition: "opacity 0.3 ease" }}
+        position="fixed"
+        width={"180px"}
+      >
+        <PointBox type="points">
+          <Heading color="white" size={{ base: "s", md: "m" }}>
+            Hand score: <RollingNumber n={levelScore} />
+          </Heading>
+        </PointBox>
+      </Box>
+    </Flex>
   );
 };
 
@@ -37,7 +66,7 @@ interface PointBoxProps {
 export const PointBox = ({ children, type }: PointBoxProps) => {
   const { colors } = useTheme();
   const colorMap = {
-    points: 'white',
+    points: "white",
     multi: colors.lsGreen,
     level: "#FFF",
   };
@@ -54,8 +83,7 @@ export const PointBox = ({ children, type }: PointBoxProps) => {
         alignItems: "center",
         textShadow: `0 0 5px ${color}`,
       }}
-      backgroundColor='rgba(0,0,0,0.5)'
-
+      backgroundColor="rgba(0,0,0,0.5)"
       boxShadow={`0px 0px 5px 2px ${color} `}
       borderRadius={{ base: 15, md: 20 }}
     >

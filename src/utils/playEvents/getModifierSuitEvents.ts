@@ -1,4 +1,4 @@
-import { MODIFIER_SUIT_EVENT } from "../../constants/dojoEventKeys";
+import { MODIFIER_CARD_SUIT_EVENT } from "../../constants/dojoEventKeys";
 import { Suits } from "../../enums/suits";
 import { DojoEvent } from "../../types/DojoEvent";
 import { ModifierSuitEvent } from "../../types/ScoreData";
@@ -9,7 +9,7 @@ export const getModifierSuitEvents = (
 ): ModifierSuitEvent[] => {
   
   const modifierSuitEvents = events.filter(
-    (event) => event.keys[0] === MODIFIER_SUIT_EVENT
+    (event) => event.keys[0] === MODIFIER_CARD_SUIT_EVENT
   );
 
   return modifierSuitEvents.map((event) => {
