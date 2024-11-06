@@ -5,7 +5,7 @@ import { Box, Spinner, Tooltip } from "@chakra-ui/react";
 import { CheckCircleIcon, WarningIcon } from "@chakra-ui/icons";
 import { MouseEventHandler } from "react";
 const transactionsUrl =
-  import.meta.env.VITE_TRANSACTIONS_URL || "http://localhost:5050";
+  import.meta.env.VITE_TRANSACTIONS_URL || "https://voyager.online/tx/";
 
 const TOAST_COMMON_OPTIONS: ExternalToast = {
   id: "transaction",
