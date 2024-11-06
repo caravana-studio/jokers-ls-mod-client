@@ -17,9 +17,8 @@ interface TopSectionProps {
 export const TopSection = ({ inRewardsPag = false }: TopSectionProps) => {
   const { mode } = useParams();
   const game = useGame();
-  const level = useMemo(() => {
-    return game?.level ?? 0;
-  }, [game]);
+
+  const level = game?.level ?? 0;
 
   return (
     <Flex
