@@ -13,18 +13,18 @@ import {
   TUTORIAL_STYLE,
 } from "../../constants/gameTutorial";
 import {
+  SKIP_TUTORIAL_BEAST,
   SKIP_TUTORIAL_GAME,
   SKIP_TUTORIAL_MODIFIERS,
   SKIP_TUTORIAL_SPECIAL_CARDS,
-  SKIP_TUTORIAL_BEAST,
 } from "../../constants/localStorage.ts";
 import { useGame } from "../../dojo/queries/useGame.tsx";
+import { useAudioPlayer } from "../../providers/AudioPlayerProvider.tsx";
 import { useGameContext } from "../../providers/GameProvider.tsx";
+import { BeastTurnAnimation } from "./BeastTurnAnimation.tsx";
 import { HandSection } from "./HandSection.tsx";
 import { MidSection } from "./MidSection.tsx";
 import { TopSection } from "./TopSection.tsx";
-import { BeastTurnAnimation } from "./BeastTurnAnimation.tsx";
-import { useAudioPlayer } from "../../providers/AudioPlayerProvider.tsx";
 
 export const GameContent = () => {
   const {
@@ -42,10 +42,11 @@ export const GameContent = () => {
 
   useEffect(() => {
     if (playsLeft < 0 || discardsLeft < 0) {
+      console.log("refetching plays and discards");
       refetchPlaysAndDiscards();
     }
-  }, [playsLeft, discardsLeft]);  
-  
+  }, [playsLeft, discardsLeft]);
+
   useEffect(() => {
     if (energyLeft < 0) {
       refetchEnergy();

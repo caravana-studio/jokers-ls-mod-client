@@ -17,8 +17,6 @@ import { SortBy } from "../../components/SortBy";
 import { TiltCard } from "../../components/TiltCard";
 import { HAND_SECTION_ID } from "../../constants/general";
 import { CARD_HEIGHT, CARD_WIDTH } from "../../constants/visualProps";
-import { useBeastPlayer } from "../../dojo/queries/useBeast";
-import { useChallengePlayer } from "../../dojo/queries/useChallenge";
 import { useGameContext } from "../../providers/GameProvider";
 import { useResponsiveValues } from "../../theme/responsiveSettings";
 
@@ -32,17 +30,15 @@ export const HandSection = () => {
     togglePreselectedModifier,
     discardEffectCard,
     preSelectedModifiers,
-    roundRewards,
+    discardAnimation,
+    playAnimation,
+    energyLeft,
+    playsLeft,
   } = useGameContext();
 
   const [discarding, setDiscarding] = useState(false);
 
-  const challengePlayer = useChallengePlayer();
-  const handsLeft = challengePlayer?.plays ?? 0;
-
-  const beastPlayer = useBeastPlayer();
-  const energyLeft = beastPlayer?.energy ?? 0;
-  const canPlay = handsLeft > 0 || energyLeft > 0;
+  const canPlay = playsLeft > 0 || energyLeft > 0;
 
   const { setNodeRef } = useDroppable({
     id: HAND_SECTION_ID,
@@ -81,7 +77,7 @@ export const HandSection = () => {
         </Box>
         <SimpleGrid
           sx={{
-            opacity: !roundRewards && canPlay ? 1 : 0.3,
+            opacity: canPlay ? 1 : 0.3,
             minWidth: `${cardWidth * 4}px`,
             maxWidth: `${cardWidth * 6.5}px`,
           }}
@@ -169,7 +165,13 @@ export const HandSection = () => {
                     transition: "transform 0.3s ease, box-shadow 0.5s ease",
                   }}
                 >
-                  <AnimatedCard idx={card.idx} discarded={card.discarded}>
+                  <AnimatedCard
+                    idx={card.idx}
+                    discarded={
+                      card.discarded || (isPreselected && discardAnimation)
+                    }
+                    played={isPreselected && playAnimation}
+                  >
                     <Box
                       sx={{
                         borderRadius: "8px",
