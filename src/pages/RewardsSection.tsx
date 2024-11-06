@@ -27,7 +27,12 @@ const RewardCard = ({
   description,
   onSelect,
 }: RewardCardProps) => {
-  const icons = ["/logos/potion.png", "/logos/book.png", "/logos/special.png"];
+  const icons = [
+    "",
+    "/logos/potion.png",
+    "/logos/book.png",
+    "/logos/special.png",
+  ];
 
   return (
     <Flex _hover={HIGHLIGHT_STYLE} p={5} border={`1px solid transparent`}>
@@ -119,26 +124,30 @@ const RewardsSection = () => {
   const filteredRewards: { id: number; type: string; description: string }[] =
     [];
   rewardsIds?.forEach((id) => {
-    console.log(typeof id.valueOf());
+    let idNumber = 0;
+
+    if (typeof id === "object") idNumber = id ? Number((id as any)?.value) : 0;
+    else idNumber = id;
+
     const match = rewards.find(
-      (reward) => (reward.id as Type.Number) == (id.valueOf() as number)
+      (reward) => (reward.id as Type.Number) == (idNumber as number)
     );
     if (match) {
       filteredRewards.push(match);
     }
   });
 
-  console.log(filteredRewards);
-
   return (
     <Flex gap={4} justify="center" align="center" wrap="wrap">
-      {rewards.map((reward, index) => (
+      {filteredRewards.map((reward, index) => (
         <RewardCard
           key={reward.type}
           {...reward}
-          index={index}
+          index={reward.id}
           onSelect={() => {
             beepSound();
+            console.log(reward.id);
+            // createNewReward(reward.id - 1, reward.type);
             createNewReward(reward.id, reward.type);
           }}
         />

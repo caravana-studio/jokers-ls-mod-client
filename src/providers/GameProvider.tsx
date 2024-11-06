@@ -385,6 +385,8 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
   };
 
   const createNewReward = async (rewardId: number, mode: string) => {
+    // console.log(rewardId);
+    // console.log(mode);
     const createNewRewardPromise = createReward(gameId, rewardId);
 
     createNewRewardPromise.then(async (response) => {
