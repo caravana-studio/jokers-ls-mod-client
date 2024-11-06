@@ -53,6 +53,7 @@ export const useGameState = () => {
   const [rewardsIds, setRewardsIds] = useState<number[]>([]);
 
   const [beastAttack, setBeastAttack] = useState(0);
+  const [obstacletAttack, setObstacleAttack] = useState(0);
 
   const [gameOver, setGameOver] = useState(false);
 
@@ -280,6 +281,8 @@ export const useGameState = () => {
     setBeastAttack,
     gameOver,
     setGameOver,
+    obstacletAttack,
+    setObstacleAttack,
     rewardsIds,
     setRewardsIds,
     refetchRewardsId,
