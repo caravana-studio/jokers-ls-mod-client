@@ -6,19 +6,19 @@ const paymaster: any = { caller: "0x414e595f43414c4c4552" };
 
 const game_system_contract_address = getContractByName(
   manifest,
-  "jokers_ls_mod",
+  "jn_loot",
   "game_system"
 )?.address;
 
 const poker_hand_system_contract_address = getContractByName(
   manifest,
-  "jokers_ls_mod",
+  "jn_loot",
   "poker_hand_system"
 )?.address;
 
 const rage_system_contract_address = getContractByName(
   manifest,
-  "jokers_ls_mod",
+  "jn_loot",
   "rage_system"
 )?.address;
 
@@ -98,6 +98,10 @@ const cartridgeConnector = new CartridgeConnector({
     {
       target: game_system_contract_address,
       method: "select_aventurer_cards",
+    },    
+    {
+      target: game_system_contract_address,
+      method: "skip_unpassed_obstacle",
     },
     {
       target: poker_hand_system_contract_address,

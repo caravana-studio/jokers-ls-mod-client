@@ -7,7 +7,7 @@ export const LEADERBOARD_QUERY_KEY = "leaderboard";
 
 export const LEADERBOARD_QUERY = gql`
   query {
-    jokersLsModGameModels(
+    jnLootGameModels(
       first: 10000
       order: { field: "LEVEL", direction: "DESC" }
     ) {
@@ -33,7 +33,7 @@ interface GameEdge {
 }
 
 interface LeaderboardResponse {
-  jokersLsModGameModels: {
+  jnLootGameModels: {
     edges: GameEdge[];
   };
 }
@@ -67,7 +67,7 @@ export const useGetLeaderboard = (gameId?: number) => {
   );
   const { data } = queryResponse;
 
-  const dojoLeaders = data?.jokersLsModGameModels?.edges
+  const dojoLeaders = data?.jnLootGameModels?.edges
     ?.filter((edge) => edge.node.player_score > 0)
     .sort((a, b) => {
       if (a.node.level !== b.node.level) {

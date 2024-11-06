@@ -58,7 +58,7 @@ export async function setup({ ...config }: DojoConfig) {
   const dojoProvider = new DojoProvider(config.manifest, config.rpcUrl);
 
   type ClientComponentsKeys = keyof typeof clientComponents;
-  const defaultNameSpace = "jokers_ls_mod-";
+  const defaultNameSpace = "jn_loot-";
   const componentNames: string[] = [];
 
   (Object.keys(clientComponents) as ClientComponentsKeys[]).forEach((key) => {
@@ -79,13 +79,13 @@ export async function setup({ ...config }: DojoConfig) {
     const keysGame: torii.KeysClause = {
       keys: [gameID],
       pattern_matching: "FixedLen",
-      models: ["jokers_ls_mod-Game"],
+      models: ["jn_loot-Game"],
     };
 
     const keysCard: torii.KeysClause = {
       keys: [gameID, undefined, undefined],
       pattern_matching: "FixedLen",
-      models: ["jokers_ls_mod-Card"],
+      models: ["jn_loot-Card"],
     };
 
     const query: torii.Query = {

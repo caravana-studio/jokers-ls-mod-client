@@ -1234,12 +1234,12 @@
         ]
       }
     ],
-    "address": "0x2c5dab047c12c6f4eb49debee9398b9fb5fab5d60d5a86fbd150f19997109d6",
-    "transaction_hash": "0x146f6fd2f891a16c67388104b6506a6cbeabf54963a44ecbebb691fa8b29f6b",
+    "address": "0x194200e527a82862b684683b3c1994d6b6831e9d9da94a6865aada5dbcd53e8",
+    "transaction_hash": "0x19f8cdc2575e3ca9554fc4838141aa52c1f689a95d7927776e5545cbe430cd3",
     "block_number": null,
-    "seed": "jokers_ls_mod",
+    "seed": "jn_loot",
     "metadata": {
-      "profile_name": "sepolia",
+      "profile_name": "prod",
       "rpc_url": "https://api.cartridge.gg/x/starknet/mainnet"
     },
     "manifest_name": "dojo-world"
@@ -1248,16 +1248,16 @@
     "kind": "Class",
     "class_hash": "0x2427dd10a58850ac9a5ca6ce04b7771b05330fd18f2e481831ad903b969e6b2",
     "original_class_hash": "0x2427dd10a58850ac9a5ca6ce04b7771b05330fd18f2e481831ad903b969e6b2",
-    "abi": "manifests/sepolia/deployment/abis/dojo-base.json",
+    "abi": "manifests/prod/deployment/abis/dojo-base.json",
     "tag": "dojo-base",
     "manifest_name": "dojo-base"
   },
   "contracts": [
     {
       "kind": "DojoContract",
-      "address": "0x4641fd7d55ccace354a272166aa359268347f0d1e1a305809113fcdb9781dc8",
-      "class_hash": "0x283f286866d77045bc154d98761b633e51541224d6ba802192fd2b3dab0249a",
-      "original_class_hash": "0x283f286866d77045bc154d98761b633e51541224d6ba802192fd2b3dab0249a",
+      "address": "0x28f5946f44fbb21997db8d6512b1a4f23ca9f8094824e6eea39a6d71d10142",
+      "class_hash": "0x7986c5dbd97aff06678a5328409ca19a749882dfab73a00c37bbecfd3153b93",
+      "original_class_hash": "0x7986c5dbd97aff06678a5328409ca19a749882dfab73a00c37bbecfd3153b93",
       "base_class_hash": "0x2427dd10a58850ac9a5ca6ce04b7771b05330fd18f2e481831ad903b969e6b2",
       "abi": [
         {
@@ -1390,11 +1390,11 @@
         {
           "type": "impl",
           "name": "ActionsImpl",
-          "interface_name": "jokers_ls_mod::systems::game_system::IGameSystem"
+          "interface_name": "jn_loot::systems::game_system::IGameSystem"
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::systems::game_system::IGameSystem",
+          "name": "jn_loot::systems::game_system::IGameSystem",
           "items": [
             {
               "type": "function",
@@ -1631,17 +1631,29 @@
               ],
               "outputs": [],
               "state_mutability": "external"
+            },
+            {
+              "type": "function",
+              "name": "skip_unpassed_obstacle",
+              "inputs": [
+                {
+                  "name": "game_id",
+                  "type": "core::integer::u32"
+                }
+              ],
+              "outputs": [],
+              "state_mutability": "external"
             }
           ]
         },
         {
           "type": "impl",
           "name": "IDojoInitImpl",
-          "interface_name": "jokers_ls_mod::systems::game_system::game_system::IDojoInit"
+          "interface_name": "jn_loot::systems::game_system::game_system::IDojoInit"
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::systems::game_system::game_system::IDojoInit",
+          "name": "jn_loot::systems::game_system::game_system::IDojoInit",
           "items": [
             {
               "type": "function",
@@ -1701,7 +1713,7 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::systems::game_system::game_system::Event",
+          "name": "jn_loot::systems::game_system::game_system::Event",
           "kind": "enum",
           "variants": [
             {
@@ -1714,10 +1726,10 @@
       ],
       "reads": [],
       "writes": [
-        "ns:jokers_ls_mod"
+        "ns:jn_loot"
       ],
       "init_calldata": [],
-      "tag": "jokers_ls_mod-game_system",
+      "tag": "jn_loot-game_system",
       "systems": [
         "create_level",
         "play",
@@ -1731,16 +1743,17 @@
         "select_aventurer_cards",
         "select_special_cards",
         "select_modifier_cards",
+        "skip_unpassed_obstacle",
         "discard_effect_card",
         "discard_special_card"
       ],
-      "manifest_name": "jokers_ls_mod-game_system-5f7fc91f"
+      "manifest_name": "jn_loot-game_system-443ca695"
     },
     {
       "kind": "DojoContract",
-      "address": "0x6a0c804f8399af31af6e64b43e3aa50ef9e14e2ec755fe05c98c2ffa4834e75",
-      "class_hash": "0x2ef4e6561d794801c4881af414ce81466ba116a3f962193912198971043cf46",
-      "original_class_hash": "0x2ef4e6561d794801c4881af414ce81466ba116a3f962193912198971043cf46",
+      "address": "0x16493e41af2208c1249a5e1ffac476de12d9b9488bc02b516254b8343936cda",
+      "class_hash": "0x1d30059b7f047ca281a1da26d96263b1446027722a75609a89668e90b27ca6d",
+      "original_class_hash": "0x1d30059b7f047ca281a1da26d96263b1446027722a75609a89668e90b27ca6d",
       "base_class_hash": "0x2427dd10a58850ac9a5ca6ce04b7771b05330fd18f2e481831ad903b969e6b2",
       "abi": [
         {
@@ -1873,11 +1886,11 @@
         {
           "type": "impl",
           "name": "PokerHandSystem",
-          "interface_name": "jokers_ls_mod::systems::poker_hand_system::IPokerHandSystem"
+          "interface_name": "jn_loot::systems::poker_hand_system::IPokerHandSystem"
         },
         {
           "type": "enum",
-          "name": "jokers_ls_mod::models::data::poker_hand::PokerHand",
+          "name": "jn_loot::models::data::poker_hand::PokerHand",
           "variants": [
             {
               "name": "None",
@@ -1931,11 +1944,11 @@
         },
         {
           "type": "struct",
-          "name": "jokers_ls_mod::models::data::poker_hand::LevelPokerHand",
+          "name": "jn_loot::models::data::poker_hand::LevelPokerHand",
           "members": [
             {
               "name": "poker_hand",
-              "type": "jokers_ls_mod::models::data::poker_hand::PokerHand"
+              "type": "jn_loot::models::data::poker_hand::PokerHand"
             },
             {
               "name": "level",
@@ -1953,7 +1966,7 @@
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::systems::poker_hand_system::IPokerHandSystem",
+          "name": "jn_loot::systems::poker_hand_system::IPokerHandSystem",
           "items": [
             {
               "type": "function",
@@ -1966,7 +1979,7 @@
               ],
               "outputs": [
                 {
-                  "type": "core::array::Array::<jokers_ls_mod::models::data::poker_hand::LevelPokerHand>"
+                  "type": "core::array::Array::<jn_loot::models::data::poker_hand::LevelPokerHand>"
                 }
               ],
               "state_mutability": "view"
@@ -1976,11 +1989,11 @@
         {
           "type": "impl",
           "name": "IDojoInitImpl",
-          "interface_name": "jokers_ls_mod::systems::poker_hand_system::poker_hand_system::IDojoInit"
+          "interface_name": "jn_loot::systems::poker_hand_system::poker_hand_system::IDojoInit"
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::systems::poker_hand_system::poker_hand_system::IDojoInit",
+          "name": "jn_loot::systems::poker_hand_system::poker_hand_system::IDojoInit",
           "items": [
             {
               "type": "function",
@@ -2040,7 +2053,7 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::systems::poker_hand_system::poker_hand_system::Event",
+          "name": "jn_loot::systems::poker_hand_system::poker_hand_system::Event",
           "kind": "enum",
           "variants": [
             {
@@ -2053,18 +2066,18 @@
       ],
       "reads": [],
       "writes": [
-        "ns:jokers_ls_mod"
+        "ns:jn_loot"
       ],
       "init_calldata": [],
-      "tag": "jokers_ls_mod-poker_hand_system",
+      "tag": "jn_loot-poker_hand_system",
       "systems": [],
-      "manifest_name": "jokers_ls_mod-poker_hand_system-42b29f2d"
+      "manifest_name": "jn_loot-poker_hand_system-706dbedc"
     },
     {
       "kind": "DojoContract",
-      "address": "0x633fbfe3048924cb0ccbf37d4e38f342d0ed93d597069332c1759a40f901b02",
-      "class_hash": "0x3687564057256c3af7a1ea414111a403e7b3f9f3176e57bf57672fdfb4fa823",
-      "original_class_hash": "0x3687564057256c3af7a1ea414111a403e7b3f9f3176e57bf57672fdfb4fa823",
+      "address": "0x5efe88a5ba9fc06dceadf9c2718120e1fdd86e622954a066eebf67dd0dd9b83",
+      "class_hash": "0x804569922b7ebc812d058ce9553cfc62e2d65ea348949f7589ae8e4ff90e53",
+      "original_class_hash": "0x804569922b7ebc812d058ce9553cfc62e2d65ea348949f7589ae8e4ff90e53",
       "base_class_hash": "0x2427dd10a58850ac9a5ca6ce04b7771b05330fd18f2e481831ad903b969e6b2",
       "abi": [
         {
@@ -2197,11 +2210,11 @@
         {
           "type": "impl",
           "name": "RageImpl",
-          "interface_name": "jokers_ls_mod::systems::rage_system::IRageSystem"
+          "interface_name": "jn_loot::systems::rage_system::IRageSystem"
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::systems::rage_system::IRageSystem",
+          "name": "jn_loot::systems::rage_system::IRageSystem",
           "items": [
             {
               "type": "function",
@@ -2220,11 +2233,11 @@
         {
           "type": "impl",
           "name": "IDojoInitImpl",
-          "interface_name": "jokers_ls_mod::systems::rage_system::rage_system::IDojoInit"
+          "interface_name": "jn_loot::systems::rage_system::rage_system::IDojoInit"
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::systems::rage_system::rage_system::IDojoInit",
+          "name": "jn_loot::systems::rage_system::rage_system::IDojoInit",
           "items": [
             {
               "type": "function",
@@ -2284,7 +2297,7 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::systems::rage_system::rage_system::Event",
+          "name": "jn_loot::systems::rage_system::rage_system::Event",
           "kind": "enum",
           "variants": [
             {
@@ -2297,14 +2310,14 @@
       ],
       "reads": [],
       "writes": [
-        "ns:jokers_ls_mod"
+        "ns:jn_loot"
       ],
       "init_calldata": [],
-      "tag": "jokers_ls_mod-rage_system",
+      "tag": "jn_loot-rage_system",
       "systems": [
         "calculate"
       ],
-      "manifest_name": "jokers_ls_mod-rage_system-1b5f5049"
+      "manifest_name": "jn_loot-rage_system-31502a71"
     }
   ],
   "models": [
@@ -2327,8 +2340,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x1b743b0bcd9a9c515effd38b3faa77a1cd51aca400f27a38d4b8738b28de7b6",
-      "original_class_hash": "0x1b743b0bcd9a9c515effd38b3faa77a1cd51aca400f27a38d4b8738b28de7b6",
+      "class_hash": "0x52a509d8b9052c9841d4e18ad3debc30c4862b893a80b06147d64dba89aa2a5",
+      "original_class_hash": "0x52a509d8b9052c9841d4e18ad3debc30c4862b893a80b06147d64dba89aa2a5",
       "abi": [
         {
           "type": "impl",
@@ -2695,7 +2708,7 @@
         {
           "type": "impl",
           "name": "adventurer_consumedImpl",
-          "interface_name": "jokers_ls_mod::models::data::adventurer::Iadventurer_consumed"
+          "interface_name": "jn_loot::models::data::adventurer::Iadventurer_consumed"
         },
         {
           "type": "enum",
@@ -2713,7 +2726,7 @@
         },
         {
           "type": "struct",
-          "name": "jokers_ls_mod::models::data::adventurer::AdventurerConsumed",
+          "name": "jn_loot::models::data::adventurer::AdventurerConsumed",
           "members": [
             {
               "name": "adventurer_id",
@@ -2731,7 +2744,7 @@
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::models::data::adventurer::Iadventurer_consumed",
+          "name": "jn_loot::models::data::adventurer::Iadventurer_consumed",
           "items": [
             {
               "type": "function",
@@ -2739,7 +2752,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "jokers_ls_mod::models::data::adventurer::AdventurerConsumed"
+                  "type": "jn_loot::models::data::adventurer::AdventurerConsumed"
                 }
               ],
               "outputs": [],
@@ -2749,14 +2762,14 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::models::data::adventurer::adventurer_consumed::Event",
+          "name": "jn_loot::models::data::adventurer::adventurer_consumed::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "jokers_ls_mod-AdventurerConsumed",
-      "qualified_path": "jokers_ls_mod::models::data::adventurer::adventurer_consumed",
-      "manifest_name": "jokers_ls_mod-AdventurerConsumed-f2e33c1c"
+      "tag": "jn_loot-AdventurerConsumed",
+      "qualified_path": "jn_loot::models::data::adventurer::adventurer_consumed",
+      "manifest_name": "jn_loot-AdventurerConsumed-754b8319"
     },
     {
       "kind": "DojoModel",
@@ -2802,8 +2815,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x399007aacf575adf49227dd511af139ccbaf36c3fdee10210c6add0c714e322",
-      "original_class_hash": "0x399007aacf575adf49227dd511af139ccbaf36c3fdee10210c6add0c714e322",
+      "class_hash": "0x508b6749d5452ab0ef1c55b8a5e59aea48bd0ffeea20355a641bb0178adb951",
+      "original_class_hash": "0x508b6749d5452ab0ef1c55b8a5e59aea48bd0ffeea20355a641bb0178adb951",
       "abi": [
         {
           "type": "impl",
@@ -3170,11 +3183,11 @@
         {
           "type": "impl",
           "name": "beastImpl",
-          "interface_name": "jokers_ls_mod::models::data::beast::Ibeast"
+          "interface_name": "jn_loot::models::data::beast::Ibeast"
         },
         {
           "type": "enum",
-          "name": "jokers_ls_mod::models::data::beast::TypeBeast",
+          "name": "jn_loot::models::data::beast::TypeBeast",
           "variants": [
             {
               "name": "LOOT_SURVIVOR",
@@ -3188,7 +3201,7 @@
         },
         {
           "type": "struct",
-          "name": "jokers_ls_mod::models::data::beast::Beast",
+          "name": "jn_loot::models::data::beast::Beast",
           "members": [
             {
               "name": "game_id",
@@ -3220,13 +3233,13 @@
             },
             {
               "name": "type_beast",
-              "type": "jokers_ls_mod::models::data::beast::TypeBeast"
+              "type": "jn_loot::models::data::beast::TypeBeast"
             }
           ]
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::models::data::beast::Ibeast",
+          "name": "jn_loot::models::data::beast::Ibeast",
           "items": [
             {
               "type": "function",
@@ -3234,7 +3247,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "jokers_ls_mod::models::data::beast::Beast"
+                  "type": "jn_loot::models::data::beast::Beast"
                 }
               ],
               "outputs": [],
@@ -3244,14 +3257,14 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::models::data::beast::beast::Event",
+          "name": "jn_loot::models::data::beast::beast::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "jokers_ls_mod-Beast",
-      "qualified_path": "jokers_ls_mod::models::data::beast::beast",
-      "manifest_name": "jokers_ls_mod-Beast-44ab404a"
+      "tag": "jn_loot-Beast",
+      "qualified_path": "jn_loot::models::data::beast::beast",
+      "manifest_name": "jn_loot-Beast-6e261c5d"
     },
     {
       "kind": "DojoModel",
@@ -3267,8 +3280,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x79b3b6389134768ccf7a567df166588340eb446c307b3e5a01f309193a0ee8b",
-      "original_class_hash": "0x79b3b6389134768ccf7a567df166588340eb446c307b3e5a01f309193a0ee8b",
+      "class_hash": "0x28585e570fa481cf303f56883b1b794e20af3ff4baa27781421034baa24692f",
+      "original_class_hash": "0x28585e570fa481cf303f56883b1b794e20af3ff4baa27781421034baa24692f",
       "abi": [
         {
           "type": "impl",
@@ -3635,11 +3648,11 @@
         {
           "type": "impl",
           "name": "beast_attackImpl",
-          "interface_name": "jokers_ls_mod::models::data::events::Ibeast_attack"
+          "interface_name": "jn_loot::models::data::events::Ibeast_attack"
         },
         {
           "type": "struct",
-          "name": "jokers_ls_mod::models::data::events::BeastAttack",
+          "name": "jn_loot::models::data::events::BeastAttack",
           "members": [
             {
               "name": "player",
@@ -3653,7 +3666,7 @@
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::models::data::events::Ibeast_attack",
+          "name": "jn_loot::models::data::events::Ibeast_attack",
           "items": [
             {
               "type": "function",
@@ -3661,7 +3674,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "jokers_ls_mod::models::data::events::BeastAttack"
+                  "type": "jn_loot::models::data::events::BeastAttack"
                 }
               ],
               "outputs": [],
@@ -3671,14 +3684,14 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::models::data::events::beast_attack::Event",
+          "name": "jn_loot::models::data::events::beast_attack::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "jokers_ls_mod-BeastAttack",
-      "qualified_path": "jokers_ls_mod::models::data::events::beast_attack",
-      "manifest_name": "jokers_ls_mod-BeastAttack-1b0ac2cf"
+      "tag": "jn_loot-BeastAttack",
+      "qualified_path": "jn_loot::models::data::events::beast_attack",
+      "manifest_name": "jn_loot-BeastAttack-53054261"
     },
     {
       "kind": "DojoModel",
@@ -3709,8 +3722,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x306f85e9e0bf2e8a94bf938a5ee63c9c5cbba981f86c303188f40e07669fd9e",
-      "original_class_hash": "0x306f85e9e0bf2e8a94bf938a5ee63c9c5cbba981f86c303188f40e07669fd9e",
+      "class_hash": "0x61154f0e9a3d5c546bfd401a33d5d30d899c3785e19d0143cbbdd2dffbcd439",
+      "original_class_hash": "0x61154f0e9a3d5c546bfd401a33d5d30d899c3785e19d0143cbbdd2dffbcd439",
       "abi": [
         {
           "type": "impl",
@@ -4077,7 +4090,7 @@
         {
           "type": "impl",
           "name": "blister_pack_itemImpl",
-          "interface_name": "jokers_ls_mod::models::status::shop::shop::Iblister_pack_item"
+          "interface_name": "jn_loot::models::status::shop::shop::Iblister_pack_item"
         },
         {
           "type": "enum",
@@ -4095,7 +4108,7 @@
         },
         {
           "type": "struct",
-          "name": "jokers_ls_mod::models::status::shop::shop::BlisterPackItem",
+          "name": "jn_loot::models::status::shop::shop::BlisterPackItem",
           "members": [
             {
               "name": "game_id",
@@ -4121,7 +4134,7 @@
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::models::status::shop::shop::Iblister_pack_item",
+          "name": "jn_loot::models::status::shop::shop::Iblister_pack_item",
           "items": [
             {
               "type": "function",
@@ -4129,7 +4142,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "jokers_ls_mod::models::status::shop::shop::BlisterPackItem"
+                  "type": "jn_loot::models::status::shop::shop::BlisterPackItem"
                 }
               ],
               "outputs": [],
@@ -4139,14 +4152,14 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::models::status::shop::shop::blister_pack_item::Event",
+          "name": "jn_loot::models::status::shop::shop::blister_pack_item::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "jokers_ls_mod-BlisterPackItem",
-      "qualified_path": "jokers_ls_mod::models::status::shop::shop::blister_pack_item",
-      "manifest_name": "jokers_ls_mod-BlisterPackItem-50ccaa82"
+      "tag": "jn_loot-BlisterPackItem",
+      "qualified_path": "jn_loot::models::status::shop::shop::blister_pack_item",
+      "manifest_name": "jn_loot-BlisterPackItem-1e6681c3"
     },
     {
       "kind": "DojoModel",
@@ -4167,8 +4180,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x50bcfaad20a5d5024ceab9327ebb6ea203c6bd8835026b194930a813a0cde43",
-      "original_class_hash": "0x50bcfaad20a5d5024ceab9327ebb6ea203c6bd8835026b194930a813a0cde43",
+      "class_hash": "0x149932963e060a429cd763b38b4825098619be94ff03c9423872240b92e8d31",
+      "original_class_hash": "0x149932963e060a429cd763b38b4825098619be94ff03c9423872240b92e8d31",
       "abi": [
         {
           "type": "impl",
@@ -4535,7 +4548,7 @@
         {
           "type": "impl",
           "name": "blister_pack_resultImpl",
-          "interface_name": "jokers_ls_mod::models::status::shop::shop::Iblister_pack_result"
+          "interface_name": "jn_loot::models::status::shop::shop::Iblister_pack_result"
         },
         {
           "type": "enum",
@@ -4563,7 +4576,7 @@
         },
         {
           "type": "struct",
-          "name": "jokers_ls_mod::models::status::shop::shop::BlisterPackResult",
+          "name": "jn_loot::models::status::shop::shop::BlisterPackResult",
           "members": [
             {
               "name": "game_id",
@@ -4581,7 +4594,7 @@
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::models::status::shop::shop::Iblister_pack_result",
+          "name": "jn_loot::models::status::shop::shop::Iblister_pack_result",
           "items": [
             {
               "type": "function",
@@ -4589,7 +4602,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "jokers_ls_mod::models::status::shop::shop::BlisterPackResult"
+                  "type": "jn_loot::models::status::shop::shop::BlisterPackResult"
                 }
               ],
               "outputs": [],
@@ -4599,14 +4612,14 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::models::status::shop::shop::blister_pack_result::Event",
+          "name": "jn_loot::models::status::shop::shop::blister_pack_result::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "jokers_ls_mod-BlisterPackResult",
-      "qualified_path": "jokers_ls_mod::models::status::shop::shop::blister_pack_result",
-      "manifest_name": "jokers_ls_mod-BlisterPackResult-aaa11a07"
+      "tag": "jn_loot-BlisterPackResult",
+      "qualified_path": "jn_loot::models::status::shop::shop::blister_pack_result",
+      "manifest_name": "jn_loot-BlisterPackResult-f97fc012"
     },
     {
       "kind": "DojoModel",
@@ -4632,8 +4645,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x1d1db5fe314b7f28b9f50c457dcfdda7f8b48064ef3be0bde827272a90c2bcc",
-      "original_class_hash": "0x1d1db5fe314b7f28b9f50c457dcfdda7f8b48064ef3be0bde827272a90c2bcc",
+      "class_hash": "0x3f78f5f997a56a9ccc970b3a99766118f4389f914c764e2cb9dab3a8fb8b606",
+      "original_class_hash": "0x3f78f5f997a56a9ccc970b3a99766118f4389f914c764e2cb9dab3a8fb8b606",
       "abi": [
         {
           "type": "impl",
@@ -5000,11 +5013,11 @@
         {
           "type": "impl",
           "name": "buy_blister_pack_eventImpl",
-          "interface_name": "jokers_ls_mod::models::data::events::Ibuy_blister_pack_event"
+          "interface_name": "jn_loot::models::data::events::Ibuy_blister_pack_event"
         },
         {
           "type": "struct",
-          "name": "jokers_ls_mod::models::data::events::BuyBlisterPackEvent",
+          "name": "jn_loot::models::data::events::BuyBlisterPackEvent",
           "members": [
             {
               "name": "game_id",
@@ -5026,7 +5039,7 @@
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::models::data::events::Ibuy_blister_pack_event",
+          "name": "jn_loot::models::data::events::Ibuy_blister_pack_event",
           "items": [
             {
               "type": "function",
@@ -5034,7 +5047,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "jokers_ls_mod::models::data::events::BuyBlisterPackEvent"
+                  "type": "jn_loot::models::data::events::BuyBlisterPackEvent"
                 }
               ],
               "outputs": [],
@@ -5044,14 +5057,14 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::models::data::events::buy_blister_pack_event::Event",
+          "name": "jn_loot::models::data::events::buy_blister_pack_event::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "jokers_ls_mod-BuyBlisterPackEvent",
-      "qualified_path": "jokers_ls_mod::models::data::events::buy_blister_pack_event",
-      "manifest_name": "jokers_ls_mod-BuyBlisterPackEvent-5cfb00bb"
+      "tag": "jn_loot-BuyBlisterPackEvent",
+      "qualified_path": "jn_loot::models::data::events::buy_blister_pack_event",
+      "manifest_name": "jn_loot-BuyBlisterPackEvent-4b5fb0b8"
     },
     {
       "kind": "DojoModel",
@@ -5087,8 +5100,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x4f7aa0ce51c3fb71f57ad52b007be80c9aab90a8dab77cf1f54c076ea7d59ba",
-      "original_class_hash": "0x4f7aa0ce51c3fb71f57ad52b007be80c9aab90a8dab77cf1f54c076ea7d59ba",
+      "class_hash": "0x6297a0ef0c6f5f3b6ff4b88fc6594843753332b641f1f590b79fa610e034e8c",
+      "original_class_hash": "0x6297a0ef0c6f5f3b6ff4b88fc6594843753332b641f1f590b79fa610e034e8c",
       "abi": [
         {
           "type": "impl",
@@ -5455,11 +5468,11 @@
         {
           "type": "impl",
           "name": "buy_card_eventImpl",
-          "interface_name": "jokers_ls_mod::models::data::events::Ibuy_card_event"
+          "interface_name": "jn_loot::models::data::events::Ibuy_card_event"
         },
         {
           "type": "enum",
-          "name": "jokers_ls_mod::models::status::shop::shop::CardItemType",
+          "name": "jn_loot::models::status::shop::shop::CardItemType",
           "variants": [
             {
               "name": "None",
@@ -5495,7 +5508,7 @@
         },
         {
           "type": "struct",
-          "name": "jokers_ls_mod::models::data::events::BuyCardEvent",
+          "name": "jn_loot::models::data::events::BuyCardEvent",
           "members": [
             {
               "name": "game_id",
@@ -5511,7 +5524,7 @@
             },
             {
               "name": "item_type",
-              "type": "jokers_ls_mod::models::status::shop::shop::CardItemType"
+              "type": "jn_loot::models::status::shop::shop::CardItemType"
             },
             {
               "name": "card_id",
@@ -5525,7 +5538,7 @@
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::models::data::events::Ibuy_card_event",
+          "name": "jn_loot::models::data::events::Ibuy_card_event",
           "items": [
             {
               "type": "function",
@@ -5533,7 +5546,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "jokers_ls_mod::models::data::events::BuyCardEvent"
+                  "type": "jn_loot::models::data::events::BuyCardEvent"
                 }
               ],
               "outputs": [],
@@ -5543,14 +5556,14 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::models::data::events::buy_card_event::Event",
+          "name": "jn_loot::models::data::events::buy_card_event::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "jokers_ls_mod-BuyCardEvent",
-      "qualified_path": "jokers_ls_mod::models::data::events::buy_card_event",
-      "manifest_name": "jokers_ls_mod-BuyCardEvent-b5604452"
+      "tag": "jn_loot-BuyCardEvent",
+      "qualified_path": "jn_loot::models::data::events::buy_card_event",
+      "manifest_name": "jn_loot-BuyCardEvent-3016d99a"
     },
     {
       "kind": "DojoModel",
@@ -5581,8 +5594,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x27136701b501b92e283d084ecba6cf677ac183dc0677447b073e9bb635c16e7",
-      "original_class_hash": "0x27136701b501b92e283d084ecba6cf677ac183dc0677447b073e9bb635c16e7",
+      "class_hash": "0x4d863dbca0f1781e5ed692d09e276b26cc04dc4aad86229a6303bc1715648a4",
+      "original_class_hash": "0x4d863dbca0f1781e5ed692d09e276b26cc04dc4aad86229a6303bc1715648a4",
       "abi": [
         {
           "type": "impl",
@@ -5949,11 +5962,11 @@
         {
           "type": "impl",
           "name": "buy_poker_hand_eventImpl",
-          "interface_name": "jokers_ls_mod::models::data::events::Ibuy_poker_hand_event"
+          "interface_name": "jn_loot::models::data::events::Ibuy_poker_hand_event"
         },
         {
           "type": "enum",
-          "name": "jokers_ls_mod::models::data::poker_hand::PokerHand",
+          "name": "jn_loot::models::data::poker_hand::PokerHand",
           "variants": [
             {
               "name": "None",
@@ -6007,7 +6020,7 @@
         },
         {
           "type": "struct",
-          "name": "jokers_ls_mod::models::data::events::BuyPokerHandEvent",
+          "name": "jn_loot::models::data::events::BuyPokerHandEvent",
           "members": [
             {
               "name": "game_id",
@@ -6023,7 +6036,7 @@
             },
             {
               "name": "poker_hand",
-              "type": "jokers_ls_mod::models::data::poker_hand::PokerHand"
+              "type": "jn_loot::models::data::poker_hand::PokerHand"
             },
             {
               "name": "level_hand",
@@ -6033,7 +6046,7 @@
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::models::data::events::Ibuy_poker_hand_event",
+          "name": "jn_loot::models::data::events::Ibuy_poker_hand_event",
           "items": [
             {
               "type": "function",
@@ -6041,7 +6054,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "jokers_ls_mod::models::data::events::BuyPokerHandEvent"
+                  "type": "jn_loot::models::data::events::BuyPokerHandEvent"
                 }
               ],
               "outputs": [],
@@ -6051,14 +6064,14 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::models::data::events::buy_poker_hand_event::Event",
+          "name": "jn_loot::models::data::events::buy_poker_hand_event::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "jokers_ls_mod-BuyPokerHandEvent",
-      "qualified_path": "jokers_ls_mod::models::data::events::buy_poker_hand_event",
-      "manifest_name": "jokers_ls_mod-BuyPokerHandEvent-7c79beb2"
+      "tag": "jn_loot-BuyPokerHandEvent",
+      "qualified_path": "jn_loot::models::data::events::buy_poker_hand_event",
+      "manifest_name": "jn_loot-BuyPokerHandEvent-66d44b2d"
     },
     {
       "kind": "DojoModel",
@@ -6084,8 +6097,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x2091c1b2908669b8538ffd2267c77294a586bf04d15a13a2afb70711e943f23",
-      "original_class_hash": "0x2091c1b2908669b8538ffd2267c77294a586bf04d15a13a2afb70711e943f23",
+      "class_hash": "0x6a4eca855de8b742d8715b82caee128350722d309fcc5d6fb3042aa51dfaa21",
+      "original_class_hash": "0x6a4eca855de8b742d8715b82caee128350722d309fcc5d6fb3042aa51dfaa21",
       "abi": [
         {
           "type": "impl",
@@ -6452,7 +6465,7 @@
         {
           "type": "impl",
           "name": "buy_reroll_eventImpl",
-          "interface_name": "jokers_ls_mod::models::data::events::Ibuy_reroll_event"
+          "interface_name": "jn_loot::models::data::events::Ibuy_reroll_event"
         },
         {
           "type": "enum",
@@ -6470,7 +6483,7 @@
         },
         {
           "type": "struct",
-          "name": "jokers_ls_mod::models::data::events::BuyRerollEvent",
+          "name": "jn_loot::models::data::events::BuyRerollEvent",
           "members": [
             {
               "name": "game_id",
@@ -6492,7 +6505,7 @@
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::models::data::events::Ibuy_reroll_event",
+          "name": "jn_loot::models::data::events::Ibuy_reroll_event",
           "items": [
             {
               "type": "function",
@@ -6500,7 +6513,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "jokers_ls_mod::models::data::events::BuyRerollEvent"
+                  "type": "jn_loot::models::data::events::BuyRerollEvent"
                 }
               ],
               "outputs": [],
@@ -6510,14 +6523,14 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::models::data::events::buy_reroll_event::Event",
+          "name": "jn_loot::models::data::events::buy_reroll_event::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "jokers_ls_mod-BuyRerollEvent",
-      "qualified_path": "jokers_ls_mod::models::data::events::buy_reroll_event",
-      "manifest_name": "jokers_ls_mod-BuyRerollEvent-5069b7ca"
+      "tag": "jn_loot-BuyRerollEvent",
+      "qualified_path": "jn_loot::models::data::events::buy_reroll_event",
+      "manifest_name": "jn_loot-BuyRerollEvent-3d9fd65a"
     },
     {
       "kind": "DojoModel",
@@ -6558,8 +6571,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x6a5804b7b816ea729026f2d51649d9acac6ef8660396857927a8a3a482c3164",
-      "original_class_hash": "0x6a5804b7b816ea729026f2d51649d9acac6ef8660396857927a8a3a482c3164",
+      "class_hash": "0x5ef1f19785b3cbd1e09aa9f659e8924b286030d9afbcda14b468a2d58185795",
+      "original_class_hash": "0x5ef1f19785b3cbd1e09aa9f659e8924b286030d9afbcda14b468a2d58185795",
       "abi": [
         {
           "type": "impl",
@@ -6926,11 +6939,11 @@
         {
           "type": "impl",
           "name": "card_itemImpl",
-          "interface_name": "jokers_ls_mod::models::status::shop::shop::Icard_item"
+          "interface_name": "jn_loot::models::status::shop::shop::Icard_item"
         },
         {
           "type": "enum",
-          "name": "jokers_ls_mod::models::status::shop::shop::CardItemType",
+          "name": "jn_loot::models::status::shop::shop::CardItemType",
           "variants": [
             {
               "name": "None",
@@ -6966,7 +6979,7 @@
         },
         {
           "type": "struct",
-          "name": "jokers_ls_mod::models::status::shop::shop::CardItem",
+          "name": "jn_loot::models::status::shop::shop::CardItem",
           "members": [
             {
               "name": "game_id",
@@ -6978,7 +6991,7 @@
             },
             {
               "name": "item_type",
-              "type": "jokers_ls_mod::models::status::shop::shop::CardItemType"
+              "type": "jn_loot::models::status::shop::shop::CardItemType"
             },
             {
               "name": "card_id",
@@ -7000,7 +7013,7 @@
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::models::status::shop::shop::Icard_item",
+          "name": "jn_loot::models::status::shop::shop::Icard_item",
           "items": [
             {
               "type": "function",
@@ -7008,7 +7021,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "jokers_ls_mod::models::status::shop::shop::CardItem"
+                  "type": "jn_loot::models::status::shop::shop::CardItem"
                 }
               ],
               "outputs": [],
@@ -7018,14 +7031,14 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::models::status::shop::shop::card_item::Event",
+          "name": "jn_loot::models::status::shop::shop::card_item::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "jokers_ls_mod-CardItem",
-      "qualified_path": "jokers_ls_mod::models::status::shop::shop::card_item",
-      "manifest_name": "jokers_ls_mod-CardItem-1e2a6fe9"
+      "tag": "jn_loot-CardItem",
+      "qualified_path": "jn_loot::models::status::shop::shop::card_item",
+      "manifest_name": "jn_loot-CardItem-7cef6446"
     },
     {
       "kind": "DojoModel",
@@ -7051,8 +7064,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x35ed4fec0c9b80b1beca1b9eef0663f18d8b97c34f47fab698dd09e84841c4",
-      "original_class_hash": "0x35ed4fec0c9b80b1beca1b9eef0663f18d8b97c34f47fab698dd09e84841c4",
+      "class_hash": "0x6ebbcddfdec490eb64c1724fe0b702dbcd38184bafa3cfe28aa1d11723b081c",
+      "original_class_hash": "0x6ebbcddfdec490eb64c1724fe0b702dbcd38184bafa3cfe28aa1d11723b081c",
       "abi": [
         {
           "type": "impl",
@@ -7419,11 +7432,11 @@
         {
           "type": "impl",
           "name": "card_score_eventImpl",
-          "interface_name": "jokers_ls_mod::models::data::events::Icard_score_event"
+          "interface_name": "jn_loot::models::data::events::Icard_score_event"
         },
         {
           "type": "struct",
-          "name": "jokers_ls_mod::models::data::events::CardScoreEvent",
+          "name": "jn_loot::models::data::events::CardScoreEvent",
           "members": [
             {
               "name": "player",
@@ -7445,7 +7458,7 @@
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::models::data::events::Icard_score_event",
+          "name": "jn_loot::models::data::events::Icard_score_event",
           "items": [
             {
               "type": "function",
@@ -7453,7 +7466,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "jokers_ls_mod::models::data::events::CardScoreEvent"
+                  "type": "jn_loot::models::data::events::CardScoreEvent"
                 }
               ],
               "outputs": [],
@@ -7463,14 +7476,14 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::models::data::events::card_score_event::Event",
+          "name": "jn_loot::models::data::events::card_score_event::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "jokers_ls_mod-CardScoreEvent",
-      "qualified_path": "jokers_ls_mod::models::data::events::card_score_event",
-      "manifest_name": "jokers_ls_mod-CardScoreEvent-6cfeceaa"
+      "tag": "jn_loot-CardScoreEvent",
+      "qualified_path": "jn_loot::models::data::events::card_score_event",
+      "manifest_name": "jn_loot-CardScoreEvent-684d4ee4"
     },
     {
       "kind": "DojoModel",
@@ -7486,8 +7499,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x165171ffc98aa184506cbb942059506140909f6f1071c23496693b652d8cac3",
-      "original_class_hash": "0x165171ffc98aa184506cbb942059506140909f6f1071c23496693b652d8cac3",
+      "class_hash": "0xb8e40834052dcd4a10b3b60c12dd1e7dd7ad9289f3e79199b08d5f3a5f44fb",
+      "original_class_hash": "0xb8e40834052dcd4a10b3b60c12dd1e7dd7ad9289f3e79199b08d5f3a5f44fb",
       "abi": [
         {
           "type": "impl",
@@ -7854,7 +7867,7 @@
         {
           "type": "impl",
           "name": "challengeImpl",
-          "interface_name": "jokers_ls_mod::models::data::challenge::Ichallenge"
+          "interface_name": "jn_loot::models::data::challenge::Ichallenge"
         },
         {
           "type": "enum",
@@ -7882,7 +7895,7 @@
         },
         {
           "type": "struct",
-          "name": "jokers_ls_mod::models::data::challenge::Challenge",
+          "name": "jn_loot::models::data::challenge::Challenge",
           "members": [
             {
               "name": "game_id",
@@ -7896,7 +7909,7 @@
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::models::data::challenge::Ichallenge",
+          "name": "jn_loot::models::data::challenge::Ichallenge",
           "items": [
             {
               "type": "function",
@@ -7904,7 +7917,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "jokers_ls_mod::models::data::challenge::Challenge"
+                  "type": "jn_loot::models::data::challenge::Challenge"
                 }
               ],
               "outputs": [],
@@ -7914,14 +7927,14 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::models::data::challenge::challenge::Event",
+          "name": "jn_loot::models::data::challenge::challenge::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "jokers_ls_mod-Challenge",
-      "qualified_path": "jokers_ls_mod::models::data::challenge::challenge",
-      "manifest_name": "jokers_ls_mod-Challenge-5bac0afb"
+      "tag": "jn_loot-Challenge",
+      "qualified_path": "jn_loot::models::data::challenge::challenge",
+      "manifest_name": "jn_loot-Challenge-5001c116"
     },
     {
       "kind": "DojoModel",
@@ -7942,8 +7955,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x53f759a72cef3a4c3beff4f9c1ed96ccaa44d3493d431a9acb46f16538eb7bd",
-      "original_class_hash": "0x53f759a72cef3a4c3beff4f9c1ed96ccaa44d3493d431a9acb46f16538eb7bd",
+      "class_hash": "0x5a6544624360bbe7b8e72828e79dedb8a05e88da41a598acf9955517f0c32e0",
+      "original_class_hash": "0x5a6544624360bbe7b8e72828e79dedb8a05e88da41a598acf9955517f0c32e0",
       "abi": [
         {
           "type": "impl",
@@ -8310,11 +8323,11 @@
         {
           "type": "impl",
           "name": "challenge_completedImpl",
-          "interface_name": "jokers_ls_mod::models::data::events::Ichallenge_completed"
+          "interface_name": "jn_loot::models::data::events::Ichallenge_completed"
         },
         {
           "type": "struct",
-          "name": "jokers_ls_mod::models::data::events::ChallengeCompleted",
+          "name": "jn_loot::models::data::events::ChallengeCompleted",
           "members": [
             {
               "name": "player",
@@ -8332,7 +8345,7 @@
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::models::data::events::Ichallenge_completed",
+          "name": "jn_loot::models::data::events::Ichallenge_completed",
           "items": [
             {
               "type": "function",
@@ -8340,7 +8353,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "jokers_ls_mod::models::data::events::ChallengeCompleted"
+                  "type": "jn_loot::models::data::events::ChallengeCompleted"
                 }
               ],
               "outputs": [],
@@ -8350,14 +8363,14 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::models::data::events::challenge_completed::Event",
+          "name": "jn_loot::models::data::events::challenge_completed::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "jokers_ls_mod-ChallengeCompleted",
-      "qualified_path": "jokers_ls_mod::models::data::events::challenge_completed",
-      "manifest_name": "jokers_ls_mod-ChallengeCompleted-7aa80550"
+      "tag": "jn_loot-ChallengeCompleted",
+      "qualified_path": "jn_loot::models::data::events::challenge_completed",
+      "manifest_name": "jn_loot-ChallengeCompleted-350178a1"
     },
     {
       "kind": "DojoModel",
@@ -8378,8 +8391,8 @@
           "key": false
         }
       ],
-      "class_hash": "0xcde89947ebd6d7da058a1ddeb0ec0cb912f3493b794ecaa823c66ef969e7ae",
-      "original_class_hash": "0xcde89947ebd6d7da058a1ddeb0ec0cb912f3493b794ecaa823c66ef969e7ae",
+      "class_hash": "0x5033df863c45ade75774aba17598d052a66a01ba171e7e7dfaec6db59ebc72f",
+      "original_class_hash": "0x5033df863c45ade75774aba17598d052a66a01ba171e7e7dfaec6db59ebc72f",
       "abi": [
         {
           "type": "impl",
@@ -8746,11 +8759,11 @@
         {
           "type": "impl",
           "name": "challenge_playerImpl",
-          "interface_name": "jokers_ls_mod::models::data::challenge::Ichallenge_player"
+          "interface_name": "jn_loot::models::data::challenge::Ichallenge_player"
         },
         {
           "type": "struct",
-          "name": "jokers_ls_mod::models::data::challenge::ChallengePlayer",
+          "name": "jn_loot::models::data::challenge::ChallengePlayer",
           "members": [
             {
               "name": "game_id",
@@ -8768,7 +8781,7 @@
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::models::data::challenge::Ichallenge_player",
+          "name": "jn_loot::models::data::challenge::Ichallenge_player",
           "items": [
             {
               "type": "function",
@@ -8776,7 +8789,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "jokers_ls_mod::models::data::challenge::ChallengePlayer"
+                  "type": "jn_loot::models::data::challenge::ChallengePlayer"
                 }
               ],
               "outputs": [],
@@ -8786,14 +8799,14 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::models::data::challenge::challenge_player::Event",
+          "name": "jn_loot::models::data::challenge::challenge_player::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "jokers_ls_mod-ChallengePlayer",
-      "qualified_path": "jokers_ls_mod::models::data::challenge::challenge_player",
-      "manifest_name": "jokers_ls_mod-ChallengePlayer-1be1b055"
+      "tag": "jn_loot-ChallengePlayer",
+      "qualified_path": "jn_loot::models::data::challenge::challenge_player",
+      "manifest_name": "jn_loot-ChallengePlayer-3bc64528"
     },
     {
       "kind": "DojoModel",
@@ -8809,8 +8822,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x71ddc1d7255c582ef119cc88ff9afd37d1f535cd9dd6511434a561b17e1bb7c",
-      "original_class_hash": "0x71ddc1d7255c582ef119cc88ff9afd37d1f535cd9dd6511434a561b17e1bb7c",
+      "class_hash": "0x2c812280777a027c717d00b1a9c2802003680c9c1d08a61c0119bcff8e868b7",
+      "original_class_hash": "0x2c812280777a027c717d00b1a9c2802003680c9c1d08a61c0119bcff8e868b7",
       "abi": [
         {
           "type": "impl",
@@ -9177,11 +9190,11 @@
         {
           "type": "impl",
           "name": "create_game_eventImpl",
-          "interface_name": "jokers_ls_mod::models::data::events::Icreate_game_event"
+          "interface_name": "jn_loot::models::data::events::Icreate_game_event"
         },
         {
           "type": "struct",
-          "name": "jokers_ls_mod::models::data::events::CreateGameEvent",
+          "name": "jn_loot::models::data::events::CreateGameEvent",
           "members": [
             {
               "name": "player",
@@ -9195,7 +9208,7 @@
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::models::data::events::Icreate_game_event",
+          "name": "jn_loot::models::data::events::Icreate_game_event",
           "items": [
             {
               "type": "function",
@@ -9203,7 +9216,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "jokers_ls_mod::models::data::events::CreateGameEvent"
+                  "type": "jn_loot::models::data::events::CreateGameEvent"
                 }
               ],
               "outputs": [],
@@ -9213,14 +9226,14 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::models::data::events::create_game_event::Event",
+          "name": "jn_loot::models::data::events::create_game_event::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "jokers_ls_mod-CreateGameEvent",
-      "qualified_path": "jokers_ls_mod::models::data::events::create_game_event",
-      "manifest_name": "jokers_ls_mod-CreateGameEvent-2ef780da"
+      "tag": "jn_loot-CreateGameEvent",
+      "qualified_path": "jn_loot::models::data::events::create_game_event",
+      "manifest_name": "jn_loot-CreateGameEvent-43872e3e"
     },
     {
       "kind": "DojoModel",
@@ -9241,8 +9254,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x11154390ee059a6a5d34906e2cbc6154ce9721f3b55497e6952cd471d1a804f",
-      "original_class_hash": "0x11154390ee059a6a5d34906e2cbc6154ce9721f3b55497e6952cd471d1a804f",
+      "class_hash": "0x2e29011bae6b4dfaf7f325d0ec507f2893c7f26d6eed167a9806c27c488a61c",
+      "original_class_hash": "0x2e29011bae6b4dfaf7f325d0ec507f2893c7f26d6eed167a9806c27c488a61c",
       "abi": [
         {
           "type": "impl",
@@ -9609,11 +9622,11 @@
         {
           "type": "impl",
           "name": "current_hand_cardImpl",
-          "interface_name": "jokers_ls_mod::models::status::round::current_hand_card::Icurrent_hand_card"
+          "interface_name": "jn_loot::models::status::round::current_hand_card::Icurrent_hand_card"
         },
         {
           "type": "struct",
-          "name": "jokers_ls_mod::models::status::round::current_hand_card::CurrentHandCard",
+          "name": "jn_loot::models::status::round::current_hand_card::CurrentHandCard",
           "members": [
             {
               "name": "game_id",
@@ -9631,7 +9644,7 @@
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::models::status::round::current_hand_card::Icurrent_hand_card",
+          "name": "jn_loot::models::status::round::current_hand_card::Icurrent_hand_card",
           "items": [
             {
               "type": "function",
@@ -9639,7 +9652,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "jokers_ls_mod::models::status::round::current_hand_card::CurrentHandCard"
+                  "type": "jn_loot::models::status::round::current_hand_card::CurrentHandCard"
                 }
               ],
               "outputs": [],
@@ -9649,14 +9662,14 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::models::status::round::current_hand_card::current_hand_card::Event",
+          "name": "jn_loot::models::status::round::current_hand_card::current_hand_card::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "jokers_ls_mod-CurrentHandCard",
-      "qualified_path": "jokers_ls_mod::models::status::round::current_hand_card::current_hand_card",
-      "manifest_name": "jokers_ls_mod-CurrentHandCard-ef024742"
+      "tag": "jn_loot-CurrentHandCard",
+      "qualified_path": "jn_loot::models::status::round::current_hand_card::current_hand_card",
+      "manifest_name": "jn_loot-CurrentHandCard-50f0bd10"
     },
     {
       "kind": "DojoModel",
@@ -9687,8 +9700,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x5a9e87f2a7b4b144057e58a51047e235ddf468b175b5d0be412396c4b779907",
-      "original_class_hash": "0x5a9e87f2a7b4b144057e58a51047e235ddf468b175b5d0be412396c4b779907",
+      "class_hash": "0x9536cbc87f7ef65f4c3481a4e5440a0600dee739a1c1c3c7e724e147cbcee2",
+      "original_class_hash": "0x9536cbc87f7ef65f4c3481a4e5440a0600dee739a1c1c3c7e724e147cbcee2",
       "abi": [
         {
           "type": "impl",
@@ -10055,7 +10068,7 @@
         {
           "type": "impl",
           "name": "current_special_cardsImpl",
-          "interface_name": "jokers_ls_mod::models::status::game::game::Icurrent_special_cards"
+          "interface_name": "jn_loot::models::status::game::game::Icurrent_special_cards"
         },
         {
           "type": "enum",
@@ -10073,7 +10086,7 @@
         },
         {
           "type": "struct",
-          "name": "jokers_ls_mod::models::status::game::game::CurrentSpecialCards",
+          "name": "jn_loot::models::status::game::game::CurrentSpecialCards",
           "members": [
             {
               "name": "game_id",
@@ -10099,7 +10112,7 @@
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::models::status::game::game::Icurrent_special_cards",
+          "name": "jn_loot::models::status::game::game::Icurrent_special_cards",
           "items": [
             {
               "type": "function",
@@ -10107,7 +10120,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "jokers_ls_mod::models::status::game::game::CurrentSpecialCards"
+                  "type": "jn_loot::models::status::game::game::CurrentSpecialCards"
                 }
               ],
               "outputs": [],
@@ -10117,14 +10130,14 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::models::status::game::game::current_special_cards::Event",
+          "name": "jn_loot::models::status::game::game::current_special_cards::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "jokers_ls_mod-CurrentSpecialCards",
-      "qualified_path": "jokers_ls_mod::models::status::game::game::current_special_cards",
-      "manifest_name": "jokers_ls_mod-CurrentSpecialCards-456839e9"
+      "tag": "jn_loot-CurrentSpecialCards",
+      "qualified_path": "jn_loot::models::status::game::game::current_special_cards",
+      "manifest_name": "jn_loot-CurrentSpecialCards-3f04c0f5"
     },
     {
       "kind": "DojoModel",
@@ -10145,8 +10158,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x2dd0e1b59fec30af97426c4d00d0fe626ea36cd290ab808f08166c2bb3bb8ea",
-      "original_class_hash": "0x2dd0e1b59fec30af97426c4d00d0fe626ea36cd290ab808f08166c2bb3bb8ea",
+      "class_hash": "0x143874cb9b2c070b882d4f06cd466a08a80360f05df5841ca3b75c221b9a2f4",
+      "original_class_hash": "0x143874cb9b2c070b882d4f06cd466a08a80360f05df5841ca3b75c221b9a2f4",
       "abi": [
         {
           "type": "impl",
@@ -10513,11 +10526,11 @@
         {
           "type": "impl",
           "name": "deck_cardImpl",
-          "interface_name": "jokers_ls_mod::models::data::game_deck::Ideck_card"
+          "interface_name": "jn_loot::models::data::game_deck::Ideck_card"
         },
         {
           "type": "struct",
-          "name": "jokers_ls_mod::models::data::game_deck::DeckCard",
+          "name": "jn_loot::models::data::game_deck::DeckCard",
           "members": [
             {
               "name": "game_id",
@@ -10535,7 +10548,7 @@
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::models::data::game_deck::Ideck_card",
+          "name": "jn_loot::models::data::game_deck::Ideck_card",
           "items": [
             {
               "type": "function",
@@ -10543,7 +10556,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "jokers_ls_mod::models::data::game_deck::DeckCard"
+                  "type": "jn_loot::models::data::game_deck::DeckCard"
                 }
               ],
               "outputs": [],
@@ -10553,14 +10566,14 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::models::data::game_deck::deck_card::Event",
+          "name": "jn_loot::models::data::game_deck::deck_card::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "jokers_ls_mod-DeckCard",
-      "qualified_path": "jokers_ls_mod::models::data::game_deck::deck_card",
-      "manifest_name": "jokers_ls_mod-DeckCard-13191af2"
+      "tag": "jn_loot-DeckCard",
+      "qualified_path": "jn_loot::models::data::game_deck::deck_card",
+      "manifest_name": "jn_loot-DeckCard-3d715b4c"
     },
     {
       "kind": "DojoModel",
@@ -10621,8 +10634,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x413a71df99e8eff4b5efdb79b4f833c5e86e217e7ded9ebf8d21178a8f13aa4",
-      "original_class_hash": "0x413a71df99e8eff4b5efdb79b4f833c5e86e217e7ded9ebf8d21178a8f13aa4",
+      "class_hash": "0x15de1d962579aa9f0117e77a8427700c093ec393f524f4e5a634e061cdca56c",
+      "original_class_hash": "0x15de1d962579aa9f0117e77a8427700c093ec393f524f4e5a634e061cdca56c",
       "abi": [
         {
           "type": "impl",
@@ -10989,11 +11002,11 @@
         {
           "type": "impl",
           "name": "detail_earned_eventImpl",
-          "interface_name": "jokers_ls_mod::models::data::events::Idetail_earned_event"
+          "interface_name": "jn_loot::models::data::events::Idetail_earned_event"
         },
         {
           "type": "struct",
-          "name": "jokers_ls_mod::models::data::events::DetailEarnedEvent",
+          "name": "jn_loot::models::data::events::DetailEarnedEvent",
           "members": [
             {
               "name": "player",
@@ -11043,7 +11056,7 @@
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::models::data::events::Idetail_earned_event",
+          "name": "jn_loot::models::data::events::Idetail_earned_event",
           "items": [
             {
               "type": "function",
@@ -11051,7 +11064,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "jokers_ls_mod::models::data::events::DetailEarnedEvent"
+                  "type": "jn_loot::models::data::events::DetailEarnedEvent"
                 }
               ],
               "outputs": [],
@@ -11061,14 +11074,14 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::models::data::events::detail_earned_event::Event",
+          "name": "jn_loot::models::data::events::detail_earned_event::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "jokers_ls_mod-DetailEarnedEvent",
-      "qualified_path": "jokers_ls_mod::models::data::events::detail_earned_event",
-      "manifest_name": "jokers_ls_mod-DetailEarnedEvent-1545f11e"
+      "tag": "jn_loot-DetailEarnedEvent",
+      "qualified_path": "jn_loot::models::data::events::detail_earned_event",
+      "manifest_name": "jn_loot-DetailEarnedEvent-63938dc0"
     },
     {
       "kind": "DojoModel",
@@ -11169,8 +11182,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x1cfc5de7949b355170d7bc2f4b3e94e8c45549520f6aa85ed98da27a0f0aee3",
-      "original_class_hash": "0x1cfc5de7949b355170d7bc2f4b3e94e8c45549520f6aa85ed98da27a0f0aee3",
+      "class_hash": "0xe4ce8c24b8fd5c064baf60b8e001feaaf172f16516e1b65aedc7cb1304371e",
+      "original_class_hash": "0xe4ce8c24b8fd5c064baf60b8e001feaaf172f16516e1b65aedc7cb1304371e",
       "abi": [
         {
           "type": "impl",
@@ -11537,11 +11550,11 @@
         {
           "type": "impl",
           "name": "gameImpl",
-          "interface_name": "jokers_ls_mod::models::status::game::game::Igame"
+          "interface_name": "jn_loot::models::status::game::game::Igame"
         },
         {
           "type": "enum",
-          "name": "jokers_ls_mod::models::status::game::game::GameState",
+          "name": "jn_loot::models::status::game::game::GameState",
           "variants": [
             {
               "name": "IN_GAME",
@@ -11555,7 +11568,7 @@
         },
         {
           "type": "enum",
-          "name": "jokers_ls_mod::models::status::game::game::GameSubState",
+          "name": "jn_loot::models::status::game::game::GameSubState",
           "variants": [
             {
               "name": "BEAST",
@@ -11600,12 +11613,16 @@
             {
               "name": "DRAFT_ADVENTURER_CARDS",
               "type": "()"
+            },
+            {
+              "name": "UNPASSED_OBSTACLE",
+              "type": "()"
             }
           ]
         },
         {
           "type": "struct",
-          "name": "jokers_ls_mod::models::status::game::game::Game",
+          "name": "jn_loot::models::status::game::game::Game",
           "members": [
             {
               "name": "id",
@@ -11677,17 +11694,17 @@
             },
             {
               "name": "state",
-              "type": "jokers_ls_mod::models::status::game::game::GameState"
+              "type": "jn_loot::models::status::game::game::GameState"
             },
             {
               "name": "substate",
-              "type": "jokers_ls_mod::models::status::game::game::GameSubState"
+              "type": "jn_loot::models::status::game::game::GameSubState"
             }
           ]
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::models::status::game::game::Igame",
+          "name": "jn_loot::models::status::game::game::Igame",
           "items": [
             {
               "type": "function",
@@ -11695,7 +11712,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "jokers_ls_mod::models::status::game::game::Game"
+                  "type": "jn_loot::models::status::game::game::Game"
                 }
               ],
               "outputs": [],
@@ -11705,14 +11722,14 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::models::status::game::game::game::Event",
+          "name": "jn_loot::models::status::game::game::game::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "jokers_ls_mod-Game",
-      "qualified_path": "jokers_ls_mod::models::status::game::game::game",
-      "manifest_name": "jokers_ls_mod-Game-d44b351e"
+      "tag": "jn_loot-Game",
+      "qualified_path": "jn_loot::models::status::game::game::game",
+      "manifest_name": "jn_loot-Game-57994941"
     },
     {
       "kind": "DojoModel",
@@ -11733,8 +11750,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x724ca866c35ca8ab8d7b695af04c6213a92dba4a8e545119783354ddb6f4b91",
-      "original_class_hash": "0x724ca866c35ca8ab8d7b695af04c6213a92dba4a8e545119783354ddb6f4b91",
+      "class_hash": "0x425e7edd2d28ba6021e1e490e80f5d8e1542971012fe23b14cc8e63d2571a31",
+      "original_class_hash": "0x425e7edd2d28ba6021e1e490e80f5d8e1542971012fe23b14cc8e63d2571a31",
       "abi": [
         {
           "type": "impl",
@@ -12101,11 +12118,11 @@
         {
           "type": "impl",
           "name": "game_deckImpl",
-          "interface_name": "jokers_ls_mod::models::data::game_deck::Igame_deck"
+          "interface_name": "jn_loot::models::data::game_deck::Igame_deck"
         },
         {
           "type": "struct",
-          "name": "jokers_ls_mod::models::data::game_deck::GameDeck",
+          "name": "jn_loot::models::data::game_deck::GameDeck",
           "members": [
             {
               "name": "game_id",
@@ -12123,7 +12140,7 @@
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::models::data::game_deck::Igame_deck",
+          "name": "jn_loot::models::data::game_deck::Igame_deck",
           "items": [
             {
               "type": "function",
@@ -12131,7 +12148,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "jokers_ls_mod::models::data::game_deck::GameDeck"
+                  "type": "jn_loot::models::data::game_deck::GameDeck"
                 }
               ],
               "outputs": [],
@@ -12141,14 +12158,14 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::models::data::game_deck::game_deck::Event",
+          "name": "jn_loot::models::data::game_deck::game_deck::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "jokers_ls_mod-GameDeck",
-      "qualified_path": "jokers_ls_mod::models::data::game_deck::game_deck",
-      "manifest_name": "jokers_ls_mod-GameDeck-2bf1ba06"
+      "tag": "jn_loot-GameDeck",
+      "qualified_path": "jn_loot::models::data::game_deck::game_deck",
+      "manifest_name": "jn_loot-GameDeck-591c34ae"
     },
     {
       "kind": "DojoModel",
@@ -12174,8 +12191,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x78c4d42a765aa2c737c93ef082426d70fab025b2fbc03b6f6b2eb50e2d1af54",
-      "original_class_hash": "0x78c4d42a765aa2c737c93ef082426d70fab025b2fbc03b6f6b2eb50e2d1af54",
+      "class_hash": "0x7b041350c821e1d815fbfe4308e89bf1e555a4daf2b359729d2900956a08c83",
+      "original_class_hash": "0x7b041350c821e1d815fbfe4308e89bf1e555a4daf2b359729d2900956a08c83",
       "abi": [
         {
           "type": "impl",
@@ -12542,11 +12559,11 @@
         {
           "type": "impl",
           "name": "game_mode_beastImpl",
-          "interface_name": "jokers_ls_mod::models::data::beast::Igame_mode_beast"
+          "interface_name": "jn_loot::models::data::beast::Igame_mode_beast"
         },
         {
           "type": "struct",
-          "name": "jokers_ls_mod::models::data::beast::GameModeBeast",
+          "name": "jn_loot::models::data::beast::GameModeBeast",
           "members": [
             {
               "name": "game_id",
@@ -12568,7 +12585,7 @@
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::models::data::beast::Igame_mode_beast",
+          "name": "jn_loot::models::data::beast::Igame_mode_beast",
           "items": [
             {
               "type": "function",
@@ -12576,7 +12593,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "jokers_ls_mod::models::data::beast::GameModeBeast"
+                  "type": "jn_loot::models::data::beast::GameModeBeast"
                 }
               ],
               "outputs": [],
@@ -12586,14 +12603,14 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::models::data::beast::game_mode_beast::Event",
+          "name": "jn_loot::models::data::beast::game_mode_beast::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "jokers_ls_mod-GameModeBeast",
-      "qualified_path": "jokers_ls_mod::models::data::beast::game_mode_beast",
-      "manifest_name": "jokers_ls_mod-GameModeBeast-485495a6"
+      "tag": "jn_loot-GameModeBeast",
+      "qualified_path": "jn_loot::models::data::beast::game_mode_beast",
+      "manifest_name": "jn_loot-GameModeBeast-3839a5ef"
     },
     {
       "kind": "DojoModel",
@@ -12609,8 +12626,8 @@
           "key": false
         }
       ],
-      "class_hash": "0xc604a085c8d0a4b65f9655ef0d33f311f4437a2cb448ef828d460cb73147c6",
-      "original_class_hash": "0xc604a085c8d0a4b65f9655ef0d33f311f4437a2cb448ef828d460cb73147c6",
+      "class_hash": "0x6b9fd439e370da3ffa241fbc1a0b8de7357234037aefa78e5e10c55986853c6",
+      "original_class_hash": "0x6b9fd439e370da3ffa241fbc1a0b8de7357234037aefa78e5e10c55986853c6",
       "abi": [
         {
           "type": "impl",
@@ -12977,11 +12994,11 @@
         {
           "type": "impl",
           "name": "item_challenge_completedImpl",
-          "interface_name": "jokers_ls_mod::models::data::events::Iitem_challenge_completed"
+          "interface_name": "jn_loot::models::data::events::Iitem_challenge_completed"
         },
         {
           "type": "struct",
-          "name": "jokers_ls_mod::models::data::events::ItemChallengeCompleted",
+          "name": "jn_loot::models::data::events::ItemChallengeCompleted",
           "members": [
             {
               "name": "game_id",
@@ -12995,7 +13012,7 @@
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::models::data::events::Iitem_challenge_completed",
+          "name": "jn_loot::models::data::events::Iitem_challenge_completed",
           "items": [
             {
               "type": "function",
@@ -13003,7 +13020,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "jokers_ls_mod::models::data::events::ItemChallengeCompleted"
+                  "type": "jn_loot::models::data::events::ItemChallengeCompleted"
                 }
               ],
               "outputs": [],
@@ -13013,14 +13030,14 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::models::data::events::item_challenge_completed::Event",
+          "name": "jn_loot::models::data::events::item_challenge_completed::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "jokers_ls_mod-ItemChallengeCompleted",
-      "qualified_path": "jokers_ls_mod::models::data::events::item_challenge_completed",
-      "manifest_name": "jokers_ls_mod-ItemChallengeCompleted-e42aa154"
+      "tag": "jn_loot-ItemChallengeCompleted",
+      "qualified_path": "jn_loot::models::data::events::item_challenge_completed",
+      "manifest_name": "jn_loot-ItemChallengeCompleted-655d1a86"
     },
     {
       "kind": "DojoModel",
@@ -13041,8 +13058,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x65edc2f17b255546d60d3db2c8303e6aec5c374eb931d9de93e53c6395f8345",
-      "original_class_hash": "0x65edc2f17b255546d60d3db2c8303e6aec5c374eb931d9de93e53c6395f8345",
+      "class_hash": "0x737399ce9c8fe210d9ed9d1bb3a7ea5e86c246226dd54d0a376bb6b2bed9973",
+      "original_class_hash": "0x737399ce9c8fe210d9ed9d1bb3a7ea5e86c246226dd54d0a376bb6b2bed9973",
       "abi": [
         {
           "type": "impl",
@@ -13409,11 +13426,11 @@
         {
           "type": "impl",
           "name": "last_beast_levelImpl",
-          "interface_name": "jokers_ls_mod::models::data::last_beast_level::Ilast_beast_level"
+          "interface_name": "jn_loot::models::data::last_beast_level::Ilast_beast_level"
         },
         {
           "type": "struct",
-          "name": "jokers_ls_mod::models::data::last_beast_level::LastBeastLevel",
+          "name": "jn_loot::models::data::last_beast_level::LastBeastLevel",
           "members": [
             {
               "name": "game_id",
@@ -13431,7 +13448,7 @@
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::models::data::last_beast_level::Ilast_beast_level",
+          "name": "jn_loot::models::data::last_beast_level::Ilast_beast_level",
           "items": [
             {
               "type": "function",
@@ -13439,7 +13456,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "jokers_ls_mod::models::data::last_beast_level::LastBeastLevel"
+                  "type": "jn_loot::models::data::last_beast_level::LastBeastLevel"
                 }
               ],
               "outputs": [],
@@ -13449,14 +13466,14 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::models::data::last_beast_level::last_beast_level::Event",
+          "name": "jn_loot::models::data::last_beast_level::last_beast_level::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "jokers_ls_mod-LastBeastLevel",
-      "qualified_path": "jokers_ls_mod::models::data::last_beast_level::last_beast_level",
-      "manifest_name": "jokers_ls_mod-LastBeastLevel-37ff0048"
+      "tag": "jn_loot-LastBeastLevel",
+      "qualified_path": "jn_loot::models::data::last_beast_level::last_beast_level",
+      "manifest_name": "jn_loot-LastBeastLevel-29baf171"
     },
     {
       "kind": "DojoModel",
@@ -13487,8 +13504,8 @@
           "key": false
         }
       ],
-      "class_hash": "0xa0013335c6962212c6e68a1ef5bc8bd11d1af9e1711b5d6b7de339071f9cd8",
-      "original_class_hash": "0xa0013335c6962212c6e68a1ef5bc8bd11d1af9e1711b5d6b7de339071f9cd8",
+      "class_hash": "0x6aac2cde710dc677803a14be2503904decebceda03b6a71cb1df55ca3e6a2e9",
+      "original_class_hash": "0x6aac2cde710dc677803a14be2503904decebceda03b6a71cb1df55ca3e6a2e9",
       "abi": [
         {
           "type": "impl",
@@ -13855,11 +13872,11 @@
         {
           "type": "impl",
           "name": "modifier_card_suit_eventImpl",
-          "interface_name": "jokers_ls_mod::models::data::events::Imodifier_card_suit_event"
+          "interface_name": "jn_loot::models::data::events::Imodifier_card_suit_event"
         },
         {
           "type": "enum",
-          "name": "jokers_ls_mod::models::data::card::Suit",
+          "name": "jn_loot::models::data::card::Suit",
           "variants": [
             {
               "name": "None",
@@ -13889,7 +13906,7 @@
         },
         {
           "type": "struct",
-          "name": "jokers_ls_mod::models::data::events::ModifierCardSuitEvent",
+          "name": "jn_loot::models::data::events::ModifierCardSuitEvent",
           "members": [
             {
               "name": "player",
@@ -13909,13 +13926,13 @@
             },
             {
               "name": "suit",
-              "type": "jokers_ls_mod::models::data::card::Suit"
+              "type": "jn_loot::models::data::card::Suit"
             }
           ]
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::models::data::events::Imodifier_card_suit_event",
+          "name": "jn_loot::models::data::events::Imodifier_card_suit_event",
           "items": [
             {
               "type": "function",
@@ -13923,7 +13940,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "jokers_ls_mod::models::data::events::ModifierCardSuitEvent"
+                  "type": "jn_loot::models::data::events::ModifierCardSuitEvent"
                 }
               ],
               "outputs": [],
@@ -13933,14 +13950,14 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::models::data::events::modifier_card_suit_event::Event",
+          "name": "jn_loot::models::data::events::modifier_card_suit_event::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "jokers_ls_mod-ModifierCardSuitEvent",
-      "qualified_path": "jokers_ls_mod::models::data::events::modifier_card_suit_event",
-      "manifest_name": "jokers_ls_mod-ModifierCardSuitEvent-79c4e5cc"
+      "tag": "jn_loot-ModifierCardSuitEvent",
+      "qualified_path": "jn_loot::models::data::events::modifier_card_suit_event",
+      "manifest_name": "jn_loot-ModifierCardSuitEvent-177eb0a2"
     },
     {
       "kind": "DojoModel",
@@ -13971,8 +13988,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x583c7f27c2b6ec25cc6926b2ec436afcc37d93183c3c69e85ab1746c1a0e63e",
-      "original_class_hash": "0x583c7f27c2b6ec25cc6926b2ec436afcc37d93183c3c69e85ab1746c1a0e63e",
+      "class_hash": "0x6463ec8fdc04012b71a78abc8d6df82a5c239c6b4c3d28d2b2ee7fd66e386e4",
+      "original_class_hash": "0x6463ec8fdc04012b71a78abc8d6df82a5c239c6b4c3d28d2b2ee7fd66e386e4",
       "abi": [
         {
           "type": "impl",
@@ -14339,11 +14356,11 @@
         {
           "type": "impl",
           "name": "neon_poker_hand_eventImpl",
-          "interface_name": "jokers_ls_mod::models::data::events::Ineon_poker_hand_event"
+          "interface_name": "jn_loot::models::data::events::Ineon_poker_hand_event"
         },
         {
           "type": "struct",
-          "name": "jokers_ls_mod::models::data::events::NeonPokerHandEvent",
+          "name": "jn_loot::models::data::events::NeonPokerHandEvent",
           "members": [
             {
               "name": "player",
@@ -14369,7 +14386,7 @@
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::models::data::events::Ineon_poker_hand_event",
+          "name": "jn_loot::models::data::events::Ineon_poker_hand_event",
           "items": [
             {
               "type": "function",
@@ -14377,7 +14394,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "jokers_ls_mod::models::data::events::NeonPokerHandEvent"
+                  "type": "jn_loot::models::data::events::NeonPokerHandEvent"
                 }
               ],
               "outputs": [],
@@ -14387,14 +14404,441 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::models::data::events::neon_poker_hand_event::Event",
+          "name": "jn_loot::models::data::events::neon_poker_hand_event::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "jokers_ls_mod-NeonPokerHandEvent",
-      "qualified_path": "jokers_ls_mod::models::data::events::neon_poker_hand_event",
-      "manifest_name": "jokers_ls_mod-NeonPokerHandEvent-67edbc43"
+      "tag": "jn_loot-NeonPokerHandEvent",
+      "qualified_path": "jn_loot::models::data::events::neon_poker_hand_event",
+      "manifest_name": "jn_loot-NeonPokerHandEvent-2eac0497"
+    },
+    {
+      "kind": "DojoModel",
+      "members": [
+        {
+          "name": "player",
+          "type": "ContractAddress",
+          "key": true
+        },
+        {
+          "name": "attack",
+          "type": "u32",
+          "key": false
+        }
+      ],
+      "class_hash": "0x6ad3de785018f7cc6d7c1d608aaf8d2f43a2cea4b1528be95f5ac923aa94fab",
+      "original_class_hash": "0x6ad3de785018f7cc6d7c1d608aaf8d2f43a2cea4b1528be95f5ac923aa94fab",
+      "abi": [
+        {
+          "type": "impl",
+          "name": "DojoModelImpl",
+          "interface_name": "dojo::model::model::IModel"
+        },
+        {
+          "type": "struct",
+          "name": "core::byte_array::ByteArray",
+          "members": [
+            {
+              "name": "data",
+              "type": "core::array::Array::<core::bytes_31::bytes31>"
+            },
+            {
+              "name": "pending_word",
+              "type": "core::felt252"
+            },
+            {
+              "name": "pending_word_len",
+              "type": "core::integer::u32"
+            }
+          ]
+        },
+        {
+          "type": "enum",
+          "name": "core::option::Option::<core::integer::u32>",
+          "variants": [
+            {
+              "name": "Some",
+              "type": "core::integer::u32"
+            },
+            {
+              "name": "None",
+              "type": "()"
+            }
+          ]
+        },
+        {
+          "type": "struct",
+          "name": "core::array::Span::<core::integer::u8>",
+          "members": [
+            {
+              "name": "snapshot",
+              "type": "@core::array::Array::<core::integer::u8>"
+            }
+          ]
+        },
+        {
+          "type": "struct",
+          "name": "dojo::model::layout::FieldLayout",
+          "members": [
+            {
+              "name": "selector",
+              "type": "core::felt252"
+            },
+            {
+              "name": "layout",
+              "type": "dojo::model::layout::Layout"
+            }
+          ]
+        },
+        {
+          "type": "struct",
+          "name": "core::array::Span::<dojo::model::layout::FieldLayout>",
+          "members": [
+            {
+              "name": "snapshot",
+              "type": "@core::array::Array::<dojo::model::layout::FieldLayout>"
+            }
+          ]
+        },
+        {
+          "type": "struct",
+          "name": "core::array::Span::<dojo::model::layout::Layout>",
+          "members": [
+            {
+              "name": "snapshot",
+              "type": "@core::array::Array::<dojo::model::layout::Layout>"
+            }
+          ]
+        },
+        {
+          "type": "enum",
+          "name": "dojo::model::layout::Layout",
+          "variants": [
+            {
+              "name": "Fixed",
+              "type": "core::array::Span::<core::integer::u8>"
+            },
+            {
+              "name": "Struct",
+              "type": "core::array::Span::<dojo::model::layout::FieldLayout>"
+            },
+            {
+              "name": "Tuple",
+              "type": "core::array::Span::<dojo::model::layout::Layout>"
+            },
+            {
+              "name": "Array",
+              "type": "core::array::Span::<dojo::model::layout::Layout>"
+            },
+            {
+              "name": "ByteArray",
+              "type": "()"
+            },
+            {
+              "name": "Enum",
+              "type": "core::array::Span::<dojo::model::layout::FieldLayout>"
+            }
+          ]
+        },
+        {
+          "type": "struct",
+          "name": "core::array::Span::<core::felt252>",
+          "members": [
+            {
+              "name": "snapshot",
+              "type": "@core::array::Array::<core::felt252>"
+            }
+          ]
+        },
+        {
+          "type": "struct",
+          "name": "dojo::model::introspect::Member",
+          "members": [
+            {
+              "name": "name",
+              "type": "core::felt252"
+            },
+            {
+              "name": "attrs",
+              "type": "core::array::Span::<core::felt252>"
+            },
+            {
+              "name": "ty",
+              "type": "dojo::model::introspect::Ty"
+            }
+          ]
+        },
+        {
+          "type": "struct",
+          "name": "core::array::Span::<dojo::model::introspect::Member>",
+          "members": [
+            {
+              "name": "snapshot",
+              "type": "@core::array::Array::<dojo::model::introspect::Member>"
+            }
+          ]
+        },
+        {
+          "type": "struct",
+          "name": "dojo::model::introspect::Struct",
+          "members": [
+            {
+              "name": "name",
+              "type": "core::felt252"
+            },
+            {
+              "name": "attrs",
+              "type": "core::array::Span::<core::felt252>"
+            },
+            {
+              "name": "children",
+              "type": "core::array::Span::<dojo::model::introspect::Member>"
+            }
+          ]
+        },
+        {
+          "type": "struct",
+          "name": "core::array::Span::<(core::felt252, dojo::model::introspect::Ty)>",
+          "members": [
+            {
+              "name": "snapshot",
+              "type": "@core::array::Array::<(core::felt252, dojo::model::introspect::Ty)>"
+            }
+          ]
+        },
+        {
+          "type": "struct",
+          "name": "dojo::model::introspect::Enum",
+          "members": [
+            {
+              "name": "name",
+              "type": "core::felt252"
+            },
+            {
+              "name": "attrs",
+              "type": "core::array::Span::<core::felt252>"
+            },
+            {
+              "name": "children",
+              "type": "core::array::Span::<(core::felt252, dojo::model::introspect::Ty)>"
+            }
+          ]
+        },
+        {
+          "type": "struct",
+          "name": "core::array::Span::<dojo::model::introspect::Ty>",
+          "members": [
+            {
+              "name": "snapshot",
+              "type": "@core::array::Array::<dojo::model::introspect::Ty>"
+            }
+          ]
+        },
+        {
+          "type": "enum",
+          "name": "dojo::model::introspect::Ty",
+          "variants": [
+            {
+              "name": "Primitive",
+              "type": "core::felt252"
+            },
+            {
+              "name": "Struct",
+              "type": "dojo::model::introspect::Struct"
+            },
+            {
+              "name": "Enum",
+              "type": "dojo::model::introspect::Enum"
+            },
+            {
+              "name": "Tuple",
+              "type": "core::array::Span::<dojo::model::introspect::Ty>"
+            },
+            {
+              "name": "Array",
+              "type": "core::array::Span::<dojo::model::introspect::Ty>"
+            },
+            {
+              "name": "ByteArray",
+              "type": "()"
+            }
+          ]
+        },
+        {
+          "type": "interface",
+          "name": "dojo::model::model::IModel",
+          "items": [
+            {
+              "type": "function",
+              "name": "name",
+              "inputs": [],
+              "outputs": [
+                {
+                  "type": "core::byte_array::ByteArray"
+                }
+              ],
+              "state_mutability": "view"
+            },
+            {
+              "type": "function",
+              "name": "namespace",
+              "inputs": [],
+              "outputs": [
+                {
+                  "type": "core::byte_array::ByteArray"
+                }
+              ],
+              "state_mutability": "view"
+            },
+            {
+              "type": "function",
+              "name": "tag",
+              "inputs": [],
+              "outputs": [
+                {
+                  "type": "core::byte_array::ByteArray"
+                }
+              ],
+              "state_mutability": "view"
+            },
+            {
+              "type": "function",
+              "name": "version",
+              "inputs": [],
+              "outputs": [
+                {
+                  "type": "core::integer::u8"
+                }
+              ],
+              "state_mutability": "view"
+            },
+            {
+              "type": "function",
+              "name": "selector",
+              "inputs": [],
+              "outputs": [
+                {
+                  "type": "core::felt252"
+                }
+              ],
+              "state_mutability": "view"
+            },
+            {
+              "type": "function",
+              "name": "name_hash",
+              "inputs": [],
+              "outputs": [
+                {
+                  "type": "core::felt252"
+                }
+              ],
+              "state_mutability": "view"
+            },
+            {
+              "type": "function",
+              "name": "namespace_hash",
+              "inputs": [],
+              "outputs": [
+                {
+                  "type": "core::felt252"
+                }
+              ],
+              "state_mutability": "view"
+            },
+            {
+              "type": "function",
+              "name": "unpacked_size",
+              "inputs": [],
+              "outputs": [
+                {
+                  "type": "core::option::Option::<core::integer::u32>"
+                }
+              ],
+              "state_mutability": "view"
+            },
+            {
+              "type": "function",
+              "name": "packed_size",
+              "inputs": [],
+              "outputs": [
+                {
+                  "type": "core::option::Option::<core::integer::u32>"
+                }
+              ],
+              "state_mutability": "view"
+            },
+            {
+              "type": "function",
+              "name": "layout",
+              "inputs": [],
+              "outputs": [
+                {
+                  "type": "dojo::model::layout::Layout"
+                }
+              ],
+              "state_mutability": "view"
+            },
+            {
+              "type": "function",
+              "name": "schema",
+              "inputs": [],
+              "outputs": [
+                {
+                  "type": "dojo::model::introspect::Ty"
+                }
+              ],
+              "state_mutability": "view"
+            }
+          ]
+        },
+        {
+          "type": "impl",
+          "name": "obstacle_attackImpl",
+          "interface_name": "jn_loot::models::data::events::Iobstacle_attack"
+        },
+        {
+          "type": "struct",
+          "name": "jn_loot::models::data::events::ObstacleAttack",
+          "members": [
+            {
+              "name": "player",
+              "type": "core::starknet::contract_address::ContractAddress"
+            },
+            {
+              "name": "attack",
+              "type": "core::integer::u32"
+            }
+          ]
+        },
+        {
+          "type": "interface",
+          "name": "jn_loot::models::data::events::Iobstacle_attack",
+          "items": [
+            {
+              "type": "function",
+              "name": "ensure_abi",
+              "inputs": [
+                {
+                  "name": "model",
+                  "type": "jn_loot::models::data::events::ObstacleAttack"
+                }
+              ],
+              "outputs": [],
+              "state_mutability": "view"
+            }
+          ]
+        },
+        {
+          "type": "event",
+          "name": "jn_loot::models::data::events::obstacle_attack::Event",
+          "kind": "enum",
+          "variants": []
+        }
+      ],
+      "tag": "jn_loot-ObstacleAttack",
+      "qualified_path": "jn_loot::models::data::events::obstacle_attack",
+      "manifest_name": "jn_loot-ObstacleAttack-4af82dc3"
     },
     {
       "kind": "DojoModel",
@@ -14410,8 +14854,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x6352793796ec9a57f378235e493b5f2d9092c91f30382c205c723edb72e0589",
-      "original_class_hash": "0x6352793796ec9a57f378235e493b5f2d9092c91f30382c205c723edb72e0589",
+      "class_hash": "0x6cee72c35a923e7460c6959bb2d51a9ed701306af91b7eb51562a0dd006b8e9",
+      "original_class_hash": "0x6cee72c35a923e7460c6959bb2d51a9ed701306af91b7eb51562a0dd006b8e9",
       "abi": [
         {
           "type": "impl",
@@ -14778,11 +15222,11 @@
         {
           "type": "impl",
           "name": "play_game_over_eventImpl",
-          "interface_name": "jokers_ls_mod::models::data::events::Iplay_game_over_event"
+          "interface_name": "jn_loot::models::data::events::Iplay_game_over_event"
         },
         {
           "type": "struct",
-          "name": "jokers_ls_mod::models::data::events::PlayGameOverEvent",
+          "name": "jn_loot::models::data::events::PlayGameOverEvent",
           "members": [
             {
               "name": "player",
@@ -14796,7 +15240,7 @@
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::models::data::events::Iplay_game_over_event",
+          "name": "jn_loot::models::data::events::Iplay_game_over_event",
           "items": [
             {
               "type": "function",
@@ -14804,7 +15248,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "jokers_ls_mod::models::data::events::PlayGameOverEvent"
+                  "type": "jn_loot::models::data::events::PlayGameOverEvent"
                 }
               ],
               "outputs": [],
@@ -14814,14 +15258,14 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::models::data::events::play_game_over_event::Event",
+          "name": "jn_loot::models::data::events::play_game_over_event::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "jokers_ls_mod-PlayGameOverEvent",
-      "qualified_path": "jokers_ls_mod::models::data::events::play_game_over_event",
-      "manifest_name": "jokers_ls_mod-PlayGameOverEvent-52a082f4"
+      "tag": "jn_loot-PlayGameOverEvent",
+      "qualified_path": "jn_loot::models::data::events::play_game_over_event",
+      "manifest_name": "jn_loot-PlayGameOverEvent-53fd908b"
     },
     {
       "kind": "DojoModel",
@@ -14847,8 +15291,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x195cb3b368f9e350ae410171d8609dbfc740416d0379c91a2b2354195462116",
-      "original_class_hash": "0x195cb3b368f9e350ae410171d8609dbfc740416d0379c91a2b2354195462116",
+      "class_hash": "0x52a767e337ceee913b0b0b0729da5860f5f9574e7214b1e1ac1014159fb6163",
+      "original_class_hash": "0x52a767e337ceee913b0b0b0729da5860f5f9574e7214b1e1ac1014159fb6163",
       "abi": [
         {
           "type": "impl",
@@ -15215,11 +15659,11 @@
         {
           "type": "impl",
           "name": "play_poker_hand_eventImpl",
-          "interface_name": "jokers_ls_mod::models::data::events::Iplay_poker_hand_event"
+          "interface_name": "jn_loot::models::data::events::Iplay_poker_hand_event"
         },
         {
           "type": "enum",
-          "name": "jokers_ls_mod::models::data::poker_hand::PokerHand",
+          "name": "jn_loot::models::data::poker_hand::PokerHand",
           "variants": [
             {
               "name": "None",
@@ -15273,7 +15717,7 @@
         },
         {
           "type": "struct",
-          "name": "jokers_ls_mod::models::data::events::PlayPokerHandEvent",
+          "name": "jn_loot::models::data::events::PlayPokerHandEvent",
           "members": [
             {
               "name": "game_id",
@@ -15289,13 +15733,13 @@
             },
             {
               "name": "poker_hand",
-              "type": "jokers_ls_mod::models::data::poker_hand::PokerHand"
+              "type": "jn_loot::models::data::poker_hand::PokerHand"
             }
           ]
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::models::data::events::Iplay_poker_hand_event",
+          "name": "jn_loot::models::data::events::Iplay_poker_hand_event",
           "items": [
             {
               "type": "function",
@@ -15303,7 +15747,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "jokers_ls_mod::models::data::events::PlayPokerHandEvent"
+                  "type": "jn_loot::models::data::events::PlayPokerHandEvent"
                 }
               ],
               "outputs": [],
@@ -15313,14 +15757,14 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::models::data::events::play_poker_hand_event::Event",
+          "name": "jn_loot::models::data::events::play_poker_hand_event::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "jokers_ls_mod-PlayPokerHandEvent",
-      "qualified_path": "jokers_ls_mod::models::data::events::play_poker_hand_event",
-      "manifest_name": "jokers_ls_mod-PlayPokerHandEvent-2f381cc7"
+      "tag": "jn_loot-PlayPokerHandEvent",
+      "qualified_path": "jn_loot::models::data::events::play_poker_hand_event",
+      "manifest_name": "jn_loot-PlayPokerHandEvent-546fe3a6"
     },
     {
       "kind": "DojoModel",
@@ -15346,8 +15790,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x1391e37b6e695b667899bb9c733e71a3585f5b2a21736649659f1cfbf948add",
-      "original_class_hash": "0x1391e37b6e695b667899bb9c733e71a3585f5b2a21736649659f1cfbf948add",
+      "class_hash": "0x4d6e6b35d6b07a407c1606f2de26bba6fed4fcd81a6fa0909c5770cf6ce6c90",
+      "original_class_hash": "0x4d6e6b35d6b07a407c1606f2de26bba6fed4fcd81a6fa0909c5770cf6ce6c90",
       "abi": [
         {
           "type": "impl",
@@ -15714,11 +16158,11 @@
         {
           "type": "impl",
           "name": "play_win_game_eventImpl",
-          "interface_name": "jokers_ls_mod::models::data::events::Iplay_win_game_event"
+          "interface_name": "jn_loot::models::data::events::Iplay_win_game_event"
         },
         {
           "type": "struct",
-          "name": "jokers_ls_mod::models::data::events::PlayWinGameEvent",
+          "name": "jn_loot::models::data::events::PlayWinGameEvent",
           "members": [
             {
               "name": "player",
@@ -15740,7 +16184,7 @@
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::models::data::events::Iplay_win_game_event",
+          "name": "jn_loot::models::data::events::Iplay_win_game_event",
           "items": [
             {
               "type": "function",
@@ -15748,7 +16192,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "jokers_ls_mod::models::data::events::PlayWinGameEvent"
+                  "type": "jn_loot::models::data::events::PlayWinGameEvent"
                 }
               ],
               "outputs": [],
@@ -15758,14 +16202,14 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::models::data::events::play_win_game_event::Event",
+          "name": "jn_loot::models::data::events::play_win_game_event::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "jokers_ls_mod-PlayWinGameEvent",
-      "qualified_path": "jokers_ls_mod::models::data::events::play_win_game_event",
-      "manifest_name": "jokers_ls_mod-PlayWinGameEvent-71b968a1"
+      "tag": "jn_loot-PlayWinGameEvent",
+      "qualified_path": "jn_loot::models::data::events::play_win_game_event",
+      "manifest_name": "jn_loot-PlayWinGameEvent-373c9df0"
     },
     {
       "kind": "DojoModel",
@@ -15781,8 +16225,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x5fa79f9b07c48013b753dc6b78c4588c55e33485d2c88a8bc7708877d0e5185",
-      "original_class_hash": "0x5fa79f9b07c48013b753dc6b78c4588c55e33485d2c88a8bc7708877d0e5185",
+      "class_hash": "0x738130cf85e0639db94c8a4232cccca5d2c3c65817b1f492bf502fbd2350cf0",
+      "original_class_hash": "0x738130cf85e0639db94c8a4232cccca5d2c3c65817b1f492bf502fbd2350cf0",
       "abi": [
         {
           "type": "impl",
@@ -16149,11 +16593,11 @@
         {
           "type": "impl",
           "name": "player_attackImpl",
-          "interface_name": "jokers_ls_mod::models::data::events::Iplayer_attack"
+          "interface_name": "jn_loot::models::data::events::Iplayer_attack"
         },
         {
           "type": "struct",
-          "name": "jokers_ls_mod::models::data::events::PlayerAttack",
+          "name": "jn_loot::models::data::events::PlayerAttack",
           "members": [
             {
               "name": "player",
@@ -16167,7 +16611,7 @@
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::models::data::events::Iplayer_attack",
+          "name": "jn_loot::models::data::events::Iplayer_attack",
           "items": [
             {
               "type": "function",
@@ -16175,7 +16619,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "jokers_ls_mod::models::data::events::PlayerAttack"
+                  "type": "jn_loot::models::data::events::PlayerAttack"
                 }
               ],
               "outputs": [],
@@ -16185,14 +16629,14 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::models::data::events::player_attack::Event",
+          "name": "jn_loot::models::data::events::player_attack::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "jokers_ls_mod-PlayerAttack",
-      "qualified_path": "jokers_ls_mod::models::data::events::player_attack",
-      "manifest_name": "jokers_ls_mod-PlayerAttack-75ee87b9"
+      "tag": "jn_loot-PlayerAttack",
+      "qualified_path": "jn_loot::models::data::events::player_attack",
+      "manifest_name": "jn_loot-PlayerAttack-69d9827f"
     },
     {
       "kind": "DojoModel",
@@ -16208,8 +16652,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x484327111335a8fed94c92abe8e5f91372490b9574e1348031f90b586ea606b",
-      "original_class_hash": "0x484327111335a8fed94c92abe8e5f91372490b9574e1348031f90b586ea606b",
+      "class_hash": "0x303a0db95e0bc992048edafa8bbca194062c1f990d4a2dc6779f41c5c302026",
+      "original_class_hash": "0x303a0db95e0bc992048edafa8bbca194062c1f990d4a2dc6779f41c5c302026",
       "abi": [
         {
           "type": "impl",
@@ -16576,11 +17020,11 @@
         {
           "type": "impl",
           "name": "player_beastImpl",
-          "interface_name": "jokers_ls_mod::models::data::beast::Iplayer_beast"
+          "interface_name": "jn_loot::models::data::beast::Iplayer_beast"
         },
         {
           "type": "struct",
-          "name": "jokers_ls_mod::models::data::beast::PlayerBeast",
+          "name": "jn_loot::models::data::beast::PlayerBeast",
           "members": [
             {
               "name": "game_id",
@@ -16594,7 +17038,7 @@
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::models::data::beast::Iplayer_beast",
+          "name": "jn_loot::models::data::beast::Iplayer_beast",
           "items": [
             {
               "type": "function",
@@ -16602,7 +17046,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "jokers_ls_mod::models::data::beast::PlayerBeast"
+                  "type": "jn_loot::models::data::beast::PlayerBeast"
                 }
               ],
               "outputs": [],
@@ -16612,14 +17056,14 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::models::data::beast::player_beast::Event",
+          "name": "jn_loot::models::data::beast::player_beast::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "jokers_ls_mod-PlayerBeast",
-      "qualified_path": "jokers_ls_mod::models::data::beast::player_beast",
-      "manifest_name": "jokers_ls_mod-PlayerBeast-2719982c"
+      "tag": "jn_loot-PlayerBeast",
+      "qualified_path": "jn_loot::models::data::beast::player_beast",
+      "manifest_name": "jn_loot-PlayerBeast-65ea3f8e"
     },
     {
       "kind": "DojoModel",
@@ -16640,8 +17084,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x4d7a2744c75338e1bd239806c61d2c3623039e8aa6dce5630c3c4c12c3a34f3",
-      "original_class_hash": "0x4d7a2744c75338e1bd239806c61d2c3623039e8aa6dce5630c3c4c12c3a34f3",
+      "class_hash": "0x7edcf66f5aa6d84fd00743ce8913ec09db323c2845026b7ce0965a7b73802ed",
+      "original_class_hash": "0x7edcf66f5aa6d84fd00743ce8913ec09db323c2845026b7ce0965a7b73802ed",
       "abi": [
         {
           "type": "impl",
@@ -17008,11 +17452,11 @@
         {
           "type": "impl",
           "name": "player_healedImpl",
-          "interface_name": "jokers_ls_mod::models::data::events::Iplayer_healed"
+          "interface_name": "jn_loot::models::data::events::Iplayer_healed"
         },
         {
           "type": "struct",
-          "name": "jokers_ls_mod::models::data::events::PlayerHealed",
+          "name": "jn_loot::models::data::events::PlayerHealed",
           "members": [
             {
               "name": "game_id",
@@ -17030,7 +17474,7 @@
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::models::data::events::Iplayer_healed",
+          "name": "jn_loot::models::data::events::Iplayer_healed",
           "items": [
             {
               "type": "function",
@@ -17038,7 +17482,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "jokers_ls_mod::models::data::events::PlayerHealed"
+                  "type": "jn_loot::models::data::events::PlayerHealed"
                 }
               ],
               "outputs": [],
@@ -17048,14 +17492,14 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::models::data::events::player_healed::Event",
+          "name": "jn_loot::models::data::events::player_healed::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "jokers_ls_mod-PlayerHealed",
-      "qualified_path": "jokers_ls_mod::models::data::events::player_healed",
-      "manifest_name": "jokers_ls_mod-PlayerHealed-724c3503"
+      "tag": "jn_loot-PlayerHealed",
+      "qualified_path": "jn_loot::models::data::events::player_healed",
+      "manifest_name": "jn_loot-PlayerHealed-1a45e387"
     },
     {
       "kind": "DojoModel",
@@ -17081,8 +17525,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x4f98bd4c304e28a8ad90a7f2771b0e77976d3634c0efab8f8a0fcf5d4178793",
-      "original_class_hash": "0x4f98bd4c304e28a8ad90a7f2771b0e77976d3634c0efab8f8a0fcf5d4178793",
+      "class_hash": "0x6d8e4345bd46a627dc37b0d957431a8e486859ca31cd5a7eddf3b5dd6657a08",
+      "original_class_hash": "0x6d8e4345bd46a627dc37b0d957431a8e486859ca31cd5a7eddf3b5dd6657a08",
       "abi": [
         {
           "type": "impl",
@@ -17449,11 +17893,11 @@
         {
           "type": "impl",
           "name": "poker_hand_eventImpl",
-          "interface_name": "jokers_ls_mod::models::data::events::Ipoker_hand_event"
+          "interface_name": "jn_loot::models::data::events::Ipoker_hand_event"
         },
         {
           "type": "struct",
-          "name": "jokers_ls_mod::models::data::events::PokerHandEvent",
+          "name": "jn_loot::models::data::events::PokerHandEvent",
           "members": [
             {
               "name": "player",
@@ -17475,7 +17919,7 @@
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::models::data::events::Ipoker_hand_event",
+          "name": "jn_loot::models::data::events::Ipoker_hand_event",
           "items": [
             {
               "type": "function",
@@ -17483,7 +17927,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "jokers_ls_mod::models::data::events::PokerHandEvent"
+                  "type": "jn_loot::models::data::events::PokerHandEvent"
                 }
               ],
               "outputs": [],
@@ -17493,14 +17937,14 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::models::data::events::poker_hand_event::Event",
+          "name": "jn_loot::models::data::events::poker_hand_event::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "jokers_ls_mod-PokerHandEvent",
-      "qualified_path": "jokers_ls_mod::models::data::events::poker_hand_event",
-      "manifest_name": "jokers_ls_mod-PokerHandEvent-31f0d347"
+      "tag": "jn_loot-PokerHandEvent",
+      "qualified_path": "jn_loot::models::data::events::poker_hand_event",
+      "manifest_name": "jn_loot-PokerHandEvent-68c22555"
     },
     {
       "kind": "DojoModel",
@@ -17531,8 +17975,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x5c142fae84f2b12147dd0a6d76475c950e9ff010e41a36d5d60e7cff9c127a4",
-      "original_class_hash": "0x5c142fae84f2b12147dd0a6d76475c950e9ff010e41a36d5d60e7cff9c127a4",
+      "class_hash": "0x6354140cbcba03254085d2094ea605b7d3c21a2ba5c03c3dd1fc46b87dad05f",
+      "original_class_hash": "0x6354140cbcba03254085d2094ea605b7d3c21a2ba5c03c3dd1fc46b87dad05f",
       "abi": [
         {
           "type": "impl",
@@ -17899,7 +18343,7 @@
         {
           "type": "impl",
           "name": "rage_roundImpl",
-          "interface_name": "jokers_ls_mod::models::status::game::rage::Irage_round"
+          "interface_name": "jn_loot::models::status::game::rage::Irage_round"
         },
         {
           "type": "enum",
@@ -17927,7 +18371,7 @@
         },
         {
           "type": "struct",
-          "name": "jokers_ls_mod::models::status::game::rage::RageRound",
+          "name": "jn_loot::models::status::game::rage::RageRound",
           "members": [
             {
               "name": "game_id",
@@ -17953,7 +18397,7 @@
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::models::status::game::rage::Irage_round",
+          "name": "jn_loot::models::status::game::rage::Irage_round",
           "items": [
             {
               "type": "function",
@@ -17961,7 +18405,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "jokers_ls_mod::models::status::game::rage::RageRound"
+                  "type": "jn_loot::models::status::game::rage::RageRound"
                 }
               ],
               "outputs": [],
@@ -17971,14 +18415,14 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::models::status::game::rage::rage_round::Event",
+          "name": "jn_loot::models::status::game::rage::rage_round::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "jokers_ls_mod-RageRound",
-      "qualified_path": "jokers_ls_mod::models::status::game::rage::rage_round",
-      "manifest_name": "jokers_ls_mod-RageRound-5d3cb743"
+      "tag": "jn_loot-RageRound",
+      "qualified_path": "jn_loot::models::status::game::rage::rage_round",
+      "manifest_name": "jn_loot-RageRound-4e71272c"
     },
     {
       "kind": "DojoModel",
@@ -17994,8 +18438,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x45f9638fadee4437e1096846df915ddf0bcecf7c2a698accc2d889499fbcfdf",
-      "original_class_hash": "0x45f9638fadee4437e1096846df915ddf0bcecf7c2a698accc2d889499fbcfdf",
+      "class_hash": "0x4ddc366ae854e89c1ae5c5722259691d2f2f3d0ffd64994dcd942515b253ec",
+      "original_class_hash": "0x4ddc366ae854e89c1ae5c5722259691d2f2f3d0ffd64994dcd942515b253ec",
       "abi": [
         {
           "type": "impl",
@@ -18362,7 +18806,7 @@
         {
           "type": "impl",
           "name": "rewardImpl",
-          "interface_name": "jokers_ls_mod::models::data::reward::Ireward"
+          "interface_name": "jn_loot::models::data::reward::Ireward"
         },
         {
           "type": "struct",
@@ -18376,7 +18820,7 @@
         },
         {
           "type": "struct",
-          "name": "jokers_ls_mod::models::data::reward::Reward",
+          "name": "jn_loot::models::data::reward::Reward",
           "members": [
             {
               "name": "game_id",
@@ -18390,7 +18834,7 @@
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::models::data::reward::Ireward",
+          "name": "jn_loot::models::data::reward::Ireward",
           "items": [
             {
               "type": "function",
@@ -18398,7 +18842,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "jokers_ls_mod::models::data::reward::Reward"
+                  "type": "jn_loot::models::data::reward::Reward"
                 }
               ],
               "outputs": [],
@@ -18408,14 +18852,14 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::models::data::reward::reward::Event",
+          "name": "jn_loot::models::data::reward::reward::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "jokers_ls_mod-Reward",
-      "qualified_path": "jokers_ls_mod::models::data::reward::reward",
-      "manifest_name": "jokers_ls_mod-Reward-30df38f0"
+      "tag": "jn_loot-Reward",
+      "qualified_path": "jn_loot::models::data::reward::reward",
+      "manifest_name": "jn_loot-Reward-7d9afa4c"
     },
     {
       "kind": "DojoModel",
@@ -18436,8 +18880,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x1dae991136db008450d960bad924d96db8b07094886b010599fcfd9675cb5d0",
-      "original_class_hash": "0x1dae991136db008450d960bad924d96db8b07094886b010599fcfd9675cb5d0",
+      "class_hash": "0x242122e59c9c5aeae57ba8603660a90e0362d9af816295308b21ab56c233e06",
+      "original_class_hash": "0x242122e59c9c5aeae57ba8603660a90e0362d9af816295308b21ab56c233e06",
       "abi": [
         {
           "type": "impl",
@@ -18804,11 +19248,11 @@
         {
           "type": "impl",
           "name": "round_score_eventImpl",
-          "interface_name": "jokers_ls_mod::models::data::events::Iround_score_event"
+          "interface_name": "jn_loot::models::data::events::Iround_score_event"
         },
         {
           "type": "struct",
-          "name": "jokers_ls_mod::models::data::events::RoundScoreEvent",
+          "name": "jn_loot::models::data::events::RoundScoreEvent",
           "members": [
             {
               "name": "player",
@@ -18826,7 +19270,7 @@
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::models::data::events::Iround_score_event",
+          "name": "jn_loot::models::data::events::Iround_score_event",
           "items": [
             {
               "type": "function",
@@ -18834,7 +19278,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "jokers_ls_mod::models::data::events::RoundScoreEvent"
+                  "type": "jn_loot::models::data::events::RoundScoreEvent"
                 }
               ],
               "outputs": [],
@@ -18844,14 +19288,14 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::models::data::events::round_score_event::Event",
+          "name": "jn_loot::models::data::events::round_score_event::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "jokers_ls_mod-RoundScoreEvent",
-      "qualified_path": "jokers_ls_mod::models::data::events::round_score_event",
-      "manifest_name": "jokers_ls_mod-RoundScoreEvent-61b0d4fb"
+      "tag": "jn_loot-RoundScoreEvent",
+      "qualified_path": "jn_loot::models::data::events::round_score_event",
+      "manifest_name": "jn_loot-RoundScoreEvent-c2c3faf7"
     },
     {
       "kind": "DojoModel",
@@ -18877,8 +19321,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x59fda2b34c90b3d6d46a625ef0f49170d151b31b7c4d988b541c4392ed83050",
-      "original_class_hash": "0x59fda2b34c90b3d6d46a625ef0f49170d151b31b7c4d988b541c4392ed83050",
+      "class_hash": "0x258b5de14ce4db0ffa215b4bbb4cd7e7446c8615cb30e40a8fd083165f7937b",
+      "original_class_hash": "0x258b5de14ce4db0ffa215b4bbb4cd7e7446c8615cb30e40a8fd083165f7937b",
       "abi": [
         {
           "type": "impl",
@@ -19245,11 +19689,11 @@
         {
           "type": "impl",
           "name": "special_cash_eventImpl",
-          "interface_name": "jokers_ls_mod::models::data::events::Ispecial_cash_event"
+          "interface_name": "jn_loot::models::data::events::Ispecial_cash_event"
         },
         {
           "type": "struct",
-          "name": "jokers_ls_mod::models::data::events::SpecialCashEvent",
+          "name": "jn_loot::models::data::events::SpecialCashEvent",
           "members": [
             {
               "name": "player",
@@ -19271,7 +19715,7 @@
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::models::data::events::Ispecial_cash_event",
+          "name": "jn_loot::models::data::events::Ispecial_cash_event",
           "items": [
             {
               "type": "function",
@@ -19279,7 +19723,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "jokers_ls_mod::models::data::events::SpecialCashEvent"
+                  "type": "jn_loot::models::data::events::SpecialCashEvent"
                 }
               ],
               "outputs": [],
@@ -19289,14 +19733,14 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::models::data::events::special_cash_event::Event",
+          "name": "jn_loot::models::data::events::special_cash_event::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "jokers_ls_mod-SpecialCashEvent",
-      "qualified_path": "jokers_ls_mod::models::data::events::special_cash_event",
-      "manifest_name": "jokers_ls_mod-SpecialCashEvent-64f53895"
+      "tag": "jn_loot-SpecialCashEvent",
+      "qualified_path": "jn_loot::models::data::events::special_cash_event",
+      "manifest_name": "jn_loot-SpecialCashEvent-76470cf7"
     },
     {
       "kind": "DojoModel",
@@ -19327,8 +19771,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x1ecb306acfa3dac9cfa8621edd610d6a4ff5307aa6539274d730e9689c1d2a8",
-      "original_class_hash": "0x1ecb306acfa3dac9cfa8621edd610d6a4ff5307aa6539274d730e9689c1d2a8",
+      "class_hash": "0x2e38c4d33810ecfdb2e33268e52b5c355d4b542397178884e9e2c5595184fd4",
+      "original_class_hash": "0x2e38c4d33810ecfdb2e33268e52b5c355d4b542397178884e9e2c5595184fd4",
       "abi": [
         {
           "type": "impl",
@@ -19695,11 +20139,11 @@
         {
           "type": "impl",
           "name": "special_global_eventImpl",
-          "interface_name": "jokers_ls_mod::models::data::events::Ispecial_global_event"
+          "interface_name": "jn_loot::models::data::events::Ispecial_global_event"
         },
         {
           "type": "struct",
-          "name": "jokers_ls_mod::models::data::events::SpecialGlobalEvent",
+          "name": "jn_loot::models::data::events::SpecialGlobalEvent",
           "members": [
             {
               "name": "player",
@@ -19725,7 +20169,7 @@
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::models::data::events::Ispecial_global_event",
+          "name": "jn_loot::models::data::events::Ispecial_global_event",
           "items": [
             {
               "type": "function",
@@ -19733,7 +20177,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "jokers_ls_mod::models::data::events::SpecialGlobalEvent"
+                  "type": "jn_loot::models::data::events::SpecialGlobalEvent"
                 }
               ],
               "outputs": [],
@@ -19743,14 +20187,14 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::models::data::events::special_global_event::Event",
+          "name": "jn_loot::models::data::events::special_global_event::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "jokers_ls_mod-SpecialGlobalEvent",
-      "qualified_path": "jokers_ls_mod::models::data::events::special_global_event",
-      "manifest_name": "jokers_ls_mod-SpecialGlobalEvent-a75514b3"
+      "tag": "jn_loot-SpecialGlobalEvent",
+      "qualified_path": "jn_loot::models::data::events::special_global_event",
+      "manifest_name": "jn_loot-SpecialGlobalEvent-50215284"
     },
     {
       "kind": "DojoModel",
@@ -19781,8 +20225,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x6884397cf0a66538a711fdb4442183c83f5eee3fd89de746d61e09cd6ed2701",
-      "original_class_hash": "0x6884397cf0a66538a711fdb4442183c83f5eee3fd89de746d61e09cd6ed2701",
+      "class_hash": "0x11587359421588b82383cdc783d4a75f9628e0e882ceaf6f086f5bbd13449e5",
+      "original_class_hash": "0x11587359421588b82383cdc783d4a75f9628e0e882ceaf6f086f5bbd13449e5",
       "abi": [
         {
           "type": "impl",
@@ -20149,11 +20593,11 @@
         {
           "type": "impl",
           "name": "special_modifier_multi_eventImpl",
-          "interface_name": "jokers_ls_mod::models::data::events::Ispecial_modifier_multi_event"
+          "interface_name": "jn_loot::models::data::events::Ispecial_modifier_multi_event"
         },
         {
           "type": "struct",
-          "name": "jokers_ls_mod::models::data::events::SpecialModifierMultiEvent",
+          "name": "jn_loot::models::data::events::SpecialModifierMultiEvent",
           "members": [
             {
               "name": "player",
@@ -20179,7 +20623,7 @@
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::models::data::events::Ispecial_modifier_multi_event",
+          "name": "jn_loot::models::data::events::Ispecial_modifier_multi_event",
           "items": [
             {
               "type": "function",
@@ -20187,7 +20631,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "jokers_ls_mod::models::data::events::SpecialModifierMultiEvent"
+                  "type": "jn_loot::models::data::events::SpecialModifierMultiEvent"
                 }
               ],
               "outputs": [],
@@ -20197,14 +20641,14 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::models::data::events::special_modifier_multi_event::Event",
+          "name": "jn_loot::models::data::events::special_modifier_multi_event::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "jokers_ls_mod-SpecialModifierMultiEvent",
-      "qualified_path": "jokers_ls_mod::models::data::events::special_modifier_multi_event",
-      "manifest_name": "jokers_ls_mod-SpecialModifierMultiEvent-4e2c6f75"
+      "tag": "jn_loot-SpecialModifierMultiEvent",
+      "qualified_path": "jn_loot::models::data::events::special_modifier_multi_event",
+      "manifest_name": "jn_loot-SpecialModifierMultiEvent-144c1e5a"
     },
     {
       "kind": "DojoModel",
@@ -20235,8 +20679,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x7ba6f98ea103a86aa00359cfb9af284b9ffd7a405aa5e24ab3dfcb44f209119",
-      "original_class_hash": "0x7ba6f98ea103a86aa00359cfb9af284b9ffd7a405aa5e24ab3dfcb44f209119",
+      "class_hash": "0x2f53333f18b3e36ef3fb6a8b95590935b28d32cf7068df46a9aaaa9ccae1113",
+      "original_class_hash": "0x2f53333f18b3e36ef3fb6a8b95590935b28d32cf7068df46a9aaaa9ccae1113",
       "abi": [
         {
           "type": "impl",
@@ -20603,11 +21047,11 @@
         {
           "type": "impl",
           "name": "special_modifier_points_eventImpl",
-          "interface_name": "jokers_ls_mod::models::data::events::Ispecial_modifier_points_event"
+          "interface_name": "jn_loot::models::data::events::Ispecial_modifier_points_event"
         },
         {
           "type": "struct",
-          "name": "jokers_ls_mod::models::data::events::SpecialModifierPointsEvent",
+          "name": "jn_loot::models::data::events::SpecialModifierPointsEvent",
           "members": [
             {
               "name": "player",
@@ -20633,7 +21077,7 @@
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::models::data::events::Ispecial_modifier_points_event",
+          "name": "jn_loot::models::data::events::Ispecial_modifier_points_event",
           "items": [
             {
               "type": "function",
@@ -20641,7 +21085,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "jokers_ls_mod::models::data::events::SpecialModifierPointsEvent"
+                  "type": "jn_loot::models::data::events::SpecialModifierPointsEvent"
                 }
               ],
               "outputs": [],
@@ -20651,14 +21095,14 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::models::data::events::special_modifier_points_event::Event",
+          "name": "jn_loot::models::data::events::special_modifier_points_event::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "jokers_ls_mod-SpecialModifierPointsEvent",
-      "qualified_path": "jokers_ls_mod::models::data::events::special_modifier_points_event",
-      "manifest_name": "jokers_ls_mod-SpecialModifierPointsEvent-232b27f2"
+      "tag": "jn_loot-SpecialModifierPointsEvent",
+      "qualified_path": "jn_loot::models::data::events::special_modifier_points_event",
+      "manifest_name": "jn_loot-SpecialModifierPointsEvent-2e2bbd6a"
     },
     {
       "kind": "DojoModel",
@@ -20689,8 +21133,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x7a0829603af2c79714d6ae1ffdf41281580ef9c04a6fb95a6ffd1cb5929f08a",
-      "original_class_hash": "0x7a0829603af2c79714d6ae1ffdf41281580ef9c04a6fb95a6ffd1cb5929f08a",
+      "class_hash": "0x6794a47115ec112a0c64f082ae4c04caa48c84e55197d466286eed221222226",
+      "original_class_hash": "0x6794a47115ec112a0c64f082ae4c04caa48c84e55197d466286eed221222226",
       "abi": [
         {
           "type": "impl",
@@ -21057,11 +21501,11 @@
         {
           "type": "impl",
           "name": "special_modifier_suit_eventImpl",
-          "interface_name": "jokers_ls_mod::models::data::events::Ispecial_modifier_suit_event"
+          "interface_name": "jn_loot::models::data::events::Ispecial_modifier_suit_event"
         },
         {
           "type": "enum",
-          "name": "jokers_ls_mod::models::data::card::Suit",
+          "name": "jn_loot::models::data::card::Suit",
           "variants": [
             {
               "name": "None",
@@ -21091,7 +21535,7 @@
         },
         {
           "type": "struct",
-          "name": "jokers_ls_mod::models::data::events::SpecialModifierSuitEvent",
+          "name": "jn_loot::models::data::events::SpecialModifierSuitEvent",
           "members": [
             {
               "name": "player",
@@ -21111,13 +21555,13 @@
             },
             {
               "name": "suit",
-              "type": "jokers_ls_mod::models::data::card::Suit"
+              "type": "jn_loot::models::data::card::Suit"
             }
           ]
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::models::data::events::Ispecial_modifier_suit_event",
+          "name": "jn_loot::models::data::events::Ispecial_modifier_suit_event",
           "items": [
             {
               "type": "function",
@@ -21125,7 +21569,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "jokers_ls_mod::models::data::events::SpecialModifierSuitEvent"
+                  "type": "jn_loot::models::data::events::SpecialModifierSuitEvent"
                 }
               ],
               "outputs": [],
@@ -21135,14 +21579,14 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::models::data::events::special_modifier_suit_event::Event",
+          "name": "jn_loot::models::data::events::special_modifier_suit_event::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "jokers_ls_mod-SpecialModifierSuitEvent",
-      "qualified_path": "jokers_ls_mod::models::data::events::special_modifier_suit_event",
-      "manifest_name": "jokers_ls_mod-SpecialModifierSuitEvent-33f814d3"
+      "tag": "jn_loot-SpecialModifierSuitEvent",
+      "qualified_path": "jn_loot::models::data::events::special_modifier_suit_event",
+      "manifest_name": "jn_loot-SpecialModifierSuitEvent-7b610704"
     },
     {
       "kind": "DojoModel",
@@ -21173,8 +21617,8 @@
           "key": false
         }
       ],
-      "class_hash": "0x6147040272ceea1ccc767aae2ad25fc04fec90b7d6dbdae6e0fe93a0c4d6889",
-      "original_class_hash": "0x6147040272ceea1ccc767aae2ad25fc04fec90b7d6dbdae6e0fe93a0c4d6889",
+      "class_hash": "0x1e6508cf81961e3d2ee80037a1f0b5557fe5fe7dde619d3a8fb36cfb63bfcea",
+      "original_class_hash": "0x1e6508cf81961e3d2ee80037a1f0b5557fe5fe7dde619d3a8fb36cfb63bfcea",
       "abi": [
         {
           "type": "impl",
@@ -21541,11 +21985,11 @@
         {
           "type": "impl",
           "name": "special_poker_hand_eventImpl",
-          "interface_name": "jokers_ls_mod::models::data::events::Ispecial_poker_hand_event"
+          "interface_name": "jn_loot::models::data::events::Ispecial_poker_hand_event"
         },
         {
           "type": "struct",
-          "name": "jokers_ls_mod::models::data::events::SpecialPokerHandEvent",
+          "name": "jn_loot::models::data::events::SpecialPokerHandEvent",
           "members": [
             {
               "name": "player",
@@ -21571,7 +22015,7 @@
         },
         {
           "type": "interface",
-          "name": "jokers_ls_mod::models::data::events::Ispecial_poker_hand_event",
+          "name": "jn_loot::models::data::events::Ispecial_poker_hand_event",
           "items": [
             {
               "type": "function",
@@ -21579,7 +22023,7 @@
               "inputs": [
                 {
                   "name": "model",
-                  "type": "jokers_ls_mod::models::data::events::SpecialPokerHandEvent"
+                  "type": "jn_loot::models::data::events::SpecialPokerHandEvent"
                 }
               ],
               "outputs": [],
@@ -21589,14 +22033,14 @@
         },
         {
           "type": "event",
-          "name": "jokers_ls_mod::models::data::events::special_poker_hand_event::Event",
+          "name": "jn_loot::models::data::events::special_poker_hand_event::Event",
           "kind": "enum",
           "variants": []
         }
       ],
-      "tag": "jokers_ls_mod-SpecialPokerHandEvent",
-      "qualified_path": "jokers_ls_mod::models::data::events::special_poker_hand_event",
-      "manifest_name": "jokers_ls_mod-SpecialPokerHandEvent-54b34724"
+      "tag": "jn_loot-SpecialPokerHandEvent",
+      "qualified_path": "jn_loot::models::data::events::special_poker_hand_event",
+      "manifest_name": "jn_loot-SpecialPokerHandEvent-7bcc14ed"
     }
   ]
 }

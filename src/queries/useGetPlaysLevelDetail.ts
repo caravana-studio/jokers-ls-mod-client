@@ -8,7 +8,7 @@ export const PLAYS_LEVEL_QUERY_KEY = "playerLevelPokerHandModels";
 
 const GET_PLAYS_LEVEL_QUERY = gql`
   query GetLevelPokerHand($gameId: ID!) {
-    jokersLsModPlayerLevelPokerHandModels(
+    jnLootPlayerLevelPokerHandModels(
       first: 30
       where: { game_idEQ: $gameId }
     ) {
@@ -30,7 +30,7 @@ interface PlaysEdge {
 }
 
 interface PlaysResponse {
-  jokersLsModPlayerLevelPokerHandModels: {
+  jnLootPlayerLevelPokerHandModels: {
     edges: PlaysEdge[];
   };
 }
@@ -47,7 +47,7 @@ export const useGetPlaysLevelDetail = (gameId: number) => {
   );
   const { data } = queryResponse;
 
-  const plays = data?.jokersLsModPlayerLevelPokerHandModels.edges
+  const plays = data?.jnLootPlayerLevelPokerHandModels.edges
     .map((edge) => {
       const play: PokerPlay = {
         pokerHand: parseHand(edge.node.poker_hand),

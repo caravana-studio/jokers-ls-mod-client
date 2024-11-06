@@ -6,7 +6,7 @@ export const GAME_QUERY_KEY = "game";
 
 export const GAME_QUERY = gql`
   query GetGame($gameId: ID!) {
-    jokersLsModGameModels(where: { idEQ: $gameId }) {
+    jnLootGameModels(where: { idEQ: $gameId }) {
       edges {
         node {
           cash
@@ -39,7 +39,7 @@ interface GameEdge {
 }
 
 interface GameResponse {
-  jokersLsModGameModels: {
+  jnLootGameModels: {
     edges: GameEdge[];
   };
 }
@@ -57,7 +57,7 @@ export const useGetGame = (id: number, refetching: boolean = false) => {
   );
   const { data } = queryResponse;
 
-  const game = data?.jokersLsModGameModels?.edges[0]?.node;
+  const game = data?.jnLootGameModels?.edges[0]?.node;
 
   return {
     ...queryResponse,
