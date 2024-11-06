@@ -16,6 +16,7 @@ import { Card } from "../types/Card";
 import { RoundRewards } from "../types/RoundRewards";
 import { checkHand } from "../utils/checkHand";
 import { sortCards } from "../utils/sortCards";
+import { useGetRewards } from "../dojo/queries/useGetRewards";
 
 export const useGameState = () => {
   const [gameId, setGameId] = useState<number>(getLSGameId());
@@ -49,6 +50,7 @@ export const useGameState = () => {
   const [playsLeft, setPlaysLeft] = useState(-1);
   const [discardsLeft, setDiscardsLeft] = useState(-1);
   const [energyLeft, setEnergyLeft] = useState(-1);
+  const [rewardsIds, setRewardsIds] = useState<number[]>([]);
 
   const [beastAttack, setBeastAttack] = useState(0);
 
@@ -199,6 +201,12 @@ export const useGameState = () => {
     }
   };
 
+  const rewards = useGetRewards();
+
+  const refetchRewardsId = () => {
+    setRewardsIds(rewards?.rewards_ids ?? [0]);
+  };
+
   const refetchBeast = () => {
     if (beastFetchData) {
       setBeast(beastFetchData as unknown as Beast);
@@ -272,5 +280,8 @@ export const useGameState = () => {
     setBeastAttack,
     gameOver,
     setGameOver,
+    rewardsIds,
+    setRewardsIds,
+    refetchRewardsId,
   };
 };

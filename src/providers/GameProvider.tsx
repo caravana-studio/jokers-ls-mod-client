@@ -108,6 +108,8 @@ interface IGameContext {
   setBeastAttack: (beastAttack: number) => void;
   gameOver: boolean;
   setGameOver: (gameOver: boolean) => void;
+  rewardsIds: number[];
+  refetchRewardsId: () => void;
   levelScore: number;
 }
 
@@ -186,6 +188,8 @@ const GameContext = createContext<IGameContext>({
   setBeastAttack: () => {},
   gameOver: false,
   setGameOver: () => {},
+  rewardsIds: [0],
+  refetchRewardsId: () => {},
   levelScore: 0,
 });
 export const useGameContext = () => useContext(GameContext);
@@ -295,6 +299,9 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     resetPlaysAndDiscards,
     setBeastAttack,
     setGameOver,
+    rewardsIds,
+    setRewardsIds,
+    refetchRewardsId,
   } = state;
 
   const resetLevel = () => {
@@ -401,6 +408,8 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
   };
 
   const createNewReward = async (rewardId: number, mode: string) => {
+    // console.log(rewardId);
+    // console.log(mode);
     const createNewRewardPromise = createReward(gameId, rewardId);
 
     createNewRewardPromise.then(async (response) => {
@@ -469,11 +478,11 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
       setHand(cards);
       return;
     }
-    
+
     const filteredHand = hand.filter(
       (card) => !cards.some((newCard) => newCard.idx === card.idx)
     );
-  
+
     // Add the new cards to the filtered hand
     const updatedHand = [...filteredHand, ...cards].filter(
       (card) => card.card_id !== 9999 // Remove placeholder cards
@@ -756,6 +765,10 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
           playEvents.obstacleDefeated ||
           playEvents.playWinGameEvent
         ) {
+          if (playEvents.rewards) {
+            const rewards = [playEvents.rewards[1], playEvents.rewards[2]];
+            setRewardsIds(rewards);
+          }
           setTimeout(
             () => {
               navigate("/rewards");
