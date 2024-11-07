@@ -9,21 +9,21 @@ export const useChallengePlayer = () => {
     setup: { client },
   } = useDojo();
 
-  const [challengePlayer, setChallengePlayer] = useState<
-    ChallengePlayer | undefined
-  >(undefined);
+  const [playsLeft, setPlaysLeft] = useState(-1);
+  const [discardsLeft, setDiscardsLeft] = useState(-1); 
 
   useEffect(() => {
-    fetchChallengePlayer();
+    fetchPlaysAndDiscards();
   }, []);
 
-  const fetchChallengePlayer = () => {
-    getChallegePlayer(client).then((challemgePlayer) => {
-      setChallengePlayer(challemgePlayer);
+  const fetchPlaysAndDiscards = () => {
+    getChallegePlayer(client).then((challengePlayer) => {
+      setPlaysLeft(challengePlayer.plays)
+      setDiscardsLeft(challengePlayer.discards)
     });
   };
 
-  return challengePlayer;
+  return { playsLeft, discardsLeft, setPlaysLeft, setDiscardsLeft, fetchPlaysAndDiscards}
 };
 
 export const useChallenge = () => {

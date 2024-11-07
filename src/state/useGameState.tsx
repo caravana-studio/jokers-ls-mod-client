@@ -41,8 +41,7 @@ export const useGameState = () => {
   const [rageCards, setRageCards] = useState<Card[]>([]);
   const [beast, setBeast] = useState<Beast | undefined>(undefined);
 
-  const [playsLeft, setPlaysLeft] = useState(-1);
-  const [discardsLeft, setDiscardsLeft] = useState(-1);
+
   const [energyLeft, setEnergyLeft] = useState(-1);
   const [rewardsIds, setRewardsIds] = useState<number[]>([]);
 
@@ -50,6 +49,8 @@ export const useGameState = () => {
   const [obstacletAttack, setObstacleAttack] = useState(0);
 
   const [gameOver, setGameOver] = useState(false);
+
+  const {playsLeft, setPlaysLeft, discardsLeft, setDiscardsLeft, fetchPlaysAndDiscards} = useChallengePlayer();
 
   const consumePlay = () => {
     setPlaysLeft((prev) => prev - 1);
@@ -68,14 +69,9 @@ export const useGameState = () => {
 
   const beastPlayer = useBeastPlayer();
 
-  const challengePlayer = useChallengePlayer();
 
   const refetchPlaysAndDiscards = () => {
-    if (challengePlayer) {
-      // console.log("cpp: ", challengePlayer);
-      setDiscardsLeft(challengePlayer?.discards.valueOf() ?? 0);
-      setPlaysLeft(challengePlayer?.plays.valueOf() ?? 0);
-    }
+    fetchPlaysAndDiscards()
   };
   const refetchEnergy = () => {
     if (beastPlayer) {
