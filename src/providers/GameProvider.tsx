@@ -1,4 +1,3 @@
-import CartridgeConnector from "@cartridge/connector";
 import { useAccount, useConnect } from "@starknet-react/core";
 import {
   PropsWithChildren,
@@ -8,7 +7,6 @@ import {
   useState,
 } from "react";
 import { useNavigate } from "react-router-dom";
-import cartridgeConnector from "../cartridgeConnector.tsx";
 import { GAME_ID, SORT_BY_SUIT } from "../constants/localStorage";
 import {
   discardSfx,
@@ -16,12 +14,12 @@ import {
   pointsSfx,
   preselectedCardSfx,
 } from "../constants/sfx.ts";
-import { useGame } from "../dojo/queries/useGame.tsx";
 import { Beast, Game } from "../dojo/typescript/models.gen.ts";
 import { useDojo } from "../dojo/useDojo.tsx";
 import { useGameActions } from "../dojo/useGameActions.tsx";
 import { gameExists } from "../dojo/utils/getGame.tsx";
 import { getLSGameId } from "../dojo/utils/getLSGameId.tsx";
+import { useUsername } from "../dojo/utils/useUsername.tsx";
 import { Plays } from "../enums/plays";
 import { SortBy } from "../enums/sortBy.ts";
 import { useAudio } from "../hooks/useAudio.tsx";
@@ -251,7 +249,6 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
   const { play: pointsSound } = useAudio(pointsSfx);
   const { play: multiSound } = useAudio(multiSfx);
 
-
   const {
     gameId,
     setGameId,
@@ -274,7 +271,6 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     setError,
     sortBySuit,
     setSortBySuit,
-    username,
     setPlayIsNeon,
     specialCards,
     setIsRageRound,
@@ -299,7 +295,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     refetchRewardsId,
     refetchPlaysAndDiscards,
     refetchCurrentHand,
-    game, 
+    game,
     fetchGame,
   } = state;
 
@@ -473,12 +469,13 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
 
     return createRewardPromise;
   };
-
+  
+  const username = useUsername();
+  
   const executeCreateGame = async () => {
-    const username = await (
-      cartridgeConnector as CartridgeConnector
-    ).username();
-    console.log("username", username);
+    if (!username) {
+      reconnectController();
+    }
     setError(false);
     setGameLoading(true);
     setIsRageRound(false);
