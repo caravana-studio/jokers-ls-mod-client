@@ -76,7 +76,7 @@ export async function setupWorld(provider: DojoProvider) {
 
     
         // Call the `select_reward` system with the specified Account and calldata
-        const select_reward = async (props: { account: Account, game_id: number, cards_index: RecsType.NumberArray }) => {
+        const select_reward = async (props: { account: Account, game_id: number, cards_index: number[] }) => {
             try {
                 return await provider.execute(
                     props.account,
@@ -118,7 +118,7 @@ export async function setupWorld(provider: DojoProvider) {
 
     
         // Call the `select_special_cards` system with the specified Account and calldata
-        const select_special_cards = async (props: { account: Account, game_id: number, cards_index: RecsType.NumberArray }) => {
+        const select_special_cards = async (props: { account: Account, game_id: number, cards_index: number[] }) => {
             try {
                 return await provider.execute(
                     props.account,
@@ -139,7 +139,7 @@ export async function setupWorld(provider: DojoProvider) {
 
     
         // Call the `select_modifier_cards` system with the specified Account and calldata
-        const select_modifier_cards = async (props: { account: Account, game_id: number, cards_index: RecsType.NumberArray }) => {
+        const select_modifier_cards = async (props: { account: Account, game_id: number, cards_index: number[] }) => {
             try {
                 return await provider.execute(
                     props.account,
@@ -160,7 +160,7 @@ export async function setupWorld(provider: DojoProvider) {
 
     
         // Call the `play` system with the specified Account and calldata
-        const play = async (props: { account: Account, game_id: number, cards_index: RecsType.NumberArray, modifiers_index: RecsType.NumberArray }) => {
+        const play = async (props: { account: Account, game_id: number, cards_index: number[], modifiers_index: number[] }) => {
             try {
                 return await provider.execute(
                     props.account,
@@ -182,7 +182,7 @@ export async function setupWorld(provider: DojoProvider) {
 
     
         // Call the `discard` system with the specified Account and calldata
-        const discard = async (props: { account: Account, game_id: number, cards_index: RecsType.NumberArray, modifiers_index: RecsType.NumberArray }) => {
+        const discard = async (props: { account: Account, game_id: number, cards_index: number[], modifiers_index: number[] }) => {
             try {
                 return await provider.execute(
                     props.account,
@@ -307,7 +307,7 @@ export async function setupWorld(provider: DojoProvider) {
 
     
         // Call the `select_aventurer_cards` system with the specified Account and calldata
-        const select_aventurer_cards = async (props: { account: Account, game_id: number, cards_index: RecsType.NumberArray }) => {
+        const select_aventurer_cards = async (props: { account: Account, game_id: number, cards_index: number[] }) => {
             try {
                 return await provider.execute(
                     props.account,
