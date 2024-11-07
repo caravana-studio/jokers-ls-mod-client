@@ -19,6 +19,7 @@ export const Adventurers = () => {
   >();
   const { adventurers, isLoading } = useAdventurers();
   const { play: beepSound } = useAudio(beep);
+  const [isSkipping, setIsSkipping] = useState(false);
 
   const toggleSelectedAdventurer = (adventurer: Adventurer) => {
     beepSound();
@@ -99,14 +100,20 @@ export const Adventurers = () => {
       </Flex>
       <Flex justifyContent={"center"} my={4} gap={12}>
         <Button
+          isDisabled={isLoading || isSkipping}
           width="300px"
           onClick={() => {
+            setIsSkipping(true);
             beepSound();
-            skipAdventurer(gameId ?? 0).then((response) => {
-              if (response) {
-                createNewLevel();
-              }
-            });
+            skipAdventurer(gameId ?? 0)
+              .then((response) => {
+                if (response) {
+                  createNewLevel();
+                }
+              })
+              .finally(() => {
+                setIsSkipping(false);
+              });
           }}
           variant="secondarySolid"
         >
