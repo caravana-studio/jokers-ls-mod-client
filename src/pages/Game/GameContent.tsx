@@ -13,6 +13,7 @@ import {
   TUTORIAL_STYLE,
 } from "../../constants/gameTutorial";
 import {
+  BEAST_IS_MINTABLE_LS,
   SKIP_TUTORIAL_BEAST,
   SKIP_TUTORIAL_GAME,
   SKIP_TUTORIAL_MODIFIERS,

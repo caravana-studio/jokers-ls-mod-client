@@ -1,3 +1,4 @@
+import CartridgeConnector from "@cartridge/connector";
 import { useAccount, useConnect } from "@starknet-react/core";
 import {
   PropsWithChildren,
@@ -7,7 +8,12 @@ import {
   useState,
 } from "react";
 import { useNavigate } from "react-router-dom";
-import { GAME_ID, SORT_BY_SUIT } from "../constants/localStorage";
+import cartridgeConnector from "../cartridgeConnector.tsx";
+import {
+  BEAST_IS_MINTABLE_LS,
+  GAME_ID,
+  SORT_BY_SUIT,
+} from "../constants/localStorage";
 import {
   discardSfx,
   multiSfx,
@@ -30,8 +36,6 @@ import { Card } from "../types/Card";
 import { RoundRewards } from "../types/RoundRewards.ts";
 import { PlayEvents } from "../types/ScoreData";
 import { changeCardSuit } from "../utils/changeCardSuit";
-import cartridgeConnector from "../cartridgeConnector.tsx";
-import CartridgeConnector from "@cartridge/connector";
 
 interface IGameContext {
   gameId: number;
@@ -473,8 +477,6 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     return createRewardPromise;
   };
 
-  const username = useUsername();
-
   const executeCreateGame = async () => {
     const username = await (
       cartridgeConnector as CartridgeConnector
@@ -489,6 +491,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
       createGame(username).then(async (response) => {
         const { gameId: newGameId, hand } = response;
         if (newGameId) {
+          window.localStorage.removeItem(BEAST_IS_MINTABLE_LS);
           resetLevel();
           setLockRedirection(true);
           navigate("/choose-class");
@@ -805,7 +808,15 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
           }
           setTimeout(
             () => {
-              navigate("/rewards");
+              if (playEvents.beastNFT) {
+                const beast_id = playEvents.beastNFT.beast_id;
+                const tier = playEvents.beastNFT.tier;
+                const level = playEvents.beastNFT.level;
+                const token_id = playEvents.beastNFT.token_id;
+                navigate(`/collected-beast?beast_id=${beast_id}&tier=${tier}&level=${level}&token_id=${token_id}`);
+              } else {
+                navigate("/rewards");
+              }
             },
             playEvents.playWinGameEvent ? 2000 : 1000
           );
