@@ -23,7 +23,6 @@ import {
 import { Beast, Game } from "../dojo/typescript/models.gen.ts";
 import { useDojo } from "../dojo/useDojo.tsx";
 import { useGameActions } from "../dojo/useGameActions.tsx";
-import { gameExists } from "../dojo/utils/getGame.tsx";
 import { getLSGameId } from "../dojo/utils/getLSGameId.tsx";
 import { Plays } from "../enums/plays";
 import { SortBy } from "../enums/sortBy.ts";
@@ -1004,24 +1003,17 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     if (!gameId || gameId === 0) {
       console.log("no game id, creating new game");
       return executeCreateGame();
-    } else if (!gameExists(Game, gameId)) {
-      console.log("game doesn't exist (first try)");
-      setTimeout(() => {
-        if (!gameExists(Game, gameId)) {
-          console.log("game still doesn't exist - creating new game");
+    } else {
+      fetchGame().then((game) => {
+        if (game.owner === 0n) {
           executeCreateGame();
         } else {
           setGameLoading(false);
           setLockRedirection(false);
           redirectBasedOnGameState();
-          console.log("Game found (2), no need to create a new one");
+          console.log("Game found, no need to create a new one");
         }
-      }, 2000);
-    } else {
-      setGameLoading(false);
-      setLockRedirection(false);
-      redirectBasedOnGameState();
-      console.log("Game found, no need to create a new one");
+      });
     }
   };
 
@@ -1062,7 +1054,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     }
     console.log("default redirect to select deck");
     return navigate("/choose-class");
-  }
+  };
 
   const redirectBasedOnGameState = () => {
     if (!lockRedirection) {
