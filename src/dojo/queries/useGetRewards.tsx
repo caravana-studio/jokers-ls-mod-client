@@ -13,6 +13,5 @@ export const useGetRewards = () => {
   const gameId = getLSGameId();
   const entityId = getEntityIdFromKeys([BigInt(gameId)]) as Entity;
   const res = useComponentValue(Reward, entityId);
-  console.log(res?.rewards_ids);
   return res;
 };
