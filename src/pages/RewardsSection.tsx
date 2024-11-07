@@ -37,7 +37,7 @@ const RewardCard = ({
       <Box
         position="relative"
         width="250px"
-        height="200px"
+        height="250px"
         borderRadius="20px"
         opacity={0.7}
         cursor={"pointer"}

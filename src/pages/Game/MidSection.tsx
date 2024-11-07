@@ -1,19 +1,18 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
 import { useDroppable } from "@dnd-kit/core";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
+import AttackAnimation from "../../components/Animation/AttackAnimation.tsx";
 import { ProgressBar } from "../../components/CompactRoundData/ProgressBar.tsx";
 import { CurrentPlay } from "../../components/CurrentPlay.tsx";
 import { MultiPoints } from "../../components/MultiPoints.tsx";
 import { PRESELECTED_CARD_SECTION_ID } from "../../constants/general.ts";
 import { useGameContext } from "../../providers/GameProvider.tsx";
 import { BEAST_RED } from "../../theme/colors.tsx";
-import { useResponsiveValues } from "../../theme/responsiveSettings.tsx";
+import { getNameBeast } from "../../utils/getNameBeast.ts";
 import { DiscardButton } from "./DiscardButton.tsx";
 import { Obstacle } from "./Obstacle.tsx";
 import { PlayButton } from "./PlayButton.tsx";
-import { getNameBeast } from "../../utils/getNameBeast.ts";
-import { useEffect, useRef, useState } from "react";
-import AttackAnimation from "../../components/Animation/AttackAnimation.tsx";
 
 interface MidSectionProps {
   isTutorialRunning?: boolean;
@@ -155,7 +154,7 @@ export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
                     </Text>
                   </Box>
                   <Text lineHeight={1} size="l">
-                    {lifeLeftValue.toString()}
+                    {lifeLeftValue.toString()} / {maxHealth.toString()}
                   </Text>
                 </Flex>
                 <Box width="100%">

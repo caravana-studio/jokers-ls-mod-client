@@ -118,7 +118,7 @@ interface IGameContext {
   refetchRewardsId: () => void;
   levelScore: number;
   game: Game | undefined;
-  fetchGame: () => void;
+  fetchGame: () => Promise<Game | undefined>;
 }
 
 const GameContext = createContext<IGameContext>({
@@ -202,7 +202,7 @@ const GameContext = createContext<IGameContext>({
   refetchRewardsId: () => {},
   levelScore: 0,
   game: undefined,
-  fetchGame: () => {},
+  fetchGame: () => new Promise((resolve) => resolve(undefined)),
 });
 export const useGameContext = () => useContext(GameContext);
 
@@ -404,7 +404,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
           setGameOver(true);
           setTimeout(() => {
             navigate(`/gameover/${gameId}`);
-          }, 1000);
+          }, 2000);
         } else {
           resetPlaysAndDiscards();
         }
@@ -842,10 +842,16 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     setPreSelectionLocked(true);
     setLockRedirection(true);
 
-    const newModifiers = [
-      ...preSelectedModifiers,
-      ...Array(preSelectedCards.length - preSelectedModifiers.length).fill(100),
-    ];
+    const hundredArray = Math.max(
+      0,
+      preSelectedCards.length - preSelectedModifiers.length
+    )
+      ? Array(
+          Math.max(0, preSelectedCards.length - preSelectedModifiers.length)
+        ).fill(100)
+      : [];
+
+    const newModifiers = [...preSelectedModifiers, ...hundredArray];
 
     play(gameId, preSelectedCards, newModifiers)
       .then((response) => {

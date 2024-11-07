@@ -1,8 +1,7 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
-import { useGame } from "../dojo/queries/useGame";
 import { useUsername } from "../dojo/utils/useUsername";
-import { ProgressBar } from "./CompactRoundData/ProgressBar";
 import { useGameContext } from "../providers/GameProvider";
+import { ProgressBar } from "./CompactRoundData/ProgressBar";
 
 export const HealthBar = () => {
   const username = useUsername();
@@ -10,7 +9,6 @@ export const HealthBar = () => {
   const { game } = useGameContext();
   const maxHp = game?.player_hp ?? 0;
   const hp = game?.current_player_hp ?? 0;
-
 
   return (
     <Flex
@@ -24,7 +22,7 @@ export const HealthBar = () => {
           {username}
         </Text>
         <Text color="white" fontWeight="bold" fontSize={"1.5rem"}>
-          {hp.valueOf()}
+          {hp.valueOf()} / {maxHp.valueOf()}
         </Text>
       </Flex>
       <Box width="400px">
