@@ -71,13 +71,15 @@ export const useGameState = () => {
     setEnergyLeft((prev) => prev - 1);
   };
 
-  const challengePlayer = useChallengePlayer();
   const beastPlayer = useBeastPlayer();
+
+  const challengePlayer = useChallengePlayer();
 
   const refetchPlaysAndDiscards = () => {
     if (challengePlayer) {
-      setDiscardsLeft(challengePlayer?.discards ?? 0);
-      setPlaysLeft(challengePlayer?.plays ?? 0);
+      // console.log("cpp: ", challengePlayer);
+      setDiscardsLeft(challengePlayer?.discards.valueOf() ?? 0);
+      setPlaysLeft(challengePlayer?.plays.valueOf() ?? 0);
     }
   };
   const refetchEnergy = () => {

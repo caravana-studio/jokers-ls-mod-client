@@ -129,6 +129,7 @@ const cartridgeConnector = new CartridgeConnector({
       method: "get_player_current_hand",
     },
     { target: player_system_contract_address, method: "get_game" },
+    { target: player_system_contract_address, method: "get_challenge_player" },
   ],
 }) as never as Connector;
 

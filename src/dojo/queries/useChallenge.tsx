@@ -3,16 +3,30 @@ import { Entity } from "@dojoengine/recs";
 import { getEntityIdFromKeys } from "@dojoengine/utils";
 import { useDojo } from "../useDojo";
 import { getLSGameId } from "../utils/getLSGameId";
+import { getChallegePlayer } from "./getChallengePlayer";
+import { useEffect, useState } from "react";
+import { ChallengePlayer } from "../typescript/models.gen";
 
 export const useChallengePlayer = () => {
   const {
-    setup: {
-      clientComponents: { ChallengePlayer },
-    },
+    setup: { client },
   } = useDojo();
-  const gameId = getLSGameId();
-  const entityId = getEntityIdFromKeys([BigInt(gameId)]) as Entity;
-  return useComponentValue(ChallengePlayer, entityId);
+
+  const [challengePlayer, setChallengePlayer] = useState<
+    ChallengePlayer | undefined
+  >(undefined);
+
+  useEffect(() => {
+    fetchChallengePlayer();
+  }, []);
+
+  const fetchChallengePlayer = () => {
+    getChallegePlayer(client).then((challemgePlayer) => {
+      setChallengePlayer(challemgePlayer);
+    });
+  };
+
+  return challengePlayer;
 };
 
 export const useChallenge = () => {
