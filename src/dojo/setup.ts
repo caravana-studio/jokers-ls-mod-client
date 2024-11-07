@@ -1,12 +1,10 @@
 import { DojoConfig, DojoProvider } from "@dojoengine/core";
 import { BurnerManager } from "@dojoengine/create-burner";
 import { Component, Metadata, Schema } from "@dojoengine/recs";
-import { setEntities, syncEntities } from "@dojoengine/state";
+import { setEntities } from "@dojoengine/state";
 import * as torii from "@dojoengine/torii-client";
-import { Account, ArraySignatureType, RpcProvider } from "starknet";
-import { GAME_ID } from "../constants/localStorage";
+import { Account, RpcProvider } from "starknet";
 import { createClientComponents } from "./createClientComponents";
-import { createSystemCalls } from "./createSystemCalls";
 import { setupWorld } from "./typescript/contracts.gen";
 import { defineContractComponents } from "./typescript/models.gen";
 import { world } from "./world";
@@ -41,12 +39,12 @@ const getEntities = async <S extends Schema>(
 
 export async function setup({ ...config }: DojoConfig) {
   // torii client
-  const toriiClient = await torii.createClient({
+  /*   const toriiClient = await torii.createClient({
     rpcUrl: config.rpcUrl,
     toriiUrl: config.toriiUrl,
     relayUrl: "",
     worldAddress: config.manifest.world.address || "",
-  });
+  }); */
 
   // create contract components
   const contractComponents = defineContractComponents(world);
@@ -66,7 +64,7 @@ export async function setup({ ...config }: DojoConfig) {
     const name = defaultNameSpace + component.metadata.name;
     componentNames.push(name);
   });
-
+  /* 
   async function syncEntitiesForGameID() {
     let gameID = localStorage.getItem(GAME_ID) || undefined;
 
@@ -113,9 +111,9 @@ export async function setup({ ...config }: DojoConfig) {
       // Log for load time
       console.log(`getSyncEntities took ${timeTaken.toFixed(2)} milliseconds`);
     }
-  }
+  } */
 
-  await syncEntitiesForGameID();
+  // await syncEntitiesForGameID();
 
   // setup world
   const client = await setupWorld(dojoProvider);
@@ -145,16 +143,16 @@ export async function setup({ ...config }: DojoConfig) {
     client,
     clientComponents,
     contractComponents,
-    systemCalls: createSystemCalls({ client }, clientComponents, world),
-    publish: (typedData: string, signature: ArraySignatureType) => {
+    // systemCalls: createSystemCalls({ client }, clientComponents, world),
+    /*     publish: (typedData: string, signature: ArraySignatureType) => {
       toriiClient.publishMessage(typedData, signature);
-    },
+    }, */
     config,
     dojoProvider,
     burnerManager,
-    toriiClient,
+    // toriiClient,
     rpcProvider,
     sync,
-    syncCallback: async () => await syncEntitiesForGameID(),
+    // syncCallback: async () => await syncEntitiesForGameID(),
   };
 }

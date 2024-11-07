@@ -68,7 +68,7 @@ export const NoAdventurers = () => {
                   createNewLevel();
                 }
               })
-              .finally(() => {
+              .catch(() => {
                 setIsSkipping(false);
               });
           }}

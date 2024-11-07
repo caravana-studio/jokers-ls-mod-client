@@ -21,7 +21,6 @@ import {
   preselectedCardSfx,
 } from "../constants/sfx.ts";
 import { Beast, Game } from "../dojo/typescript/models.gen.ts";
-import { useDojo } from "../dojo/useDojo.tsx";
 import { useGameActions } from "../dojo/useGameActions.tsx";
 import { getLSGameId } from "../dojo/utils/getLSGameId.tsx";
 import { Plays } from "../enums/plays";
@@ -227,12 +226,6 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
   }, []);
 
   const navigate = useNavigate();
-  const {
-    setup: {
-      clientComponents: { Game },
-    },
-    syncCall,
-  } = useDojo();
 
   const {
     createGame,
@@ -502,7 +495,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
           clearPreSelection();
           localStorage.setItem(GAME_ID, newGameId.toString());
           console.log(`game ${newGameId} created`);
-          await syncCall();
+          // await syncCall();
           setGameLoading(false);
           setPreSelectionLocked(false);
           setRoundRewards(undefined);
@@ -510,6 +503,8 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
           setError(true);
         }
       });
+    } else {
+      reconnectController();
     }
   };
 
@@ -842,16 +837,12 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     setPreSelectionLocked(true);
     setLockRedirection(true);
 
-    const hundredArray = Math.max(
-      0,
-      preSelectedCards.length - preSelectedModifiers.length
-    )
-      ? Array(
-          Math.max(0, preSelectedCards.length - preSelectedModifiers.length)
-        ).fill(100)
-      : [];
-
-    const newModifiers = [...preSelectedModifiers, ...hundredArray];
+    const newModifiers = [
+      ...preSelectedModifiers,
+      ...Array(
+        Math.max(0, preSelectedCards.length - preSelectedModifiers.length)
+      ).fill(100),
+    ];
 
     play(gameId, preSelectedCards, newModifiers)
       .then((response) => {
