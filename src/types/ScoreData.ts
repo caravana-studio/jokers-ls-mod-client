@@ -24,6 +24,7 @@ export interface PlayEvents {
   obstacleAttack?: number;
   rewards?: number[];
   beastNFT?: BeastNFTEvent;
+  obstacleHandScore?: number;
 }
 
 export interface BeastNFTEvent {
