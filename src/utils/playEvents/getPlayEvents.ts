@@ -1,12 +1,12 @@
 import {
   CHALLENGE_COMPLETED,
-  PLAY_GAME_OVER_EVENT,
-  PLAYER_ATTACK,
+  PLAY_GAME_OVER_EVENT
 } from "../../constants/dojoEventKeys";
 import { DojoEvent } from "../../types/DojoEvent";
 import { PlayEvents } from "../../types/ScoreData";
 import { getBeastNFTEvent } from "../getBeastNFTEvent";
 import { getCardsFromEvents } from "../getCardsFromEvents";
+import { getObstacleHandScore } from "../getObstacleHandScore";
 import { getRewardsEvents } from "../getRewardEvents";
 import { getBeastAttackEvent } from "./getBeastAttackEvent";
 import { getCashEvents } from "./getCashEvents";
@@ -52,6 +52,7 @@ export const getPlayEvents = (events: DojoEvent[]): PlayEvents => {
     obstacleAttack: getObstacleAttackEvent(events),
     rewards: getRewardsEvents(events),
     beastNFT: getBeastNFTEvent(events),
+    obstacleHandScore: getObstacleHandScore(events),
   };
 
   return playEvents;

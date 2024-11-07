@@ -763,6 +763,8 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
           setAttackAnimation(playEvents.playerAttack.valueOf());
           setLevelScore(playEvents.playerAttack.valueOf());
           fetchBeast();
+        } else if (playEvents.obstacleHandScore) {
+          setLevelScore(playEvents.obstacleHandScore);
         }
         setTimeout(() => {
           setLevelScore(0);
@@ -812,7 +814,9 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
                 const tier = playEvents.beastNFT.tier;
                 const level = playEvents.beastNFT.level;
                 const token_id = playEvents.beastNFT.token_id;
-                navigate(`/collected-beast?beast_id=${beast_id}&tier=${tier}&level=${level}&token_id=${token_id}`);
+                navigate(
+                  `/collected-beast?beast_id=${beast_id}&tier=${tier}&level=${level}&token_id=${token_id}`
+                );
               } else {
                 navigate("/rewards");
               }
