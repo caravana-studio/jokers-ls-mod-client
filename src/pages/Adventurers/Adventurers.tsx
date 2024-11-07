@@ -111,7 +111,7 @@ export const Adventurers = () => {
                   createNewLevel();
                 }
               })
-              .finally(() => {
+              .catch(() => {
                 setIsSkipping(false);
               });
           }}
