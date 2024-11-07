@@ -41,7 +41,7 @@ export const useGameState = () => {
   );
   const [isRageRound, setIsRageRound] = useState(false);
   const [rageCards, setRageCards] = useState<Card[]>([]);
-  const [beast, setBeast] = useState<Beast | undefined>(undefined);
+  const { beast, setBeast } = useBeast();
   const [obstacles, setObstacles] = useState<
     { id: number; completed: boolean }[]
   >([]);
@@ -153,13 +153,6 @@ export const useGameState = () => {
   };
 
   //effects
-  useEffect(() => {
-    if (
-      beastFetchData &&
-      beastFetchData?.current_health != beast?.current_health
-    )
-      setBeast(beastFetchData as unknown as Beast);
-  }, [beastFetchData]);
 
   const setMultiAndPoints = (play: Plays) => {
     const playerPokerHand = PLAYS_DATA[play - 1];
