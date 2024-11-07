@@ -25,7 +25,6 @@ import { useDojo } from "../dojo/useDojo.tsx";
 import { useGameActions } from "../dojo/useGameActions.tsx";
 import { gameExists } from "../dojo/utils/getGame.tsx";
 import { getLSGameId } from "../dojo/utils/getLSGameId.tsx";
-import { useUsername } from "../dojo/utils/useUsername.tsx";
 import { Plays } from "../enums/plays";
 import { SortBy } from "../enums/sortBy.ts";
 import { useAudio } from "../hooks/useAudio.tsx";
@@ -762,9 +761,9 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
         setPlayAnimation(true);
         if (playEvents.playerAttack) {
           setAttackAnimation(playEvents.playerAttack.valueOf());
+          setLevelScore(playEvents.playerAttack.valueOf());
           fetchBeast();
         }
-        setLevelScore(points * multi);
         setTimeout(() => {
           setLevelScore(0);
         }, 2500);
