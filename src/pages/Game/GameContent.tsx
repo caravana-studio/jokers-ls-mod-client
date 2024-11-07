@@ -18,7 +18,6 @@ import {
   SKIP_TUTORIAL_MODIFIERS,
   SKIP_TUTORIAL_SPECIAL_CARDS,
 } from "../../constants/localStorage.ts";
-import { useGame } from "../../dojo/queries/useGame.tsx";
 import { useAudioPlayer } from "../../providers/AudioPlayerProvider.tsx";
 import { useGameContext } from "../../providers/GameProvider.tsx";
 import { BeastTurnAnimation } from "./BeastTurnAnimation.tsx";
@@ -29,8 +28,7 @@ import { TopSection } from "./TopSection.tsx";
 export const GameContent = () => {
   const {
     hand,
-    preSelectedCards,
-    gameLoading,
+    game,
     error,
     executeCreateGame,
     playsLeft,
@@ -104,8 +102,6 @@ export const GameContent = () => {
     setRunTutorialModifiers
   );
 
-  const game = useGame();
-
   useEffect(() => {
     const showSpecialCardTutorial = !localStorage.getItem(
       SKIP_TUTORIAL_SPECIAL_CARDS
@@ -116,14 +112,14 @@ export const GameContent = () => {
     const showBeastTutorial = !localStorage.getItem(SKIP_TUTORIAL_BEAST);
     const showTutorial = !localStorage.getItem(SKIP_TUTORIAL_GAME);
 
-    if (showBeastTutorial && game?.substate === "BEAST") {
+    if (showBeastTutorial && game?.substate.type === "BEAST") {
       setRunTutorialBeast(true);
     }
 
     if (
       showSpecialCardTutorial &&
       game?.len_current_special_cards != undefined &&
-      game?.len_current_special_cards > 0 &&
+      game?.len_current_special_cards.valueOf() > 0 &&
       !showTutorial
     ) {
       setRunSpecial(true);
@@ -137,7 +133,7 @@ export const GameContent = () => {
     }
   }, [game, hand, specialTutorialCompleted, run]);
 
-  if (game?.substate === "BEAST") {
+  if (game?.substate.type === "BEAST") {
     if (!beastSound) {
       changeSong("/music/Conflict.mp3", true);
     }

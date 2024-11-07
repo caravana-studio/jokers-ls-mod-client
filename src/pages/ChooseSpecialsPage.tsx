@@ -18,26 +18,23 @@ export const ChooseSpecialsPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [cardsToKeep, setCardsToKeep] = useState<Card[]>([]);
   const { isSmallScreen, cardScale } = useResponsiveValues();
-  const adjustedCardScale = cardScale * 1.5;
+  const adjustedCardScale = cardScale * 1.2;
   const maxCards = 2;
   const { play: beepSound } = useAudio(beep);
 
   const {
     selectSpecialCards,
-    redirectBasedOnGameState,
-    lockRedirection,
     blisterPackResult,
     setBlisterPackResult,
     refetchBlisterPackResult,
     addSpecialCard,
   } = useGameContext();
-  const game = useGame();
 
   useEffect(() => {
     if (blisterPackResult.length === 0) {
       refetchBlisterPackResult();
     }
-  }, [blisterPackResult]);
+  }, []);
 
   const confirmSelectCards = () => {
     beepSound();

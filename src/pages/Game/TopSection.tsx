@@ -2,13 +2,11 @@ import { Box, Flex, HStack, Heading, Text } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import CachedImage from "../../components/CachedImage.tsx";
 import { HealthBar } from "../../components/HealthBar.tsx";
-import { SpecialCards } from "../../components/SpecialCards.tsx";
-import { Energy } from "./Energy.tsx";
-import { useGame } from "../../dojo/queries/useGame.tsx";
 import { PointBox } from "../../components/MultiPoints.tsx";
 import { RollingNumber } from "../../components/RollingNumber.tsx";
+import { SpecialCards } from "../../components/SpecialCards.tsx";
 import { useGameContext } from "../../providers/GameProvider.tsx";
-import { useMemo } from "react";
+import { Energy } from "./Energy.tsx";
 
 interface TopSectionProps {
   inRewardsPag?: boolean;
@@ -20,9 +18,9 @@ export const TopSection = ({
   obstacleFailed = false,
 }: TopSectionProps) => {
   const { mode } = useParams();
-  const game = useGame();
+  const { game } = useGameContext();
 
-  const level = game?.level ?? 0;
+  const level = game?.level.valueOf() ?? 0;
 
   return (
     <Flex

@@ -17,6 +17,8 @@ import { SortBy } from "../../components/SortBy";
 import { TiltCard } from "../../components/TiltCard";
 import { HAND_SECTION_ID } from "../../constants/general";
 import { CARD_HEIGHT, CARD_WIDTH } from "../../constants/visualProps";
+import { getGameQuery } from "../../dojo/queries/getGameQuery";
+import { useDojo } from "../../dojo/useDojo";
 import { useGameContext } from "../../providers/GameProvider";
 import { useResponsiveValues } from "../../theme/responsiveSettings";
 
@@ -39,6 +41,8 @@ export const HandSection = () => {
   const [discarding, setDiscarding] = useState(false);
 
   const canPlay = playsLeft > 0 || energyLeft > 0;
+
+  // console.log(playsLeft);
 
   const { setNodeRef } = useDroppable({
     id: HAND_SECTION_ID,

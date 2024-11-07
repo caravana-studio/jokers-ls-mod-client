@@ -1,4 +1,3 @@
-import CartridgeConnector from "@cartridge/connector";
 import { useAccount, useConnect } from "@starknet-react/core";
 import {
   PropsWithChildren,
@@ -8,7 +7,6 @@ import {
   useState,
 } from "react";
 import { useNavigate } from "react-router-dom";
-import cartridgeConnector from "../cartridgeConnector.tsx";
 import { GAME_ID, SORT_BY_SUIT } from "../constants/localStorage";
 import {
   discardSfx,
@@ -16,12 +14,12 @@ import {
   pointsSfx,
   preselectedCardSfx,
 } from "../constants/sfx.ts";
-import { useGame } from "../dojo/queries/useGame.tsx";
-import { Beast } from "../dojo/typescript/models.gen.ts";
+import { Beast, Game } from "../dojo/typescript/models.gen.ts";
 import { useDojo } from "../dojo/useDojo.tsx";
 import { useGameActions } from "../dojo/useGameActions.tsx";
 import { gameExists } from "../dojo/utils/getGame.tsx";
 import { getLSGameId } from "../dojo/utils/getLSGameId.tsx";
+import { useUsername } from "../dojo/utils/useUsername.tsx";
 import { Plays } from "../enums/plays";
 import { SortBy } from "../enums/sortBy.ts";
 import { useAudio } from "../hooks/useAudio.tsx";
@@ -32,7 +30,6 @@ import { Card } from "../types/Card";
 import { RoundRewards } from "../types/RoundRewards.ts";
 import { PlayEvents } from "../types/ScoreData";
 import { changeCardSuit } from "../utils/changeCardSuit";
-
 interface IGameContext {
   gameId: number;
   preSelectedPlay: Plays;
@@ -112,6 +109,8 @@ interface IGameContext {
   rewardsIds: number[];
   refetchRewardsId: () => void;
   levelScore: number;
+  game: Game | undefined;
+  fetchGame: () => void;
 }
 
 const GameContext = createContext<IGameContext>({
@@ -193,6 +192,8 @@ const GameContext = createContext<IGameContext>({
   rewardsIds: [0],
   refetchRewardsId: () => {},
   levelScore: 0,
+  game: undefined,
+  fetchGame: () => {},
 });
 export const useGameContext = () => useContext(GameContext);
 
@@ -243,23 +244,10 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
 
   const { discards, discard: stateDiscard, rollbackDiscard } = useDiscards();
 
-  const game = useGame();
   const { play: preselectCardSound } = useAudio(preselectedCardSfx);
   const { play: discardSound } = useAudio(discardSfx, 4);
   const { play: pointsSound } = useAudio(pointsSfx);
   const { play: multiSound } = useAudio(multiSfx);
-
-  const minimumDuration =
-    !game?.level || game?.level <= 15 ? 400 : game?.level > 20 ? 300 : 350;
-
-  const playAnimationDuration = Math.max(
-    700 - ((game?.level ?? 1) - 1) * 50,
-    minimumDuration
-  );
-
-  const { setAnimatedCard } = useCardAnimations();
-
-  const [attackAnimation, setAttackAnimation] = useState(0);
 
   const {
     gameId,
@@ -283,12 +271,11 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     setError,
     sortBySuit,
     setSortBySuit,
-    username,
     setPlayIsNeon,
     specialCards,
     setIsRageRound,
-    beast,
     setBeast,
+    fetchBeast,
     obstacles,
     setObstacles,
     refetchObstacles,
@@ -306,7 +293,27 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     rewardsIds,
     setRewardsIds,
     refetchRewardsId,
+    refetchPlaysAndDiscards,
+    refetchCurrentHand,
+    game,
+    fetchGame,
   } = state;
+
+  const minimumDuration =
+    !game?.level || game?.level.valueOf() <= 15
+      ? 400
+      : game?.level.valueOf() > 20
+        ? 300
+        : 350;
+
+  const playAnimationDuration = Math.max(
+    700 - ((game?.level.valueOf() ?? 1) - 1) * 50,
+    minimumDuration
+  );
+
+  const { setAnimatedCard } = useCardAnimations();
+
+  const [attackAnimation, setAttackAnimation] = useState(0);
 
   const resetLevel = () => {
     setRoundRewards(undefined);
@@ -380,7 +387,10 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
   const executeEndTurn = async () => {
     const endTurnPromise = endTurn(gameId).then((response) => {
       if (response?.success) {
-        response.beastAttack && setBeastAttack(response.beastAttack);
+        if (response.beastAttack) {
+          fetchGame();
+          setBeastAttack(response.beastAttack);
+        }
         if (response.gameOver) {
           setGameOver(true);
           setTimeout(() => {
@@ -459,12 +469,13 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
 
     return createRewardPromise;
   };
-
+  
+  const username = useUsername();
+  
   const executeCreateGame = async () => {
-    const username = await (
-      cartridgeConnector as CartridgeConnector
-    ).username();
-    console.log("username", username);
+    if (!username) {
+      reconnectController();
+    }
     setError(false);
     setGameLoading(true);
     setIsRageRound(false);
@@ -494,6 +505,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
   };
 
   const replaceCards = (cards: Card[]) => {
+    console.log("replaceCards");
     if (hand.length === 0) {
       setHand(cards);
       return;
@@ -579,19 +591,17 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
                 idx: [event.idx],
                 animationIndex: index,
               });
-              setHand((prev) => {
-                const newHand = prev?.map((card) => {
-                  if (event.idx === card.idx) {
-                    return {
-                      ...card,
-                      suit: event.suit,
-                      img: `${changeCardSuit(card.card_id!, event.suit)}.png`,
-                    };
-                  }
-                  return card;
-                });
-                return newHand;
+              const newHand = hand?.map((card) => {
+                if (event.idx === card.idx) {
+                  return {
+                    ...card,
+                    suit: event.suit,
+                    img: `${changeCardSuit(card.card_id!, event.suit)}.png`,
+                  };
+                }
+                return card;
               });
+              setHand(newHand);
             },
             playAnimationDuration * index + NEON_PLAY_DURATION
           );
@@ -607,18 +617,16 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
               idx: event.idx,
               animationIndex: 10 + index,
             });
-            setHand((prev) => {
-              const newHand = prev?.map((card) => {
-                if (event.idx.includes(card.idx)) {
-                  return {
-                    ...card,
-                    img: `${changeCardSuit(card.card_id!, event.suit)}.png`,
-                  };
-                }
-                return card;
-              });
-              return newHand;
+            const newHand = hand?.map((card) => {
+              if (event.idx.includes(card.idx)) {
+                return {
+                  ...card,
+                  img: `${changeCardSuit(card.card_id!, event.suit)}.png`,
+                };
+              }
+              return card;
             });
+            setHand(newHand);
           });
         }
 
@@ -747,6 +755,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
         setPlayAnimation(true);
         if (playEvents.playerAttack) {
           setAttackAnimation(playEvents.playerAttack.valueOf());
+          fetchBeast();
         }
         setLevelScore(points * multi);
         setTimeout(() => {
@@ -768,6 +777,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
         if (playEvents.beastAttack) {
           setBeastAttack(playEvents.beastAttack);
           resetPlaysAndDiscards();
+          fetchGame();
         }
 
         if (playEvents.itemChallengeCompleted) {
@@ -799,7 +809,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
           navigate("/rewards");
           setObstacleAttack(playEvents.obstacleAttack);
         } else {
-          playEvents.cards && replaceCards(playEvents.cards);
+          refetchCurrentHand();
           setRoundRewards(undefined);
           setLockRedirection(false);
         }
@@ -907,7 +917,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
             navigate(`/gameover/${gameId}`);
           }, 1000);
         } else {
-          replaceCards(response.cards);
+          refetchCurrentHand();
         }
       } else {
         rollbackDiscard();
@@ -944,7 +954,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     discardPromise
       .then((response): void => {
         if (response.success) {
-          replaceCards(response.cards);
+          refetchCurrentHand();
         } else {
           rollback();
         }
@@ -1002,32 +1012,32 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
 
   const redirectBasedOnGameState = () => {
     if (!lockRedirection) {
-      if (game?.state === "FINISHED") {
+      if (game?.state.type === "FINISHED") {
         return navigate(`/gameover/${gameId}`);
       } else {
-        if (game?.substate === "SELECT_DECK") {
+        if (game?.substate.type === "DRAFT_DECK") {
           console.log("redirecting to SELECT_DECK");
           return navigate("/choose-class");
-        } else if (game?.substate === "SELECT_SPECIAL_CARDS") {
+        } else if (game?.substate.type === "DRAFT_SPECIALS") {
           console.log("redirecting to SELECT_SPECIAL_CARDS");
           return navigate("/choose-specials");
-        } else if (game?.substate === "SELECT_MODIFIER_CARDS") {
+        } else if (game?.substate.type === "DRAFT_MODIFIERS") {
           console.log("redirecting to SELECT_MODIFIER_CARDS");
           return navigate("/choose-modifiers");
-        } else if (game?.substate === "DRAFT_ADVENTURER") {
+        } else if (game?.substate.type === "DRAFT_ADVENTURER") {
           return navigate("/adventurers");
-        } else if (game?.substate === "OBSTACLE") {
+        } else if (game?.substate.type === "OBSTACLE") {
           return navigate("/game/obstacle");
-        } else if (game?.substate === "BEAST") {
+        } else if (game?.substate.type === "BEAST") {
           return navigate("/game/beast");
         } else if (
-          game?.substate === "CREATE_REWARD" ||
-          game?.substate === "UNPASSED_OBSTACLE"
+          game?.substate.type === "CREATE_REWARD" ||
+          game?.substate.type === "UNPASSED_OBSTACLE"
         ) {
           return navigate("/rewards");
-        } else if (game?.substate === "REWARD_CARDS_PACK") {
+        } else if (game?.substate.type === "REWARD_CARDS_PACK") {
           return navigate("/rewards/pack");
-        } else if (game?.substate === "REWARD_SPECIALS") {
+        } else if (game?.substate.type === "REWARD_SPECIALS") {
           return navigate("/rewards/specials");
         }
       }

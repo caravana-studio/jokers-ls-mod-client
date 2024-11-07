@@ -1,23 +1,24 @@
-import { Entity, getComponentValue } from "@dojoengine/recs";
-import { getEntityIdFromKeys } from "@dojoengine/utils";
-import { useMemo } from "react";
+import { useEffect, useState } from "react";
+import { Game } from "../typescript/models.gen";
 import { useDojo } from "../useDojo";
-import { getLSGameId } from "../utils/getLSGameId";
-import { useComponentValue } from "@dojoengine/react";
+import { getGameQuery } from "./getGameQuery";
 
 export const useGame = () => {
   const {
-    setup: {
-      clientComponents: { Game },
-    },
+    setup: { client },
   } = useDojo();
-  const gameId = getLSGameId();
-  const entityId = useMemo(
-    () =>
-      getEntityIdFromKeys([
-        BigInt(gameId),
-      ]) as Entity,
-    [gameId],
-  );
-  return useComponentValue(Game, entityId);
+
+  const [game, setGame] = useState<Game | undefined>(undefined);
+
+  useEffect(() => {
+    fetchGame();
+  }, []);
+
+  const fetchGame = () => {
+    getGameQuery(client).then((game) => {
+      setGame(game);
+    });
+  };
+
+  return { game, fetchGame };
 };

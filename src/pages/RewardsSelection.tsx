@@ -30,7 +30,7 @@ export const RewardsSelection = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const { isSmallScreen, cardScale } = useResponsiveValues();
-  const adjustedCardScale = cardScale * 1.5;
+  const adjustedCardScale = cardScale * 1;
   const maxCards = mode === "special" ? 1 : 3;
   const isSpecialsFull = specialCards.length === 5;
 
@@ -40,7 +40,7 @@ export const RewardsSelection = () => {
     if (blisterPackResult.length === 0) {
       refetchBlisterPackResult();
     }
-  }, [blisterPackResult]);
+  }, []);
 
   useEffect(() => {
     runConfettiAnimation();

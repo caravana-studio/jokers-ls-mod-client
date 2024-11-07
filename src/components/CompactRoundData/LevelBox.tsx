@@ -3,12 +3,13 @@ import { useTranslation } from "react-i18next";
 import { useGame } from "../../dojo/queries/useGame";
 import { BLUE_LIGHT, VIOLET } from "../../theme/colors";
 import { useMemo } from "react";
+import { useGameContext } from "../../providers/GameProvider";
 
 export const LevelBox = () => {
   const { t } = useTranslation("game", {
     keyPrefix: "game.compact-round-data",
   });
-  const game = useGame();
+  const { game } = useGameContext();
   const level = useMemo(() => {
     return game?.level ?? 0;
   }, [game]);

@@ -1,58 +1,34 @@
-import {
-  Component,
-  Entity,
-  getComponentValue
-} from "@dojoengine/recs";
-import { getEntityIdFromKeys } from "@dojoengine/utils";
-import { useMemo } from "react";
-import { Card } from "../../types/Card.ts";
-import { useDojo } from "../useDojo.tsx";
-import { useGame } from "./useGame.tsx";
-
-const getSpecialCard = (
-  gameId: number,
-  index: number,
-  component: Component
-) => {
-  const entityId = getEntityIdFromKeys([
-    BigInt(gameId),
-    BigInt(index),
-  ]) as Entity;
-  const specialCard = getComponentValue(component, entityId);
-  const card_id = specialCard?.effect_card_id ?? 0;
-
-  return {
-    card_id,
-    isSpecial: true,
-    id: card_id?.toString(),
-    idx: index ?? 0,
-    img: `${card_id}.png`,
-    temporary: specialCard?.is_temporary,
-    remaining: specialCard?.remaining,
-  };
-};
+import { useEffect, useState } from "react";
+import { useDojo } from "../useDojo";
+import { Card } from "../../types/Card";
+import { getSpecialCard } from "./getSpecialCard";
 
 export const useCurrentSpecialCards = () => {
   const {
-    setup: {
-      clientComponents: { CurrentSpecialCards },
-    },
+    setup: { client },
   } = useDojo();
-  const game = useGame();
+  const [specialCards, setSpecialCards] = useState<Card[]>([]);
 
-  const gameId = game?.id ?? 0;
+  useEffect(() => {
+    fetchSpecialCards();
+  }, []);
 
-  const specialCardsLength = game?.len_current_special_cards ?? 0;
+  const fetchSpecialCards = () => {
+    getSpecialCard(client).then((dojoCards) => {
+      const cards: Card[] = dojoCards
+        .map((dojoCard: any) => {
+          return {
+            ...dojoCard,
+            img: `${dojoCard?.card_id}.png`,
+            isModifier: false,
+            isSpecial: true,
+            idx: dojoCard?.idx,
+            id: dojoCard?.idx.toString(),
+          };
+        });
 
-  const specialCards: Card[] = useMemo(() => {
-    const specialCardsIds = Array.from(
-      { length: specialCardsLength },
-      (_, index) => index
-    );
-    return specialCardsIds.map((index) =>
-      getSpecialCard(gameId, index, CurrentSpecialCards)
-    );
-  }, [specialCardsLength, game?.state]);
-
-  return specialCards;
+      setSpecialCards(cards);
+    });
+  };
+  return {specialCards, setSpecialCards, fetchSpecialCards};
 };

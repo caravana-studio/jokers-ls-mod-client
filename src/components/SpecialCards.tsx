@@ -12,7 +12,6 @@ interface SpecialCardsProps {
 }
 
 export const SpecialCards = ({ inStore = false }: SpecialCardsProps) => {
-  const game = useGame();
   const { t } = useTranslation(["game"]);
 
   const {
@@ -25,15 +24,8 @@ export const SpecialCards = ({ inStore = false }: SpecialCardsProps) => {
   const [confirmationModalOpen, setConfirmationModalOpen] = useState(false);
 
   useEffect(() => {
-    if (
-      (game?.len_current_special_cards &&
-        game?.len_current_special_cards > 0 &&
-        specialCards.length === 0) ||
-      (specialCards.length > 0 && specialCards[0].card_id === 0)
-    ) {
-      refetchSpecialCards();
-    }
-  }, [game]);
+    refetchSpecialCards();
+  }, []);
 
   return (
     <Box className="special-cards-step-3">

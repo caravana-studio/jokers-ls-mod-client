@@ -87,13 +87,12 @@ const RewardCard = ({
 };
 
 const RewardsSection = () => {
-  const { redirectBasedOnGameState, rewardsIds, refetchRewardsId } =
+  const { redirectBasedOnGameState, rewardsIds, refetchRewardsId, game } =
     useGameContext();
   const { createNewReward } = useGameContext();
-  const game = useGame();
   const { play: beepSound } = useAudio(beep);
 
-  if (game?.substate != "CREATE_REWARD") {
+  if (game?.substate.type != "CREATE_REWARD") {
     redirectBasedOnGameState();
   }
 
