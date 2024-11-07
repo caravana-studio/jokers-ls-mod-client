@@ -15,10 +15,6 @@ const getDefaultImageUrls = (): string[] => {
     imageUrls.push(`/Cards/${key}.png`);
   });
 
-  Object.keys(NEON_CARDS_DATA).forEach((key) => {
-    imageUrls.push(`/Cards/${key}.png`);
-  });
-
   // Modifier cards
   Object.keys(MODIFIER_CARDS_DATA).forEach((key) => {
     imageUrls.push(`/Cards/${key}.png`);
