@@ -15,6 +15,7 @@ import { SortBy } from "../enums/sortBy";
 import { Card } from "../types/Card";
 import { RoundRewards } from "../types/RoundRewards";
 import { checkHand } from "../utils/checkHand";
+import { useGame } from "../dojo/queries/useGame";
 
 export const useGameState = () => {
   const [gameId, setGameId] = useState<number>(getLSGameId());
@@ -39,16 +40,18 @@ export const useGameState = () => {
   );
   const [isRageRound, setIsRageRound] = useState(false);
   const [rageCards, setRageCards] = useState<Card[]>([]);
-  const { beast, setBeast } = useBeast();
-  // const [beast, setBeast] = useState<Beast | undefined>(undefined);
+  const { beast, setBeast, fetchBeast } = useBeast();
 
-  const [energyLeft, setEnergyLeft] = useState(-1);
   const [rewardsIds, setRewardsIds] = useState<number[]>([]);
 
   const [beastAttack, setBeastAttack] = useState(0);
   const [obstacletAttack, setObstacleAttack] = useState(0);
 
   const [gameOver, setGameOver] = useState(false);
+
+  const { energyLeft, setEnergyLeft, fetchEnergyLeft } = useBeastPlayer();
+
+  const { game, fetchGame } = useGame();
 
   const {
     playsLeft,
@@ -73,15 +76,11 @@ export const useGameState = () => {
     setEnergyLeft((prev) => prev - 1);
   };
 
-  const beastPlayer = useBeastPlayer();
-
   const refetchPlaysAndDiscards = () => {
     fetchPlaysAndDiscards();
   };
   const refetchEnergy = () => {
-    if (beastPlayer) {
-      setEnergyLeft(beastPlayer?.energy ?? 0);
-    }
+    fetchEnergyLeft();
   };
 
   const { specialCards, setSpecialCards, fetchSpecialCards } =
@@ -111,7 +110,15 @@ export const useGameState = () => {
     [sortBySuit]
   );
 
-  const { hand, setHand } = useCurrentHand(sortBy);
+  const { hand, setHand, fetchHand } = useCurrentHand(sortBy);
+
+  const refetchCurrentHand = () => {
+    setPreSelectedCards([]);
+    setPreSelectedModifiers([]);
+    setPlayAnimation(false);
+    setDiscardAnimation(false);
+    fetchHand();
+  };
 
   const refetchSpecialCards = () => {
     fetchSpecialCards();
@@ -232,6 +239,7 @@ export const useGameState = () => {
     setRageCards,
     beast,
     setBeast,
+    fetchBeast,
     obstacles,
     setObstacles,
     refetchObstacles,
@@ -259,5 +267,8 @@ export const useGameState = () => {
     rewardsIds,
     setRewardsIds,
     refetchRewardsId,
+    refetchCurrentHand,
+    game,
+    fetchGame,
   };
 };

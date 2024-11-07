@@ -20,5 +20,5 @@ export const useGame = () => {
     });
   };
 
-  return game;
+  return { game, fetchGame };
 };

@@ -18,7 +18,6 @@ import {
   SKIP_TUTORIAL_MODIFIERS,
   SKIP_TUTORIAL_SPECIAL_CARDS,
 } from "../../constants/localStorage.ts";
-import { useGame } from "../../dojo/queries/useGame.tsx";
 import { useAudioPlayer } from "../../providers/AudioPlayerProvider.tsx";
 import { useGameContext } from "../../providers/GameProvider.tsx";
 import { BeastTurnAnimation } from "./BeastTurnAnimation.tsx";
@@ -29,8 +28,7 @@ import { TopSection } from "./TopSection.tsx";
 export const GameContent = () => {
   const {
     hand,
-    preSelectedCards,
-    gameLoading,
+    game,
     error,
     executeCreateGame,
     playsLeft,
@@ -103,8 +101,6 @@ export const GameContent = () => {
     SKIP_TUTORIAL_BEAST,
     setRunTutorialModifiers
   );
-
-  const game = useGame();
 
   useEffect(() => {
     const showSpecialCardTutorial = !localStorage.getItem(

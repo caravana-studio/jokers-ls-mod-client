@@ -16,6 +16,14 @@ export const useCurrentHand = (sortBy: SortBy) => {
     fetchHand();
   }, []);
 
+  useEffect(() => {
+    setAndSortHand(hand);
+  }, [sortBy]);
+
+  const setAndSortHand = (cards: Card[]) => {
+    setHand(sortCards(cards, sortBy));
+  };
+
   const fetchHand = () => {
     getCurrentHand(client).then((dojoCards) => {
       const cards: Card[] = dojoCards
@@ -31,15 +39,11 @@ export const useCurrentHand = (sortBy: SortBy) => {
           };
         });
 
-      const sortedCards = sortCards(cards, sortBy);
-      console.log("sortedCards", sortedCards);
-      const anyUndefined = sortedCards.some(
-        (card) => card.img === "undefined.png"
-      );
+      const anyUndefined = cards.some((card) => card.img === "undefined.png");
 
-      setHand(anyUndefined ? [] : sortedCards);
+      setAndSortHand(anyUndefined ? [] : cards);
     });
   };
 
-  return { hand, setHand, fetchHand };
+  return { hand, setHand: setAndSortHand, fetchHand };
 };

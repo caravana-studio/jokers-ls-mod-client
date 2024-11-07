@@ -20,7 +20,7 @@ export const useBeast = () => {
     });
   };
 
-  return { beast, setBeast }
+  return { beast, setBeast, fetchBeast }
 };
 
 export const useBeastPlayer = () => {
@@ -28,27 +28,17 @@ export const useBeastPlayer = () => {
     setup: { client },
   } = useDojo();
   
-  const [player_beast, setPlayerBeast] = useState<PlayerBeast | undefined>(undefined);
+  const [energyLeft, setEnergyLeft] = useState<number>(-1);
 
   useEffect(() => {
-    fetchPlayerBeast();
+    fetchEnergyLeft();
   }, []);
 
-  const fetchPlayerBeast = () => {
+  const fetchEnergyLeft = () => {
     getPlayerBeastQuery(client).then((player_beast) => {
-      setPlayerBeast(player_beast);
+      setEnergyLeft(player_beast.energy.valueOf());
     });
   };
 
-  return player_beast;
-};
-
-export const useGameModeBeast = () => {
-  const {
-    setup: { client },
-  } = useDojo();
-  
-  const gameId = getLSGameId();
-  const entityId = getEntityIdFromKeys([BigInt(gameId)]) as Entity;
-  return useComponentValue(GameModeBeast, entityId);
+  return { energyLeft, setEnergyLeft, fetchEnergyLeft }
 };
