@@ -40,9 +40,6 @@ export const useGameState = () => {
   const [isRageRound, setIsRageRound] = useState(false);
   const [rageCards, setRageCards] = useState<Card[]>([]);
   const [beast, setBeast] = useState<Beast | undefined>(undefined);
-  const [obstacles, setObstacles] = useState<
-    { id: number; completed: boolean }[]
-  >([]);
 
   const [playsLeft, setPlaysLeft] = useState(-1);
   const [discardsLeft, setDiscardsLeft] = useState(-1);
@@ -177,12 +174,10 @@ export const useGameState = () => {
     }
   }, [preSelectedCards]);
 
-  const challenges = useChallenge();
+  const {challenges: obstacles, setChallenges: setObstacles, fetchChallenges} = useChallenge();
 
   const refetchObstacles = () => {
-    if (challenges) {
-      setObstacles(challenges);
-    }
+    fetchChallenges()
   };
 
   const rewards = useGetRewards();

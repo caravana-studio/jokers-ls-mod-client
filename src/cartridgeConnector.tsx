@@ -124,12 +124,6 @@ const cartridgeConnector = new CartridgeConnector({
       target: rage_system_contract_address,
       method: "calculate",
     },
-    {
-      target: player_system_contract_address,
-      method: "get_player_current_hand",
-    },
-    { target: player_system_contract_address, method: "get_game" },
-    { target: player_system_contract_address, method: "get_challenge" },
   ],
 }) as never as Connector;
 

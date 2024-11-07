@@ -31,13 +31,11 @@ export const useChallenge = () => {
 
   const fetchChallenges = () => {
     getChallenges(client).then((newChallenges) => {
-      // console.log("challenge: ", newChallenges);
-
       setChallenges(newChallenges);
     });
   };
 
-  return challenges;
+  return {challenges, setChallenges, fetchChallenges};
 };
 
 export const getChallenges = async (
@@ -49,9 +47,6 @@ export const getChallenges = async (
 
   return (result.active_ids as any).map((challenge: any) => {
     const id = challenge[0] ? Number((challenge[0] as number)?.valueOf()) : 0;
-
-    console.log(challenge[1]);
-
     const completed = challenge[1]
       ? Boolean((challenge[1] as boolean)?.valueOf())
       : false;
