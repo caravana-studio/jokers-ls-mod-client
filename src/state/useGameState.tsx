@@ -6,7 +6,7 @@ import { useBlisterPackResult } from "../dojo/queries/useBlisterPackResult";
 import { useChallenge, useChallengePlayer } from "../dojo/queries/useChallenge";
 import { useCurrentHand } from "../dojo/queries/useCurrentHand";
 import { useCurrentSpecialCards } from "../dojo/queries/useCurrentSpecialCards";
-import { useGame } from "../dojo/queries/useGame";
+import { useGetRewards } from "../dojo/queries/useGetRewards";
 import { Beast } from "../dojo/typescript/models.gen";
 import { getLSGameId } from "../dojo/utils/getLSGameId";
 import { useUsername } from "../dojo/utils/useUsername";
@@ -15,8 +15,6 @@ import { SortBy } from "../enums/sortBy";
 import { Card } from "../types/Card";
 import { RoundRewards } from "../types/RoundRewards";
 import { checkHand } from "../utils/checkHand";
-import { sortCards } from "../utils/sortCards";
-import { useGetRewards } from "../dojo/queries/useGetRewards";
 
 export const useGameState = () => {
   const [gameId, setGameId] = useState<number>(getLSGameId());
@@ -42,12 +40,8 @@ export const useGameState = () => {
   const [isRageRound, setIsRageRound] = useState(false);
   const [rageCards, setRageCards] = useState<Card[]>([]);
   const { beast, setBeast } = useBeast();
-  const [obstacles, setObstacles] = useState<
-    { id: number; completed: boolean }[]
-  >([]);
+  // const [beast, setBeast] = useState<Beast | undefined>(undefined);
 
-  const [playsLeft, setPlaysLeft] = useState(-1);
-  const [discardsLeft, setDiscardsLeft] = useState(-1);
   const [energyLeft, setEnergyLeft] = useState(-1);
   const [rewardsIds, setRewardsIds] = useState<number[]>([]);
 
@@ -55,6 +49,14 @@ export const useGameState = () => {
   const [obstacletAttack, setObstacleAttack] = useState(0);
 
   const [gameOver, setGameOver] = useState(false);
+
+  const {
+    playsLeft,
+    setPlaysLeft,
+    discardsLeft,
+    setDiscardsLeft,
+    fetchPlaysAndDiscards,
+  } = useChallengePlayer();
 
   const consumePlay = () => {
     setPlaysLeft((prev) => prev - 1);
@@ -71,20 +73,19 @@ export const useGameState = () => {
     setEnergyLeft((prev) => prev - 1);
   };
 
-  const challengePlayer = useChallengePlayer();
   const beastPlayer = useBeastPlayer();
 
   const refetchPlaysAndDiscards = () => {
-    if (challengePlayer) {
-      setDiscardsLeft(challengePlayer?.discards ?? 0);
-      setPlaysLeft(challengePlayer?.plays ?? 0);
-    }
+    fetchPlaysAndDiscards();
   };
   const refetchEnergy = () => {
     if (beastPlayer) {
       setEnergyLeft(beastPlayer?.energy ?? 0);
     }
   };
+
+  const { specialCards, setSpecialCards, fetchSpecialCards } =
+    useCurrentSpecialCards();
 
   const resetPlaysAndDiscards = () => {
     const hasIncreasePlaysAndDiscardsSpecialCard = !!specialCards.find(
@@ -98,16 +99,11 @@ export const useGameState = () => {
     setEnergyLeft(maxEnergy);
   };
 
-  const [specialCards, setSpecialCards] = useState<Card[]>([]);
-
-  const [blisterPackResult, setBlisterPackResult] = useState<Card[]>([]);
-
-  const dojoBlisterPackResult = useBlisterPackResult();
+  const { blisterPackResult, setBlisterPackResult, fetchBlisterPackResult } =
+    useBlisterPackResult();
 
   const refetchBlisterPackResult = () => {
-    if (dojoBlisterPackResult) {
-      setBlisterPackResult(dojoBlisterPackResult.cards);
-    }
+    fetchBlisterPackResult();
   };
 
   const sortBy: SortBy = useMemo(
@@ -117,12 +113,8 @@ export const useGameState = () => {
 
   const { hand, setHand } = useCurrentHand(sortBy);
 
-  const dojoSpecialCards = useCurrentSpecialCards();
-
   const refetchSpecialCards = () => {
-    if (dojoSpecialCards) {
-      setSpecialCards(dojoSpecialCards);
-    }
+    fetchSpecialCards();
   };
 
   const addSpecialCard = (card: Card) => {
@@ -175,12 +167,14 @@ export const useGameState = () => {
     }
   }, [preSelectedCards]);
 
-  const challenges = useChallenge();
+  const {
+    challenges: obstacles,
+    setChallenges: setObstacles,
+    fetchChallenges,
+  } = useChallenge();
 
   const refetchObstacles = () => {
-    if (challenges) {
-      setObstacles(challenges);
-    }
+    fetchChallenges();
   };
 
   const rewards = useGetRewards();

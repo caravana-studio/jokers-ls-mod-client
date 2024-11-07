@@ -574,8 +574,6 @@ export async function setupWorld(provider: DojoProvider) {
             }
         };
             
-
-    
         // Call the `get_reward` system with the specified Account and calldata
         const get_reward = async (props: { game_id: number }) => {
             try {
