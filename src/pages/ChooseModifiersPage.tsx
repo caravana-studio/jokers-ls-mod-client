@@ -18,7 +18,7 @@ export const ChooseModifiersPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [cardsToKeep, setCardsToKeep] = useState<Card[]>([]);
   const { isSmallScreen, cardScale } = useResponsiveValues();
-  const adjustedCardScale = cardScale * 1;
+  const adjustedCardScale = cardScale * 0.8;
   const maxCards = 3;
   const { play: beepSound } = useAudio(beep);
 
@@ -69,9 +69,9 @@ export const ChooseModifiersPage = () => {
             textAlign={"center"}
             lineHeight={1}
           >
-            Modifier cards add points or multi to your plays when played.
-            Once added to your deck, they can be used whenever drawn, allowing
-            for flexible and strategic play.
+            Modifier cards add points or multi to your plays when played. Once
+            added to your deck, they can be used whenever drawn, allowing for
+            flexible and strategic play.
           </Text>
         </Box>
         <Heading size={"xl"} textAlign={"center"} variant="neonGreen" mt={2}>
