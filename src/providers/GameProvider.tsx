@@ -250,7 +250,11 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
   const { play: multiSound } = useAudio(multiSfx);
 
   const minimumDuration =
-    !game?.level || game?.level.valueOf() <= 15 ? 400 : game?.level.valueOf() > 20 ? 300 : 350;
+    !game?.level || game?.level.valueOf() <= 15
+      ? 400
+      : game?.level.valueOf() > 20
+        ? 300
+        : 350;
 
   const playAnimationDuration = Math.max(
     700 - ((game?.level.valueOf() ?? 1) - 1) * 50,
@@ -306,6 +310,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     rewardsIds,
     setRewardsIds,
     refetchRewardsId,
+    refetchPlaysAndDiscards,
   } = state;
 
   const resetLevel = () => {

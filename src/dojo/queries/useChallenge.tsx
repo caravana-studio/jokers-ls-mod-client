@@ -1,19 +1,29 @@
-import { useComponentValue } from "@dojoengine/react";
-import { Entity } from "@dojoengine/recs";
-import { getEntityIdFromKeys } from "@dojoengine/utils";
+import { useEffect, useState } from "react";
+import { ChallengePlayer } from "../typescript/models.gen";
 import { useDojo } from "../useDojo";
 import { getLSGameId } from "../utils/getLSGameId";
-import { useEffect, useState } from "react";
+import { getChallegePlayer } from "./getChallengePlayer";
 
 export const useChallengePlayer = () => {
   const {
-    setup: {
-      clientComponents: { ChallengePlayer },
-    },
+    setup: { client },
   } = useDojo();
-  const gameId = getLSGameId();
-  const entityId = getEntityIdFromKeys([BigInt(gameId)]) as Entity;
-  return useComponentValue(ChallengePlayer, entityId);
+
+  const [playsLeft, setPlaysLeft] = useState(-1);
+  const [discardsLeft, setDiscardsLeft] = useState(-1); 
+
+  useEffect(() => {
+    fetchPlaysAndDiscards();
+  }, []);
+
+  const fetchPlaysAndDiscards = () => {
+    getChallegePlayer(client).then((challengePlayer) => {
+      setPlaysLeft(challengePlayer.plays)
+      setDiscardsLeft(challengePlayer.discards)
+    });
+  };
+
+  return { playsLeft, discardsLeft, setPlaysLeft, setDiscardsLeft, fetchPlaysAndDiscards}
 };
 
 export const useChallenge = () => {
@@ -35,7 +45,7 @@ export const useChallenge = () => {
     });
   };
 
-  return {challenges, setChallenges, fetchChallenges};
+  return { challenges, setChallenges, fetchChallenges };
 };
 
 export const getChallenges = async (
