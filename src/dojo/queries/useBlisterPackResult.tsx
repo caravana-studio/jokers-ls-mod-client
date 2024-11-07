@@ -11,16 +11,16 @@ const sort = (a: Card, b: Card) => {
 
 const getCards = (cardIds: number[]) => {
   return cardIds.map((cardId, index) => {
-    return getCardFromCardId(cardId, index);
+    return getCardFromCardId(Number(cardId), index);
   });
 };
 
-export const useBlisterPackResult = (blisterPackResult, setBlisterPackResult) => {
+export const useBlisterPackResult = () => {
   const {
     setup: { client },
   } = useDojo();
 
-  // const [blisterPackResult, setBlisterPackResult] = useState<Card[] | undefined>(undefined);
+  const [blisterPackResult, setBlisterPackResult] = useState<Card[]>([]);
 
   useEffect(() => {
     fetchBlisterPackResult();
@@ -28,10 +28,10 @@ export const useBlisterPackResult = (blisterPackResult, setBlisterPackResult) =>
 
   const fetchBlisterPackResult = () => {
     getBlisterPackResult(client).then((result) => {
-      const cards = getCards(result.cards);
+      const cards = getCards(result.cards ?? []).sort(sort);
       setBlisterPackResult(cards);
       return cards;
     });
   };
-  return blisterPackResult;
+  return {blisterPackResult, setBlisterPackResult, fetchBlisterPackResult};
 };
