@@ -1,16 +1,26 @@
 import { Button, Flex, Heading, Text } from "@chakra-ui/react";
 import { faXTwitter } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Tilt } from "react-tilt";
 import { Background } from "../components/Background";
 import { HoloEffect } from "../components/HoloEffect";
+import { BEAST_IS_MINTABLE_LS } from "../constants/localStorage";
 import { TILT_OPTIONS } from "../constants/visualProps";
+import { getNameBeast } from "../utils/getNameBeast";
+
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
 
 export const CollectedBeastPage = () => {
-  const beastName = "Fallen Neon King";
-  const token = "12345";
-  const realmsURL = `https://market.realms.world/token/${token}?beast_origin=client`;
+  const query = useQuery();
+  const beast_id = query.get("beast_id");
+  const tier = query.get("tier");
+  const level = query.get("level");
+  const token_id = query.get("token_id");
+  const beastName = getNameBeast(Number(beast_id));
+  const realmsURL = `https://market.realms.world/token/${token_id}/2`;
   const GAME_URL = "https://ls.jokersofneon.com";
 
   const tweetURL = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
@@ -30,14 +40,22 @@ export const CollectedBeastPage = () => {
         alignItems="center"
         flexDirection="column"
       >
-        <Heading textAlign="center" fontSize="100px">
+        <Heading
+          color="yellow"
+          textShadow={`0px 0px 10px yellow`}
+          textAlign="center"
+          fontSize="100px"
+        >
           COLLECTED BEAST
         </Heading>
         <Flex h="100%" gap={16} justifyContent={"center"} alignItems={"center"}>
-          <Flex boxShadow={`0px 0px 30px 10px white, inset 0px 0px 50px 15px white`} borderRadius="20px">
+          <Flex
+            boxShadow={`0px 0px 30px 10px yellow, inset 0px 0px 50px 15px yellow`}
+            borderRadius="20px"
+          >
             <Tilt options={{ ...TILT_OPTIONS, max: 5, scale: 1 }}>
               <HoloEffect
-                url={`/beasts/nft/105.png`}
+                url={`/beasts/nft/${beast_id}.png`}
                 borderRadius={{ base: "20px", sm: "20px" }}
                 width={"500px"}
                 height={"500px"}
@@ -47,8 +65,8 @@ export const CollectedBeastPage = () => {
           <Flex flexDir={"column"} gap={4}>
             <Flex flexDir="column" mb={6}>
               <Heading size="xxl">{beastName}</Heading>
-              <Text size="xl">Level: 5</Text>
-              <Text size="xl">Tier: 3</Text>
+              <Text size="xl">Level: {level}</Text>
+              <Text size="xl">Tier: {tier}</Text>
             </Flex>
             <Button
               variant="solid"
@@ -69,7 +87,14 @@ export const CollectedBeastPage = () => {
             >
               View on Realms market
             </Button>
-            <Button onClick={() => navigate("/rewards/beast")}>Continue</Button>
+            <Button
+              onClick={() => {
+                window.localStorage.removeItem(BEAST_IS_MINTABLE_LS);
+                navigate("/rewards");
+              }}
+            >
+              Continue
+            </Button>
           </Flex>
         </Flex>
       </Flex>

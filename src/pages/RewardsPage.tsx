@@ -1,14 +1,15 @@
 import { Box, Button, Flex, Text } from "@chakra-ui/react";
+import { useEffect } from "react";
 import { Background } from "../components/Background";
 import { PositionedDiscordLink } from "../components/DiscordLink";
 import { PositionedGameMenu } from "../components/GameMenu";
-import { TopSection } from "./Game/TopSection";
-import RewardsSection from "./RewardsSection";
-import SpriteAnimation from "./SpriteAnimation";
-import { useGame } from "../dojo/queries/useGame";
+import { BEAST_IS_MINTABLE_LS } from "../constants/localStorage";
 import { useGameContext } from "../providers/GameProvider";
 import { useGameState } from "../state/useGameState";
 import { LS_GREEN } from "../theme/colors";
+import { TopSection } from "./Game/TopSection";
+import RewardsSection from "./RewardsSection";
+import SpriteAnimation from "./SpriteAnimation";
 
 export const notificationAnimations = [
   { name: "idle", startFrame: 0, frameCount: 4 },
@@ -33,6 +34,10 @@ export const RewardsPage = () => {
     setObstacleAttack(5 * game.level.valueOf());
   }
 
+  useEffect(() => {
+    window.localStorage.removeItem(BEAST_IS_MINTABLE_LS);
+  }, []);
+
   return (
     <Background type="skulls" dark bgDecoration>
       <PositionedGameMenu decoratedPage />
@@ -43,7 +48,12 @@ export const RewardsPage = () => {
       >
         <TopSection inRewardsPag obstacleFailed={obstacleFailed} />
         {!obstacleFailed ? (
-          <Flex flexDir='column' justifyContent={'space-around'} h='100%' mt={5}>
+          <Flex
+            flexDir="column"
+            justifyContent={"space-around"}
+            h="100%"
+            mt={5}
+          >
             <RewardsSection />
             <Flex
               width={"100%"}
