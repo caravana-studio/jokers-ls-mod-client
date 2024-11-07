@@ -43,7 +43,7 @@ export const RewardsPage = () => {
       >
         <TopSection inRewardsPag obstacleFailed={obstacleFailed} />
         {!obstacleFailed ? (
-          <Box mt={5}>
+          <Flex flexDir='column' justifyContent={'space-around'} h='100%' mt={5}>
             <RewardsSection />
             <Flex
               width={"100%"}
@@ -61,7 +61,7 @@ export const RewardsPage = () => {
                 adjustment={0}
               />
             </Flex>
-          </Box>
+          </Flex>
         ) : (
           <Flex alignItems={"center"} direction={"column"}>
             <Text fontFamily="Jersey" fontSize="2rem">

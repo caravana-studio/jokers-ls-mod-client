@@ -2,7 +2,6 @@ import { Box, Flex, Img, Text } from "@chakra-ui/react";
 import { Type } from "@dojoengine/recs";
 import { useEffect } from "react";
 import { beep } from "../constants/sfx";
-import { useGame } from "../dojo/queries/useGame";
 import { useAudio } from "../hooks/useAudio";
 import { useGameContext } from "../providers/GameProvider";
 import { LS_GREEN } from "../theme/colors";
@@ -86,20 +85,26 @@ const RewardCard = ({
 };
 
 const RewardsSection = () => {
-  const { redirectBasedOnGameState, rewardsIds, refetchRewardsId, game } =
-    useGameContext();
-  const { createNewReward } = useGameContext();
+  const {
+    redirectBasedOnGameState,
+    rewardsIds,
+    refetchRewardsId,
+    game,
+    createNewReward,
+  } = useGameContext();
   const { play: beepSound } = useAudio(beep);
-
-  if (game?.substate.type != "CREATE_REWARD") {
-    redirectBasedOnGameState();
-  }
 
   useEffect(() => {
     if (!rewardsIds || rewardsIds.length === 0) {
       refetchRewardsId();
     }
   }, [rewardsIds]);
+
+  useEffect(() => {
+    if (game?.substate.type != "CREATE_REWARD") {
+      redirectBasedOnGameState();
+    }
+  }, [game]);
 
   const rewards = [
     {
