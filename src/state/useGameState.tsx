@@ -98,7 +98,6 @@ export const useGameState = () => {
     setEnergyLeft(maxEnergy);
   };
 
-  const [specialCards, setSpecialCards] = useState<Card[]>([]);
 
   const [blisterPackResult, setBlisterPackResult] = useState<Card[]>([]);
 
@@ -117,8 +116,8 @@ export const useGameState = () => {
 
   const { hand, setHand } = useCurrentHand(sortBy);
 
-  const dojoSpecialCards = useCurrentSpecialCards();
-
+  const [specialCards, setSpecialCards] = useState<Card[]>([]);
+  const dojoSpecialCards = useCurrentSpecialCards(specialCards, setSpecialCards);
   const refetchSpecialCards = () => {
     if (dojoSpecialCards) {
       setSpecialCards(dojoSpecialCards);
