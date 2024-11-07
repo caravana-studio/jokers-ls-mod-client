@@ -1,19 +1,17 @@
 import { Button, Flex, Heading } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
 import { Background } from "../../components/Background";
 import { PositionedDiscordLink } from "../../components/DiscordLink";
 import { PositionedGameMenu } from "../../components/GameMenu";
-import { PlaysAvailableTable } from "./PlaysAvailableTable";
-import { useResponsiveValues } from "../../theme/responsiveSettings";
 import { useGameContext } from "../../providers/GameProvider";
+import { useResponsiveValues } from "../../theme/responsiveSettings";
+import { PlaysAvailableTable } from "./PlaysAvailableTable";
 
 export const PlaysLayout = () => {
-  const navigate = useNavigate();
   const { t } = useTranslation(["game"]);
   const { isSmallScreen } = useResponsiveValues();
 
-  const { redirectBasedOnGameState } = useGameContext();
+  const { forceRedirectBasedOnGameState } = useGameContext();
 
   return (
     <Background type="home" dark bgDecoration>
@@ -44,7 +42,7 @@ export const PlaysLayout = () => {
           w="100%"
           size="md"
           variant="solid"
-          onClick={() => redirectBasedOnGameState()}
+          onClick={() => forceRedirectBasedOnGameState()}
         >
           {t("game.plays.go-back-btn")}
         </Button>

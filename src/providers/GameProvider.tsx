@@ -84,6 +84,7 @@ interface IGameContext {
   selectModifierCards: (cardIndex: number[]) => Promise<boolean>;
   selectAdventurerCards: (cardIndex: number[]) => Promise<boolean>;
   redirectBasedOnGameState: () => void;
+  forceRedirectBasedOnGameState: () => void;
   createNewLevel: () => Promise<any>;
   obstacles: { id: number; completed: boolean }[];
   refetchObstacles: () => void;
@@ -168,6 +169,7 @@ const GameContext = createContext<IGameContext>({
   selectModifierCards: (_) => new Promise((resolve) => resolve(false)),
   selectAdventurerCards: (_) => new Promise((resolve) => resolve(false)),
   redirectBasedOnGameState: () => {},
+  forceRedirectBasedOnGameState: () => {},
   createNewLevel: () => new Promise((resolve) => resolve(undefined)),
   obstacles: [],
   refetchObstacles: () => {},
@@ -1030,39 +1032,43 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     setIsRageRound(false);
   };
 
+  const forceRedirectBasedOnGameState = () => {
+    if (game?.state.type === "FINISHED") {
+      return navigate(`/gameover/${gameId}`);
+    } else {
+      if (game?.substate.type === "DRAFT_DECK") {
+        console.log("redirecting to SELECT_DECK");
+        return navigate("/choose-class");
+      } else if (game?.substate.type === "DRAFT_SPECIALS") {
+        console.log("redirecting to SELECT_SPECIAL_CARDS");
+        return navigate("/choose-specials");
+      } else if (game?.substate.type === "DRAFT_MODIFIERS") {
+        console.log("redirecting to SELECT_MODIFIER_CARDS");
+        return navigate("/choose-modifiers");
+      } else if (game?.substate.type === "DRAFT_ADVENTURER") {
+        return navigate("/adventurers");
+      } else if (game?.substate.type === "OBSTACLE") {
+        return navigate("/game/obstacle");
+      } else if (game?.substate.type === "BEAST") {
+        return navigate("/game/beast");
+      } else if (
+        game?.substate.type === "CREATE_REWARD" ||
+        game?.substate.type === "UNPASSED_OBSTACLE"
+      ) {
+        return navigate("/rewards");
+      } else if (game?.substate.type === "REWARD_CARDS_PACK") {
+        return navigate("/rewards/pack");
+      } else if (game?.substate.type === "REWARD_SPECIALS") {
+        return navigate("/rewards/specials");
+      }
+    }
+    console.log("default redirect to select deck");
+    return navigate("/choose-class");
+  }
+
   const redirectBasedOnGameState = () => {
     if (!lockRedirection) {
-      if (game?.state.type === "FINISHED") {
-        return navigate(`/gameover/${gameId}`);
-      } else {
-        if (game?.substate.type === "DRAFT_DECK") {
-          console.log("redirecting to SELECT_DECK");
-          return navigate("/choose-class");
-        } else if (game?.substate.type === "DRAFT_SPECIALS") {
-          console.log("redirecting to SELECT_SPECIAL_CARDS");
-          return navigate("/choose-specials");
-        } else if (game?.substate.type === "DRAFT_MODIFIERS") {
-          console.log("redirecting to SELECT_MODIFIER_CARDS");
-          return navigate("/choose-modifiers");
-        } else if (game?.substate.type === "DRAFT_ADVENTURER") {
-          return navigate("/adventurers");
-        } else if (game?.substate.type === "OBSTACLE") {
-          return navigate("/game/obstacle");
-        } else if (game?.substate.type === "BEAST") {
-          return navigate("/game/beast");
-        } else if (
-          game?.substate.type === "CREATE_REWARD" ||
-          game?.substate.type === "UNPASSED_OBSTACLE"
-        ) {
-          return navigate("/rewards");
-        } else if (game?.substate.type === "REWARD_CARDS_PACK") {
-          return navigate("/rewards/pack");
-        } else if (game?.substate.type === "REWARD_SPECIALS") {
-          return navigate("/rewards/specials");
-        }
-      }
-      console.log("default redirect to select deck");
-      return navigate("/choose-class");
+      forceRedirectBasedOnGameState();
     }
   };
 
@@ -1107,6 +1113,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
         lockRedirection,
         discards,
         redirectBasedOnGameState,
+        forceRedirectBasedOnGameState,
         attackAnimation,
         setAttackAnimation,
         levelScore,
