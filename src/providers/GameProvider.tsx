@@ -109,7 +109,9 @@ interface IGameContext {
   gameOver: boolean;
   setGameOver: (gameOver: boolean) => void;
   skipFailedObstacle: () => Promise<any>;
-  rewardsIds: number[];
+  rewardsIds: {
+    id: number;
+  }[];
   refetchRewardsId: () => void;
   levelScore: number;
 }
@@ -190,7 +192,7 @@ const GameContext = createContext<IGameContext>({
   gameOver: false,
   setGameOver: () => {},
   skipFailedObstacle: () => new Promise((resolve) => resolve(undefined)),
-  rewardsIds: [0],
+  rewardsIds: [],
   refetchRewardsId: () => {},
   levelScore: 0,
 });
@@ -792,7 +794,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
         ) {
           if (playEvents.rewards) {
             const rewards = [playEvents.rewards[1], playEvents.rewards[2]];
-            setRewardsIds(rewards);
+            setRewardsIds(rewards.map((id) => ({ id })));
           }
           setTimeout(
             () => {

@@ -39,7 +39,7 @@ const RewardCard = ({
       <Box
         position="relative"
         width="250px"
-        height="300px"
+        height="200px"
         borderRadius="20px"
         opacity={0.7}
         cursor={"pointer"}
@@ -123,11 +123,12 @@ const RewardsSection = () => {
 
   const filteredRewards: { id: number; type: string; description: string }[] =
     [];
-  rewardsIds?.forEach((id) => {
+  rewardsIds?.forEach((objectId) => {
     let idNumber = 0;
 
-    if (typeof id === "object") idNumber = id ? Number((id as any)?.value) : 0;
-    else idNumber = id;
+    if (typeof objectId === "object")
+      idNumber = objectId ? Number(objectId.id?.valueOf()) : 0;
+    else idNumber = objectId;
 
     const match = rewards.find(
       (reward) => (reward.id as Type.Number) == (idNumber as number)
@@ -136,6 +137,8 @@ const RewardsSection = () => {
       filteredRewards.push(match);
     }
   });
+
+  console.log(filteredRewards);
 
   return (
     <Flex gap={4} justify="center" align="center" wrap="wrap">
@@ -147,7 +150,6 @@ const RewardsSection = () => {
           onSelect={() => {
             beepSound();
             console.log(reward.id);
-            // createNewReward(reward.id - 1, reward.type);
             createNewReward(index, reward.type);
           }}
         />

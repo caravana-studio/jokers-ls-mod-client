@@ -29,21 +29,22 @@ export const RewardsPage = () => {
   const { skipFailedObstacle } = useGameContext();
   const { obstacletAttack, setObstacleAttack } = useGameState();
   const obstacleFailed = game?.substate.type === "UNPASSED_OBSTACLE";
-  
+
   if (obstacleFailed && obstacletAttack === 0) {
     setObstacleAttack(5 * game.level.valueOf());
   }
+
   return (
     <Background type="skulls" dark bgDecoration>
       <PositionedGameMenu decoratedPage />
       <Flex
         height={"100%"}
-        justifyContent={"space-between"}
+        justifyContent={"space-around"}
         direction={"column"}
       >
-        <TopSection inRewardsPag obstacleFailed />
+        <TopSection inRewardsPag obstacleFailed={obstacleFailed} />
         {!obstacleFailed ? (
-          <Box mt={16}>
+          <Box mt={5}>
             <RewardsSection />
             <Flex
               width={"100%"}
@@ -63,7 +64,7 @@ export const RewardsPage = () => {
             </Flex>
           </Box>
         ) : (
-          <Flex alignItems={"center"} direction={"column"} pt={20}>
+          <Flex alignItems={"center"} direction={"column"}>
             <Text fontFamily="Jersey" fontSize="2rem">
               You received{" "}
               <Text
@@ -89,14 +90,6 @@ export const RewardsPage = () => {
           </Flex>
         )}
 
-        {/* <Button
-          width={"30%"}
-          mt={8}
-          alignSelf={"center"}
-          onClick={() => createNewLevel()}
-        >
-          Continue
-        </Button> */}
         <PositionedDiscordLink />
       </Flex>
     </Background>
