@@ -40,7 +40,7 @@ export const RewardsSelection = () => {
     if (blisterPackResult.length === 0) {
       refetchBlisterPackResult();
     }
-  }, [blisterPackResult]);
+  }, []);
 
   useEffect(() => {
     runConfettiAnimation();

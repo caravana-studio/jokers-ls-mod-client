@@ -42,6 +42,8 @@ export const HandSection = () => {
 
   const canPlay = playsLeft > 0 || energyLeft > 0;
 
+  // console.log(playsLeft);
+
   const { setNodeRef } = useDroppable({
     id: HAND_SECTION_ID,
   });
