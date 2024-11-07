@@ -63,7 +63,7 @@ export const OpenPack = () => {
     if (blisterPackResult.length === 0) {
       refetchBlisterPackResult();
     }
-  }, [blisterPackResult]);
+  }, []);
 
   const allSelected = cardsToKeep.length === blisterPackResult.length;
 

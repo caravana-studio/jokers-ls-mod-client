@@ -121,14 +121,13 @@ export const BlisterPackItemDefinition = {
     
 };
 
-
 // Type definition for `jokers_ls_mod::models::status::shop::shop::BlisterPackResult` struct
 export interface BlisterPackResult {
     game_id: Number;
     cards_picked: Boolean;
     cards: Number[];
-    
 }
+
 export const BlisterPackResultDefinition = {
     game_id: RecsType.Number,
     cards_picked: RecsType.Boolean,

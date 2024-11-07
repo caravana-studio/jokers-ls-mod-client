@@ -16,7 +16,6 @@ export const useGame = () => {
 
   const fetchGame = () => {
     getGameQuery(client).then((game) => {
-      console.log("asdasd", game);
       setGame(game);
     });
   };
