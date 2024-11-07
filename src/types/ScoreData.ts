@@ -23,6 +23,14 @@ export interface PlayEvents {
   beastAttack?: number;
   obstacleAttack?: number;
   rewards?: number[];
+  beastNFT?: BeastNFTEvent;
+}
+
+export interface BeastNFTEvent {
+  beast_id: number;
+  tier: number;
+  level: number;
+  token_id: number;
 }
 
 export interface PlayWinGameEvent {
