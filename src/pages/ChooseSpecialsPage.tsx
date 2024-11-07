@@ -37,7 +37,7 @@ export const ChooseSpecialsPage = () => {
     if (blisterPackResult.length === 0) {
       refetchBlisterPackResult();
     }
-  }, [blisterPackResult]);
+  }, []);
 
   const confirmSelectCards = () => {
     beepSound();
