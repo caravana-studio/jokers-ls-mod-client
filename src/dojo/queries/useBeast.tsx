@@ -1,40 +1,44 @@
-import { getEntityIdFromKeys } from "@dojoengine/utils";
+import { useEffect, useState } from "react";
 import { useDojo } from "../useDojo";
-import { getLSGameId } from "../utils/getLSGameId";
-import { Entity } from "@dojoengine/recs";
-import { useComponentValue } from "@dojoengine/react";
+import { Beast, PlayerBeast } from "../typescript/models.gen";
+import { getBeastQuery, getGameModeBeastQuery, getPlayerBeastQuery } from "./getBeastQuery";
 
 export const useBeast = () => {
   const {
-    setup: {
-      clientComponents: { Beast },
-    },
+    setup: { client },
   } = useDojo();
-  const gameId = getLSGameId();
-  const entityId = getEntityIdFromKeys([BigInt(gameId)]) as Entity;
-  const data = useComponentValue(Beast, entityId);
-  return data;
+
+  const [beast, setBeast] = useState<Beast | undefined>(undefined);
+
+  useEffect(() => {
+    fetchBeast();
+  }, []);
+
+  const fetchBeast = () => {
+    getBeastQuery(client).then((beast) => {
+      setBeast(beast);
+    });
+  };
+
+  return { beast, setBeast, fetchBeast }
 };
 
 export const useBeastPlayer = () => {
   const {
-    setup: {
-      clientComponents: { PlayerBeast },
-    },
+    setup: { client },
   } = useDojo();
-  const gameId = getLSGameId();
-  const entityId = getEntityIdFromKeys([BigInt(gameId)]) as Entity;
-  const data = useComponentValue(PlayerBeast, entityId);
-  return data;
-};
+  
+  const [energyLeft, setEnergyLeft] = useState<number>(-1);
 
-export const useGameModeBeast = () => {
-  const {
-    setup: {
-      clientComponents: { GameModeBeast },
-    },
-  } = useDojo();
-  const gameId = getLSGameId();
-  const entityId = getEntityIdFromKeys([BigInt(gameId)]) as Entity;
-  return useComponentValue(GameModeBeast, entityId);
+  useEffect(() => {
+    fetchEnergyLeft();
+  }, []);
+
+  const fetchEnergyLeft = () => {
+    getPlayerBeastQuery(client).then((player_beast) => {
+      setEnergyLeft(player_beast.energy.valueOf());
+    });
+  };
+
+  return { energyLeft, setEnergyLeft, fetchEnergyLeft }
 };

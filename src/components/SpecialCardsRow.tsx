@@ -29,7 +29,6 @@ export const SpecialCardsRow = ({ cards }: SpecialCardsRowProps) => {
 
   const { highlightCard } = useCardHighlight();
 
-  const game = useGame();
   // const maxLength = game?.len_max_current_special_cards ?? 5;
   const maxLength = 5;
   const emptySlots = maxLength - cards.length;

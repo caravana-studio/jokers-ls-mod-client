@@ -25,8 +25,7 @@ export const notificationAnimations = [
 ];
 
 export const RewardsPage = () => {
-  const game = useGame();
-  const { skipFailedObstacle } = useGameContext();
+  const { skipFailedObstacle, game } = useGameContext();
   const { obstacletAttack, setObstacleAttack } = useGameState();
   const obstacleFailed = game?.substate.type === "UNPASSED_OBSTACLE";
 

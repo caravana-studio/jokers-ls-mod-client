@@ -15,6 +15,7 @@ import { SortBy } from "../enums/sortBy";
 import { Card } from "../types/Card";
 import { RoundRewards } from "../types/RoundRewards";
 import { checkHand } from "../utils/checkHand";
+import { useGame } from "../dojo/queries/useGame";
 
 export const useGameState = () => {
   const [gameId, setGameId] = useState<number>(getLSGameId());
@@ -39,14 +40,16 @@ export const useGameState = () => {
   );
   const [isRageRound, setIsRageRound] = useState(false);
   const [rageCards, setRageCards] = useState<Card[]>([]);
-  const [beast, setBeast] = useState<Beast | undefined>(undefined);
-
-  const [energyLeft, setEnergyLeft] = useState(-1);
+  const { beast, setBeast, fetchBeast } = useBeast();
 
   const [beastAttack, setBeastAttack] = useState(0);
   const [obstacletAttack, setObstacleAttack] = useState(0);
 
   const [gameOver, setGameOver] = useState(false);
+
+  const { energyLeft, setEnergyLeft, fetchEnergyLeft } = useBeastPlayer();
+
+  const { game, fetchGame } = useGame();
 
   const {
     playsLeft,
@@ -71,15 +74,11 @@ export const useGameState = () => {
     setEnergyLeft((prev) => prev - 1);
   };
 
-  const beastPlayer = useBeastPlayer();
-
   const refetchPlaysAndDiscards = () => {
     fetchPlaysAndDiscards();
   };
   const refetchEnergy = () => {
-    if (beastPlayer) {
-      setEnergyLeft(beastPlayer?.energy ?? 0);
-    }
+    fetchEnergyLeft();
   };
 
   const { specialCards, setSpecialCards, fetchSpecialCards } =
@@ -109,7 +108,15 @@ export const useGameState = () => {
     [sortBySuit]
   );
 
-  const { hand, setHand } = useCurrentHand(sortBy);
+  const { hand, setHand, fetchHand } = useCurrentHand(sortBy);
+
+  const refetchCurrentHand = () => {
+    setPreSelectedCards([]);
+    setPreSelectedModifiers([]);
+    setPlayAnimation(false);
+    setDiscardAnimation(false);
+    fetchHand();
+  };
 
   const refetchSpecialCards = () => {
     fetchSpecialCards();
@@ -143,13 +150,6 @@ export const useGameState = () => {
   };
 
   //effects
-  useEffect(() => {
-    if (
-      beastFetchData &&
-      beastFetchData?.current_health != beast?.current_health
-    )
-      setBeast(beastFetchData as unknown as Beast);
-  }, [beastFetchData]);
 
   const setMultiAndPoints = (play: Plays) => {
     const playerPokerHand = PLAYS_DATA[play - 1];
@@ -241,6 +241,7 @@ export const useGameState = () => {
     setRageCards,
     beast,
     setBeast,
+    fetchBeast,
     obstacles,
     setObstacles,
     refetchObstacles,
@@ -268,5 +269,8 @@ export const useGameState = () => {
     rewardsIds,
     setRewardsIds,
     refetchRewardsId,
+    refetchCurrentHand,
+    game,
+    fetchGame,
   };
 };
