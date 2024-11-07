@@ -22,7 +22,7 @@ export const TopSection = ({
   const { mode } = useParams();
   const game = useGame();
 
-  const level = game?.level ?? 0;
+  const level = game?.level.valueOf() ?? 0;
 
   return (
     <Flex

@@ -27,7 +27,7 @@ export const SpecialCards = ({ inStore = false }: SpecialCardsProps) => {
   useEffect(() => {
     if (
       (game?.len_current_special_cards &&
-        game?.len_current_special_cards > 0 &&
+        game?.len_current_special_cards.valueOf() > 0 &&
         specialCards.length === 0) ||
       (specialCards.length > 0 && specialCards[0].card_id === 0)
     ) {

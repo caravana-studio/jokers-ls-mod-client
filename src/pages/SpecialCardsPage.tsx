@@ -37,7 +37,7 @@ export const SpecialCardsPage = () => {
 
   const game = useGame();
 
-  const unlockedSpecialSlots = game?.len_max_current_special_cards ?? 1;
+  const unlockedSpecialSlots = game?.len_max_current_special_cards.valueOf() ?? 1;
 
   const freeUnlockedSlots = unlockedSpecialSlots - specialCards.length;
   const lockedSlots =

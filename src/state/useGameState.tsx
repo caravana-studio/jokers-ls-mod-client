@@ -33,7 +33,6 @@ export const useGameState = () => {
   const [preSelectedModifiers, setPreSelectedModifiers] = useState<number[]>(
     []
   );
-  const [hand, setHand] = useState<Card[]>([]);
   const [roundRewards, setRoundRewards] = useState<RoundRewards | undefined>(
     undefined
   );
@@ -115,11 +114,8 @@ export const useGameState = () => {
     () => (sortBySuit ? SortBy.SUIT : SortBy.RANK),
     [sortBySuit]
   );
-  const sortedHand = useMemo(() => sortCards(hand, sortBy), [hand, sortBy]);
 
-  const game = useGame();
-
-  const dojoHand = useCurrentHand(sortBy);
+  const { hand, setHand } = useCurrentHand(sortBy);
 
   const dojoSpecialCards = useCurrentSpecialCards();
 
@@ -157,14 +153,6 @@ export const useGameState = () => {
   };
 
   //effects
-
-  useEffect(() => {
-    if (dojoHand?.length > 0 && hand.length === 0) {
-      console.log("replacing hand", dojoHand);
-      setHand(dojoHand);
-    }
-  }, [dojoHand]);
-
   useEffect(() => {
     if (
       beastFetchData &&
@@ -237,15 +225,13 @@ export const useGameState = () => {
     setPreSelectedCards,
     preSelectedModifiers,
     setPreSelectedModifiers,
-    hand,
-    setHand,
     roundRewards,
     setRoundRewards,
     sortBySuit,
     setSortBySuit,
-    apiHand: dojoHand,
     sortBy,
-    sortedHand,
+    hand,
+    setHand,
     username,
     playIsNeon,
     setPlayIsNeon,

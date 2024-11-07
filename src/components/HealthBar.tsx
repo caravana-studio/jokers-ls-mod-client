@@ -23,7 +23,7 @@ export const HealthBar = () => {
           {username}
         </Text>
         <Text color="white" fontWeight="bold" fontSize={"1.5rem"}>
-          {hp}
+          {hp.valueOf()}
         </Text>
       </Flex>
       <Box width="400px">

@@ -28,10 +28,10 @@ export const RewardsPage = () => {
   const game = useGame();
   const { skipFailedObstacle } = useGameContext();
   const { obstacletAttack, setObstacleAttack } = useGameState();
-  const obstacleFailed = game?.substate === "UNPASSED_OBSTACLE";
+  const obstacleFailed = game?.substate.type === "UNPASSED_OBSTACLE";
   
   if (obstacleFailed && obstacletAttack === 0) {
-    setObstacleAttack(5 * game.level);
+    setObstacleAttack(5 * game.level.valueOf());
   }
   return (
     <Background type="skulls" dark bgDecoration>

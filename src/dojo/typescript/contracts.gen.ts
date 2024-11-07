@@ -466,16 +466,15 @@ export async function setupWorld(provider: DojoProvider) {
 
     
         // Call the `get_player_current_hand` system with the specified Account and calldata
-        const get_player_current_hand = async (props: { account: Account, game_id: number }) => {
+        const get_player_current_hand = async (props: { game_id: number }) => {
             try {
-                return await provider.execute(
-                    props.account,
+                return await provider.call(
+                    "jokers_ls_mod",
                     {
                         contractName: contract_name,
                         entrypoint: "get_player_current_hand",
                         calldata: [props.game_id],
                     },
-                    "jokers_ls_mod"
                 );
             } catch (error) {
                 console.error("Error executing get_player_current_hand:", error);
@@ -486,16 +485,15 @@ export async function setupWorld(provider: DojoProvider) {
 
     
         // Call the `get_game` system with the specified Account and calldata
-        const get_game = async (props: { account: Account, game_id: number }) => {
+        const get_game = async (props: { game_id: number }) => {
             try {
-                return await provider.execute(
-                    props.account,
+                return await provider.call(
+                    "jokers_ls_mod",
                     {
                         contractName: contract_name,
                         entrypoint: "get_game",
                         calldata: [props.game_id],
                     },
-                    "jokers_ls_mod"
                 );
             } catch (error) {
                 console.error("Error executing get_game:", error);

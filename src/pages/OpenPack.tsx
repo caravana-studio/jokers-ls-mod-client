@@ -43,7 +43,7 @@ export const OpenPack = () => {
   const navigate = useNavigate();
 
   const game = useGame();
-  const maxSpecialCards = game?.len_max_current_special_cards ?? 0;
+  const maxSpecialCards = game?.len_max_current_special_cards.valueOf() ?? 0;
 
   const [cardsToKeep, setCardsToKeep] = useState<Card[]>([]);
   const [confirmationModalOpen, setConfirmationModalOpen] = useState(false);
@@ -58,12 +58,6 @@ export const OpenPack = () => {
 
   const { blisterPackResult, setBlisterPackResult, refetchBlisterPackResult } =
     useGameContext();
-
-  useEffect(() => {
-    if (game?.state === "IN_STORE") {
-      navigate("/redirect/store");
-    }
-  }, [game?.state]);
 
   useEffect(() => {
     if (blisterPackResult.length === 0) {

@@ -116,14 +116,14 @@ export const GameContent = () => {
     const showBeastTutorial = !localStorage.getItem(SKIP_TUTORIAL_BEAST);
     const showTutorial = !localStorage.getItem(SKIP_TUTORIAL_GAME);
 
-    if (showBeastTutorial && game?.substate === "BEAST") {
+    if (showBeastTutorial && game?.substate.type === "BEAST") {
       setRunTutorialBeast(true);
     }
 
     if (
       showSpecialCardTutorial &&
       game?.len_current_special_cards != undefined &&
-      game?.len_current_special_cards > 0 &&
+      game?.len_current_special_cards.valueOf() > 0 &&
       !showTutorial
     ) {
       setRunSpecial(true);
@@ -137,7 +137,7 @@ export const GameContent = () => {
     }
   }, [game, hand, specialTutorialCompleted, run]);
 
-  if (game?.substate === "BEAST") {
+  if (game?.substate.type === "BEAST") {
     if (!beastSound) {
       changeSong("/music/Conflict.mp3", true);
     }

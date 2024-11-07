@@ -3,6 +3,7 @@ import { Entity } from "@dojoengine/recs";
 import { getEntityIdFromKeys } from "@dojoengine/utils";
 import { useDojo } from "../useDojo";
 import { useGame } from "./useGame";
+import { getLSGameId } from "../utils/getLSGameId";
 
 export const useRageRound = () => {
   const {
@@ -10,9 +11,8 @@ export const useRageRound = () => {
       clientComponents: { RageRound },
     },
   } = useDojo();
-  const game = useGame();
 
-  const gameId = game?.id ?? 0;
+  const gameId = getLSGameId()
 
   const entityId = getEntityIdFromKeys([BigInt(gameId)]) as Entity;
   const rageRound = useComponentValue(RageRound, entityId);

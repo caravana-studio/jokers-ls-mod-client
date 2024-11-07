@@ -31,13 +31,13 @@ const rage_system_contract_address = getContractByName(
 
 console.log("rage_system_contract_address", rage_system_contract_address);
 
-/* const player_system_contract_address = getContractByName(
+const player_system_contract_address = getContractByName(
   manifest,
   "jokers_ls_mod",
   "player_system"
 )?.address;
 
-console.log("player_system_contract_address", player_system_contract_address); */
+console.log("player_system_contract_address", player_system_contract_address);
 
 const cartridgeConnector = new CartridgeConnector({
   theme: "jokers-of-neon",
@@ -124,11 +124,11 @@ const cartridgeConnector = new CartridgeConnector({
       target: rage_system_contract_address,
       method: "calculate",
     },
-/*     {
+    {
       target: player_system_contract_address,
       method: "get_player_current_hand",
     },
-    { target: player_system_contract_address, method: "get_game" }, */
+    { target: player_system_contract_address, method: "get_game" },
   ],
 }) as never as Connector;
 

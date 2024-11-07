@@ -1,53 +1,45 @@
-import { Component, Entity, getComponentValue } from "@dojoengine/recs";
-import { getEntityIdFromKeys } from "@dojoengine/utils";
+import { useEffect, useState } from "react";
 import { SortBy } from "../../enums/sortBy";
 import { Card } from "../../types/Card";
 import { sortCards } from "../../utils/sortCards";
 import { useDojo } from "../useDojo";
-import { useGame } from "./useGame";
-
-const getCard = (gameId: number, index: number, entity: Component) => {
-  const entityId = getEntityIdFromKeys([
-    BigInt(gameId),
-    BigInt(index),
-  ]) as Entity;
-  return getComponentValue(entity, entityId);
-};
+import { getCurrentHand } from "./getCurrentHand";
 
 export const useCurrentHand = (sortBy: SortBy) => {
   const {
-    setup: {
-      clientComponents: { CurrentHandCard },
-    },
+    setup: { client },
   } = useDojo();
 
-  const game = useGame();
+  const [hand, setHand] = useState<Card[]>([]);
 
-  if (!game) return [];
+  useEffect(() => {
+    fetchHand();
+  }, []);
 
-  const handSize = game.len_hand;
-  const dojoCards = [];
+  const fetchHand = () => {
+    getCurrentHand(client).then((dojoCards) => {
+      const cards: Card[] = dojoCards
+        // filter out null cards (represented by card_id 9999)
+        .filter((card: any) => card?.card_id !== 9999)
+        .map((dojoCard: any) => {
+          return {
+            ...dojoCard,
+            img: `${dojoCard?.card_id}.png`,
+            isModifier: dojoCard?.card_id >= 600 && dojoCard?.card_id <= 700,
+            idx: dojoCard?.idx,
+            id: dojoCard?.idx.toString(),
+          };
+        });
 
-  for (let i = 0; i < handSize; i++) {
-    dojoCards.push(getCard(game.id ?? 0, i, CurrentHandCard));
-  }
+      const sortedCards = sortCards(cards, sortBy);
+      console.log("sortedCards", sortedCards);
+      const anyUndefined = sortedCards.some(
+        (card) => card.img === "undefined.png"
+      );
 
-  const cards: Card[] = dojoCards
-    // filter out null cards (represented by card_id 9999)
-    .filter((card) => card?.card_id !== 9999)
-    .map((dojoCard) => {
-      return {
-        ...dojoCard,
-        img: `${dojoCard?.card_id}.png`,
-        isModifier: dojoCard?.card_id >= 600 && dojoCard?.card_id <= 700,
-        idx: dojoCard?.idx,
-        id: dojoCard?.idx.toString(),
-      };
+      setHand(anyUndefined ? [] : sortedCards);
     });
+  };
 
-  const sortedCards = sortCards(cards, sortBy);
-
-  const anyUndefined = sortedCards.some((card) => card.img === "undefined.png");
-
-  return anyUndefined ? [] : sortedCards;
+  return { hand, setHand, fetchHand };
 };

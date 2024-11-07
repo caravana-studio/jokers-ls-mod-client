@@ -32,7 +32,7 @@ import { Card } from "../types/Card";
 import { RoundRewards } from "../types/RoundRewards.ts";
 import { PlayEvents } from "../types/ScoreData";
 import { changeCardSuit } from "../utils/changeCardSuit";
-
+import { GameState } from "../dojo/typescript/models.gen";
 interface IGameContext {
   gameId: number;
   preSelectedPlay: Plays;
@@ -250,10 +250,10 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
   const { play: multiSound } = useAudio(multiSfx);
 
   const minimumDuration =
-    !game?.level || game?.level <= 15 ? 400 : game?.level > 20 ? 300 : 350;
+    !game?.level || game?.level.valueOf() <= 15 ? 400 : game?.level.valueOf() > 20 ? 300 : 350;
 
   const playAnimationDuration = Math.max(
-    700 - ((game?.level ?? 1) - 1) * 50,
+    700 - ((game?.level.valueOf() ?? 1) - 1) * 50,
     minimumDuration
   );
 
@@ -1002,32 +1002,32 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
 
   const redirectBasedOnGameState = () => {
     if (!lockRedirection) {
-      if (game?.state === "FINISHED") {
+      if (game?.state.type === "FINISHED") {
         return navigate(`/gameover/${gameId}`);
       } else {
-        if (game?.substate === "SELECT_DECK") {
+        if (game?.substate.type === "DRAFT_DECK") {
           console.log("redirecting to SELECT_DECK");
           return navigate("/choose-class");
-        } else if (game?.substate === "SELECT_SPECIAL_CARDS") {
+        } else if (game?.substate.type === "DRAFT_SPECIALS") {
           console.log("redirecting to SELECT_SPECIAL_CARDS");
           return navigate("/choose-specials");
-        } else if (game?.substate === "SELECT_MODIFIER_CARDS") {
+        } else if (game?.substate.type === "DRAFT_MODIFIERS") {
           console.log("redirecting to SELECT_MODIFIER_CARDS");
           return navigate("/choose-modifiers");
-        } else if (game?.substate === "DRAFT_ADVENTURER") {
+        } else if (game?.substate.type === "DRAFT_ADVENTURER") {
           return navigate("/adventurers");
-        } else if (game?.substate === "OBSTACLE") {
+        } else if (game?.substate.type === "OBSTACLE") {
           return navigate("/game/obstacle");
-        } else if (game?.substate === "BEAST") {
+        } else if (game?.substate.type === "BEAST") {
           return navigate("/game/beast");
         } else if (
-          game?.substate === "CREATE_REWARD" ||
-          game?.substate === "UNPASSED_OBSTACLE"
+          game?.substate.type === "CREATE_REWARD" ||
+          game?.substate.type === "UNPASSED_OBSTACLE"
         ) {
           return navigate("/rewards");
-        } else if (game?.substate === "REWARD_CARDS_PACK") {
+        } else if (game?.substate.type === "REWARD_CARDS_PACK") {
           return navigate("/rewards/pack");
-        } else if (game?.substate === "REWARD_SPECIALS") {
+        } else if (game?.substate.type === "REWARD_SPECIALS") {
           return navigate("/rewards/specials");
         }
       }

@@ -40,9 +40,9 @@ export const useCurrentSpecialCards = () => {
   } = useDojo();
   const game = useGame();
 
-  const gameId = game?.id ?? 0;
+  const gameId = game?.id.valueOf() ?? 0;
 
-  const specialCardsLength = game?.len_current_special_cards ?? 0;
+  const specialCardsLength = game?.len_current_special_cards.valueOf() ?? 0;
 
   const specialCards: Card[] = useMemo(() => {
     const specialCardsIds = Array.from(
