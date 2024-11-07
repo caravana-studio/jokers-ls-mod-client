@@ -4,11 +4,14 @@ import "./App.scss";
 
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
+import { useEffect } from "react";
 import { AdventurersPage } from "./pages/Adventurers/AdventurersPage";
 import { ChooseAdventurerCards } from "./pages/ChooseAdventurerCards";
 import { ChooseClassPage } from "./pages/ChooseClassPage";
 import { ChooseModifiersPage } from "./pages/ChooseModifiersPage";
 import { ChooseSpecialsPage } from "./pages/ChooseSpecialsPage";
+import { CollectedBeastPage } from "./pages/CollectedBeastPage";
+import { DesktopOnlyNotice } from "./pages/DesktopOnlyNotice";
 import { GamePage } from "./pages/Game/GamePage";
 import { GameOver } from "./pages/GameOver";
 import { Home } from "./pages/Home";
@@ -19,8 +22,6 @@ import { AudioPlayerProvider } from "./providers/AudioPlayerProvider";
 import { CardAnimationsProvider } from "./providers/CardAnimationsProvider";
 import { GameProvider } from "./providers/GameProvider";
 import customTheme from "./theme/theme";
-import { DesktopOnlyNotice } from "./pages/DesktopOnlyNotice";
-import { useEffect } from "react";
 
 function App() {
   const theme = extendTheme(customTheme);
@@ -57,6 +58,7 @@ function App() {
               <Route path="/rewards" element={<RewardsPage />} />
               <Route path="/adventurers" element={<AdventurersPage />} />
               <Route path="/rewards/:mode" element={<RewardsSelection />} />
+              <Route path="/collected-beast" element={<CollectedBeastPage />} />
               <Route
                 path="/desktop-only-notice"
                 element={<DesktopOnlyNotice />}
