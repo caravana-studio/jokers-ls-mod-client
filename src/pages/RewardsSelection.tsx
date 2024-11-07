@@ -59,7 +59,7 @@ export const RewardsSelection = () => {
           });
         }
       })
-      .finally(() => {
+      .catch(() => {
         setIsLoading(false);
       });
     setBlisterPackResult([]);
@@ -70,7 +70,7 @@ export const RewardsSelection = () => {
 
   const continueButton = (
     <Button
-      isDisabled={continueButtonDisabled}
+      isDisabled={continueButtonDisabled || isLoading}
       width={"30%"}
       mt={8}
       alignSelf={"center"}

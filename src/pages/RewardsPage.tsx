@@ -1,8 +1,9 @@
-import { Box, Button, Flex, Text } from "@chakra-ui/react";
+import { Button, Flex, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { Background } from "../components/Background";
 import { PositionedDiscordLink } from "../components/DiscordLink";
 import { PositionedGameMenu } from "../components/GameMenu";
+import { Loading } from "../components/Loading";
 import { BEAST_IS_MINTABLE_LS } from "../constants/localStorage";
 import { useGameContext } from "../providers/GameProvider";
 import { useGameState } from "../state/useGameState";
@@ -26,7 +27,7 @@ export const notificationAnimations = [
 ];
 
 export const RewardsPage = () => {
-  const { skipFailedObstacle, game } = useGameContext();
+  const { skipFailedObstacle, game, fetchGame } = useGameContext();
   const { obstacletAttack, setObstacleAttack } = useGameState();
   const obstacleFailed = game?.substate.type === "UNPASSED_OBSTACLE";
   const [disableBtn, setDisableBtn] = useState(false);
@@ -35,8 +36,11 @@ export const RewardsPage = () => {
     setObstacleAttack(5 * game?.level.valueOf());
   }
 
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     window.localStorage.removeItem(BEAST_IS_MINTABLE_LS);
+    fetchGame().finally(() => setIsLoading(false));
   }, []);
 
   return (
@@ -44,12 +48,19 @@ export const RewardsPage = () => {
       <PositionedGameMenu decoratedPage />
       <Flex
         height={"100%"}
-        justifyContent={"space-between"}
+        justifyContent={"space-around"}
         direction={"column"}
       >
-        <TopSection inRewardsPag obstacleFailed />
-        {!obstacleFailed ? (
-          <Box mt={16}>
+        <TopSection inRewardsPag obstacleFailed={obstacleFailed} />
+        {isLoading ? (
+          <Loading />
+        ) : !obstacleFailed ? (
+          <Flex
+            flexDir="column"
+            justifyContent={"space-around"}
+            h="100%"
+            mt={5}
+          >
             <RewardsSection />
             <Flex
               width={"100%"}
@@ -67,9 +78,14 @@ export const RewardsPage = () => {
                 adjustment={0}
               />
             </Flex>
-          </Box>
+          </Flex>
         ) : (
-          <Flex alignItems={"center"} direction={"column"} pt={20}>
+          <Flex
+            alignItems={"center"}
+            h="100%"
+            justifyContent={"center"}
+            direction={"column"}
+          >
             <Text fontFamily="Jersey" fontSize="2rem">
               You received{" "}
               <Text
@@ -81,8 +97,6 @@ export const RewardsPage = () => {
                 {obstacletAttack} damage
               </Text>{" "}
               as punishment.
-              <br />
-              Click on the continue button to keep going.
             </Text>
             <Button
               isDisabled={disableBtn}
@@ -99,14 +113,6 @@ export const RewardsPage = () => {
           </Flex>
         )}
 
-        {/* <Button
-          width={"30%"}
-          mt={8}
-          alignSelf={"center"}
-          onClick={() => createNewLevel()}
-        >
-          Continue
-        </Button> */}
         <PositionedDiscordLink />
       </Flex>
     </Background>

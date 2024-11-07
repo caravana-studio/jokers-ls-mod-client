@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Box, Text, Flex, Button, Img } from "@chakra-ui/react";
-import { LS_GREEN } from "../theme/colors";
-import { useGameContext } from "../providers/GameProvider";
-import { useGame } from "../dojo/queries/useGame";
-import { useAudio } from "../hooks/useAudio";
-import { beep } from "../constants/sfx";
-import { JSX } from "react/jsx-runtime";
+import { Box, Flex, Img, Text } from "@chakra-ui/react";
 import { Type } from "@dojoengine/recs";
+import { useEffect } from "react";
+import { beep } from "../constants/sfx";
+import { useAudio } from "../hooks/useAudio";
+import { useGameContext } from "../providers/GameProvider";
+import { LS_GREEN } from "../theme/colors";
 
 interface RewardCardProps {
   index: number;
@@ -39,7 +37,7 @@ const RewardCard = ({
       <Box
         position="relative"
         width="250px"
-        height="300px"
+        height="250px"
         borderRadius="20px"
         opacity={0.7}
         cursor={"pointer"}
@@ -87,20 +85,26 @@ const RewardCard = ({
 };
 
 const RewardsSection = () => {
-  const { redirectBasedOnGameState, rewardsIds, refetchRewardsId, game } =
-    useGameContext();
-  const { createNewReward } = useGameContext();
+  const {
+    redirectBasedOnGameState,
+    rewardsIds,
+    refetchRewardsId,
+    game,
+    createNewReward,
+  } = useGameContext();
   const { play: beepSound } = useAudio(beep);
-
-  if (game?.substate.type != "CREATE_REWARD") {
-    redirectBasedOnGameState();
-  }
 
   useEffect(() => {
     if (!rewardsIds || rewardsIds.length === 0) {
       refetchRewardsId();
     }
   }, [rewardsIds]);
+
+  useEffect(() => {
+    if (game?.substate.type != "CREATE_REWARD") {
+      redirectBasedOnGameState();
+    }
+  }, [game]);
 
   const rewards = [
     {
@@ -122,11 +126,12 @@ const RewardsSection = () => {
 
   const filteredRewards: { id: number; type: string; description: string }[] =
     [];
-  rewardsIds?.forEach((id) => {
+  rewardsIds?.forEach((objectId) => {
     let idNumber = 0;
 
-    if (typeof id === "object") idNumber = id ? Number((id as any)?.value) : 0;
-    else idNumber = id;
+    if (typeof objectId === "object")
+      idNumber = objectId ? Number(objectId.id?.valueOf()) : 0;
+    else idNumber = objectId;
 
     const match = rewards.find(
       (reward) => (reward.id as Type.Number) == (idNumber as number)
@@ -146,7 +151,6 @@ const RewardsSection = () => {
           onSelect={() => {
             beepSound();
             console.log(reward.id);
-            // createNewReward(reward.id - 1, reward.type);
             createNewReward(index, reward.type);
           }}
         />

@@ -5,8 +5,10 @@ import { getNumberValueFromEvent } from "../getNumberValueFromEvent";
 export const getObstacleAttackEvent = (
   events: DojoEvent[]
 ): number | undefined => {
-  const beastAttackEvent = events.find(
+  const obstacleAttackEvent = events.find(
     (event) => event.keys[0] === OBSTACLE_ATTACK_EVENT
   );
-  return beastAttackEvent && getNumberValueFromEvent(beastAttackEvent, 0);
+  const res =
+    obstacleAttackEvent && getNumberValueFromEvent(obstacleAttackEvent, 0);
+  return res;
 };

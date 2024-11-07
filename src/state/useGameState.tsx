@@ -42,8 +42,6 @@ export const useGameState = () => {
   const [rageCards, setRageCards] = useState<Card[]>([]);
   const { beast, setBeast, fetchBeast } = useBeast();
 
-  const [rewardsIds, setRewardsIds] = useState<number[]>([]);
-
   const [beastAttack, setBeastAttack] = useState(0);
   const [obstacletAttack, setObstacleAttack] = useState(0);
 
@@ -184,10 +182,14 @@ export const useGameState = () => {
     fetchChallenges();
   };
 
-  const rewards = useGetRewards();
+  const {
+    rewardIds: rewardsIds,
+    setRewardIds: setRewardsIds,
+    fetchRewardIds,
+  } = useGetRewards();
 
   const refetchRewardsId = () => {
-    setRewardsIds(rewards?.rewards_ids ?? [0]);
+    fetchRewardIds();
   };
 
   const refetchBeast = () => {
