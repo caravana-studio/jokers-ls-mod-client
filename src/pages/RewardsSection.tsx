@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { Box, Text, Flex, Button, Img } from "@chakra-ui/react";
-import { LS_GREEN } from "../theme/colors";
-import { useGameContext } from "../providers/GameProvider";
+import { Box, Flex, Img, Text } from "@chakra-ui/react";
+import { Type } from "@dojoengine/recs";
+import { useEffect } from "react";
+import { beep } from "../constants/sfx";
 import { useGame } from "../dojo/queries/useGame";
 import { useAudio } from "../hooks/useAudio";
-import { beep } from "../constants/sfx";
-import { JSX } from "react/jsx-runtime";
-import { Type } from "@dojoengine/recs";
+import { useGameContext } from "../providers/GameProvider";
+import { LS_GREEN } from "../theme/colors";
 
 interface RewardCardProps {
   index: number;
@@ -137,8 +136,6 @@ const RewardsSection = () => {
       filteredRewards.push(match);
     }
   });
-
-  console.log(filteredRewards);
 
   return (
     <Flex gap={4} justify="center" align="center" wrap="wrap">

@@ -42,7 +42,6 @@ export const useGameState = () => {
   const [beast, setBeast] = useState<Beast | undefined>(undefined);
 
   const [energyLeft, setEnergyLeft] = useState(-1);
-  // const [rewardsIds, setRewardsIds] = useState<number[]>([]);
 
   const [beastAttack, setBeastAttack] = useState(0);
   const [obstacletAttack, setObstacleAttack] = useState(0);

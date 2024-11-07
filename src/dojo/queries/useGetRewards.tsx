@@ -34,5 +34,4 @@ export const getRewards = async (client: any): Promise<{ id: number }[]> => {
     const id = reward_id ? Number((reward_id as number)?.valueOf()) : 0;
     return { id };
   });
-  return [];
 };
