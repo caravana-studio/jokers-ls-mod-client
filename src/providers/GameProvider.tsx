@@ -1005,7 +1005,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
       return executeCreateGame();
     } else {
       fetchGame().then((game) => {
-        if (game.owner === 0n) {
+        if (!game || game.owner === 0n) {
           executeCreateGame();
         } else {
           setGameLoading(false);

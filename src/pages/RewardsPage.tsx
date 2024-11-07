@@ -32,7 +32,7 @@ export const RewardsPage = () => {
   const [disableBtn, setDisableBtn] = useState(false);
 
   if (obstacleFailed && obstacletAttack === 0) {
-    setObstacleAttack(5 * game.level.valueOf());
+    setObstacleAttack(5 * game?.level.valueOf());
   }
 
   useEffect(() => {
