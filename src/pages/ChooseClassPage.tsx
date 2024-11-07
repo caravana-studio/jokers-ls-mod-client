@@ -139,9 +139,9 @@ const ClassBox = ({
       flexDirection="column"
       alignItems="center"
       gap={4}
-      width="280px"
-      height="440px"
-      p={"20px"}
+      width="auto"
+      height="auto"
+      p={"16px"}
       cursor="pointer"
       opacity={0.8}
       border={`1px solid transparent`}
@@ -152,8 +152,8 @@ const ClassBox = ({
         {title}
       </Heading>
       <Box
-        height="220px"
-        width="220px"
+        height="20vh"
+        width="20vh"
         display="flex"
         borderRadius="20px"
         justifyContent="center"
