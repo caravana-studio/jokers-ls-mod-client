@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import { useDojo } from "../useDojo";
 import { Card } from "../../types/Card";
 import { getSpecialCard } from "./getSpecialCard";
-import { sortCards } from "../../utils/sortCards";
 
-export const useCurrentSpecialCards = (specialCards: any, setSpecialCards: any) => {
+export const useCurrentSpecialCards = () => {
   const {
     setup: { client },
   } = useDojo();
+  const [specialCards, setSpecialCards] = useState<Card[]>([]);
 
   useEffect(() => {
     fetchSpecialCards();
@@ -27,9 +27,8 @@ export const useCurrentSpecialCards = (specialCards: any, setSpecialCards: any) 
           };
         });
 
-      // console.log("fetchSpecialCards: specialCards", cards);
       setSpecialCards(cards);
     });
   };
-  return specialCards;
+  return {specialCards, setSpecialCards, fetchSpecialCards};
 };

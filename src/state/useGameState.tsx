@@ -41,7 +41,6 @@ export const useGameState = () => {
   const [rageCards, setRageCards] = useState<Card[]>([]);
   const [beast, setBeast] = useState<Beast | undefined>(undefined);
 
-
   const [energyLeft, setEnergyLeft] = useState(-1);
   const [rewardsIds, setRewardsIds] = useState<number[]>([]);
 
@@ -50,7 +49,13 @@ export const useGameState = () => {
 
   const [gameOver, setGameOver] = useState(false);
 
-  const {playsLeft, setPlaysLeft, discardsLeft, setDiscardsLeft, fetchPlaysAndDiscards} = useChallengePlayer();
+  const {
+    playsLeft,
+    setPlaysLeft,
+    discardsLeft,
+    setDiscardsLeft,
+    fetchPlaysAndDiscards,
+  } = useChallengePlayer();
 
   const consumePlay = () => {
     setPlaysLeft((prev) => prev - 1);
@@ -69,15 +74,17 @@ export const useGameState = () => {
 
   const beastPlayer = useBeastPlayer();
 
-
   const refetchPlaysAndDiscards = () => {
-    fetchPlaysAndDiscards()
+    fetchPlaysAndDiscards();
   };
   const refetchEnergy = () => {
     if (beastPlayer) {
       setEnergyLeft(beastPlayer?.energy ?? 0);
     }
   };
+
+  const { specialCards, setSpecialCards, fetchSpecialCards } =
+    useCurrentSpecialCards();
 
   const resetPlaysAndDiscards = () => {
     const hasIncreasePlaysAndDiscardsSpecialCard = !!specialCards.find(
@@ -90,7 +97,6 @@ export const useGameState = () => {
     setDiscardsLeft(maxDiscards);
     setEnergyLeft(maxEnergy);
   };
-
 
   const { blisterPackResult, setBlisterPackResult, fetchBlisterPackResult } =
     useBlisterPackResult();
@@ -106,12 +112,8 @@ export const useGameState = () => {
 
   const { hand, setHand } = useCurrentHand(sortBy);
 
-  const [specialCards, setSpecialCards] = useState<Card[]>([]);
-  const dojoSpecialCards = useCurrentSpecialCards(specialCards, setSpecialCards);
   const refetchSpecialCards = () => {
-    if (dojoSpecialCards) {
-      setSpecialCards(dojoSpecialCards);
-    }
+    fetchSpecialCards();
   };
 
   const addSpecialCard = (card: Card) => {
@@ -171,10 +173,14 @@ export const useGameState = () => {
     }
   }, [preSelectedCards]);
 
-  const {challenges: obstacles, setChallenges: setObstacles, fetchChallenges} = useChallenge();
+  const {
+    challenges: obstacles,
+    setChallenges: setObstacles,
+    fetchChallenges,
+  } = useChallenge();
 
   const refetchObstacles = () => {
-    fetchChallenges()
+    fetchChallenges();
   };
 
   const rewards = useGetRewards();
