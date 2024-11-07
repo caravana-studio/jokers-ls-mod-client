@@ -6,7 +6,7 @@ import { useBlisterPackResult } from "../dojo/queries/useBlisterPackResult";
 import { useChallenge, useChallengePlayer } from "../dojo/queries/useChallenge";
 import { useCurrentHand } from "../dojo/queries/useCurrentHand";
 import { useCurrentSpecialCards } from "../dojo/queries/useCurrentSpecialCards";
-import { useGame } from "../dojo/queries/useGame";
+import { useGetRewards } from "../dojo/queries/useGetRewards";
 import { Beast } from "../dojo/typescript/models.gen";
 import { getLSGameId } from "../dojo/utils/getLSGameId";
 import { useUsername } from "../dojo/utils/useUsername";
@@ -15,8 +15,6 @@ import { SortBy } from "../enums/sortBy";
 import { Card } from "../types/Card";
 import { RoundRewards } from "../types/RoundRewards";
 import { checkHand } from "../utils/checkHand";
-import { sortCards } from "../utils/sortCards";
-import { useGetRewards } from "../dojo/queries/useGetRewards";
 
 export const useGameState = () => {
   const [gameId, setGameId] = useState<number>(getLSGameId());
@@ -42,9 +40,6 @@ export const useGameState = () => {
   const [isRageRound, setIsRageRound] = useState(false);
   const [rageCards, setRageCards] = useState<Card[]>([]);
   const [beast, setBeast] = useState<Beast | undefined>(undefined);
-  const [obstacles, setObstacles] = useState<
-    { id: number; completed: boolean }[]
-  >([]);
 
   const [playsLeft, setPlaysLeft] = useState(-1);
   const [discardsLeft, setDiscardsLeft] = useState(-1);
@@ -102,14 +97,11 @@ export const useGameState = () => {
 
   const [specialCards, setSpecialCards] = useState<Card[]>([]);
 
-  const [blisterPackResult, setBlisterPackResult] = useState<Card[]>([]);
-
-  const dojoBlisterPackResult = useBlisterPackResult();
+  const { blisterPackResult, setBlisterPackResult, fetchBlisterPackResult } =
+    useBlisterPackResult();
 
   const refetchBlisterPackResult = () => {
-    if (dojoBlisterPackResult) {
-      setBlisterPackResult(dojoBlisterPackResult.cards);
-    }
+    fetchBlisterPackResult();
   };
 
   const sortBy: SortBy = useMemo(
@@ -184,12 +176,10 @@ export const useGameState = () => {
     }
   }, [preSelectedCards]);
 
-  const challenges = useChallenge();
+  const {challenges: obstacles, setChallenges: setObstacles, fetchChallenges} = useChallenge();
 
   const refetchObstacles = () => {
-    if (challenges) {
-      setObstacles(challenges);
-    }
+    fetchChallenges()
   };
 
   const rewards = useGetRewards();

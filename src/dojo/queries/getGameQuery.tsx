@@ -5,7 +5,6 @@ export const getGameQuery = async (client: any): Promise<Game> => {
   const result = await client.player_system.get_game({
     game_id: getLSGameId(),
   });
-  console.log("result from getGame", result);
   return {
     id: parseInt(result.id),
     beasts_defeated: parseInt(result.beasts_defeated),
