@@ -1,3 +1,4 @@
+import CartridgeConnector from "@cartridge/connector";
 import { useAccount, useConnect } from "@starknet-react/core";
 import {
   PropsWithChildren,
@@ -7,7 +8,12 @@ import {
   useState,
 } from "react";
 import { useNavigate } from "react-router-dom";
-import { GAME_ID, SORT_BY_SUIT } from "../constants/localStorage";
+import cartridgeConnector from "../cartridgeConnector.tsx";
+import {
+  BEAST_IS_MINTABLE_LS,
+  GAME_ID,
+  SORT_BY_SUIT,
+} from "../constants/localStorage";
 import {
   discardSfx,
   multiSfx,
@@ -17,9 +23,7 @@ import {
 import { Beast, Game } from "../dojo/typescript/models.gen.ts";
 import { useDojo } from "../dojo/useDojo.tsx";
 import { useGameActions } from "../dojo/useGameActions.tsx";
-import { gameExists } from "../dojo/utils/getGame.tsx";
 import { getLSGameId } from "../dojo/utils/getLSGameId.tsx";
-import { useUsername } from "../dojo/utils/useUsername.tsx";
 import { Plays } from "../enums/plays";
 import { SortBy } from "../enums/sortBy.ts";
 import { useAudio } from "../hooks/useAudio.tsx";
@@ -30,6 +34,7 @@ import { Card } from "../types/Card";
 import { RoundRewards } from "../types/RoundRewards.ts";
 import { PlayEvents } from "../types/ScoreData";
 import { changeCardSuit } from "../utils/changeCardSuit";
+
 interface IGameContext {
   gameId: number;
   preSelectedPlay: Plays;
@@ -78,6 +83,7 @@ interface IGameContext {
   selectModifierCards: (cardIndex: number[]) => Promise<boolean>;
   selectAdventurerCards: (cardIndex: number[]) => Promise<boolean>;
   redirectBasedOnGameState: () => void;
+  forceRedirectBasedOnGameState: () => void;
   createNewLevel: () => Promise<any>;
   obstacles: { id: number; completed: boolean }[];
   refetchObstacles: () => void;
@@ -162,6 +168,7 @@ const GameContext = createContext<IGameContext>({
   selectModifierCards: (_) => new Promise((resolve) => resolve(false)),
   selectAdventurerCards: (_) => new Promise((resolve) => resolve(false)),
   redirectBasedOnGameState: () => {},
+  forceRedirectBasedOnGameState: () => {},
   createNewLevel: () => new Promise((resolve) => resolve(undefined)),
   obstacles: [],
   refetchObstacles: () => {},
@@ -471,13 +478,12 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
 
     return createRewardPromise;
   };
-  
-  const username = useUsername();
-  
+
   const executeCreateGame = async () => {
-    if (!username) {
-      reconnectController();
-    }
+    const username = await (
+      cartridgeConnector as CartridgeConnector
+    ).username();
+    console.log("username", username);
     setError(false);
     setGameLoading(true);
     setIsRageRound(false);
@@ -487,6 +493,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
       createGame(username).then(async (response) => {
         const { gameId: newGameId, hand } = response;
         if (newGameId) {
+          window.localStorage.removeItem(BEAST_IS_MINTABLE_LS);
           resetLevel();
           setLockRedirection(true);
           navigate("/choose-class");
@@ -757,9 +764,11 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
         setPlayAnimation(true);
         if (playEvents.playerAttack) {
           setAttackAnimation(playEvents.playerAttack.valueOf());
+          setLevelScore(playEvents.playerAttack.valueOf());
           fetchBeast();
+        } else if (playEvents.obstacleHandScore) {
+          setLevelScore(playEvents.obstacleHandScore);
         }
-        setLevelScore(points * multi);
         setTimeout(() => {
           setLevelScore(0);
         }, 2500);
@@ -803,7 +812,17 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
           }
           setTimeout(
             () => {
-              navigate("/rewards");
+              if (playEvents.beastNFT) {
+                const beast_id = playEvents.beastNFT.beast_id;
+                const tier = playEvents.beastNFT.tier;
+                const level = playEvents.beastNFT.level;
+                const token_id = playEvents.beastNFT.token_id;
+                navigate(
+                  `/collected-beast?beast_id=${beast_id}&tier=${tier}&level=${level}&token_id=${token_id}`
+                );
+              } else {
+                navigate("/rewards");
+              }
             },
             playEvents.playWinGameEvent ? 2000 : 1000
           );
@@ -986,24 +1005,17 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     if (!gameId || gameId === 0) {
       console.log("no game id, creating new game");
       return executeCreateGame();
-    } else if (!gameExists(Game, gameId)) {
-      console.log("game doesn't exist (first try)");
-      setTimeout(() => {
-        if (!gameExists(Game, gameId)) {
-          console.log("game still doesn't exist - creating new game");
+    } else {
+      fetchGame().then((game) => {
+        if (!game || game.owner === 0n) {
           executeCreateGame();
         } else {
           setGameLoading(false);
           setLockRedirection(false);
           redirectBasedOnGameState();
-          console.log("Game found (2), no need to create a new one");
+          console.log("Game found, no need to create a new one");
         }
-      }, 2000);
-    } else {
-      setGameLoading(false);
-      setLockRedirection(false);
-      redirectBasedOnGameState();
-      console.log("Game found, no need to create a new one");
+      });
     }
   };
 
@@ -1012,39 +1024,43 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     setIsRageRound(false);
   };
 
+  const forceRedirectBasedOnGameState = () => {
+    if (game?.state.type === "FINISHED") {
+      return navigate(`/gameover/${gameId}`);
+    } else {
+      if (game?.substate.type === "DRAFT_DECK") {
+        console.log("redirecting to SELECT_DECK");
+        return navigate("/choose-class");
+      } else if (game?.substate.type === "DRAFT_SPECIALS") {
+        console.log("redirecting to SELECT_SPECIAL_CARDS");
+        return navigate("/choose-specials");
+      } else if (game?.substate.type === "DRAFT_MODIFIERS") {
+        console.log("redirecting to SELECT_MODIFIER_CARDS");
+        return navigate("/choose-modifiers");
+      } else if (game?.substate.type === "DRAFT_ADVENTURER") {
+        return navigate("/adventurers");
+      } else if (game?.substate.type === "OBSTACLE") {
+        return navigate("/game/obstacle");
+      } else if (game?.substate.type === "BEAST") {
+        return navigate("/game/beast");
+      } else if (
+        game?.substate.type === "CREATE_REWARD" ||
+        game?.substate.type === "UNPASSED_OBSTACLE"
+      ) {
+        return navigate("/rewards");
+      } else if (game?.substate.type === "REWARD_CARDS_PACK") {
+        return navigate("/rewards/pack");
+      } else if (game?.substate.type === "REWARD_SPECIALS") {
+        return navigate("/rewards/specials");
+      }
+    }
+    console.log("default redirect to select deck");
+    return navigate("/choose-class");
+  };
+
   const redirectBasedOnGameState = () => {
     if (!lockRedirection) {
-      if (game?.state.type === "FINISHED") {
-        return navigate(`/gameover/${gameId}`);
-      } else {
-        if (game?.substate.type === "DRAFT_DECK") {
-          console.log("redirecting to SELECT_DECK");
-          return navigate("/choose-class");
-        } else if (game?.substate.type === "DRAFT_SPECIALS") {
-          console.log("redirecting to SELECT_SPECIAL_CARDS");
-          return navigate("/choose-specials");
-        } else if (game?.substate.type === "DRAFT_MODIFIERS") {
-          console.log("redirecting to SELECT_MODIFIER_CARDS");
-          return navigate("/choose-modifiers");
-        } else if (game?.substate.type === "DRAFT_ADVENTURER") {
-          return navigate("/adventurers");
-        } else if (game?.substate.type === "OBSTACLE") {
-          return navigate("/game/obstacle");
-        } else if (game?.substate.type === "BEAST") {
-          return navigate("/game/beast");
-        } else if (
-          game?.substate.type === "CREATE_REWARD" ||
-          game?.substate.type === "UNPASSED_OBSTACLE"
-        ) {
-          return navigate("/rewards");
-        } else if (game?.substate.type === "REWARD_CARDS_PACK") {
-          return navigate("/rewards/pack");
-        } else if (game?.substate.type === "REWARD_SPECIALS") {
-          return navigate("/rewards/specials");
-        }
-      }
-      console.log("default redirect to select deck");
-      return navigate("/choose-class");
+      forceRedirectBasedOnGameState();
     }
   };
 
@@ -1089,6 +1105,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
         lockRedirection,
         discards,
         redirectBasedOnGameState,
+        forceRedirectBasedOnGameState,
         attackAnimation,
         setAttackAnimation,
         levelScore,

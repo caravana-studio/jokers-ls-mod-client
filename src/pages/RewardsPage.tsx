@@ -1,14 +1,15 @@
 import { Box, Button, Flex, Text } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import { Background } from "../components/Background";
 import { PositionedDiscordLink } from "../components/DiscordLink";
 import { PositionedGameMenu } from "../components/GameMenu";
-import { TopSection } from "./Game/TopSection";
-import RewardsSection from "./RewardsSection";
-import SpriteAnimation from "./SpriteAnimation";
-import { useGame } from "../dojo/queries/useGame";
+import { BEAST_IS_MINTABLE_LS } from "../constants/localStorage";
 import { useGameContext } from "../providers/GameProvider";
 import { useGameState } from "../state/useGameState";
 import { LS_GREEN } from "../theme/colors";
+import { TopSection } from "./Game/TopSection";
+import RewardsSection from "./RewardsSection";
+import SpriteAnimation from "./SpriteAnimation";
 
 export const notificationAnimations = [
   { name: "idle", startFrame: 0, frameCount: 4 },
@@ -28,10 +29,15 @@ export const RewardsPage = () => {
   const { skipFailedObstacle, game } = useGameContext();
   const { obstacletAttack, setObstacleAttack } = useGameState();
   const obstacleFailed = game?.substate.type === "UNPASSED_OBSTACLE";
+  const [disableBtn, setDisableBtn] = useState(false);
 
   if (obstacleFailed && obstacletAttack === 0) {
-    setObstacleAttack(5 * game.level.valueOf());
+    setObstacleAttack(5 * game?.level.valueOf());
   }
+
+  useEffect(() => {
+    window.localStorage.removeItem(BEAST_IS_MINTABLE_LS);
+  }, []);
 
   return (
     <Background type="skulls" dark bgDecoration>
@@ -79,10 +85,14 @@ export const RewardsPage = () => {
               Click on the continue button to keep going.
             </Text>
             <Button
+              isDisabled={disableBtn}
               width={"30%"}
               mt={8}
               alignSelf={"center"}
-              onClick={() => skipFailedObstacle()}
+              onClick={() => {
+                setDisableBtn(true);
+                skipFailedObstacle().finally(() => setDisableBtn(false));
+              }}
             >
               Continue
             </Button>
