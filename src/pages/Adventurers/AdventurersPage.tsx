@@ -1,18 +1,16 @@
 import { Box, Flex } from "@chakra-ui/react";
 import { useEffect } from "react";
+import { useAdventurers } from "../../api/useAdventurers";
 import { Background } from "../../components/Background";
 import { PositionedGameMenu } from "../../components/GameMenu";
-import { useGame } from "../../dojo/queries/useGame";
+import { Loading } from "../../components/Loading";
 import { useGameContext } from "../../providers/GameProvider";
 import { Lsxjon } from "../Game/Lsxjon";
 import { Adventurers } from "./Adventurers";
-import { useAdventurers } from "../../api/useAdventurers";
-import { Loading } from "../../components/Loading";
 import { NoAdventurers } from "./NoAdventurers";
 
 export const AdventurersPage = () => {
-  const { redirectBasedOnGameState, lockRedirection } = useGameContext();
-  const game = useGame();
+  const { redirectBasedOnGameState, lockRedirection, game } = useGameContext();
   const { adventurers, isLoading } = useAdventurers();
 
   useEffect(() => {

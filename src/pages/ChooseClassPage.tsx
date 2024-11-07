@@ -37,13 +37,11 @@ export const ChooseClassPage = () => {
 
   const {
     selectDeckType,
-    gameLoading,
+    game,
     error,
     redirectBasedOnGameState,
     lockRedirection,
   } = useGameContext();
-
-  const game = useGame();
 
   useEffect(() => {
     redirectBasedOnGameState();

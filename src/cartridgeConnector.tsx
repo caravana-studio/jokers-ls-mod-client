@@ -115,6 +115,10 @@ const cartridgeConnector = new CartridgeConnector({
     {
       target: game_system_contract_address,
       method: "select_aventurer_cards",
+    },    
+    {
+      target: game_system_contract_address,
+      method: "skip_unpassed_obstacle",
     },
     {
       target: poker_hand_system_contract_address,

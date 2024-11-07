@@ -28,14 +28,12 @@ export const SpecialCardsPage = () => {
     keyPrefix: "special-cards",
   });
 
-  const { discardSpecialCard, specialCards } = useGameContext();
+  const { discardSpecialCard, specialCards, game } = useGameContext();
 
   const [discardedCards, setDiscardedCards] = useState<Card[]>([]);
   const [confirmationModalOpen, setConfirmationModalOpen] = useState(false);
 
   const [preselectedCard, setPreselectedCard] = useState<Card | undefined>();
-
-  const game = useGame();
 
   const unlockedSpecialSlots = game?.len_max_current_special_cards.valueOf() ?? 1;
 

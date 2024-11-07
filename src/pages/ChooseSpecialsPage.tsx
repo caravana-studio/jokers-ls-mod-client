@@ -24,14 +24,11 @@ export const ChooseSpecialsPage = () => {
 
   const {
     selectSpecialCards,
-    redirectBasedOnGameState,
-    lockRedirection,
     blisterPackResult,
     setBlisterPackResult,
     refetchBlisterPackResult,
     addSpecialCard,
   } = useGameContext();
-  const game = useGame();
 
   useEffect(() => {
     if (blisterPackResult.length === 0) {

@@ -59,7 +59,7 @@ export const AnimatedCard = ({
   };
 
   const [cardSprings, cardApi] = useSpring(() => ({
-    from: { transform: "scale(1)", opacity: 1, x: 0, boxShadow: "0px" },
+    from: { transform: "scale(1)", opacity: 1, y: 0, boxShadow: "0px" },
     config: { tension: 200, friction: 10 },
   }));
 
@@ -107,7 +107,12 @@ export const AnimatedCard = ({
   useEffect(() => {
     if (played) {
       cardApi.start({
-        to: { x: 1000, opacity: 0 },
+        to: { y: 500, opacity: 0 },
+        config: { duration: 200 },
+      });
+    } else {
+      cardApi.start({
+        to: { y: 0, opacity: 1 },
         config: { duration: 200 },
       });
     }
@@ -116,12 +121,12 @@ export const AnimatedCard = ({
   useEffect(() => {
     if (discarded) {
       cardApi.start({
-        to: { x: -1000, opacity: 0 },
+        to: { y: 500, opacity: 0 },
         config: { duration: 200 },
       });
     } else {
       cardApi.start({
-        to: { x: 0, opacity: 1 },
+        to: { y: 0, opacity: 1 },
         config: { duration: 200 },
       });
     }
