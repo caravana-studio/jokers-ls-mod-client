@@ -27,15 +27,17 @@ export const ChooseSpecialsPage = () => {
     redirectBasedOnGameState,
     lockRedirection,
     blisterPackResult,
-    setBlisterPackResult,
     refetchBlisterPackResult,
     addSpecialCard,
   } = useGameContext();
   const game = useGame();
 
   useEffect(() => {
+    console.log("useEffect() - ChooseSpecialsPage", blisterPackResult);
     if (blisterPackResult.length === 0) {
       refetchBlisterPackResult();
+    } else {
+      console.log("blisterPackResult not empty anymore")
     }
   }, [blisterPackResult]);
 

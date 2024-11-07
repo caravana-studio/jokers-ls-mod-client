@@ -99,14 +99,12 @@ export const useGameState = () => {
   };
 
   const [specialCards, setSpecialCards] = useState<Card[]>([]);
-
   const [blisterPackResult, setBlisterPackResult] = useState<Card[]>([]);
-
-  const dojoBlisterPackResult = useBlisterPackResult();
-
+  const dojoBlisterPackResult = useBlisterPackResult(blisterPackResult, setBlisterPackResult);
+  
   const refetchBlisterPackResult = () => {
     if (dojoBlisterPackResult) {
-      setBlisterPackResult(dojoBlisterPackResult.cards);
+      setBlisterPackResult(dojoBlisterPackResult);
     }
   };
 
