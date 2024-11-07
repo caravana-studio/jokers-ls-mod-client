@@ -84,6 +84,7 @@ export async function setupWorld(provider: DojoProvider) {
                         contractName: contract_name,
                         entrypoint: "select_reward",
                         calldata: [props.game_id,
+                            props.cards_index.length,
                 ...props.cards_index],
                     },
                     "jokers_ls_mod"
@@ -126,7 +127,8 @@ export async function setupWorld(provider: DojoProvider) {
                         contractName: contract_name,
                         entrypoint: "select_special_cards",
                         calldata: [props.game_id,
-                ...props.cards_index],
+                            props.cards_index.length,
+                            ...props.cards_index],
                     },
                     "jokers_ls_mod"
                 );
@@ -147,7 +149,8 @@ export async function setupWorld(provider: DojoProvider) {
                         contractName: contract_name,
                         entrypoint: "select_modifier_cards",
                         calldata: [props.game_id,
-                ...props.cards_index],
+                            props.cards_index.length,
+                            ...props.cards_index],
                     },
                     "jokers_ls_mod"
                 );
@@ -168,8 +171,10 @@ export async function setupWorld(provider: DojoProvider) {
                         contractName: contract_name,
                         entrypoint: "play",
                         calldata: [props.game_id,
-                ...props.cards_index,
-                ...props.modifiers_index],
+                            props.cards_index.length,
+                            ...props.cards_index,
+                            props.modifiers_index.length,
+                            ...props.modifiers_index],
                     },
                     "jokers_ls_mod"
                 );
@@ -190,8 +195,10 @@ export async function setupWorld(provider: DojoProvider) {
                         contractName: contract_name,
                         entrypoint: "discard",
                         calldata: [props.game_id,
-                ...props.cards_index,
-                ...props.modifiers_index],
+                            props.cards_index.length,
+                            ...props.cards_index,
+                            props.modifiers_index.length,
+                            ...props.modifiers_index],
                     },
                     "jokers_ls_mod"
                 );
@@ -315,7 +322,8 @@ export async function setupWorld(provider: DojoProvider) {
                         contractName: contract_name,
                         entrypoint: "select_aventurer_cards",
                         calldata: [props.game_id,
-                ...props.cards_index],
+                            props.cards_index.length,
+                            ...props.cards_index],
                     },
                     "jokers_ls_mod"
                 );
@@ -419,7 +427,7 @@ export async function setupWorld(provider: DojoProvider) {
         // Call the `get_game` system with the specified Account and calldata
         const get_game = async (props: { game_id: number }) => {
             try {
-                return await provider.execute(
+                return await provider.call(
                     "jokers_ls_mod",
                     {
                         contractName: contract_name,
