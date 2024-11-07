@@ -15,9 +15,11 @@ export const useGame = () => {
   }, []);
 
   const fetchGame = () => {
-    getGameQuery(client).then((game) => {
+    const gamePromise = getGameQuery(client)
+    gamePromise.then((game) => {
       setGame(game);
     });
+    return gamePromise;
   };
 
   return { game, fetchGame };
