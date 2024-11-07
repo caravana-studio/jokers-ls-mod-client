@@ -30,6 +30,9 @@ import { Card } from "../types/Card";
 import { RoundRewards } from "../types/RoundRewards.ts";
 import { PlayEvents } from "../types/ScoreData";
 import { changeCardSuit } from "../utils/changeCardSuit";
+import cartridgeConnector from "../cartridgeConnector.tsx";
+import CartridgeConnector from "@cartridge/connector";
+
 interface IGameContext {
   gameId: number;
   preSelectedPlay: Plays;
@@ -471,13 +474,14 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
 
     return createRewardPromise;
   };
-  
+
   const username = useUsername();
-  
+
   const executeCreateGame = async () => {
-    if (!username) {
-      reconnectController();
-    }
+    const username = await (
+      cartridgeConnector as CartridgeConnector
+    ).username();
+    console.log("username", username);
     setError(false);
     setGameLoading(true);
     setIsRageRound(false);
