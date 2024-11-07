@@ -2,11 +2,17 @@ import { Button, Flex, HStack, Heading, Text } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useGameActions } from "../../dojo/useGameActions";
 import { useGameContext } from "../../providers/GameProvider";
+import { useState } from "react";
+import { useAdventurers } from "../../api/useAdventurers";
+import { useAudio } from "../../hooks/useAudio";
+import { beep } from "../../constants/sfx";
 
 export const NoAdventurers = () => {
   const { gameId, createNewLevel } = useGameContext();
   const { skipAdventurer } = useGameActions();
   const navigate = useNavigate();
+  const { play: beepSound } = useAudio(beep);
+  const [isSkipping, setIsSkipping] = useState(false);
 
   return (
     <Flex
@@ -51,13 +57,20 @@ export const NoAdventurers = () => {
       </Flex>
       <Flex justifyContent={"center"} my={4} gap={12}>
         <Button
+          isDisabled={isSkipping}
           width="300px"
           onClick={() => {
-            skipAdventurer(gameId ?? 0).then((response) => {
-              if (response) {
-                createNewLevel();
-              }
-            });
+            beepSound();
+            setIsSkipping(true);
+            skipAdventurer(gameId ?? 0)
+              .then((response) => {
+                if (response) {
+                  createNewLevel();
+                }
+              })
+              .finally(() => {
+                setIsSkipping(false);
+              });
           }}
           variant="outlineWhiteGreenGlowLoot"
         >
