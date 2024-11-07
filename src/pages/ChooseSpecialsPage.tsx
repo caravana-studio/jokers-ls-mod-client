@@ -18,7 +18,7 @@ export const ChooseSpecialsPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [cardsToKeep, setCardsToKeep] = useState<Card[]>([]);
   const { isSmallScreen, cardScale } = useResponsiveValues();
-  const adjustedCardScale = cardScale * 1.5;
+  const adjustedCardScale = cardScale * 1.2;
   const maxCards = 2;
   const { play: beepSound } = useAudio(beep);
 
