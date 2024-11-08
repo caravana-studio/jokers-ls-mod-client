@@ -7,7 +7,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { NavigateOptions, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import cartridgeConnector from "../cartridgeConnector.tsx";
 import {
   BEAST_IS_MINTABLE_LS,
