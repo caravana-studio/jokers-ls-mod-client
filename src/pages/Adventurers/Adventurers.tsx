@@ -1,19 +1,23 @@
 import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
-import { Adventurer } from "../../types/Adventurer";
-import { useState } from "react";
-import { useAdventurers } from "../../api/useAdventurers";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useGameActions } from "../../dojo/useGameActions";
-import { useConsumedAdventurers } from "../../dojo/queries/useConsumedAdventurers";
-import { useGameContext } from "../../providers/GameProvider";
-import { AdventurerBox } from "./AdventurerBox";
+import { useAdventurers } from "../../api/useAdventurers";
 import { Loading } from "../../components/Loading";
-import { useAudio } from "../../hooks/useAudio";
 import { beep } from "../../constants/sfx";
+import { getConsumedAdventurers } from "../../dojo/queries/getConsumedAdventurers";
+import { useDojo } from "../../dojo/useDojo";
+import { useGameActions } from "../../dojo/useGameActions";
+import { useAudio } from "../../hooks/useAudio";
+import { useGameContext } from "../../providers/GameProvider";
+import { Adventurer } from "../../types/Adventurer";
+import { AdventurerBox } from "./AdventurerBox";
 
 export const Adventurers = () => {
   const { gameId, createNewLevel, setBlisterPackResult } = useGameContext();
 
+  const {
+    setup: { client },
+  } = useDojo();
   const [selectedAdventurer, setSelectedAdventurer] = useState<
     Adventurer | undefined
   >();
@@ -28,9 +32,21 @@ export const Adventurers = () => {
     );
   };
 
+  const [consumedAdventurers, setConsumedAdventurers] = useState<number[]>([]);
+
   const navigate = useNavigate();
   const { useAdventurer, skipAdventurer } = useGameActions();
-  const consumedAdventurers = useConsumedAdventurers();
+  const ids = useMemo(() => {
+    return adventurers?.map((adventurer) => adventurer.id);
+  }, [adventurers]);
+
+  useEffect(() => {
+    if (ids?.length) {
+      getConsumedAdventurers(client, ids).then((adventurers) => {
+        setConsumedAdventurers(adventurers);
+      });
+    }
+  }, [ids]);
 
   return (
     <>
@@ -122,16 +138,19 @@ export const Adventurers = () => {
         <Button
           width="300px"
           onClick={() => {
+            setIsSkipping(true);
             beepSound();
             selectedAdventurer &&
-              useAdventurer(gameId ?? 0, selectedAdventurer.id).then(
-                (response) => {
+              useAdventurer(gameId ?? 0, selectedAdventurer.id)
+                .then((response) => {
                   if (response.length > 0) {
                     setBlisterPackResult(response);
                     navigate("/choose-adventurer-cards");
                   }
-                }
-              );
+                })
+                .catch(() => {
+                  setIsSkipping(false);
+                });
           }}
           isDisabled={selectedAdventurer === undefined}
         >
