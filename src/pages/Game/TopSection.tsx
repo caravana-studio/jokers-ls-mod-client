@@ -103,7 +103,7 @@ export const TopSection = ({
               <Box gap={3} sx={{ display: "flex", alignItems: "center" }}>
                 <PointBox type="points">
                   <Heading color="white" size={{ base: "s", md: "m" }}>
-                    Level <RollingNumber n={level} />
+                  ROUND <RollingNumber n={level} />
                   </Heading>
                 </PointBox>
               </Box>
@@ -114,7 +114,7 @@ export const TopSection = ({
             <HStack gap={4}>
               <PointBox type="points">
                 <Heading color="white" size={{ base: "s", md: "m" }}>
-                  Level <RollingNumber n={level} />
+                  ROUND <RollingNumber n={level} />
                 </Heading>
               </PointBox>
               <Energy />
