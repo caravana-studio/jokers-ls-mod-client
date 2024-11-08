@@ -56,7 +56,7 @@ export const Home = () => {
           <>
             {leaderboardOpen ? (
               <Box>
-                <Heading mb={"40px"} size="xl" textAlign={"center"}>
+                <Heading mb={"40px"} size="xxl" textAlign={"center"}>
                   LEADERBOARD
                 </Heading>
 
