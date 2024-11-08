@@ -15,6 +15,7 @@ import { Card } from "../types/Card";
 import { getCardUniqueId } from "../utils/getCardUniqueId";
 import { runConfettiAnimation } from "../utils/runConfettiAnimation";
 import { FullScreenCardContainer } from "./FullScreenCardContainer";
+import { Loading } from "../components/Loading";
 
 export const RewardsSelection = () => {
   const { mode } = useParams();
@@ -97,57 +98,62 @@ export const RewardsSelection = () => {
           {maxCards === 1 ? "Choose 1 card" : `Choose up to ${maxCards} cards`}
         </Heading>
         <FullScreenCardContainer>
-          {blisterPackResult?.map((card, index) => {
-            return (
-              <Flex
-                key={`${card.card_id ?? ""}-${index}`}
-                flexDirection="column"
-                gap={2}
-              >
-                <Box
-                  key={getCardUniqueId(card)}
-                  m={1}
-                  padding={"8px"}
-                  sx={{
-                    opacity:
-                      cardsToKeep.map((card) => card.idx).includes(card.idx) ||
-                      cardsToKeep.length === 0
-                        ? 1
-                        : 0.9,
-                    boxShadow: cardsToKeep
-                      .map((card) => card.idx)
-                      .includes(card.idx)
-                      ? `0px 0px 15px 1px ${LS_GREEN}, inset 0px 0px 15px 1px ${LS_GREEN}`
-                      : "none",
-                    border: cardsToKeep
-                      .map((card) => card.idx)
-                      .includes(card.idx)
-                      ? `1px solid ${LS_GREEN}`
-                      : "1px solid transparent",
-                  }}
+          {!blisterPackResult || blisterPackResult.length == 0 ? (
+            <Loading />
+          ) : (
+            blisterPackResult?.map((card, index) => {
+              return (
+                <Flex
+                  key={`${card.card_id ?? ""}-${index}`}
+                  flexDirection="column"
+                  gap={2}
                 >
-                  <TiltCard
-                    scale={adjustedCardScale}
-                    card={card}
-                    key={index}
-                    onClick={() => {
-                      beepSound();
-                      if (
-                        cardsToKeep.map((card) => card.idx).includes(card.idx)
-                      ) {
-                        setCardsToKeep(
-                          cardsToKeep.filter((c) => c.idx !== card.idx)
-                        );
-                      } else {
-                        if (cardsToKeep.length < maxCards)
-                          setCardsToKeep([...cardsToKeep, card]);
-                      }
+                  <Box
+                    key={getCardUniqueId(card)}
+                    m={1}
+                    padding={"8px"}
+                    sx={{
+                      opacity:
+                        cardsToKeep
+                          .map((card) => card.idx)
+                          .includes(card.idx) || cardsToKeep.length === 0
+                          ? 1
+                          : 0.9,
+                      boxShadow: cardsToKeep
+                        .map((card) => card.idx)
+                        .includes(card.idx)
+                        ? `0px 0px 15px 1px ${LS_GREEN}, inset 0px 0px 15px 1px ${LS_GREEN}`
+                        : "none",
+                      border: cardsToKeep
+                        .map((card) => card.idx)
+                        .includes(card.idx)
+                        ? `1px solid ${LS_GREEN}`
+                        : "1px solid transparent",
                     }}
-                  />
-                </Box>
-              </Flex>
-            );
-          })}
+                  >
+                    <TiltCard
+                      scale={adjustedCardScale}
+                      card={card}
+                      key={index}
+                      onClick={() => {
+                        beepSound();
+                        if (
+                          cardsToKeep.map((card) => card.idx).includes(card.idx)
+                        ) {
+                          setCardsToKeep(
+                            cardsToKeep.filter((c) => c.idx !== card.idx)
+                          );
+                        } else {
+                          if (cardsToKeep.length < maxCards)
+                            setCardsToKeep([...cardsToKeep, card]);
+                        }
+                      }}
+                    />
+                  </Box>
+                </Flex>
+              );
+            })
+          )}
         </FullScreenCardContainer>
 
         {continueButtonDisabled ? (
