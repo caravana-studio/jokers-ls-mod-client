@@ -3,24 +3,26 @@ import { faXTwitter } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Background } from "../components/Background";
 import { DiscordLink } from "../components/DiscordLink";
 import { PositionedGameMenu } from "../components/GameMenu";
 import { Leaderboard } from "../components/Leaderboard";
 import { GAME_ID } from "../constants/localStorage";
+import { ending } from "../constants/lore";
 import { looseSfx } from "../constants/sfx";
+import { useDojo } from "../dojo/useDojo";
+import { decodeString } from "../dojo/utils/decodeString";
 import { useAudio } from "../hooks/useAudio";
 import { useGameContext } from "../providers/GameProvider";
-import { useGetLeaderboard } from "../queries/useGetLeaderboard";
-import { ending } from "../constants/lore";
 import Lore from "./LoreScreen/Lore";
 
 const GAME_URL = "https://ls.jokersofneon.com/";
 
 export const GameOver = () => {
-  const navigate = useNavigate();
-
+  const {
+    setup: { client },
+  } = useDojo();
   const params = useParams();
 
   const gameId = Number(params.gameId);
@@ -28,29 +30,43 @@ export const GameOver = () => {
   const { restartGame, setIsRageRound, executeCreateGame } = useGameContext();
 
   const { play: looseSound, stop: stopLooseSound } = useAudio(looseSfx);
-  const { data: fullLeaderboard } = useGetLeaderboard();
-  const actualPlayer = fullLeaderboard?.find((player) => player.id === gameId);
   const { t } = useTranslation(["intermediate-screens"]);
-  const currentLeader = fullLeaderboard?.find((leader) => leader.id === gameId);
   const [showEnding, setShowEnding] = useState(true);
 
   let congratulationsMsj = "";
+  const [currentLeader, setCurrentLeader] = useState<{
+    name: string;
+    player_level: number;
+    level: number;
+  }>();
 
-  if (currentLeader?.position != undefined) {
-    congratulationsMsj =
-      actualPlayer?.position === 1
-        ? t("game-over.table.gameOver-leader-msj")
-        : currentLeader?.position > 1 && currentLeader?.position <= 5
-          ? t("game-over.table.gameOver-top5-msj")
-          : "";
-  }
+  const tweetText =
+    encodeURIComponent(`🃏 I just battled through @JokersOfNeon x @LootSurvivor mod and reached Level ${currentLeader?.player_level} after ${currentLeader?.level} rounds!
+    
+    How long can you hold out, warrior? The beasts are waiting, and the game is now live on mainnet! 🎃👻
+    
+    ⚔️ Play to die now: ${GAME_URL} 🕹️🃏✨`);
 
-  const position = currentLeader?.position ?? 100;
+  const tweetUrl = `https://twitter.com/intent/tweet?text=${tweetText}`;
 
   useEffect(() => {
     looseSound();
     localStorage.removeItem(GAME_ID);
     setIsRageRound(false);
+
+    gameId &&
+      client.player_system
+        .get_game({
+          game_id: gameId,
+        })
+        .then((result: any) => {
+          const currentLeader = {
+            name: decodeString(result.player_name),
+            player_level: parseInt(result.player_level),
+            level: parseInt(result.level),
+          };
+          setCurrentLeader(currentLeader);
+        });
   }, []);
 
   return (
@@ -80,10 +96,7 @@ export const GameOver = () => {
                   width={"50%"}
                   variant="solid"
                   onClick={() => {
-                    window.open(
-                      `https://twitter.com/intent/tweet?text=%F0%9F%83%8F%20I%20just%20battled%20through%20%40JokersOfNeon%20x%20%40LootSurvivor%20mod%20%E2%80%94%20here%20are%20my%20final%20results%3A%0A%F0%9F%8F%85%20Rank%3A%20${currentLeader?.position}%0A%F0%9F%94%A5%20Level%3A%20${currentLeader?.level}%0A%0AHow%20long%20can%20you%20hold%20out%2C%20warrior%3F%20The%20beasts%20are%20waiting%2C%20and%20the%20game%20is%20now%20live%20on%20mainnet!%20%F0%9F%8E%83%F0%9F%91%BB%0A%0A%E2%9A%94%EF%B8%8F%20Play%20to%20die%20now%3A%20${GAME_URL}%2F%20%F0%9F%95%B8%EF%B8%8F%F0%9F%83%8F%E2%9C%A8`,
-                      "_blank"
-                    );
+                    window.open(tweetUrl, "_blank");
                   }}
                   data-size="large"
                 >
