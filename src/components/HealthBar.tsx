@@ -7,14 +7,14 @@ import { ProgressBar } from "./CompactRoundData/ProgressBar";
 export const HealthBar = () => {
   const username = useUsername();
 
-  const { game, attackAnimation, fetchGame } = useGameContext();
+  const { game, beastAttack, fetchGame } = useGameContext();
 
   const [maxHp, setMaxHp] = useState(game?.player_hp ?? 0);
   const [hp, setHp] = useState(game?.current_player_hp ?? 0);
 
-  // hack to refetch player HP when attackAnimation changes
+  // hack to refetch player HP when beastAttack changes
   useEffect(() => {
-    if (attackAnimation) {
+    if (beastAttack) {
       fetchGame().then((game) => {
         if (game) {
           setMaxHp(game.player_hp);
@@ -22,7 +22,7 @@ export const HealthBar = () => {
         }
       });
     }
-  }, [attackAnimation]);
+  }, [beastAttack]);
 
   useEffect(() => {
     if (game) {
@@ -40,7 +40,7 @@ export const HealthBar = () => {
     >
       <Flex width="100%" justifyContent="space-between">
         <Text color="white" fontWeight="bold" fontSize={"1.5rem"}>
-          {username}
+          {username} (LVL {game?.player_level.valueOf()}) 
         </Text>
         <Text color="white" fontWeight="bold" fontSize={"1.5rem"}>
           {hp.valueOf()} / {maxHp.valueOf()}

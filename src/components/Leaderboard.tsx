@@ -11,6 +11,7 @@ import {
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { BigNumberish, num, RpcProvider, shortString } from "starknet";
+import { useDojo } from "../dojo/useDojo.tsx";
 import { useUsername } from "../dojo/utils/useUsername.tsx";
 import { LS_GREEN } from "../theme/colors.tsx";
 import { RollingNumber } from "./RollingNumber";
@@ -44,9 +45,13 @@ const WORLD_ADDRESS =
   "0x02c5dab047c12c6f4eb49debee9398b9fb5fab5d60d5a86fbd150f19997109d6";
 const EVENT_KEY =
   import.meta.env.VITE_GAME_QUERY_EVENT_KEY ||
-  "0xd44b351e1ce0d066c11d56012e6f0ffca4008853d0b1ca1972433a0852d25e";
+  "0x5622350131a852e8954f0ec6ddcd4ea547ec4d1c993fbba36c67f027d9c4573";
 
-const getLeaderboard = async () => {
+const getLeaderboard = async (currentLeader?: {
+  name: string;
+  score: number;
+  level: number;
+}) => {
   console.log("getting leaderboard");
   const provider = new RpcProvider({
     nodeUrl: `${import.meta.env.VITE_RPC_URL}`,
@@ -82,9 +87,9 @@ const getLeaderboard = async () => {
       .map((event) => {
         const game = event.data;
         return {
-          name: decodeString(game[1]),
-          score: parseInt(game[3], 16),
-          level: parseInt(game[4], 16),
+          name: decodeString(game[0]),
+          score: parseInt(game[1], 16),
+          level: parseInt(game[2], 16),
         };
       })
       .reduce((map, obj) => {
@@ -105,6 +110,18 @@ const getLeaderboard = async () => {
       }, new Map())
       .values()
   );
+
+  if (
+    currentLeader &&
+    !uniqueEvents.find(
+      (leader) =>
+        leader.name === currentLeader.name &&
+        leader.score === currentLeader.score &&
+        leader.level === currentLeader.level
+    )
+  ) {
+    uniqueEvents.push(currentLeader);
+  }
 
   // Sort by level DESC, then score DESC
   uniqueEvents.sort((a, b) => {
@@ -129,20 +146,60 @@ export const Leaderboard = ({ gameId, lines = 11 }: LeaderboardProps) => {
     { name: string; position: number; score: number; level: number }[]
   >([]);
 
+  const [currentLeader, setCurrentLeader] = useState<{
+    name: string;
+    score: number;
+    level: number;
+  }>();
+
   const username = useUsername();
 
-  const currentLeader = leaderboard?.find((leader) => leader.name === username);
+  const {
+    setup: { client },
+  } = useDojo();
+
+  const positionedCurrentLeader =
+    currentLeader &&
+    leaderboard.find(
+      (leader) =>
+        leader.name === currentLeader.name &&
+        leader.score === currentLeader.score &&
+        leader.level === currentLeader.level
+    );
+
   const currentLeaderIsInReducedLeaderboard =
-    currentLeader && currentLeader.position <= lines;
+    positionedCurrentLeader &&
+    (positionedCurrentLeader.position ?? 1000) <= lines;
 
   useEffect(() => {
-    getLeaderboard()
-      .then((games) => {
-        setLeaderboard(games);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    const result =
+      gameId ?
+      client.player_system
+        .get_game({
+          game_id: gameId,
+        })
+        .then((result: any) => {
+          console.log("result", result);
+          const currentLeader = {
+            name: decodeString(result.player_name),
+            score: parseInt(result.player_score),
+            level: parseInt(result.player_level),
+          };
+          setCurrentLeader(currentLeader);
+          getLeaderboard(currentLeader)
+            .then((games) => {
+              setLeaderboard(games);
+            })
+            .finally(() => {
+              setIsLoading(false);
+            });
+        }): getLeaderboard()
+        .then((games) => {
+          setLeaderboard(games);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
   }, []);
 
   return (
@@ -219,26 +276,27 @@ export const Leaderboard = ({ gameId, lines = 11 }: LeaderboardProps) => {
                     </Td>
                   </Tr>
                 ))}
-              {currentLeader && !currentLeaderIsInReducedLeaderboard && (
-                <>
-                  <Tr>
-                    <Td>...</Td>
-                    <Td>...</Td>
-                    <Td>...</Td>
-                    <Td>...</Td>
-                  </Tr>
-                  <Tr sx={CURRENT_LEADER_STYLES}>
-                    <Td>{currentLeader.position}</Td>
-                    <Td>{currentLeader.name}</Td>
-                    <Td isNumeric>
-                      <RollingNumber n={currentLeader.score} />
-                    </Td>
-                    <Td>
-                      <RollingNumber n={currentLeader.level} />
-                    </Td>
-                  </Tr>
-                </>
-              )}
+              {positionedCurrentLeader &&
+                !currentLeaderIsInReducedLeaderboard && (
+                  <>
+                    <Tr>
+                      <Td>...</Td>
+                      <Td>...</Td>
+                      <Td>...</Td>
+                      <Td>...</Td>
+                    </Tr>
+                    <Tr sx={CURRENT_LEADER_STYLES}>
+                      <Td>{positionedCurrentLeader.position}</Td>
+                      <Td>{positionedCurrentLeader.name}</Td>
+                      <Td isNumeric>
+                        <RollingNumber n={positionedCurrentLeader.score} />
+                      </Td>
+                      <Td>
+                        <RollingNumber n={positionedCurrentLeader.level} />
+                      </Td>
+                    </Tr>
+                  </>
+                )}
             </Tbody>
           </Table>
         </TableContainer>
