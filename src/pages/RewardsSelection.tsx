@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { Background } from "../components/Background";
 import { PositionedDiscordLink } from "../components/DiscordLink";
 import { PositionedGameMenu } from "../components/GameMenu";
+import { SpecialCards } from "../components/SpecialCards";
 import { TiltCard } from "../components/TiltCard";
 import { beep } from "../constants/sfx";
 import { useAudio } from "../hooks/useAudio";
@@ -82,6 +83,11 @@ export const RewardsSelection = () => {
 
   return (
     <Background type="skulls" dark bgDecoration>
+      {mode === "special" && (
+        <Box position="absolute" top="80px" right="40px">
+          <SpecialCards />
+        </Box>
+      )}
       <PositionedGameMenu decoratedPage />
       <Flex height="100%" justifyContent={"center"} direction={"column"}>
         <Heading size={"xxl"} mb={4} textAlign={"center"} variant="neonGreen">
