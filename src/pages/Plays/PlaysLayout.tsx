@@ -42,7 +42,11 @@ export const PlaysLayout = () => {
           w="100%"
           size="md"
           variant="solid"
-          onClick={() => forceRedirectBasedOnGameState()}
+          onClick={() =>
+            forceRedirectBasedOnGameState({
+              state: { skipBeastAttackAnimation: true },
+            })
+          }
         >
           {t("game.plays.go-back-btn")}
         </Button>

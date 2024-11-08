@@ -7,7 +7,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavigateOptions, useNavigate } from "react-router-dom";
 import cartridgeConnector from "../cartridgeConnector.tsx";
 import {
   BEAST_IS_MINTABLE_LS,
@@ -82,7 +82,7 @@ interface IGameContext {
   selectModifierCards: (cardIndex: number[]) => Promise<boolean>;
   selectAdventurerCards: (cardIndex: number[]) => Promise<boolean>;
   redirectBasedOnGameState: () => void;
-  forceRedirectBasedOnGameState: () => void;
+  forceRedirectBasedOnGameState: (state?: NavigateOptions) => void;
   createNewLevel: () => Promise<any>;
   obstacles: { id: number; completed: boolean }[];
   refetchObstacles: () => void;
@@ -167,7 +167,7 @@ const GameContext = createContext<IGameContext>({
   selectModifierCards: (_) => new Promise((resolve) => resolve(false)),
   selectAdventurerCards: (_) => new Promise((resolve) => resolve(false)),
   redirectBasedOnGameState: () => {},
-  forceRedirectBasedOnGameState: () => {},
+  forceRedirectBasedOnGameState: (state?: NavigateOptions) => {},
   createNewLevel: () => new Promise((resolve) => resolve(undefined)),
   obstacles: [],
   refetchObstacles: () => {},
@@ -1021,7 +1021,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     setIsRageRound(false);
   };
 
-  const forceRedirectBasedOnGameState = () => {
+  const forceRedirectBasedOnGameState = (state?: NavigateOptions) => {
     if (game?.state.type === "FINISHED") {
       return navigate(`/gameover/${gameId}`);
     } else {
@@ -1039,7 +1039,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
       } else if (game?.substate.type === "OBSTACLE") {
         return navigate("/game/obstacle");
       } else if (game?.substate.type === "BEAST") {
-        return navigate("/game/beast");
+        return navigate("/game/beast", state);
       } else if (
         game?.substate.type === "CREATE_REWARD" ||
         game?.substate.type === "UNPASSED_OBSTACLE"

@@ -2,7 +2,7 @@ import { Box, Button, Flex, Heading, Image } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Joyride, { CallBackProps } from "react-joyride";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { PositionedGameMenu } from "../../components/GameMenu.tsx";
 import {
   BEAST_TUTORIAL_STEPS,
@@ -51,6 +51,10 @@ export const GameContent = () => {
       refetchEnergy();
     }
   }, [energyLeft]);
+
+  const { state } = useLocation();
+  const skipBeastAttackAnimation = state?.skipBeastAttackAnimation;
+  console.log(skipBeastAttackAnimation);
 
   const { mode } = useParams();
   const { beastSound, changeSong } = useAudioPlayer();
@@ -181,7 +185,7 @@ export const GameContent = () => {
         width: "100%",
       }}
     >
-      {mode === "beast" && <BeastTurnAnimation />}
+      {!skipBeastAttackAnimation && mode === "beast" && <BeastTurnAnimation />}
       <Box
         sx={{
           height: "100%",
