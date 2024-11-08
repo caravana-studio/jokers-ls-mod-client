@@ -47,7 +47,7 @@ export const BeastTurnAnimation = () => {
         setShowAnimationText(
           `Beast attacked you causing ${beastAttack} damage`
         );
-      }, 500);
+      }, 800);
       const timer = setTimeout(() => {
         setShowAnimationHeading("");
         setShowAnimationText("");
@@ -57,7 +57,7 @@ export const BeastTurnAnimation = () => {
             const timer = setTimeout(() => {
               setShowAnimationHeading("");
               setBeastAttack(0);
-            }, 2000);
+            }, 2300);
             return () => clearTimeout(timer);
           }
         }, 500);

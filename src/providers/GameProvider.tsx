@@ -795,7 +795,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
           setTimeout(() => {
             navigate(`/gameover/${gameId}`);
             setLockRedirection(false);
-          }, 1500);
+          }, 1800);
         } else if (
           playEvents.levelPassed ||
           playEvents.obstacleDefeated ||
