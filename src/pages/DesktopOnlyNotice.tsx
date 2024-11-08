@@ -1,13 +1,13 @@
 import { Box, Button, Flex, Heading, Img, Text } from "@chakra-ui/react";
-import { Background } from "../components/Background";
-import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { DiscordLink } from "../components/DiscordLink";
-import { PoweredBy } from "../components/PoweredBy";
-import { Leaderboard } from "../components/Leaderboard";
-import AudioPlayer from "../components/AudioPlayer";
-import { LS_GREEN } from "../theme/colors";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import AudioPlayer from "../components/AudioPlayer";
+import { Background } from "../components/Background";
+import { DiscordLink } from "../components/DiscordLink";
+import { Leaderboard } from "../components/Leaderboard";
+import { PoweredBy } from "../components/PoweredBy";
+import { LS_GREEN } from "../theme/colors";
 
 export const DesktopOnlyNotice = () => {
   const navigate = useNavigate();
@@ -30,22 +30,28 @@ export const DesktopOnlyNotice = () => {
         gap={4}
       >
         {leaderboardOpen ? (
-          <Box>
+          <Flex flexDirection={"column"} alignItems={"center"}>
             <Heading mb={"40px"} size="xl" textAlign={"center"}>
               LEADERBOARD
             </Heading>
 
-            <Leaderboard />
+            <Box w="100%">
+              <Leaderboard />
+            </Box>
             <Button
               mt={8}
-              width="100%"
+              fontSize={"18px"}
+              width={"200px"}
+              border="1px solid white"
+              py={1}
+              px={2}
               onClick={() => {
                 setLeaderboardOpen(false);
               }}
             >
               {t("leaderboard.btn.returnLeaderboard-btn")}
             </Button>
-          </Box>
+          </Flex>
         ) : (
           <Flex flexDirection="column" alignItems="center" px={4}>
             <Img
@@ -76,7 +82,11 @@ export const DesktopOnlyNotice = () => {
                 onClick={() => {
                   setLeaderboardOpen(true);
                 }}
-                width={"350px"}
+                fontSize={"18px"}
+                width={"200px"}
+                border="1px solid white"
+                py={1}
+                px={2}
               >
                 leaderboard
               </Button>
