@@ -10,7 +10,7 @@ const leaderboard = definePartsStyle({
     color: LS_GREEN,
     fontFamily: "VT323",
     textAlign: "center",
-    fontSize: ["9px", "1.3rem", "1.3rem", "2rem"],
+    fontSize: ["17px", "1.3rem", "1.3rem", "2rem"],
   },
   thead: {
     tr: {
@@ -31,9 +31,9 @@ const leaderboard = definePartsStyle({
         },
         td: {
           color: "white",
-          fontSize: ["9px", "1rem", "1rem", "1.3rem"],
+          fontSize: ["15px", "1rem", "1rem", "1.3rem"],
           px: [1, 1, 4],
-          py: [1, 2, 2, 2],
+          py: [0.5, 2, 2, 2],
         },
       },
       "&:nth-of-type(even)": {
@@ -42,9 +42,9 @@ const leaderboard = definePartsStyle({
         },
         td: {
           color: "white",
-          fontSize: ["9px", "1rem", "1rem", "1.3rem"],
+          fontSize: ["15px", "1rem", "1rem", "1.3rem"],
           px: [1, 1, 4],
-          py: [1, 2, 2, 2],
+          py: [0.5, 2, 2, 2],
         },
       },
     },
