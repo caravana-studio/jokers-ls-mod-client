@@ -82,7 +82,7 @@ interface IGameContext {
   selectModifierCards: (cardIndex: number[]) => Promise<boolean>;
   selectAdventurerCards: (cardIndex: number[]) => Promise<boolean>;
   redirectBasedOnGameState: () => void;
-  forceRedirectBasedOnGameState: (state?: NavigateOptions) => void;
+  forceRedirectBasedOnGameState: () => void;
   createNewLevel: () => Promise<any>;
   obstacles: { id: number; completed: boolean }[];
   refetchObstacles: () => void;
@@ -167,7 +167,7 @@ const GameContext = createContext<IGameContext>({
   selectModifierCards: (_) => new Promise((resolve) => resolve(false)),
   selectAdventurerCards: (_) => new Promise((resolve) => resolve(false)),
   redirectBasedOnGameState: () => {},
-  forceRedirectBasedOnGameState: (state?: NavigateOptions) => {},
+  forceRedirectBasedOnGameState: () => {},
   createNewLevel: () => new Promise((resolve) => resolve(undefined)),
   obstacles: [],
   refetchObstacles: () => {},
@@ -795,7 +795,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
           setTimeout(() => {
             navigate(`/gameover/${gameId}`);
             setLockRedirection(false);
-          }, 1500);
+          }, 1800);
         } else if (
           playEvents.levelPassed ||
           playEvents.obstacleDefeated ||
@@ -1021,7 +1021,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     setIsRageRound(false);
   };
 
-  const forceRedirectBasedOnGameState = (state?: NavigateOptions) => {
+  const forceRedirectBasedOnGameState = () => {
     if (game?.state.type === "FINISHED") {
       return navigate(`/gameover/${gameId}`);
     } else {
@@ -1039,7 +1039,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
       } else if (game?.substate.type === "OBSTACLE") {
         return navigate("/game/obstacle");
       } else if (game?.substate.type === "BEAST") {
-        return navigate("/game/beast", state);
+        return navigate("/game/beast");
       } else if (
         game?.substate.type === "CREATE_REWARD" ||
         game?.substate.type === "UNPASSED_OBSTACLE"
