@@ -98,7 +98,7 @@ export const RewardsSelection = () => {
           {maxCards === 1 ? "Choose 1 card" : `Choose up to ${maxCards} cards`}
         </Heading>
         <FullScreenCardContainer>
-          {blisterPackResult && blisterPackResult.length == 0 ? (
+          {!blisterPackResult || blisterPackResult.length == 0 ? (
             <Loading />
           ) : (
             blisterPackResult?.map((card, index) => {
