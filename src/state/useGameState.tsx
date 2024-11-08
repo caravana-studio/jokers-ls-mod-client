@@ -6,8 +6,8 @@ import { useBlisterPackResult } from "../dojo/queries/useBlisterPackResult";
 import { useChallenge, useChallengePlayer } from "../dojo/queries/useChallenge";
 import { useCurrentHand } from "../dojo/queries/useCurrentHand";
 import { useCurrentSpecialCards } from "../dojo/queries/useCurrentSpecialCards";
+import { useGame } from "../dojo/queries/useGame";
 import { useGetRewards } from "../dojo/queries/useGetRewards";
-import { Beast } from "../dojo/typescript/models.gen";
 import { getLSGameId } from "../dojo/utils/getLSGameId";
 import { useUsername } from "../dojo/utils/useUsername";
 import { Plays } from "../enums/plays";
@@ -15,7 +15,6 @@ import { SortBy } from "../enums/sortBy";
 import { Card } from "../types/Card";
 import { RoundRewards } from "../types/RoundRewards";
 import { checkHand } from "../utils/checkHand";
-import { useGame } from "../dojo/queries/useGame";
 
 export const useGameState = () => {
   const [gameId, setGameId] = useState<number>(getLSGameId());
@@ -110,6 +109,10 @@ export const useGameState = () => {
 
   const { hand, setHand, fetchHand } = useCurrentHand(sortBy);
 
+  useEffect(() => {
+    fetchHand();
+  }, [sortBy]);
+
   const refetchCurrentHand = () => {
     setPreSelectedCards([]);
     setPreSelectedModifiers([]);
@@ -139,8 +142,6 @@ export const useGameState = () => {
   const resetSpecialCards = () => {
     setSpecialCards([]);
   };
-
-  const beastFetchData = useBeast();
 
   const username = useUsername();
 
@@ -193,9 +194,7 @@ export const useGameState = () => {
   };
 
   const refetchBeast = () => {
-    if (beastFetchData) {
-      setBeast(beastFetchData as unknown as Beast);
-    }
+    fetchBeast();
   };
 
   return {

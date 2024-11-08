@@ -16,10 +16,6 @@ export const useCurrentHand = (sortBy: SortBy) => {
     fetchHand();
   }, []);
 
-  useEffect(() => {
-    setAndSortHand(hand);
-  }, [sortBy]);
-
   const setAndSortHand = (cards: Card[]) => {
     setHand(sortCards(cards, sortBy));
   };

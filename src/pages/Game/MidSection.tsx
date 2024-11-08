@@ -19,23 +19,21 @@ interface MidSectionProps {
 }
 
 export const MidSection = ({ isTutorialRunning = false }: MidSectionProps) => {
-  const {
-    preSelectedCards,
-    hand,
-    togglePreselected,
-    discardAnimation,
-    playAnimation,
-    beast,
-    refetchBeast,
-    attackAnimation,
-    setAttackAnimation,
-  } = useGameContext();
+  const { beast, refetchBeast, attackAnimation, setAttackAnimation } =
+    useGameContext();
 
   useEffect(() => {
     if (!beast) {
       refetchBeast();
     }
   }, [beast]);
+
+  // hack to refetch beast HP when attackAnimation changes
+  useEffect(() => {
+    if (attackAnimation) {
+      refetchBeast();
+    }
+  }, [attackAnimation]);
 
   const { setNodeRef } = useDroppable({
     id: PRESELECTED_CARD_SECTION_ID,
