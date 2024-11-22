@@ -13,6 +13,8 @@ function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
+const COLLECTION_CONTRACT_ADDRESS = import.meta.env.VITE_NFT_COLLECTION_CONTRACT_ADDRESS || "0x07268fcf96383f8691b91ba758cc8fefe0844146f0557909345b841fb1de042f";
+
 export const CollectedBeastPage = () => {
   const query = useQuery();
   const beast_id = query.get("beast_id");
@@ -20,7 +22,7 @@ export const CollectedBeastPage = () => {
   const level = query.get("level");
   const token_id = query.get("token_id");
   const beastName = getNameBeast(Number(beast_id));
-  const realmsURL = `https://market.realms.world/token/${token_id}/2`;
+  const realmsURL = `https://market.realms.world/token/${COLLECTION_CONTRACT_ADDRESS}/${token_id}`;
   const GAME_URL = "https://ls.jokersofneon.com";
 
   const tweetURL = `https://twitter.com/intent/tweet?text=${encodeURIComponent(

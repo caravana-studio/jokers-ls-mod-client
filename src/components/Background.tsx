@@ -4,7 +4,7 @@ import { useResponsiveValues } from "../theme/responsiveSettings";
 import CachedImage from "./CachedImage";
 
 interface BackgroundProps extends PropsWithChildren {
-  type?: "game" | "store" | "home" | "white" | "rage" | "skulls" | "cave" | "beast";
+  type?: "game" | "store" | "home" | "white" | "rage" | "skulls" | "cave" | "beast" | "homex2";
   dark?: boolean;
   scrollOnMobile?: boolean;
   bgDecoration?: boolean;

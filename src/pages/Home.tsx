@@ -1,4 +1,12 @@
-import { Box, Button, Flex, Heading, Img, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  Img,
+  Text,
+  Tooltip,
+} from "@chakra-ui/react";
 import { useConnect } from "@starknet-react/core";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -7,13 +15,15 @@ import { Background } from "../components/Background";
 import { DiscordLink } from "../components/DiscordLink";
 import { Leaderboard } from "../components/Leaderboard";
 import { PoweredBy } from "../components/PoweredBy";
+import { intro } from "../constants/lore";
+import { beep } from "../constants/sfx";
 import { useDojo } from "../dojo/useDojo";
+import { useAudio } from "../hooks/useAudio";
 import { useGameContext } from "../providers/GameProvider";
 import { LS_GREEN } from "../theme/colors";
-import { useAudio } from "../hooks/useAudio";
-import { beep } from "../constants/sfx";
-import { intro } from "../constants/lore";
 import Lore from "./LoreScreen/Lore";
+
+const doubleChance = !!import.meta.env.VITE_DOUBLE_CHANCE;
 
 export const Home = () => {
   const [leaderboardOpen, setLeaderboardOpen] = useState(false);
@@ -41,7 +51,7 @@ export const Home = () => {
   };
 
   return (
-    <Background bgDecoration type="home">
+    <Background bgDecoration type={doubleChance ? "homex2" : "home"}>
       <AudioPlayer />
       <Flex
         height="100%"
@@ -82,13 +92,34 @@ export const Home = () => {
                 <Text
                   fontSize="50px"
                   lineHeight="1"
-                  mb="60px"
+                  mb={doubleChance ? "20px" : "60px"}
                   mt="-40px"
                   color="lsGreen"
                   textShadow={`0px 0px 10px ${LS_GREEN}`}
                 >
                   LOOT SURVIVOR MOD
                 </Text>
+                {doubleChance && (
+                  <>
+                    <Tooltip
+                      fontSize={"20px"}
+                      placement="right"
+                      width="300px"
+                      label="Special event active! Double chance to face a Jokers of Neon collectible beast. Play now!"
+                    >
+                      <Heading
+                        textShadow={"0px 0px 30px yellow"}
+                        color="yellow"
+                        size="xxl"
+                      >
+                        DOUBLE CHANCE
+                      </Heading>
+                    </Tooltip>
+                    <Heading mt="-20px" mb="30px" size="xl">
+                      on JN beasts
+                    </Heading>
+                  </>
+                )}
 
                 <Flex
                   gap={14}
