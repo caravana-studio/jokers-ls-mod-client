@@ -25,7 +25,7 @@ export const OBSTACLES: ObstacleMap = {
     description: "Play Three of a Kind.",
   },
   9: {
-    description: "Play a Double Pair.",
+    description: "Play a Two Pair.",
   },
   10: {
     description: "Play a Pair.",
