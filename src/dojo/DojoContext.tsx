@@ -11,8 +11,8 @@ import {
 } from "react";
 import { Account, AccountInterface, RpcProvider } from "starknet";
 import { LoadingScreen } from "../pages/LoadingScreen";
-import { useAccountStore } from "./accountStore";
 import { SetupResult } from "./setup";
+import { useAccountStore } from "./accountStore";
 
 interface DojoAccount {
   create: () => void;
