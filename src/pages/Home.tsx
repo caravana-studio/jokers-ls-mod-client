@@ -43,11 +43,21 @@ export const Home = () => {
     }
   }, [account, playButtonClicked]);
 
+  const connectWallet = async () => {
+    try {
+      console.log("Attempting to connect wallet...");
+      await connect({ connector: connectors[0] });
+      console.log("Wallet connected successfully.");
+    } catch (error) {
+      console.error("Failed to connect wallet:", error);
+    }
+  };
+
   const onPlayClick = () => {
     beepSound();
     setLoading(true);
     setPlayButtonClicked(true);
-    connect({ connector: connectors[0] });
+    connectWallet();
   };
 
   return (
