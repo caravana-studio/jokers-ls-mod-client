@@ -9,7 +9,6 @@ import { useCurrentSpecialCards } from "../dojo/queries/useCurrentSpecialCards";
 import { useGame } from "../dojo/queries/useGame";
 import { useGetRewards } from "../dojo/queries/useGetRewards";
 import { getLSGameId } from "../dojo/utils/getLSGameId";
-import { useUsername } from "../dojo/utils/useUsername";
 import { Plays } from "../enums/plays";
 import { SortBy } from "../enums/sortBy";
 import { Card } from "../types/Card";
@@ -143,8 +142,6 @@ export const useGameState = () => {
     setSpecialCards([]);
   };
 
-  const username = useUsername();
-
   const resetMultiPoints = () => {
     setPoints(0);
     setMulti(0);
@@ -227,7 +224,6 @@ export const useGameState = () => {
     sortBy,
     hand,
     setHand,
-    username,
     playIsNeon,
     setPlayIsNeon,
     specialCards,
