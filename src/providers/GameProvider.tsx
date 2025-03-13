@@ -1,4 +1,3 @@
-import CartridgeConnector from "@cartridge/connector";
 import { useAccount, useConnect } from "@starknet-react/core";
 import {
   PropsWithChildren,
@@ -8,7 +7,6 @@ import {
   useState,
 } from "react";
 import { useNavigate } from "react-router-dom";
-import cartridgeConnector from "../cartridgeConnector.tsx";
 import {
   BEAST_IS_MINTABLE_LS,
   GAME_ID,
@@ -33,6 +31,7 @@ import { Card } from "../types/Card";
 import { RoundRewards } from "../types/RoundRewards.ts";
 import { PlayEvents } from "../types/ScoreData";
 import { changeCardSuit } from "../utils/changeCardSuit";
+import { useUsername } from "../dojo/utils/useUsername.tsx";
 
 interface IGameContext {
   gameId: number;
@@ -472,10 +471,9 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     return createRewardPromise;
   };
 
+  const username = useUsername();
+
   const executeCreateGame = async () => {
-    const username = await (
-      cartridgeConnector as CartridgeConnector
-    ).username();
     console.log("username", username);
     setError(false);
     setGameLoading(true);

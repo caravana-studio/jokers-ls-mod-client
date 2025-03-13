@@ -7,7 +7,7 @@ import {
   Text,
   Tooltip,
 } from "@chakra-ui/react";
-import { useConnect } from "@starknet-react/core";
+import { useAccount, useConnect } from "@starknet-react/core";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import AudioPlayer from "../components/AudioPlayer";
@@ -22,6 +22,7 @@ import { useAudio } from "../hooks/useAudio";
 import { useGameContext } from "../providers/GameProvider";
 import { LS_GREEN } from "../theme/colors";
 import Lore from "./LoreScreen/Lore";
+import { useUsername } from "../dojo/utils/useUsername";
 
 const doubleChance = !!import.meta.env.VITE_DOUBLE_CHANCE;
 
@@ -30,18 +31,23 @@ export const Home = () => {
   const [loading, setLoading] = useState(false);
   const [showIntro, setShowIntro] = useState(true);
   const { connect, connectors } = useConnect();
-  const { account } = useDojo();
   const [playButtonClicked, setPlayButtonClicked] = useState(false);
   const { play: beepSound } = useAudio(beep);
   const { t } = useTranslation(["home"]);
+  const { account } = useAccount();
 
   const { checkOrCreateGame } = useGameContext();
+  const {
+    setup: { masterAccount },
+  } = useDojo();
+
+  const username = useUsername();
 
   useEffect(() => {
-    if (account && playButtonClicked) {
+    if (account !== masterAccount && username && playButtonClicked) {
       checkOrCreateGame();
     }
-  }, [account, playButtonClicked]);
+  }, [account, username, playButtonClicked]);
 
   const connectWallet = async () => {
     try {
