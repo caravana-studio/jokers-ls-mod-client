@@ -30,7 +30,6 @@ export const Home = () => {
   const [leaderboardOpen, setLeaderboardOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showIntro, setShowIntro] = useState(true);
-  const { connect, connectors } = useConnect();
   const [playButtonClicked, setPlayButtonClicked] = useState(false);
   const { play: beepSound } = useAudio(beep);
   const { t } = useTranslation(["home"]);
@@ -49,21 +48,10 @@ export const Home = () => {
     }
   }, [account, username, playButtonClicked]);
 
-  const connectWallet = async () => {
-    try {
-      console.log("Attempting to connect wallet...");
-      await connect({ connector: connectors[0] });
-      console.log("Wallet connected successfully.");
-    } catch (error) {
-      console.error("Failed to connect wallet:", error);
-    }
-  };
-
   const onPlayClick = () => {
     beepSound();
     setLoading(true);
     setPlayButtonClicked(true);
-    connectWallet();
   };
 
   return (

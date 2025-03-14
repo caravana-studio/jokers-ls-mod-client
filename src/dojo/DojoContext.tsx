@@ -13,6 +13,7 @@ import { Account, AccountInterface, RpcProvider } from "starknet";
 import { LoadingScreen } from "../pages/LoadingScreen";
 import { SetupResult } from "./setup";
 import { useAccountStore } from "./accountStore";
+import { PreThemeLoadingPage } from "../pages/PreThemeLoadingPage";
 
 interface DojoAccount {
   create: () => void;
@@ -160,38 +161,46 @@ const DojoContextProvider = ({
 
   const [accountsInitialized, setAccountsInitialized] = useState(false);
 
-  // Determine which account to use based on environment
-  const isDev = import.meta.env.VITE_DEV === "true";
-  const accountToUse = isDev ? burnerAccount : controllerAccount;
+  const connectWallet = async () => {
+    try {
+      console.log("Attempting to connect wallet...");
+      await connect({ connector: connectors[0] });
+      console.log("Wallet connected successfully.");
+    } catch (error) {
+      console.error("Failed to connect wallet:", error);
+    }
+  };
 
   useEffect(() => {
-    if (isDev) {
-      if (burnerAccount) {
-        console.log("Setting account from burner hook:", burnerAccount);
-        useAccountStore.getState().setAccount(burnerAccount);
-        setAccountsInitialized(true);
-      } else {
-        console.log("Burner account is null in development.");
-      }
+    if (controllerAccount) {
+      console.log("Setting account from controllerAccount:", controllerAccount);
+      useAccountStore.getState().setAccount(controllerAccount);
+      setAccountsInitialized(true);
     } else {
-      if (controllerAccount) {
-        console.log(
-          "Setting account from controllerAccount:",
-          controllerAccount
-        );
-        useAccountStore.getState().setAccount(controllerAccount);
-        setAccountsInitialized(true);
-      } else {
-        console.log(
-          "ControllerAccount is null in production or not connected."
-        );
-        setAccountsInitialized(true);
-      }
+      console.log("ControllerAccount is null in production or not connected.");
+      setAccountsInitialized(true);
     }
-  }, [isDev, controllerAccount, burnerAccount]);
+  }, [controllerAccount]);
 
   if (!accountsInitialized) {
     return <LoadingScreen />;
+  }
+
+  if (isConnecting) {
+    return <LoadingScreen />;
+  }
+
+  if (!isConnected && !isConnecting && !controllerAccount) {
+    return (
+      <PreThemeLoadingPage>
+        <img width="60%" src="logos/logo.png" alt="logo" />
+        {!isConnected && (
+          <button className="login-button" onClick={connectWallet}>
+            LOGIN
+          </button>
+        )}
+      </PreThemeLoadingPage>
+    );
   }
 
   if (!controllerAccount && isConnected) {
@@ -211,10 +220,10 @@ const DojoContextProvider = ({
           get,
           select,
           clear,
-          account: accountToUse as Account, // | AccountInterface,
+          account: controllerAccount as Account, // | AccountInterface,
           isDeploying,
           accountDisplay: displayAddress(
-            (accountToUse as Account | AccountInterface)?.address || ""
+            (controllerAccount as Account | AccountInterface)?.address || ""
           ),
         },
       }}
