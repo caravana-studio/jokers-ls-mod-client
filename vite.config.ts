@@ -12,10 +12,10 @@ export default defineConfig({
   build: {
     outDir: "dist",
   },
-  server: {
-    https: {
-      key: fs.readFileSync(path.resolve(__dirname, "localhost+2-key.pem")),
-      cert: fs.readFileSync(path.resolve(__dirname, "localhost+2-cert.pem")),
-    },
-  },
+  // server: {
+  //   https: {
+  //     key: fs.readFileSync(path.resolve(__dirname, "localhost+2-key.pem")),
+  //     cert: fs.readFileSync(path.resolve(__dirname, "localhost+2-cert.pem")),
+  //   },
+  // },
 });
