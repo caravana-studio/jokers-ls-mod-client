@@ -85,7 +85,7 @@
     "@graphql-codegen/typescript-graphql-request": "^5.0.0",
     "@graphql-codegen/typescript-operations": "^4.0.1",
     "@svgx/vite-plugin-react": "^1.0.1",
-    "@swc/core": "^1.7.26",
+    "@swc/core": "^1.x.x",
     "@testing-library/jest-dom": "^6.4.8",
     "@testing-library/react": "^16.0.0",
     "@types/howler": "^2.2.11",
