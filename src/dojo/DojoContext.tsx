@@ -225,7 +225,7 @@ const DojoContextProvider = ({
           get,
           select,
           clear,
-          account: controllerAccount as Account, // | AccountInterface,
+          account: controllerAccount as Account,
           isDeploying,
           accountDisplay: displayAddress(
             (controllerAccount as Account | AccountInterface)?.address || ""
