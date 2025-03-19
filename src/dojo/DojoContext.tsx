@@ -160,6 +160,7 @@ const DojoContextProvider = ({
   const { isConnected, isConnecting } = useAccount();
 
   const [accountsInitialized, setAccountsInitialized] = useState(false);
+  const [isReady, setIsReady] = useState(false);
 
   const connectWallet = async () => {
     try {
@@ -180,13 +181,22 @@ const DojoContextProvider = ({
       console.log("ControllerAccount is null in production or not connected.");
       setAccountsInitialized(true);
     }
-  }, [controllerAccount]);
+  }, [controllerAccount, accountsInitialized]);
 
-  if (!accountsInitialized) {
-    return <LoadingScreen />;
-  }
+  useEffect(() => {
+    if (
+      !(
+        !accountsInitialized &&
+        isConnecting &&
+        !controllerAccount &&
+        isConnected
+      )
+    ) {
+      setIsReady(true);
+    }
+  }, [accountsInitialized, isConnecting, controllerAccount, isConnected]);
 
-  if (isConnecting) {
+  if (!isReady) {
     return <LoadingScreen />;
   }
 
@@ -201,11 +211,6 @@ const DojoContextProvider = ({
         )}
       </PreThemeLoadingPage>
     );
-  }
-
-  if (!controllerAccount && isConnected) {
-    // Connected but controllerAccount is not set yet
-    return <LoadingScreen />;
   }
 
   // Once account is set, render the children
