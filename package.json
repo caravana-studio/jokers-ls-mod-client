@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "codegen": "graphql-codegen",
     "generate": "sozo build --typescript --manifest-path ../jokers-ls-mod-contracts/Scarb.toml --bindings-output ./src/dojo",
-    "test": "vitest"
+    "test": "vitest",
+    "vercel-build": "npm rebuild @swc/core && npm run build"
   },
   "dependencies": {
     "@cartridge/controller": "0.7.4",
