@@ -1,18 +1,17 @@
 import { useEffect, useState } from "react";
-import { useControllerAddress } from "../dojo/utils/useUsername";
 import { Adventurer } from "../types/Adventurer";
 import { getAdventurers } from "./adventurers";
+import { useAccount } from "@starknet-react/core";
 
 export const useAdventurers = () => {
   const [adventurers, setAdventurers] = useState<Adventurer[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const account = useControllerAddress();
-  console.log("account", account);
+  const { address } = useAccount();
 
   useEffect(() => {
-    if (account) {
-      getAdventurers(account)
+    if (address) {
+      getAdventurers(address)
         .then((adventurers) => {
           setAdventurers(adventurers);
         })
@@ -20,7 +19,7 @@ export const useAdventurers = () => {
           setIsLoading(false);
         });
     }
-  }, [account]);
+  }, [address]);
 
   return { adventurers, isLoading };
 };
