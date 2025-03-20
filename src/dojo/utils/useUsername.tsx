@@ -1,27 +1,14 @@
-import CartridgeConnector from '@cartridge/connector'
-import { useEffect, useState } from 'react'
-import cartridgeConnector from '../../cartridgeConnector'
+import { useEffect, useState } from "react";
+import { controller } from "../controller/controller";
 
 export const useUsername = () => {
-  const [username, setUsername] = useState<string | null>(null)
+  const [username, setUsername] = useState<string | null>(null);
 
   useEffect(() => {
-    (cartridgeConnector as CartridgeConnector).username()?.then((username) => {
-      setUsername(username)
-    })
-  }, [cartridgeConnector])
+    controller.username()?.then((username) => {
+      setUsername(username);
+    });
+  }, [controller]);
 
-  return username
-}
-
-export const useControllerAddress = () => {
-  const [address, setAddress] = useState<string | null>(null)
-
-  useEffect(() => {
-    (cartridgeConnector as CartridgeConnector).account()?.then((acc) => {
-      setAddress(acc.address)
-    })
-  }, [cartridgeConnector])
-
-  return address
-}
+  return username;
+};

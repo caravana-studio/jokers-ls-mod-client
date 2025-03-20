@@ -29,7 +29,7 @@ export const GameMenu = ({
     toggleSound();
   };
 
-  const {disconnect} = useDisconnect();
+  const { disconnect } = useDisconnect();
 
   return (
     <>
@@ -63,8 +63,8 @@ export const GameMenu = ({
               onClick={() => {
                 localStorage.removeItem(GAME_ID);
                 localStorage.removeItem(LOGGED_USER);
-                restartGame();
                 disconnect();
+                restartGame();
                 navigate("/");
               }}
             >

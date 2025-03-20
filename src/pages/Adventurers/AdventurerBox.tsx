@@ -1,5 +1,5 @@
 import { Divider, Flex, Heading, Text } from "@chakra-ui/react";
-import { useContractRead } from "@starknet-react/core";
+import { useCall } from "@starknet-react/core";
 import CachedImage from "../../components/CachedImage";
 import { Loading } from "../../components/Loading.tsx";
 import { LS_GREEN } from "../../theme/colors";
@@ -21,18 +21,15 @@ export const AdventurerBox = ({
   otherIsSelected,
   consumed,
 }: AdventurerBoxProps) => {
-  const { data, error, isLoading } = useContractRead({
+  const { data, error, isLoading } = useCall({
     abi,
     functionName: "get_adventurer",
     address:
       "0x033150a5c88087a5944b887f6ece3bb0329d3d844ca632e44039ab9f1edb32a8",
     args: [adventurer.id],
   });
-
   if (isLoading) return <Loading />;
-
   const level = Number((data as any)?.level ?? 1);
-
   const amountOfCardsToPick = Math.min(4, Math.max(1, Math.floor(level / 10)));
   const amountOfCardsToSelectFrom = Math.min(
     10,
@@ -43,12 +40,12 @@ export const AdventurerBox = ({
       onClick={() => !consumed && onClick()}
       width="30%"
       minWidth={"400px"}
-      maxWidth={'600px'}
+      maxWidth={"600px"}
       bg="black"
       borderRadius="30px"
       border="1px solid white"
       m={4}
-      height='200px'
+      height="200px"
       cursor={consumed ? "not-allowed" : "pointer"}
       boxShadow={isSelected ? `0px 0px 15px 5px ${LS_GREEN}` : "none"}
       opacity={otherIsSelected || consumed ? 0.5 : 1}
@@ -117,12 +114,12 @@ export const AdventurerBox = ({
               +{level * 2} HP
             </Heading>
             <Heading size="m" color="white" textAlign="center">
-              Select 2 cards from a total of{" "}
-              5 available
+              Select 2 cards from a total of 5 available
             </Heading>
           </>
         )}
       </Flex>
     </Flex>
   );
+  return <></>;
 };

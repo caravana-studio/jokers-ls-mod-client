@@ -20,3 +20,10 @@
   display          : inline-block;
   background-repeat: no-repeat;
 }
+
+body {
+  overflow-x: hidden !important;
+  background-color: black;
+  touch-action: pan-x pan-y;
+  -webkit-overflow-scrolling: touch;
+}
