@@ -14,6 +14,8 @@ import { LoadingScreen } from "../pages/LoadingScreen";
 import { SetupResult } from "./setup";
 import { useAccountStore } from "./accountStore";
 import { PreThemeLoadingPage } from "../pages/PreThemeLoadingPage";
+import { Button, ChakraBaseProvider, extendTheme } from "@chakra-ui/react";
+import customTheme from "../theme/theme";
 
 interface DojoAccount {
   create: () => void;
@@ -162,6 +164,8 @@ const DojoContextProvider = ({
   const [accountsInitialized, setAccountsInitialized] = useState(false);
   const [isReady, setIsReady] = useState(false);
 
+  const theme = extendTheme(customTheme);
+
   const connectWallet = async () => {
     try {
       console.log("Attempting to connect wallet...");
@@ -202,14 +206,16 @@ const DojoContextProvider = ({
 
   if (!isConnected && !isConnecting && !controllerAccount) {
     return (
-      <PreThemeLoadingPage>
-        <img width="60%" src="logos/logo.png" alt="logo" />
-        {!isConnected && (
-          <button className="login-button" onClick={connectWallet}>
-            LOGIN
-          </button>
-        )}
-      </PreThemeLoadingPage>
+      <ChakraBaseProvider theme={theme}>
+        <PreThemeLoadingPage>
+          <img width="60%" src="logos/logo.png" alt="logo" />
+          {!isConnected && (
+            <Button className="login-button" onClick={connectWallet}>
+              LOGIN
+            </Button>
+          )}
+        </PreThemeLoadingPage>
+      </ChakraBaseProvider>
     );
   }
 
